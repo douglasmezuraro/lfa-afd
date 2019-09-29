@@ -1,0 +1,118 @@
+object Main: TMain
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 600
+  ClientWidth = 800
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object TabControlView: TTabControl
+    Align = Client
+    Size.Width = 800.000000000000000000
+    Size.Height = 600.000000000000000000
+    Size.PlatformDefault = False
+    TabIndex = 0
+    TabOrder = 0
+    TabPosition = PlatformDefault
+    Sizes = (
+      800s
+      574s)
+    object TabItemInput: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = True
+      Size.Width = 48.000000000000000000
+      Size.Height = 26.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'Input'
+      object EditFinalStates: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 1
+        Position.X = 15.000000000000000000
+        Position.Y = 118.000000000000000000
+        Size.Width = 545.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = 'Final states'
+      end
+      object EditInitialState: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 2
+        Position.X = 15.000000000000000000
+        Position.Y = 88.000000000000000000
+        Size.Width = 545.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = 'Initial state'
+      end
+      object EditStates: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 3
+        Position.X = 15.000000000000000000
+        Position.Y = 56.000000000000000000
+        Size.Width = 545.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = 'States'
+      end
+      object EditSymbols: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 4
+        Position.X = 15.000000000000000000
+        Position.Y = 24.000000000000000000
+        Size.Width = 545.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextPrompt = #931
+      end
+      object Grid: TStringGrid
+        CanFocus = True
+        ClipChildren = True
+        Position.X = 16.000000000000000000
+        Position.Y = 152.000000000000000000
+        Size.Width = 545.000000000000000000
+        Size.Height = 273.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        RowCount = 0
+        Options = [Editing, AlwaysShowEditor, ColumnResize, ColLines, RowLines, Tabs, HeaderClick, AutoDisplacement]
+        OnSelectCell = GridSelectCell
+        Viewport.Width = 541.000000000000000000
+        Viewport.Height = 269.000000000000000000
+      end
+      object ButtonBuild: TButton
+        Action = ActionBuild
+        Enabled = True
+        ImageIndex = -1
+        Position.X = 632.000000000000000000
+        Position.Y = 302.000000000000000000
+        TabOrder = 5
+      end
+      object ButtonBuildMatrix: TButton
+        Action = ActionBuildMatrix
+        Enabled = True
+        ImageIndex = -1
+        Position.X = 632.000000000000000000
+        Position.Y = 230.000000000000000000
+        TabOrder = 6
+      end
+    end
+  end
+  object ActionList: TActionList
+    Left = 584
+    Top = 208
+    object ActionBuild: TAction
+      Text = '&Build'
+      OnExecute = ActionBuildExecute
+    end
+    object ActionBuildMatrix: TAction
+      Text = 'Build &matrix'
+      OnExecute = ActionBuildMatrixExecute
+    end
+  end
+end
