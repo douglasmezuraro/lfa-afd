@@ -25,8 +25,8 @@ type
     ActionBuildMatrix: TAction;
     procedure ActionBuildExecute(Sender: TObject);
     procedure ActionBuildMatrixExecute(Sender: TObject);
-    procedure GridSelectCell(Sender: TObject; const ACol,
-      ARow: Integer; var CanSelect: Boolean);
+    procedure GridSelectCell(Sender: TObject; const ACol, ARow: Integer;
+      var CanSelect: Boolean);
   strict private
     FAFD: TAFD;
   private
@@ -78,7 +78,8 @@ end;
 
 procedure TMain.ActionBuildExecute(Sender: TObject);
 begin
-  FAFD := FAFD.AddSymbols(Symbols)
+  FAFD := FAFD.Clear
+              .AddSymbols(Symbols)
               .AddStates(States)
               .AddInitialState(InitialState)
               .AddFinalStates(FinalStates)
@@ -111,8 +112,8 @@ begin
   Result := Grid.ToMatrix;
 end;
 
-procedure TMain.GridSelectCell(Sender: TObject; const ACol,
-  ARow: Integer; var CanSelect: Boolean);
+procedure TMain.GridSelectCell(Sender: TObject; const ACol, ARow: Integer;
+  var CanSelect: Boolean);
 begin
   CanSelect := (ACol <> Grid.FirstColumn) and (ARow <> Grid.FirstRow);
 end;

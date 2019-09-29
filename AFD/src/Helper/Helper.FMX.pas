@@ -41,8 +41,17 @@ begin
 end;
 
 function TStringGridHelper.ToMatrix: TArray<TArray<string>>;
+var
+  LRow, LColumn: Integer;
 begin
-  raise ENotImplemented.CreateFmt('The method %s is not implemented!', ['ToMatrix'.QuotedString]);
+  SetLength(Result, RowCount, ColumnCount);
+  for LRow := FirstRow to Pred(RowCount) do
+  begin
+    for LColumn := FirstColumn to Pred(ColumnCount) do
+    begin
+      Result[LRow, LColumn] := Cells[LColumn, LRow];
+    end;
+  end;
 end;
 
 end.
