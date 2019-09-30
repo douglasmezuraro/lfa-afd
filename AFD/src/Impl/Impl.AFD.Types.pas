@@ -28,10 +28,8 @@ type
     NotFoundIndex = -1;
   strict private
     FMatrix: TMatrix;
-    FRows: Integer;
-    FColumns: Integer;
   public
-    constructor Create(const Rows, Columns: Byte);
+    constructor Create(const Matrix: TMatrix); overload;
     function HasTransition(const State: TState; const Symbol: TSymbol): Boolean;
     function Transition(const State: TState; const Symbol: TSymbol): TTransition;
     function ToMatrix: TMatrix;
@@ -41,32 +39,14 @@ implementation
 
 { TTransitions }
 
-constructor TTransitions.Create(const Rows, Columns: Byte);
+constructor TTransitions.Create(const Matrix: TMatrix);
 begin
-  FRows := Rows;
-  FColumns := Columns;
-  SetLength(FMatrix, FRows, FColumns);
+  FMatrix := Matrix;
 end;
 
 function TTransitions.HasTransition(const State: TState; const Symbol: TSymbol): Boolean;
-var
-  Index, Row, Column: Integer;
 begin
-  Row := NotFoundIndex; Column := NotFoundIndex;
-
-  for Index := 1 to Pred(FRows) do
-  begin
-    if FMatrix[Index, 0].Equals(State) then
-      Row := Index;
-  end;
-
-  for Index := 1 to Pred(FColumns) do
-  begin
-    if FMatrix[Row, Index].Equals(Symbol) then
-      Column := Index;
-  end;
-
-  Result := not FMatrix[Row, Column].Trim.IsEmpty;
+  Result := not Transition(State, Symbol).Trim.IsEmpty;
 end;
 
 function TTransitions.ToMatrix: TMatrix;
@@ -75,8 +55,34 @@ begin
 end;
 
 function TTransitions.Transition(const State: TState; const Symbol: TSymbol): TTransition;
+var
+  Index, Row, Column: Integer;
 begin
+  Row := NotFoundIndex;
+  Column := NotFoundIndex;
 
+  for Index := 1 to Pred(Length(FMatrix)) do
+  begin
+    if FMatrix[Index, 0].Equals(State) then
+    begin
+      Row := Index;
+      Break;
+    end;
+  end;
+
+  for Index := 1 to Pred(Length(FMatrix[0])) do
+  begin
+    if FMatrix[0, Index].Equals(Symbol) then
+    begin
+      Column := Index;
+      Break;
+    end;
+  end;
+
+  if (Row = NotFoundIndex) or (Column = NotFoundIndex) then
+    Exit(TTransition.Empty);
+
+  Result := FMatrix[Row, Column];
 end;
 
 end.

@@ -12,7 +12,7 @@ type
     FStates: TList<TState>;
     FInitialState: TState;
     FFinalStates: TList<TState>;
-    FTransitions: TMatrix;
+    FTransitions: TTransitions;
   private
     function ListToString(const List: TList<string>): string;
   public
@@ -23,7 +23,8 @@ type
     function AddStates(const States: TArray<TState>): TAFD;
     function AddInitialState(const State: TState): TAFD;
     function AddFinalStates(const States: TArray<TState>): TAFD;
-    function AddTransitions(const Transitions: TMatrix): TAFD;
+    function AddTransitions(const Transitions: TTransitions): TAFD;
+    function Accept(const Word: string): Boolean;
   end;
 
 implementation
@@ -36,7 +37,6 @@ begin
   FStates.Clear;
   FFinalStates.Clear;
   FInitialState := string.Empty;
-  SetLength(FTransitions, 0, 0);
 
   Result := Self;
 end;
@@ -72,6 +72,24 @@ begin
   end;
 
   Result := Result + ']';
+end;
+
+function TAFD.Accept(const Word: string): Boolean;
+var
+  State: TState;
+  Symbol: TSymbol;
+begin
+  State := FInitialState;
+
+  for Symbol in Word.ToCharArray do
+  begin
+    if FTransitions.HasTransition(State, Symbol) then
+      State := FTransitions.Transition(State, Symbol)
+    else
+      Exit(False);
+  end;
+
+  Result := FFinalStates.Contains(State);
 end;
 
 function TAFD.AddSymbols(const Symbols: TArray<TSymbol>): TAFD;
@@ -144,7 +162,7 @@ begin
   Result := Self;
 end;
 
-function TAFD.AddTransitions(const Transitions: TMatrix): TAFD;
+function TAFD.AddTransitions(const Transitions: TTransitions): TAFD;
 begin
   FTransitions := Transitions;
   Result := Self;

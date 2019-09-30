@@ -1,118 +1,271 @@
 object Main: TMain
   Left = 0
   Top = 0
-  Caption = 'Form1'
-  ClientHeight = 600
-  ClientWidth = 800
+  Caption = 'AFD'
+  ClientHeight = 511
+  ClientWidth = 580
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
+  OnShow = FormShow
   DesignerMasterStyle = 0
+  object PanelButtons: TPanel
+    Align = Bottom
+    Locked = True
+    Position.Y = 466.000000000000000000
+    Size.Width = 580.000000000000000000
+    Size.Height = 45.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    object ButtonClear: TButton
+      Action = ActionClear
+      Align = Right
+      Enabled = True
+      ImageIndex = -1
+      Locked = True
+      Position.X = 480.000000000000000000
+      Size.Width = 100.000000000000000000
+      Size.Height = 45.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+    end
+    object ButtonBuildMatrix: TButton
+      Action = ActionBuildMatrix
+      Align = Left
+      Enabled = True
+      ImageIndex = -1
+      Locked = True
+      Size.Width = 100.000000000000000000
+      Size.Height = 45.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+    end
+    object ButtonBuildAFD: TButton
+      Action = ActionBuildAFD
+      Align = Left
+      Enabled = True
+      ImageIndex = -1
+      Locked = True
+      Position.X = 100.000000000000000000
+      Size.Width = 100.000000000000000000
+      Size.Height = 45.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+    end
+  end
   object TabControlView: TTabControl
     Align = Client
-    Size.Width = 800.000000000000000000
-    Size.Height = 600.000000000000000000
+    Locked = True
+    Size.Width = 580.000000000000000000
+    Size.Height = 466.000000000000000000
     Size.PlatformDefault = False
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     TabPosition = PlatformDefault
+    OnChange = TabControlViewChange
     Sizes = (
-      800s
-      574s)
+      580s
+      440s
+      580s
+      440s)
     object TabItemInput: TTabItem
       CustomIcon = <
         item
         end>
-      IsSelected = True
+      Locked = True
+      IsSelected = False
       Size.Width = 48.000000000000000000
       Size.Height = 26.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = ''
       TabOrder = 0
       Text = 'Input'
-      object EditFinalStates: TEdit
-        Touch.InteractiveGestures = [LongTap, DoubleTap]
-        TabOrder = 1
-        Position.X = 15.000000000000000000
-        Position.Y = 118.000000000000000000
-        Size.Width = 545.000000000000000000
-        Size.Height = 22.000000000000000000
-        Size.PlatformDefault = False
-        TextPrompt = 'Final states'
-      end
-      object EditInitialState: TEdit
-        Touch.InteractiveGestures = [LongTap, DoubleTap]
-        TabOrder = 2
-        Position.X = 15.000000000000000000
-        Position.Y = 88.000000000000000000
-        Size.Width = 545.000000000000000000
-        Size.Height = 22.000000000000000000
-        Size.PlatformDefault = False
-        TextPrompt = 'Initial state'
-      end
-      object EditStates: TEdit
-        Touch.InteractiveGestures = [LongTap, DoubleTap]
-        TabOrder = 3
-        Position.X = 15.000000000000000000
-        Position.Y = 56.000000000000000000
-        Size.Width = 545.000000000000000000
-        Size.Height = 22.000000000000000000
-        Size.PlatformDefault = False
-        TextPrompt = 'States'
+      ExplicitSize.cx = 48.000000000000000000
+      ExplicitSize.cy = 26.000000000000000000
+      object LabelSymbols: TLabel
+        Locked = True
+        FocusControl = EditSymbols
+        Position.X = 16.000000000000000000
+        Position.Y = 8.000000000000000000
+        Text = #931' (Symbols)'
+        TabOrder = 0
       end
       object EditSymbols: TEdit
         Touch.InteractiveGestures = [LongTap, DoubleTap]
-        TabOrder = 4
+        Anchors = [akLeft, akTop, akRight]
+        TabOrder = 1
         Position.X = 15.000000000000000000
         Position.Y = 24.000000000000000000
+        Locked = True
         Size.Width = 545.000000000000000000
         Size.Height = 22.000000000000000000
         Size.PlatformDefault = False
-        TextPrompt = #931
       end
-      object Grid: TStringGrid
-        CanFocus = True
-        ClipChildren = True
+      object LabelStates: TLabel
+        Locked = True
+        FocusControl = EditStates
+        Position.X = 16.000000000000000000
+        Position.Y = 56.000000000000000000
+        Text = 'States'
+        TabOrder = 2
+      end
+      object EditStates: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Anchors = [akLeft, akTop, akRight]
+        TabOrder = 3
+        Position.X = 15.000000000000000000
+        Position.Y = 72.000000000000000000
+        Locked = True
+        Size.Width = 545.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+      end
+      object LabelInitialState: TLabel
+        Locked = True
+        FocusControl = EditInitialState
+        Position.X = 16.000000000000000000
+        Position.Y = 104.000000000000000000
+        Text = 'Initial state'
+        TabOrder = 4
+      end
+      object EditInitialState: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Anchors = [akLeft, akTop, akRight]
+        TabOrder = 5
+        Position.X = 15.000000000000000000
+        Position.Y = 120.000000000000000000
+        Locked = True
+        Size.Width = 545.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+      end
+      object LabelFinalStates: TLabel
+        Locked = True
+        FocusControl = EditFinalStates
         Position.X = 16.000000000000000000
         Position.Y = 152.000000000000000000
+        Text = 'Final states'
+        TabOrder = 6
+      end
+      object EditFinalStates: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Anchors = [akLeft, akTop, akRight]
+        TabOrder = 7
+        Position.X = 15.000000000000000000
+        Position.Y = 166.000000000000000000
+        Locked = True
         Size.Width = 545.000000000000000000
-        Size.Height = 273.000000000000000000
+        Size.Height = 22.000000000000000000
         Size.PlatformDefault = False
-        TabOrder = 0
+      end
+      object LabelTransitions: TLabel
+        Locked = True
+        FocusControl = Grid
+        Position.X = 16.000000000000000000
+        Position.Y = 200.000000000000000000
+        Text = 'Transitions'
+        TabOrder = 8
+      end
+      object Grid: TStringGrid
+        Anchors = [akLeft, akTop, akRight, akBottom]
+        CanFocus = True
+        ClipChildren = True
+        Locked = True
+        Position.X = 16.000000000000000000
+        Position.Y = 215.000000000000000000
+        Size.Width = 545.000000000000000000
+        Size.Height = 210.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 9
         RowCount = 0
         Options = [Editing, AlwaysShowEditor, ColumnResize, ColLines, RowLines, Tabs, HeaderClick, AutoDisplacement]
         OnSelectCell = GridSelectCell
         Viewport.Width = 541.000000000000000000
-        Viewport.Height = 269.000000000000000000
+        Viewport.Height = 206.000000000000000000
       end
-      object ButtonBuild: TButton
-        Action = ActionBuild
+    end
+    object TabItemOutput: TTabItem
+      CustomIcon = <
+        item
+        end>
+      Locked = True
+      IsSelected = True
+      Size.Width = 58.000000000000000000
+      Size.Height = 26.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'Output'
+      ExplicitSize.cx = 58.000000000000000000
+      ExplicitSize.cy = 26.000000000000000000
+      object ButtonCheck: TButton
+        Action = ActionCheck
+        Anchors = [akLeft, akTop, akRight]
         Enabled = True
         ImageIndex = -1
-        Position.X = 632.000000000000000000
-        Position.Y = 302.000000000000000000
-        TabOrder = 5
+        Locked = True
+        Position.X = 480.000000000000000000
+        Position.Y = 32.000000000000000000
+        TabOrder = 2
       end
-      object ButtonBuildMatrix: TButton
-        Action = ActionBuildMatrix
-        Enabled = True
-        ImageIndex = -1
-        Position.X = 632.000000000000000000
-        Position.Y = 230.000000000000000000
-        TabOrder = 6
+      object EditWord: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 1
+        Position.X = 16.000000000000000000
+        Position.Y = 32.000000000000000000
+        Locked = True
+        Size.Width = 457.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+      end
+      object LabelWord: TLabel
+        Locked = True
+        Position.X = 16.000000000000000000
+        Position.Y = 16.000000000000000000
+        Text = 'Word'
+        TabOrder = 0
+      end
+      object LabelWords: TLabel
+        Locked = True
+        Position.X = 16.000000000000000000
+        Position.Y = 64.000000000000000000
+        Text = 'Words'
+        TabOrder = 3
+      end
+      object MemoWords: TMemo
+        Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+        DataDetectorTypes = []
+        Anchors = [akLeft, akTop, akRight, akBottom]
+        Locked = True
+        Position.X = 16.000000000000000000
+        Position.Y = 81.000000000000000000
+        Size.Width = 545.000000000000000000
+        Size.Height = 337.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 4
+        Viewport.Width = 541.000000000000000000
+        Viewport.Height = 333.000000000000000000
       end
     end
   end
   object ActionList: TActionList
-    Left = 584
+    Left = 360
     Top = 208
-    object ActionBuild: TAction
-      Text = '&Build'
-      OnExecute = ActionBuildExecute
+    object ActionBuildAFD: TAction
+      Text = '&Build AFD'
+      OnExecute = ActionBuildAFDExecute
     end
     object ActionBuildMatrix: TAction
       Text = 'Build &matrix'
       OnExecute = ActionBuildMatrixExecute
+    end
+    object ActionCheck: TAction
+      Text = '&Check'
+      OnExecute = ActionCheckExecute
+    end
+    object ActionClear: TAction
+      Text = 'Cl&ear'
+      OnExecute = ActionClearExecute
     end
   end
 end
