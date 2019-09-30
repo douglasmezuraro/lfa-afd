@@ -125,8 +125,7 @@ end;
 
 procedure TMain.ActionBuildAFDExecute(Sender: TObject);
 begin
-  FAFD := FAFD.Clear
-              .AddSymbols(Symbols)
+  FAFD := FAFD.AddSymbols(Symbols)
               .AddStates(States)
               .AddInitialState(InitialState)
               .AddFinalStates(FinalStates)

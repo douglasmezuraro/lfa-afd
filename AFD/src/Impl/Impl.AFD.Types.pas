@@ -24,8 +24,6 @@ type
   EStateDuplicated = class(EDuplicated);
 
   TTransitions = record
-  public const
-    NotFoundIndex = -1;
   strict private
     FMatrix: TMatrix;
   public
@@ -58,8 +56,8 @@ function TTransitions.Transition(const State: TState; const Symbol: TSymbol): TT
 var
   Index, Row, Column: Integer;
 begin
-  Row := NotFoundIndex;
-  Column := NotFoundIndex;
+  Row := Integer.MinValue;
+  Column := Integer.MinValue;
 
   for Index := 1 to Pred(Length(FMatrix)) do
   begin
@@ -79,7 +77,7 @@ begin
     end;
   end;
 
-  if (Row = NotFoundIndex) or (Column = NotFoundIndex) then
+  if (Row = Integer.MinValue) or (Column = Integer.MinValue) then
     Exit(TTransition.Empty);
 
   Result := FMatrix[Row, Column];

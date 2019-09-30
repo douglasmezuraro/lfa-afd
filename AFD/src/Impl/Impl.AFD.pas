@@ -7,7 +7,7 @@ uses
 
 type
   TAFD = class sealed
-  private
+  strict private
     FSymbols: TList<TSymbol>;
     FStates: TList<TState>;
     FInitialState: TState;
@@ -18,7 +18,7 @@ type
   public
     constructor Create;
     destructor Destroy; override;
-    function Clear: TAFD;
+    procedure Clear;
     function AddSymbols(const Symbols: TArray<TSymbol>): TAFD;
     function AddStates(const States: TArray<TState>): TAFD;
     function AddInitialState(const State: TState): TAFD;
@@ -30,16 +30,6 @@ type
 implementation
 
 { TAFD }
-
-function TAFD.Clear: TAFD;
-begin
-  FSymbols.Clear;
-  FStates.Clear;
-  FFinalStates.Clear;
-  FInitialState := string.Empty;
-
-  Result := Self;
-end;
 
 constructor TAFD.Create;
 begin
@@ -54,6 +44,14 @@ begin
   FStates.Free;
   FSymbols.Free;
   inherited;
+end;
+
+procedure TAFD.Clear;
+begin
+  FSymbols.Clear;
+  FStates.Clear;
+  FFinalStates.Clear;
+  FInitialState := string.Empty;
 end;
 
 function TAFD.ListToString(const List: TList<string>): string;
@@ -96,6 +94,8 @@ function TAFD.AddSymbols(const Symbols: TArray<TSymbol>): TAFD;
 var
   Symbol: TSymbol;
 begin
+  Clear;
+
   for Symbol in Symbols do
   begin
     if FSymbols.Contains(Symbol) then
