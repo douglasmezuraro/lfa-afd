@@ -3,7 +3,7 @@ unit Impl.AFD;
 interface
 
 uses
-  Impl.AFD.Types, Impl.List, System.SysUtils;
+  Impl.Types, Impl.List, Impl.Transitions, System.SysUtils;
 
 type
   TAFD = class sealed

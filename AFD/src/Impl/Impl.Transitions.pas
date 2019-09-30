@@ -1,21 +1,11 @@
-unit Impl.AFD.Types;
+unit Impl.Transitions;
 
 interface
 
 uses
-  System.SysUtils;
+  Impl.Types, System.SysUtils;
 
 type
-  TSymbol = string;
-  TState = string;
-  TTransition = string;
-  TWord = string;
-  TMatrix = TArray<TArray<string>>;
-
-  ENotDefined = class(Exception);
-  EDuplicated = class(Exception);
-  ENotFound = class(Exception);
-
   TTransitions = record
   strict private
     FMatrix: TMatrix;

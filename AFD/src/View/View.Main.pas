@@ -3,14 +3,14 @@
 interface
 
 uses
-  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
-  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls,
-  FMX.Edit, FMX.Controls.Presentation, System.Rtti, FMX.Grid.Style,
-  FMX.ScrollBox, FMX.Grid, FMX.TabControl, Helper.FMX, Impl.AFD, Impl.AFD.Types,
-  System.Actions, FMX.ActnList, FMX.Memo, Impl.Dialogs, System.StrUtils;
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants, FMX.Types,
+  FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls, FMX.Edit, FMX.TabControl,
+  FMX.Controls.Presentation, System.Rtti, FMX.Grid.Style, FMX.ScrollBox, FMX.Grid, Helper.FMX,
+  System.Actions, FMX.ActnList, FMX.Memo, System.StrUtils, Impl.Dialogs, Impl.AFD, Impl.Types,
+  Impl.Transitions;
 
 type
-  TMain = class(TForm)
+  TMain = class sealed(TForm)
     ActionList: TActionList;
     ActionBuildAFD: TAction;
     ActionBuildMatrix: TAction;
