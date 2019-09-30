@@ -7,7 +7,7 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls,
   FMX.Edit, FMX.Controls.Presentation, System.Rtti, FMX.Grid.Style,
   FMX.ScrollBox, FMX.Grid, FMX.TabControl, Helper.FMX, Impl.AFD, Impl.AFD.Types,
-  System.Actions, FMX.ActnList, FMX.Memo;
+  System.Actions, FMX.ActnList, FMX.Memo, Impl.Dialogs, System.StrUtils;
 
 type
   TMain = class(TForm)
@@ -91,7 +91,7 @@ const
 var
   Message: string;
 begin
-  Message := Format('[%d][Status: %s][Word: %s]', [Succ(MemoWords.Lines.Count), Result[FAFD.Accept(Word)], Word]);
+  Message := Format('[%d][Status: %s][Word: %s]', [Succ(MemoWords.Lines.Count), Result[FAFD.Accept(Word)], IfThen(Word.IsEmpty, '?', Word)]);
   MemoWords.Lines.Add(Message);
 end;
 
@@ -125,11 +125,18 @@ end;
 
 procedure TMain.ActionBuildAFDExecute(Sender: TObject);
 begin
-  FAFD := FAFD.AddSymbols(Symbols)
-              .AddStates(States)
-              .AddInitialState(InitialState)
-              .AddFinalStates(FinalStates)
-              .AddTransitions(Transitions);
+  try
+    FAFD := FAFD.AddSymbols(Symbols)
+                .AddStates(States)
+                .AddInitialState(InitialState)
+                .AddFinalStates(FinalStates)
+                .AddTransitions(Transitions);
+  except
+    on E: Exception do
+    begin
+      TDialogs.Warning(E.Message);
+    end;
+  end;
 end;
 
 

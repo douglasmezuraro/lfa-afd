@@ -3,18 +3,16 @@ unit Impl.AFD;
 interface
 
 uses
-  Impl.AFD.Types, System.SysUtils, System.Generics.Collections;
+  Impl.AFD.Types, Impl.List, System.SysUtils;
 
 type
   TAFD = class sealed
   strict private
-    FSymbols: TList<TSymbol>;
-    FStates: TList<TState>;
+    FSymbols: TList;
+    FStates: TList;
     FInitialState: TState;
-    FFinalStates: TList<TState>;
+    FFinalStates: TList;
     FTransitions: TTransitions;
-  private
-    function ListToString(const List: TList<string>): string;
   public
     constructor Create;
     destructor Destroy; override;
@@ -33,9 +31,9 @@ implementation
 
 constructor TAFD.Create;
 begin
-  FSymbols     := TList<TSymbol>.Create;
-  FStates      := TList<TState>.Create;
-  FFinalStates := TList<TState>.Create;
+  FSymbols     := TList.Create;
+  FStates      := TList.Create;
+  FFinalStates := TList.Create;
 end;
 
 destructor TAFD.Destroy;
@@ -52,24 +50,6 @@ begin
   FStates.Clear;
   FFinalStates.Clear;
   FInitialState := string.Empty;
-end;
-
-function TAFD.ListToString(const List: TList<string>): string;
-var
-  Item: string;
-begin
-  if (not Assigned(List)) or (List.Count = 0) then
-    Exit('[]');
-
-  for Item in List do
-  begin
-    if Result.Trim.IsEmpty then
-      Result := '[' + Item
-    else
-      Result := Result + ', ' + Item;
-  end;
-
-  Result := Result + ']';
 end;
 
 function TAFD.Accept(const Word: string): Boolean;
@@ -98,14 +78,14 @@ begin
 
   for Symbol in Symbols do
   begin
-    if FSymbols.Contains(Symbol) then
-      raise ESymbolDuplicated.CreateFmt('The symbol %s is duplicated!', [Symbol.QuotedString]);
+    if FSymbols.Contains(Symbol.Trim) then
+      raise EDuplicated.CreateFmt('The symbol %s is duplicated!', [Symbol.Trim.QuotedString]);
 
-    FSymbols.Add(Symbol);
+    FSymbols.Add(Symbol.Trim);
   end;
 
-  if FSymbols.Count = 0 then
-    raise ESymbolsNotDefined.Create('The AFD symbols is not defined!');
+  if FSymbols.IsEmpty then
+    raise ENotDefined.Create('The AFD symbols is not defined!');
 
   Result := Self;
 end;
@@ -116,14 +96,14 @@ var
 begin
   for State in States do
   begin
-    if FStates.Contains(State) then
-      raise EStateDuplicated.CreateFmt('The state %s is duplicated!', [State.QuotedString]);
+    if FStates.Contains(State.Trim) then
+      raise EDuplicated.CreateFmt('The state %s is duplicated!', [State.Trim.QuotedString]);
 
-    FStates.Add(State);
+    FStates.Add(State.Trim);
   end;
 
-  if FStates.Count = 0 then
-    raise EStatesNotDefined.Create('The AFD states is not defined!');
+  if FStates.IsEmpty then
+    raise ENotDefined.Create('The AFD states is not defined!');
 
   Result := Self;
 end;
@@ -131,12 +111,12 @@ end;
 function TAFD.AddInitialState(const State: TState): TAFD;
 begin
   if State.IsEmpty then
-    raise EInitialStateNotDefined.Create('The AFD initial state is not defined!');
+    raise ENotDefined.Create('The AFD initial state is not defined!');
 
-  if not FStates.Contains(State) then
-    raise EStateNotFound.CreateFmt('The state %s is not in states list %s!', [State, ListToString(FStates)]);
+  if not FStates.Contains(State.Trim) then
+    raise ENotFound.CreateFmt('The state %s is not in states list %s!', [State.Trim, FStates.ToString]);
 
-  FInitialState := State;
+  FInitialState := State.Trim;
   Result := Self;
 end;
 
@@ -146,19 +126,18 @@ var
 begin
   for State in States do
   begin
-    if not FStates.Contains(State) then
-      raise EStateNotFound.CreateFmt('The state %s is not in states list %s!', [State, ListToString(FStates)]);
+    if not FStates.Contains(State.Trim) then
+      raise ENotFound.CreateFmt('The state %s is not in states list %s!', [State.Trim, FStates.ToString]);
 
-    if FFinalStates.Contains(State) then
-      raise EStateDuplicated.CreateFmt('The state %s is duplicated!', [State.QuotedString]);
+    if FFinalStates.Contains(State.Trim) then
+      raise EDuplicated.CreateFmt('The state %s is duplicated!', [State.Trim.QuotedString]);
 
-    FFinalStates.Add(State);
+    FFinalStates.Add(State.Trim);
   end;
 
-  if FFinalStates.Count = 0 then
-    raise EStatesNotDefined.Create('The AFD states is not defined!');
+  if FFinalStates.IsEmpty then
+    raise ENotDefined.Create('The AFD final states is not defined!');
 
-  FFinalStates.AddRange(States);
   Result := Self;
 end;
 

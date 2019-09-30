@@ -9,19 +9,11 @@ type
   TSymbol = string;
   TState = string;
   TTransition = string;
-  TMatrix = TArray<TArray<TTransition>>;
+  TMatrix = TArray<TArray<string>>;
 
   ENotDefined = class(Exception);
-  ESymbolsNotDefined = class(ENotDefined);
-  EStatesNotDefined = class(ENotDefined);
-  EInitialStateNotDefined = class(ENotDefined);
-  EFinalStatesNotDefined = class(ENotDefined);
-  ETransitionsNotDefined = class(ENotDefined);
-
-  EStateNotFound = class(Exception);
   EDuplicated = class(Exception);
-  ESymbolDuplicated = class(EDuplicated);
-  EStateDuplicated = class(EDuplicated);
+  ENotFound = class(Exception);
 
   TTransitions = record
   strict private
