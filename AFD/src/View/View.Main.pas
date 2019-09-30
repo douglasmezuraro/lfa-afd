@@ -1,4 +1,4 @@
-unit View.Main;
+﻿unit View.Main;
 
 interface
 
@@ -91,7 +91,7 @@ const
 var
   Message: string;
 begin
-  Message := Format('[%d][Status: %s][Word: %s]', [Succ(MemoWords.Lines.Count), Result[FAFD.Accept(Word)], IfThen(Word.IsEmpty, '?', Word)]);
+  Message := Format('[%.3d][Status: %s][Word: %s]', [Succ(MemoWords.Lines.Count), Result[FAFD.Accept(Word)], IfThen(Word.IsEmpty, 'ʎ', Word)]);
   MemoWords.Lines.Add(Message);
 end;
 

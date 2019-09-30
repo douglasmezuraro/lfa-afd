@@ -9,6 +9,7 @@ type
   TSymbol = string;
   TState = string;
   TTransition = string;
+  TWord = string;
   TMatrix = TArray<TArray<string>>;
 
   ENotDefined = class(Exception);
@@ -18,11 +19,15 @@ type
   TTransitions = record
   strict private
     FMatrix: TMatrix;
+    FRows: Byte;
+    FColumns: Byte;
   public
     constructor Create(const Matrix: TMatrix); overload;
     function HasTransition(const State: TState; const Symbol: TSymbol): Boolean;
     function Transition(const State: TState; const Symbol: TSymbol): TTransition;
     function ToMatrix: TMatrix;
+    property Rows: Byte read FRows;
+    property Columns: Byte read FColumns;
   end;
 
 implementation
@@ -32,6 +37,8 @@ implementation
 constructor TTransitions.Create(const Matrix: TMatrix);
 begin
   FMatrix := Matrix;
+  FRows := Length(FMatrix);
+  FColumns := Length(FMatrix[Low(FMatrix)]);
 end;
 
 function TTransitions.HasTransition(const State: TState; const Symbol: TSymbol): Boolean;
@@ -51,7 +58,7 @@ begin
   Row := Integer.MinValue;
   Column := Integer.MinValue;
 
-  for Index := 1 to Pred(Length(FMatrix)) do
+  for Index := 1 to Pred(FRows) do
   begin
     if FMatrix[Index, 0].Equals(State) then
     begin
@@ -60,7 +67,7 @@ begin
     end;
   end;
 
-  for Index := 1 to Pred(Length(FMatrix[0])) do
+  for Index := 1 to Pred(FColumns) do
   begin
     if FMatrix[0, Index].Equals(Symbol) then
     begin

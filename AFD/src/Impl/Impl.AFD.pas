@@ -22,7 +22,7 @@ type
     function AddInitialState(const State: TState): TAFD;
     function AddFinalStates(const States: TArray<TState>): TAFD;
     function AddTransitions(const Transitions: TTransitions): TAFD;
-    function Accept(const Word: string): Boolean;
+    function Accept(const Word: TWord): Boolean;
   end;
 
 implementation
@@ -52,7 +52,7 @@ begin
   FInitialState := string.Empty;
 end;
 
-function TAFD.Accept(const Word: string): Boolean;
+function TAFD.Accept(const Word: TWord): Boolean;
 var
   State: TState;
   Symbol: TSymbol;
@@ -114,7 +114,7 @@ begin
     raise ENotDefined.Create('The AFD initial state is not defined!');
 
   if not FStates.Contains(State.Trim) then
-    raise ENotFound.CreateFmt('The state %s is not in states list %s!', [State.Trim, FStates.ToString]);
+    raise ENotFound.CreateFmt('The state %s is not in states list %s!', [State.Trim.QuotedString, FStates.ToString]);
 
   FInitialState := State.Trim;
   Result := Self;
@@ -127,7 +127,7 @@ begin
   for State in States do
   begin
     if not FStates.Contains(State.Trim) then
-      raise ENotFound.CreateFmt('The state %s is not in states list %s!', [State.Trim, FStates.ToString]);
+      raise ENotFound.CreateFmt('The state %s is not in states list %s!', [State.Trim.QuotedString, FStates.ToString]);
 
     if FFinalStates.Contains(State.Trim) then
       raise EDuplicated.CreateFmt('The state %s is duplicated!', [State.Trim.QuotedString]);
@@ -142,9 +142,28 @@ begin
 end;
 
 function TAFD.AddTransitions(const Transitions: TTransitions): TAFD;
+var
+  Row, Column: Integer;
+  State: TState;
 begin
   FTransitions := Transitions;
+
+  for Row := 1 to Pred(Transitions.Rows) do
+  begin
+    for Column := 1 to Pred(Transitions.Columns) do
+    begin
+      State := Transitions.ToMatrix[Row, Column];
+
+      if State.Trim.IsEmpty then
+        continue;
+
+      if not FStates.Contains(State) then
+        raise ENotDefined.CreateFmt('The state %s is not defined in states %s.', [State.QuotedString, FStates.ToString]);
+    end;
+  end;
+
   Result := Self;
 end;
 
 end.
+

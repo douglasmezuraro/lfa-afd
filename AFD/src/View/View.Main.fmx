@@ -4,6 +4,7 @@ object Main: TMain
   Caption = 'AFD'
   ClientHeight = 511
   ClientWidth = 580
+  Position = ScreenCenter
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
@@ -238,6 +239,7 @@ object Main: TMain
       object MemoWords: TMemo
         Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
         DataDetectorTypes = []
+        ReadOnly = True
         Anchors = [akLeft, akTop, akRight, akBottom]
         Locked = True
         Position.X = 16.000000000000000000
