@@ -99,11 +99,12 @@
             <Form>Main</Form>
             <FormType>fmx</FormType>
         </DCCReference>
-        <DCCReference Include="..\src\Impl\Impl.AFD.pas"/>
-        <DCCReference Include="..\src\Impl\Impl.AFD.Types.pas"/>
         <DCCReference Include="..\src\Helper\Helper.FMX.pas"/>
         <DCCReference Include="..\src\Impl\Impl.Dialogs.pas"/>
         <DCCReference Include="..\src\Impl\Impl.List.pas"/>
+        <DCCReference Include="..\src\Impl\Impl.Transitions.pas"/>
+        <DCCReference Include="..\src\Impl\Impl.AFD.pas"/>
+        <DCCReference Include="..\src\Impl\Impl.Types.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

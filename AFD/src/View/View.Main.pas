@@ -7,7 +7,8 @@ uses
   FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls, FMX.Edit, FMX.TabControl,
   FMX.Controls.Presentation, System.Rtti, FMX.Grid.Style, FMX.ScrollBox, FMX.Grid, Helper.FMX,
   System.Actions, FMX.ActnList, FMX.Memo, System.StrUtils, Impl.Dialogs, Impl.AFD, Impl.Types,
-  Impl.Transitions;
+  Impl.Transitions, FMX.Layouts, FMX.ListBox, FMX.ListView.Types, FMX.ListView.Appearances,
+  FMX.ListView.Adapters.Base, FMX.ListView, System.ImageList, FMX.ImgList;
 
 type
   TMain = class sealed(TForm)
@@ -35,13 +36,12 @@ type
     EditWord: TEdit;
     LabelWord: TLabel;
     LabelWords: TLabel;
-    MemoWords: TMemo;
     ButtonBuildMatrix: TButton;
     ButtonBuildAFD: TButton;
+    ListWords: TListBox;
     procedure ActionBuildAFDExecute(Sender: TObject);
     procedure ActionBuildMatrixExecute(Sender: TObject);
-    procedure GridSelectCell(Sender: TObject; const ACol, ARow: Integer;
-      var CanSelect: Boolean);
+    procedure GridSelectCell(Sender: TObject; const ACol, ARow: Integer; var CanSelect: Boolean);
     procedure ActionCheckExecute(Sender: TObject);
     procedure ActionClearExecute(Sender: TObject);
     procedure TabControlViewChange(Sender: TObject);
@@ -58,6 +58,7 @@ type
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
+  published
     property Symbols: TArray<TSymbol> read GetSymbols;
     property States: TArray<TState> read GetStates;
     property InitialState: TState read GetInitialState;
@@ -86,13 +87,11 @@ begin
 end;
 
 procedure TMain.ActionCheckExecute(Sender: TObject);
-const
-  Result: array[Boolean] of string = ('Rejected', 'Accepted');
 var
-  Message: string;
+  Index: Integer;
 begin
-  Message := Format('[%.3d][Status: %s][Word: %s]', [Succ(MemoWords.Lines.Count), Result[FAFD.Accept(Word)], IfThen(Word.IsEmpty, 'ʎ', Word)]);
-  MemoWords.Lines.Add(Message);
+  Index := ListWords.Items.Add(IfThen(Word.IsEmpty, 'ʎ', Word));
+  ListWords.ItemByIndex(Index).IsChecked := FAFD.Accept(Word);
 end;
 
 procedure TMain.ActionClearExecute(Sender: TObject);
@@ -103,7 +102,7 @@ begin
   EditInitialState.Text := string.Empty;
   EditFinalStates.Text := string.Empty;
   EditWord.Text := string.Empty;
-  MemoWords.Lines.Clear;
+  ListWords.Items.Clear;
 end;
 
 constructor TMain.Create(AOwner: TComponent);
@@ -125,6 +124,8 @@ end;
 
 procedure TMain.ActionBuildAFDExecute(Sender: TObject);
 begin
+  EditWord.Text := string.Empty;
+  ListWords.Items.Clear;
   try
     FAFD := FAFD.AddSymbols(Symbols)
                 .AddStates(States)
@@ -170,8 +171,7 @@ begin
   Result := EditWord.Text;
 end;
 
-procedure TMain.GridSelectCell(Sender: TObject; const ACol, ARow: Integer;
-  var CanSelect: Boolean);
+procedure TMain.GridSelectCell(Sender: TObject; const ACol, ARow: Integer; var CanSelect: Boolean);
 begin
   CanSelect := (ACol <> Grid.FirstColumn) and (ARow <> Grid.FirstRow);
 end;

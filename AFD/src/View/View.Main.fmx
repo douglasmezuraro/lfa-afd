@@ -60,7 +60,7 @@ object Main: TMain
     Size.Width = 580.000000000000000000
     Size.Height = 466.000000000000000000
     Size.PlatformDefault = False
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     TabPosition = PlatformDefault
     OnChange = TabControlViewChange
@@ -74,7 +74,7 @@ object Main: TMain
         item
         end>
       Locked = True
-      IsSelected = False
+      IsSelected = True
       Size.Width = 48.000000000000000000
       Size.Height = 26.000000000000000000
       Size.PlatformDefault = False
@@ -88,7 +88,7 @@ object Main: TMain
         FocusControl = EditSymbols
         Position.X = 16.000000000000000000
         Position.Y = 8.000000000000000000
-        Text = #931' (Symbols)'
+        Text = #931
         TabOrder = 0
       end
       object EditSymbols: TEdit
@@ -101,13 +101,14 @@ object Main: TMain
         Size.Width = 545.000000000000000000
         Size.Height = 22.000000000000000000
         Size.PlatformDefault = False
+        TextPrompt = 'Symbols'
       end
       object LabelStates: TLabel
         Locked = True
         FocusControl = EditStates
         Position.X = 16.000000000000000000
         Position.Y = 56.000000000000000000
-        Text = 'States'
+        Text = 'E'
         TabOrder = 2
       end
       object EditStates: TEdit
@@ -120,13 +121,14 @@ object Main: TMain
         Size.Width = 545.000000000000000000
         Size.Height = 22.000000000000000000
         Size.PlatformDefault = False
+        TextPrompt = 'States'
       end
       object LabelInitialState: TLabel
         Locked = True
         FocusControl = EditInitialState
         Position.X = 16.000000000000000000
         Position.Y = 104.000000000000000000
-        Text = 'Initial state'
+        Text = 'i'
         TabOrder = 4
       end
       object EditInitialState: TEdit
@@ -139,13 +141,14 @@ object Main: TMain
         Size.Width = 545.000000000000000000
         Size.Height = 22.000000000000000000
         Size.PlatformDefault = False
+        TextPrompt = 'Initial state'
       end
       object LabelFinalStates: TLabel
         Locked = True
         FocusControl = EditFinalStates
         Position.X = 16.000000000000000000
         Position.Y = 152.000000000000000000
-        Text = 'Final states'
+        Text = 'F'
         TabOrder = 6
       end
       object EditFinalStates: TEdit
@@ -158,13 +161,14 @@ object Main: TMain
         Size.Width = 545.000000000000000000
         Size.Height = 22.000000000000000000
         Size.PlatformDefault = False
+        TextPrompt = 'Final states'
       end
       object LabelTransitions: TLabel
         Locked = True
         FocusControl = Grid
         Position.X = 16.000000000000000000
         Position.Y = 200.000000000000000000
-        Text = 'Transitions'
+        Text = #948
         TabOrder = 8
       end
       object Grid: TStringGrid
@@ -190,7 +194,7 @@ object Main: TMain
         item
         end>
       Locked = True
-      IsSelected = True
+      IsSelected = False
       Size.Width = 58.000000000000000000
       Size.Height = 26.000000000000000000
       Size.PlatformDefault = False
@@ -199,19 +203,6 @@ object Main: TMain
       Text = 'Output'
       ExplicitSize.cx = 58.000000000000000000
       ExplicitSize.cy = 26.000000000000000000
-      object ButtonCheck: TButton
-        Action = ActionCheck
-        Anchors = [akLeft, akTop, akRight]
-        Enabled = True
-        ImageIndex = -1
-        Locked = True
-        Position.X = 480.000000000000000000
-        Position.Y = 32.000000000000000000
-        Size.Width = 80.000000000000000000
-        Size.Height = 22.000000000000000000
-        Size.PlatformDefault = False
-        TabOrder = 2
-      end
       object EditWord: TEdit
         Touch.InteractiveGestures = [LongTap, DoubleTap]
         TabOrder = 1
@@ -236,20 +227,34 @@ object Main: TMain
         Text = 'Words'
         TabOrder = 3
       end
-      object MemoWords: TMemo
-        Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
-        DataDetectorTypes = []
-        ReadOnly = True
-        Anchors = [akLeft, akTop, akRight, akBottom]
+      object ButtonCheck: TButton
+        Action = ActionCheck
+        Anchors = [akLeft, akTop, akRight]
+        Enabled = True
+        ImageIndex = -1
         Locked = True
-        Position.X = 16.000000000000000000
-        Position.Y = 81.000000000000000000
+        Position.X = 480.000000000000000000
+        Position.Y = 32.000000000000000000
+        Size.Width = 80.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+      end
+      object ListWords: TListBox
+        Locked = True
+        Position.X = 15.000000000000000000
+        Position.Y = 80.000000000000000000
         Size.Width = 545.000000000000000000
-        Size.Height = 337.000000000000000000
+        Size.Height = 341.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 4
+        DisableFocusEffect = True
+        DefaultItemStyles.ItemStyle = ''
+        DefaultItemStyles.GroupHeaderStyle = ''
+        DefaultItemStyles.GroupFooterStyle = ''
+        ShowCheckboxes = True
         Viewport.Width = 541.000000000000000000
-        Viewport.Height = 333.000000000000000000
+        Viewport.Height = 337.000000000000000000
       end
     end
   end

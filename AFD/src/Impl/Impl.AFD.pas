@@ -59,7 +59,7 @@ var
 begin
   State := FInitialState;
 
-  for Symbol in Word.ToCharArray do
+  for Symbol in Word do
   begin
     if FTransitions.HasTransition(State, Symbol) then
       State := FTransitions.Transition(State, Symbol)
