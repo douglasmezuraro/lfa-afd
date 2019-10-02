@@ -17,6 +17,7 @@ type
     constructor Create;
     destructor Destroy; override;
     procedure Clear;
+    function IsDefined: Boolean;
     function AddSymbols(const Symbols: TArray<TSymbol>): TAFD;
     function AddStates(const States: TArray<TState>): TAFD;
     function AddInitialState(const State: TState): TAFD;
@@ -44,6 +45,25 @@ begin
   inherited;
 end;
 
+function TAFD.IsDefined: Boolean;
+begin
+  Result := False;
+
+  if FSymbols.IsEmpty then
+    Exit;
+
+  if FStates.IsEmpty then
+    Exit;
+
+  if FInitialState.Trim.IsEmpty then
+    Exit;
+
+  if FFinalStates.IsEmpty then
+    Exit;
+
+  Result := not FTransitions.IsEmpty;
+end;
+
 procedure TAFD.Clear;
 begin
   FSymbols.Clear;
@@ -57,6 +77,9 @@ var
   State: TState;
   Symbol: TSymbol;
 begin
+  if not IsDefined then
+    raise ENotDefined.Create('Some properties of AFD is not defined!');
+
   State := FInitialState;
 
   for Symbol in Word do

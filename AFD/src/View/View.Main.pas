@@ -12,40 +12,39 @@ uses
 
 type
   TMain = class sealed(TForm)
-    ActionList: TActionList;
     ActionBuildAFD: TAction;
-    ActionBuildMatrix: TAction;
     ActionCheck: TAction;
-    PanelButtons: TPanel;
-    ButtonClear: TButton;
     ActionClear: TAction;
-    TabControlView: TTabControl;
-    TabItemInput: TTabItem;
-    LabelSymbols: TLabel;
-    EditSymbols: TEdit;
-    LabelStates: TLabel;
-    EditStates: TEdit;
-    LabelInitialState: TLabel;
-    EditInitialState: TEdit;
-    LabelFinalStates: TLabel;
-    EditFinalStates: TEdit;
-    LabelTransitions: TLabel;
-    Grid: TStringGrid;
-    TabItemOutput: TTabItem;
+    ActionList: TActionList;
+    ButtonBuildAFD: TButton;
     ButtonCheck: TButton;
+    ButtonClear: TButton;
+    EditFinalStates: TEdit;
+    EditInitialState: TEdit;
+    EditStates: TEdit;
+    EditSymbols: TEdit;
     EditWord: TEdit;
+    Grid: TStringGrid;
+    LabelFinalStates: TLabel;
+    LabelInitialState: TLabel;
+    LabelStates: TLabel;
+    LabelSymbols: TLabel;
+    LabelTransitions: TLabel;
     LabelWord: TLabel;
     LabelWords: TLabel;
-    ButtonBuildMatrix: TButton;
-    ButtonBuildAFD: TButton;
     ListWords: TListBox;
+    PanelButtons: TPanel;
+    TabControlView: TTabControl;
+    TabItemInput: TTabItem;
+    TabItemOutput: TTabItem;
     procedure ActionBuildAFDExecute(Sender: TObject);
-    procedure ActionBuildMatrixExecute(Sender: TObject);
     procedure GridSelectCell(Sender: TObject; const ACol, ARow: Integer; var CanSelect: Boolean);
     procedure ActionCheckExecute(Sender: TObject);
     procedure ActionClearExecute(Sender: TObject);
     procedure TabControlViewChange(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure EditSymbolsChange(Sender: TObject);
+    procedure EditStatesChange(Sender: TObject);
   strict private
     FAFD: TAFD;
   private
@@ -54,7 +53,8 @@ type
     function GetStates: TArray<TState>;
     function GetSymbols: TArray<TSymbol>;
     function GetTransitions: TTransitions;
-    function GetWord: string;
+    function GetWord: TWord;
+    procedure DrawMatrix;
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
@@ -64,7 +64,7 @@ type
     property InitialState: TState read GetInitialState;
     property FinalStates: TArray<TState> read GetFinalStates;
     property Transitions: TTransitions read GetTransitions;
-    property Word: string read GetWord;
+    property Word: TWord read GetWord;
   end;
 
 implementation
@@ -73,25 +73,33 @@ implementation
 
 { TMain }
 
-procedure TMain.ActionBuildMatrixExecute(Sender: TObject);
-var
-  Row, Column: Byte;
+constructor TMain.Create(AOwner: TComponent);
 begin
-  Grid.DefineSize(Length(States) + 1, Length(Symbols) + 1);
+  inherited Create(AOwner);
+  FAFD := TAFD.Create;
+end;
 
-  for Row := 1 to Pred(Grid.RowCount) do
-    Grid.Cells[Grid.FirstColumn, Row] := States[Row - 1];
-
-  for Column := 1 to Pred(Grid.ColumnCount) do
-    Grid.Cells[Column, Grid.FirstRow] := Symbols[Column - 1]
+destructor TMain.Destroy;
+begin
+  FAFD.Free;
+  inherited Destroy;
 end;
 
 procedure TMain.ActionCheckExecute(Sender: TObject);
 var
+  Accepted: Boolean;
   Index: Integer;
 begin
-  Index := ListWords.Items.Add(IfThen(Word.IsEmpty, 'ʎ', Word));
-  ListWords.ItemByIndex(Index).IsChecked := FAFD.Accept(Word);
+  try
+    Accepted := FAFD.Accept(Word);
+    Index := ListWords.Items.Add(IfThen(Word.IsEmpty, 'ʎ', Word));
+    ListWords.ItemByIndex(Index).IsChecked := Accepted;
+  except
+    on E: Exception do
+    begin
+      TDialogs.Warning(E.Message);
+    end;
+  end;
 end;
 
 procedure TMain.ActionClearExecute(Sender: TObject);
@@ -105,16 +113,32 @@ begin
   ListWords.Items.Clear;
 end;
 
-constructor TMain.Create(AOwner: TComponent);
+procedure TMain.DrawMatrix;
+var
+  Row, Column: Byte;
 begin
-  inherited Create(AOwner);
-  FAFD := TAFD.Create;
+  Grid.Clear;
+
+  if (Length(States) = 0) or (Length(Symbols) = 0) then
+    Exit;
+
+  Grid.DefineSize(Length(States) + 1, Length(Symbols) + 1);
+
+  for Row := 1 to Pred(Grid.RowCount) do
+    Grid.Cells[Grid.FirstColumn, Row] := States[Row - 1];
+
+  for Column := 1 to Pred(Grid.ColumnCount) do
+    Grid.Cells[Column, Grid.FirstRow] := Symbols[Column - 1]
 end;
 
-destructor TMain.Destroy;
+procedure TMain.EditStatesChange(Sender: TObject);
 begin
-  FAFD.Free;
-  inherited Destroy;
+  DrawMatrix;
+end;
+
+procedure TMain.EditSymbolsChange(Sender: TObject);
+begin
+  DrawMatrix;
 end;
 
 procedure TMain.FormShow(Sender: TObject);
@@ -139,7 +163,6 @@ begin
     end;
   end;
 end;
-
 
 function TMain.GetFinalStates: TArray<TState>;
 begin
@@ -166,7 +189,7 @@ begin
   Result := TTransitions.Create(Grid.ToMatrix);
 end;
 
-function TMain.GetWord: string;
+function TMain.GetWord: TWord;
 begin
   Result := EditWord.Text;
 end;
@@ -179,7 +202,6 @@ end;
 procedure TMain.TabControlViewChange(Sender: TObject);
 begin
   ButtonBuildAFD.Visible := TabControlView.ActiveTab = TabItemInput;
-  ButtonBuildMatrix.Visible := TabControlView.ActiveTab = TabItemInput;
 end;
 
 end.

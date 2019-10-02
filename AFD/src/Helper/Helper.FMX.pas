@@ -15,12 +15,19 @@ type
     procedure DefineColumnCount(const Columns: Byte);
   public
     function ToMatrix: TArray<TArray<string>>;
+    procedure Clear;
     procedure DefineSize(const Rows, Columns: Byte);
   end;
 
 implementation
 
 { TStringGridHelper }
+
+procedure TStringGridHelper.Clear;
+begin
+  RowCount := 0;
+  ClearColumns;
+end;
 
 procedure TStringGridHelper.DefineColumnCount(const Columns: Byte);
 begin

@@ -13,6 +13,7 @@ type
     FColumns: Byte;
   public
     constructor Create(const Matrix: TMatrix); overload;
+    function IsEmpty: Boolean;
     function HasTransition(const State: TState; const Symbol: TSymbol): Boolean;
     function Transition(const State: TState; const Symbol: TSymbol): TTransition;
     function ToMatrix: TMatrix;
@@ -34,6 +35,11 @@ end;
 function TTransitions.HasTransition(const State: TState; const Symbol: TSymbol): Boolean;
 begin
   Result := not Transition(State, Symbol).Trim.IsEmpty;
+end;
+
+function TTransitions.IsEmpty: Boolean;
+begin
+  Result := (FRows < 1) or (FColumns < 1);
 end;
 
 function TTransitions.ToMatrix: TMatrix;
