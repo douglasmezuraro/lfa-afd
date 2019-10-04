@@ -1,14 +1,14 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <ProjectGuid>{4AB4828E-BEAF-4AB6-8BB9-FE74EA28FA7A}</ProjectGuid>
-        <ProjectVersion>18.5</ProjectVersion>
-        <FrameworkType>FMX</FrameworkType>
-        <MainSource>AFD.dpr</MainSource>
+        <ProjectGuid>{B62D427F-AC5E-464A-AA04-B910924EC81B}</ProjectGuid>
+        <ProjectVersion>18.4</ProjectVersion>
+        <FrameworkType>None</FrameworkType>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>1</TargetedPlatforms>
-        <AppType>Application</AppType>
+        <AppType>Console</AppType>
+        <MainSource>AFD.Tests.dpr</MainSource>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
         <Base>true</Base>
@@ -34,38 +34,26 @@
         <CfgParent>Base</CfgParent>
         <Base>true</Base>
     </PropertyGroup>
-    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win32)'!=''">
-        <Cfg_2_Win32>true</Cfg_2_Win32>
-        <CfgParent>Cfg_2</CfgParent>
-        <Cfg_2>true</Cfg_2>
-        <Base>true</Base>
-    </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
-        <DCC_DcuOutput>.\bin\dcu\</DCC_DcuOutput>
-        <DCC_ExeOutput>.\bin\</DCC_ExeOutput>
+        <DCC_DcuOutput>.</DCC_DcuOutput>
+        <DCC_ExeOutput>.\$(Platform)\$(Config)</DCC_ExeOutput>
         <DCC_E>false</DCC_E>
         <DCC_N>false</DCC_N>
         <DCC_S>false</DCC_S>
         <DCC_F>false</DCC_F>
         <DCC_K>false</DCC_K>
-        <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
-        <Icon_MainIcon>$(BDS)\bin\delphi_PROJECTICON.ico</Icon_MainIcon>
-        <Icns_MainIcns>$(BDS)\bin\delphi_PROJECTICNS.icns</Icns_MainIcns>
-        <VerInfo_Locale>1046</VerInfo_Locale>
-        <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
-        <SanitizedProjectName>AFD</SanitizedProjectName>
+        <DCC_UsePackage>RESTBackendComponents;CloudService;soaprtl;soapmidas;RESTComponents;emsclientfiredac;DataSnapFireDAC;FireDACIBDriver;emsclient;FireDACCommon;soapserver;FireDACCommonDriver;inet;FireDAC;FireDACSqliteDriver;$(DCC_UsePackage)</DCC_UsePackage>
+        <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;$(DCC_Namespace)</DCC_Namespace>
         <DCC_UnitSearchPath>$(BDS)\Source\DUnit\src;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <DCC_Define>_CONSOLE_TESTRUNNER;$(DCC_Define)</DCC_Define>
+        <SanitizedProjectName>AFD_Tests</SanitizedProjectName>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
-        <DCC_UsePackage>DBXSqliteDriver;IndyIPCommon;RESTComponents;bindcompdbx;DBXInterBaseDriver;vcl;IndyIPServer;vclactnband;vclFireDAC;IndySystem;tethering;svnui;dsnapcon;FireDACADSDriver;FireDACMSAccDriver;fmxFireDAC;vclimg;FireDAC;vcltouch;vcldb;bindcompfmx;svn;FireDACSqliteDriver;FireDACPgDriver;inetdb;soaprtl;DbxCommonDriver;fmx;FireDACIBDriver;fmxdae;xmlrtl;soapmidas;fmxobj;vclwinx;rtl;DbxClientDriver;CustomIPTransport;vcldsnap;dbexpress;IndyCore;vclx;bindcomp;appanalytics;dsnap;FireDACCommon;IndyIPClient;bindcompvcl;RESTBackendComponents;VCLRESTComponents;soapserver;dbxcds;VclSmp;adortl;vclie;bindengine;DBXMySQLDriver;CloudService;dsnapxml;FireDACMySQLDriver;dbrtl;IndyProtocols;inetdbxpress;FireDACCommonODBC;FireDACCommonDriver;inet;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
+        <DCC_UsePackage>DBXSqliteDriver;DBXDb2Driver;addictdb;dxExRw;smdCompletoDT;vclactnband;tb2k;vclFireDAC;RaveVCL;tethering;spFundamentals;FireDACADSDriver;SAXKWR;EQGrid;OXml_R;VarianWorkshop;FireDACMSSQLDriver;vcltouch;sppCompleto;PKIPDFBBox;vcldb;dxsb;PGPMIMEBBox;SFTPBBoxSrv;svn;spOrpheus;spVCL;spCommonAPI;pg5Completo;PGPBBox;rbRTL1617;sp4D5ViolacoesDependencia;sgcCompleto;ASiCBBox;FireDACDBXDriver;vclx;spConsultas;DAVBBoxCli;cgoCompletoDT;ZIPBBox;EDIBBox;scmCompleto;VCLRESTComponents;rbTCUI1617;RvCore;pg5cPrettyLabel;Box;tbxrt;vclie;bindengine;addict;FireDACMySQLDriver;dxcomn;wflViolacoesDependencia;spVclPkg;SAMLBBoxSrv;smdCompleto;DataSnapClient;spAddict;bindcompdbx;DBXSybaseASEDriver;IndyIPServer;prcImpl;PngComponents;IndySystem;spTablet;XMLBBox;spVCL_DT;dsnapcon;VirtualTreesR;DBPlannerPkg;FireDACMSAccDriver;fmxFireDAC;FireDACInfxDriver;vclimg;RvStandard;RvBarcode;spDados;spGravador;Jcl;spLdap;emshosting;spDxInspector;RvReport;DsgnBBox;dxBarDBNavR;spCompletoDadosConsultas_DT;pg5cCompleto;ccpCompleto;spEmbeddedWB;sasCompleto;DBXOdbcDriver;FireDACTDataDriver;FMXTee;DreamControls;digCompletoViolacoesPg5;DbxCommonDriver;intCompleto;xmlrtl;DataSnapNativeClient;fmxobj;spCompletoNew_DT;rtl;DbxClientDriver;DBXSybaseASADriver;dxDBEd;spCentralNotificacoes;appanalytics;spdxExpressBar;IndyIPClient;WPTAddict_DT;dxdbtr;bindcompvcl;vcldbx;TeeUI;dxELib;dxGrEd;HtmlLabelPkg;VclSmp;FireDACODBCDriver;spPatternsAPI;spVCLStylesEditor;DataSnapIndy10ServerTransport;BaseBBox;edtCompleto;DataSnapProviderClient;MailBBox;FireDACMongoDBDriver;spActiveDirectory;SFTPBBoxCli;PacotespPrinter;spCompleto_DT;DataSnapServerMidas;TVidGrab;spGenesis;DBXInterBaseDriver;RvGraphics;PKIECtrl;SAMLBBox;svnui;rbIDE1617;TMSLabelsButtonsPkg;DAVBBoxSrv;dxBarExtDBItemsR;DBXMSSQLDriver;spQuickPDF;spUIDControlsDT;DatasnapConnectorsFreePascal;spViewPDF;rbBDE1617;bindcompfmx;SSHBBoxCli;DBXOracleDriver;spCommonStructures;inetdb;CEF4Delphi;spVCLStyles;FmxTeeUI;emsedge;PDFBBox;fmx;fmxdae;SSHBBoxSrv;EQDBTL;spPatternsImpl;CloudBBox;spHTTP;wflCompleto;sajCompleto;PGPTLSBBox;digCompleto;dbexpress;IndyCore;smdPrettyListView;OfficeBBox;dsnap;DataSnapCommon;sggCompleto;bdertl;DataSnapConnectors;XDevice;SqlDir;EQTL;sarCompleto;rbRCL1617;SAXMSR;FTPSBBoxCli;EmbeddedWebBrowser;FireDACOracleDriver;DBXMySQLDriver;XFormat;ECQDBC;BurnCSP;DBXFirebirdDriver;Json_RT;SOAPBBoxCli;FireDACCommonODBC;ah_comp;MIMEBBox;spZip;cgoCompleto;ObjectDebugger;spImageEn;IndyIPCommon;ppWPToolsPack;vcl;XMLBBoxSec;FTPSBBoxSrv;FireDACDb2Driver;PBFolderDialog;spUtils;XLSSuit;PKIBBox;HTTPBBoxCli;aipCompleto;TeeDB;PKISSHBBox;dxForumLib;VCLZipDT;FireDACPgDriver;proCompleto;FireDACASADriver;dxObjIns;WPTools;spCompletoBase;Tee;DataSnapServer;vclwinx;FireDACDSDriver;dxIns;RvEngine;CustomIPTransport;vcldsnap;spCompletoNew;spDxInspector_DT;SMIMECAdESBBox;dxBarExtItemsR;bindcomp;DBXInformixDriver;SSLBBoxCli;spFormularios;dxBarR;SSLBBoxSrv;HTTPBBoxSrv;SMIMEBBox;aclCompleto;dbxcds;SAXR;PGPSSHBBox;adortl;pg5cPrettyListView;spSecureBlackBox;dxEdtr;ggpCompleto;rbTDBC1617;spCommonFunctions;dsnapxml;rbTC1617;dbrtl;inetdbxpress;IndyProtocols;LDAPBBox;spDUnit;SynEditR;spLockBox;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
         <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
         <BT_BuildType>Debug</BT_BuildType>
-        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
-        <UWP_DelphiLogo44>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_44.png</UWP_DelphiLogo44>
-        <UWP_DelphiLogo150>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png</UWP_DelphiLogo150>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1)'!=''">
         <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
@@ -77,10 +65,6 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
         <DCC_RemoteDebug>false</DCC_RemoteDebug>
-        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
-        <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
-        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <VerInfo_Locale>1033</VerInfo_Locale>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -88,24 +72,15 @@
         <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
         <DCC_DebugInformation>0</DCC_DebugInformation>
     </PropertyGroup>
-    <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
-        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
-        <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
-    </PropertyGroup>
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="..\src\View\View.Main.pas">
-            <Form>Main</Form>
-            <FormType>fmx</FormType>
-        </DCCReference>
-        <DCCReference Include="..\src\Helper\Helper.FMX.pas"/>
-        <DCCReference Include="..\src\Impl\Impl.Dialogs.pas"/>
-        <DCCReference Include="..\src\Impl\Impl.List.pas"/>
-        <DCCReference Include="..\src\Impl\Impl.Transitions.pas"/>
-        <DCCReference Include="..\src\Impl\Impl.AFD.pas"/>
-        <DCCReference Include="..\src\Impl\Impl.Types.pas"/>
+        <DCCReference Include="..\src\Impl\Impl.AFD.Validations.Test.pas"/>
+        <DCCReference Include="..\..\AFD\src\Impl\Impl.AFD.pas"/>
+        <DCCReference Include="..\..\AFD\src\Impl\Impl.Transitions.pas"/>
+        <DCCReference Include="..\..\AFD\src\Impl\Impl.Types.pas"/>
+        <DCCReference Include="..\..\AFD\src\Impl\Impl.List.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -123,12 +98,8 @@
         <Borland.ProjectType>Application</Borland.ProjectType>
         <BorlandProject>
             <Delphi.Personality>
-                <Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k260.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp260.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
-                </Excluded_Packages>
                 <Source>
-                    <Source Name="MainSource">AFD.dpr</Source>
+                    <Source Name="MainSource">AFD.Tests.dpr</Source>
                 </Source>
             </Delphi.Personality>
             <Deployment Version="3">
@@ -137,22 +108,12 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="$(BDS)\Redist\osx64\libcgsqlite3.dylib" Class="DependencyModule">
-                    <Platform Name="OSX64">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="$(BDS)\Redist\iossimulator\libPCRE.dylib" Class="DependencyModule">
-                    <Platform Name="iOSSimulator">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
                 <DeployFile LocalName="$(BDS)\Redist\iossimulator\libcgunwind.1.0.dylib" Class="DependencyModule">
                     <Platform Name="iOSSimulator">
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="$(BDS)\Redist\iossimulator\libpcre.dylib" Class="DependencyModule">
+                <DeployFile LocalName="$(BDS)\Redist\iossimulator\libPCRE.dylib" Class="DependencyModule">
                     <Platform Name="iOSSimulator">
                         <Overwrite>true</Overwrite>
                     </Platform>
@@ -162,9 +123,9 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="bin\AFD.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="Win32\Debug\AFD.Tests.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
-                        <RemoteName>AFD.exe</RemoteName>
+                        <RemoteName>AFD_Tests.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -184,12 +145,6 @@
                 <DeployClass Name="AndroidClassesDexFile">
                     <Platform Name="Android">
                         <RemoteDir>classes</RemoteDir>
-                        <Operation>1</Operation>
-                    </Platform>
-                </DeployClass>
-                <DeployClass Name="AndroidFileProvider">
-                    <Platform Name="Android">
-                        <RemoteDir>res\xml</RemoteDir>
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
@@ -226,12 +181,6 @@
                 <DeployClass Name="AndroidSplashStyles">
                     <Platform Name="Android">
                         <RemoteDir>res\values</RemoteDir>
-                        <Operation>1</Operation>
-                    </Platform>
-                </DeployClass>
-                <DeployClass Name="AndroidSplashStylesV21">
-                    <Platform Name="Android">
-                        <RemoteDir>res\values-v21</RemoteDir>
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
@@ -516,12 +465,6 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
-                <DeployClass Name="ProjectOSXDebug">
-                    <Platform Name="OSX64">
-                        <RemoteDir>..\$(PROJECTNAME).app.dSYM\Contents\Resources\DWARF</RemoteDir>
-                        <Operation>1</Operation>
-                    </Platform>
-                </DeployClass>
                 <DeployClass Name="ProjectOSXEntitlements">
                     <Platform Name="OSX32">
                         <RemoteDir>..\</RemoteDir>
@@ -600,14 +543,16 @@
                 <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Android" Name="$(PROJECTNAME)"/>
-                <ProjectRoot Platform="OSX64" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
             </Deployment>
             <Platforms>
                 <Platform value="Win32">True</Platform>
             </Platforms>
             <UnitTesting>
-                <TestProjectName>C:\Users\douglas.mezuraro\Documents\lfa\AFD.Tests\pkg\AFD.dproj</TestProjectName>
+                <TestFramework>DUnit / Delphi Win32</TestFramework>
+                <TestRunner>GUI</TestRunner>
+                <SourceProjectName>C:\Users\douglas.mezuraro\Documents\lfa\AFD\pkg\AFD.dproj</SourceProjectName>
+                <TestProjectName/>
             </UnitTesting>
         </BorlandProject>
         <ProjectFileVersion>12</ProjectFileVersion>

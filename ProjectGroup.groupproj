@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{A2C434C1-69AF-4B40-A6C5-8E58449476FD}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="AFD\pkg\AFD.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="AFD.Tests\pkg\AFD.Tests.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="AFD">
+        <MSBuild Projects="AFD\pkg\AFD.dproj"/>
+    </Target>
+    <Target Name="AFD:Clean">
+        <MSBuild Projects="AFD\pkg\AFD.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="AFD:Make">
+        <MSBuild Projects="AFD\pkg\AFD.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="AFD_Tests">
+        <MSBuild Projects="AFD.Tests\pkg\AFD.Tests.dproj"/>
+    </Target>
+    <Target Name="AFD_Tests:Clean">
+        <MSBuild Projects="AFD.Tests\pkg\AFD.Tests.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="AFD_Tests:Make">
+        <MSBuild Projects="AFD.Tests\pkg\AFD.Tests.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="AFD;AFD_Tests"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="AFD:Clean;AFD_Tests:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="AFD:Make;AFD_Tests:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

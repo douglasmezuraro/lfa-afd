@@ -27,6 +27,9 @@ implementation
 
 constructor TTransitions.Create(const Matrix: TMatrix);
 begin
+  if Length(Matrix) = 0 then
+    Exit;
+
   FMatrix := Matrix;
   FRows := Length(FMatrix);
   FColumns := Length(FMatrix[Low(FMatrix)]);

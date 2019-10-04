@@ -10,12 +10,14 @@ type
   private
     FList: TArray<string>;
   public
-    procedure Add(const Item: string);
+    procedure Add(const Item: string); overload;
+    procedure Add(const Items: TArray<string>); overload;
     procedure Clear;
     function IsEmpty: Boolean;
     function Contains(const Item: string): Boolean;
     function Count: UInt32;
     function ToString: string; override;
+    function ToArray: TArray<string>;
   end;
 
 implementation
@@ -26,6 +28,14 @@ procedure TList.Add(const Item: string);
 begin
   SetLength(FList, Count + 1);
   FList[High(FList)] := Item;
+end;
+
+procedure TList.Add(const Items: TArray<string>);
+var
+  Element: string;
+begin
+  for Element in Items do
+    Add(Element);
 end;
 
 procedure TList.Clear;
@@ -54,6 +64,11 @@ end;
 function TList.IsEmpty: Boolean;
 begin
   Result := Count = 0;
+end;
+
+function TList.ToArray: TArray<string>;
+begin
+  Result := FList;
 end;
 
 function TList.ToString: string;
