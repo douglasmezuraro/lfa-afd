@@ -3,7 +3,7 @@ unit Helper.FMX;
 interface
 
 uses
-  System.SysUtils, FMX.Grid;
+  System.SysUtils, FMX.Grid, FMX.ListBox;
 
 type
   TStringGridHelper = class Helper for TStringGrid
@@ -18,6 +18,15 @@ type
     procedure Clear;
     procedure DefineSize(const Rows, Columns: Byte);
   end;
+
+  TListBoxItemHelper = class Helper for TListBoxItem
+  private
+    function GetIsCheckedBackup: Boolean;
+    procedure SetIsCheckedBackup(const Value: Boolean);
+  public
+    property IsCheckedBackup: Boolean read GetIsCheckedBackup write SetIsCheckedBackup;
+  end;
+
 
 implementation
 
@@ -61,4 +70,17 @@ begin
   end;
 end;
 
+{ TListBoxItemHelper }
+
+function TListBoxItemHelper.GetIsCheckedBackup: Boolean;
+begin
+  Result := TagString.ToBoolean;
+end;
+
+procedure TListBoxItemHelper.SetIsCheckedBackup(const Value: Boolean);
+begin
+  TagString := Value.ToString;
+end;
+
 end.
+

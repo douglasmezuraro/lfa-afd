@@ -20,4 +20,9 @@ begin
   Application.Initialize;
   Application.CreateForm(TMain, Main);
   Application.Run;
+
+  {$WARN SYMBOL_PLATFORM OFF}
+  ReportMemoryLeaksOnShutdown := ByteBool(DebugHook);
+  {$WARN SYMBOL_PLATFORM ON}
 end.
+

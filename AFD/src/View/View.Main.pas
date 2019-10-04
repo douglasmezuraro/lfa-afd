@@ -45,6 +45,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure EditSymbolsChange(Sender: TObject);
     procedure EditStatesChange(Sender: TObject);
+    procedure ListWordsChangeCheck(Sender: TObject);
   strict private
     FAFD: TAFD;
   private
@@ -87,13 +88,15 @@ end;
 
 procedure TMain.ActionCheckExecute(Sender: TObject);
 var
-  Accepted: Boolean;
-  Index: Integer;
+  Item: TListBoxItem;
 begin
+  Item := TListBoxItem.Create(ListWords);
   try
-    Accepted := FAFD.Accept(Word);
-    Index := ListWords.Items.Add(IfThen(Word.IsEmpty, 'ʎ', Word));
-    ListWords.ItemByIndex(Index).IsChecked := Accepted;
+    Item.IsChecked := FAFD.Accept(Word);
+    Item.IsCheckedBackup := Item.IsChecked;
+    Item.Text := IfThen(Word.IsEmpty, TAFD.EmptySymbol, Word);
+
+    ListWords.AddObject(Item);
   except
     on E: Exception do
     begin
@@ -197,6 +200,11 @@ end;
 procedure TMain.GridSelectCell(Sender: TObject; const ACol, ARow: Integer; var CanSelect: Boolean);
 begin
   CanSelect := (ACol <> Grid.FirstColumn) and (ARow <> Grid.FirstRow);
+end;
+
+procedure TMain.ListWordsChangeCheck(Sender: TObject);
+begin
+  (Sender as TListBoxItem).IsChecked := (Sender as TListBoxItem).IsCheckedBackup;
 end;
 
 procedure TMain.TabControlViewChange(Sender: TObject);

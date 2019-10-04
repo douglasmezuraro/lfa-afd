@@ -1,4 +1,4 @@
-unit Impl.AFD;
+﻿unit Impl.AFD;
 
 interface
 
@@ -7,6 +7,8 @@ uses
 
 type
   TAFD = class sealed
+  public const
+    EmptySymbol: TSymbol = 'ʎ';
   strict private
     FSymbols: TList;
     FStates: TList;
