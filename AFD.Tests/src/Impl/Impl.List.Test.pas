@@ -151,17 +151,24 @@ end;
 
 procedure TListTest.TestToArrayWhenListIsEmpty;
 begin
-  CheckTrue(Length(FList.ToArray) = 0);
+  CheckEquals(0, Length(FList.ToArray));
 end;
 
 procedure TListTest.TestToArrayWhenListHasOneElement;
 begin
-
+  FList.Add('S0');
+  CheckEquals('S0', FList.ToArray[0]);
 end;
 
 procedure TListTest.TestToArrayWhenListHasMoreThanOneElement;
 begin
+  FList.Add(['S0', 'S1', 'S2', 'S3', 'S4']);
 
+  CheckEquals('S0',  FList.ToArray[0]);
+  CheckEquals('S1',  FList.ToArray[1]);
+  CheckEquals('S2',  FList.ToArray[2]);
+  CheckEquals('S3',  FList.ToArray[3]);
+  CheckEquals('S4',  FList.ToArray[4]);
 end;
 
 initialization

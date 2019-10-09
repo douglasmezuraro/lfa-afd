@@ -128,10 +128,10 @@ begin
   Grid.DefineSize(Length(States) + 1, Length(Symbols) + 1);
 
   for Row := 1 to Pred(Grid.RowCount) do
-    Grid.Cells[Grid.FirstColumn, Row] := States[Row - 1];
+    Grid.Cells[Grid.FirstColumn, Row] := States[Row - 1].Trim;
 
   for Column := 1 to Pred(Grid.ColumnCount) do
-    Grid.Cells[Column, Grid.FirstRow] := Symbols[Column - 1]
+    Grid.Cells[Column, Grid.FirstRow] := Symbols[Column - 1].Trim;
 end;
 
 procedure TMain.EditStatesChange(Sender: TObject);
@@ -151,7 +151,7 @@ end;
 
 procedure TMain.ActionBuildAFDExecute(Sender: TObject);
 begin
-  EditWord.Text := string.Empty;
+  EditWord.Text := TWord.Empty;
   ListWords.Items.Clear;
   try
     FAFD := FAFD.AddSymbols(Symbols)
@@ -159,6 +159,8 @@ begin
                 .AddInitialState(InitialState)
                 .AddFinalStates(FinalStates)
                 .AddTransitions(Transitions);
+
+    TabControlView.Next;
   except
     on E: Exception do
     begin
@@ -167,24 +169,24 @@ begin
   end;
 end;
 
-function TMain.GetFinalStates: TArray<TState>;
-begin
-  Result := EditFinalStates.Text.Split([',']);
-end;
-
 function TMain.GetInitialState: TState;
 begin
   Result := EditInitialState.Text.Trim;
 end;
 
+function TMain.GetFinalStates: TArray<TState>;
+begin
+  Result := EditFinalStates.Text.Split([','], TStringSplitOptions.ExcludeEmpty);
+end;
+
 function TMain.GetStates: TArray<TState>;
 begin
-  Result := EditStates.Text.Split([',']);
+  Result := EditStates.Text.Split([','], TStringSplitOptions.ExcludeEmpty);
 end;
 
 function TMain.GetSymbols: TArray<TSymbol>;
 begin
-  Result := EditSymbols.Text.Split([',']);
+  Result := EditSymbols.Text.Split([','], TStringSplitOptions.ExcludeEmpty);
 end;
 
 function TMain.GetTransitions: TTransitions;

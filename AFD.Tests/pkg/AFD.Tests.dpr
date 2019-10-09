@@ -20,7 +20,8 @@ uses
   Impl.AFD in '..\..\AFD\src\Impl\Impl.AFD.pas',
   Impl.Transitions in '..\..\AFD\src\Impl\Impl.Transitions.pas',
   Impl.Types in '..\..\AFD\src\Impl\Impl.Types.pas',
-  Impl.List in '..\..\AFD\src\Impl\Impl.List.pas';
+  Impl.List in '..\..\AFD\src\Impl\Impl.List.pas',
+  Impl.List.Test in '..\src\Impl\Impl.List.Test.pas';
 
 {$R *.RES}
 
