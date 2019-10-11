@@ -3,11 +3,11 @@ unit Impl.List.Test;
 interface
 
 uses
-  TestFramework, Impl.List, System.SysUtils;
+  TestFramework, TestFramework.Helpers, Impl.List, System.SysUtils;
 
 type
   TListTest = class(TTestCase)
-  strict private
+  private
     FList: TList;
   public
     procedure SetUp; override;
@@ -52,25 +52,17 @@ begin
 end;
 
 procedure TListTest.TestAddOneElement;
-const
-  Elements: TArray<string> = ['Led Zeppelin'];
-var
-  Index: Integer;
 begin
-  FList.Add(Elements);
-  for Index := Low(Elements) to High(Elements) do
-    CheckEquals(Elements[Index], FList.ToArray[Index]);
+  FList.Add('S0');
+  CheckEquals('S0', FList.ToArray[0]);
 end;
 
 procedure TListTest.TestAddMoreThanOneElement;
 const
-  Elements: TArray<string> = ['Pink Floyd', 'Kyuss', 'Alcest'];
-var
-  Index: Integer;
+  Elements: TArray<string> = ['S0', 'S1', 'S2'];
 begin
   FList.Add(Elements);
-  for Index := Low(Elements) to High(Elements) do
-    CheckEquals(Elements[Index], FList.ToArray[Index]);
+  CheckEquals(Elements, FList.ToArray);
 end;
 
 procedure TListTest.TestIsEmptyWhenListIsEmpty;
@@ -80,7 +72,7 @@ end;
 
 procedure TListTest.TestIsEmptyWhenListIsNotEmpty;
 begin
-  FList.Add('Opeth');
+  FList.Add('S0');
   CheckFalse(FList.IsEmpty);
 end;
 
@@ -92,14 +84,14 @@ end;
 
 procedure TListTest.TestClearWhenListHasOneElement;
 begin
-  FList.Add('Alice In Chains');
+  FList.Add('S0');
   FList.Clear;
   CheckTrue(FList.IsEmpty);
 end;
 
 procedure TListTest.TestClearWhenListHasMoreThanOneElement;
 begin
-  FList.Add(['Midlake', 'Agalloch', 'Blind Melon']);
+  FList.Add(['S0', 'S1', 'S2']);
   FList.Clear;
   CheckTrue(FList.IsEmpty);
 end;
@@ -111,25 +103,26 @@ end;
 
 procedure TListTest.TestCountWhenListHasOneElement;
 begin
-  FList.Add('Rush');
+  FList.Add('S0');
   CheckEquals(1, FList.Count);
 end;
 
 procedure TListTest.TestCountWhenListHasMoreThanOneElement;
 begin
-  FList.Add(['Explosions In The Sky', 'God Is An Astronaut', 'Caspian', 'Mono']);
+  FList.Add(['S0', 'S1', 'S2', 'S3']);
   CheckEquals(4, FList.Count);
 end;
 
 procedure TListTest.TestContainsWhenListContainsTheElement;
 begin
-  FList.Add(['Black Sabbath', 'Deep Purple', 'Blue Öyster Cult', 'Uriah Heep']);
-  CheckTrue(FList.Contains('Blue Öyster Cult'));
+  FList.Add(['S0', 'S1', 'S2', 'S3']);
+  CheckTrue(FList.Contains('S2'));
 end;
 
 procedure TListTest.TestContainsWhenListNotContainsTheElement;
 begin
-  CheckFalse(FList.Contains('Iron Maiden'));
+  FList.Add(['S0', 'S1', 'S2']);
+  CheckFalse(FList.Contains('S3'));
 end;
 
 procedure TListTest.TestToStringWhenListIsEmpty;
@@ -139,14 +132,14 @@ end;
 
 procedure TListTest.TestToStringWhenListHasOneElement;
 begin
-  FList.Add('Judas Priest');
-  CheckEquals('[Judas Priest]', FList.ToString);
+  FList.Add('S0');
+  CheckEquals('[S0]', FList.ToString);
 end;
 
 procedure TListTest.TestToStringWhenListHasMoreThanOneElement;
 begin
-  FList.Add(['Anthax', 'Megadeth', 'Metallica', 'Slayer']);
-  CheckEquals('[Anthax, Megadeth, Metallica, Slayer]', FList.ToString);
+  FList.Add(['S0', 'S1', 'S2', 'S3']);
+  CheckEquals('[S0, S1, S2, S3]', FList.ToString);
 end;
 
 procedure TListTest.TestToArrayWhenListIsEmpty;
@@ -161,14 +154,11 @@ begin
 end;
 
 procedure TListTest.TestToArrayWhenListHasMoreThanOneElement;
+const
+  Elements: TArray<string> = ['S0', 'S1', 'S2', 'S3', 'S4'];
 begin
-  FList.Add(['S0', 'S1', 'S2', 'S3', 'S4']);
-
-  CheckEquals('S0',  FList.ToArray[0]);
-  CheckEquals('S1',  FList.ToArray[1]);
-  CheckEquals('S2',  FList.ToArray[2]);
-  CheckEquals('S3',  FList.ToArray[3]);
-  CheckEquals('S4',  FList.ToArray[4]);
+  FList.Add(Elements);
+  CheckEquals(Elements,  FList.ToArray);
 end;
 
 initialization

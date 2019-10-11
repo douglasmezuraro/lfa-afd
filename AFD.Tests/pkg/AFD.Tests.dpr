@@ -22,7 +22,8 @@ uses
   Impl.Types in '..\..\AFD\src\Impl\Impl.Types.pas',
   Impl.List in '..\..\AFD\src\Impl\Impl.List.pas',
   Impl.List.Test in '..\src\Impl\Impl.List.Test.pas',
-  TestFramework.Helpers in '..\src\TestFramework\TestFramework.Helpers.pas';
+  TestFramework.Helpers in '..\src\TestFramework\TestFramework.Helpers.pas',
+  Impl.AFD.Exercise1.Test in '..\src\Impl\Impl.AFD.Exercise1.Test.pas';
 
 {$R *.RES}
 
