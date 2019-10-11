@@ -53,7 +53,7 @@ type
     function GetInitialState: TState;
     function GetStates: TArray<TState>;
     function GetSymbols: TArray<TSymbol>;
-    function GetTransitions: TTransitions;
+    function GetTransitions: TMatrix;
     function GetWord: TWord;
     procedure DrawMatrix;
   public
@@ -64,7 +64,7 @@ type
     property States: TArray<TState> read GetStates;
     property InitialState: TState read GetInitialState;
     property FinalStates: TArray<TState> read GetFinalStates;
-    property Transitions: TTransitions read GetTransitions;
+    property Transitions: TMatrix read GetTransitions;
     property Word: TWord read GetWord;
   end;
 
@@ -189,9 +189,9 @@ begin
   Result := EditSymbols.Text.Split([','], TStringSplitOptions.ExcludeEmpty);
 end;
 
-function TMain.GetTransitions: TTransitions;
+function TMain.GetTransitions: TMatrix;
 begin
-  Result := TTransitions.Create(Grid.ToMatrix);
+  Result := Grid.ToMatrix;
 end;
 
 function TMain.GetWord: TWord;

@@ -59,7 +59,7 @@ begin
 
   for Index := 1 to Pred(FRows) do
   begin
-    if FMatrix[Index, 0].Equals(State) then
+    if FMatrix[Index, 0].Trim.Equals(State.Trim) then
     begin
       Row := Index;
       Break;
@@ -68,7 +68,7 @@ begin
 
   for Index := 1 to Pred(FColumns) do
   begin
-    if FMatrix[0, Index].Equals(Symbol) then
+    if FMatrix[0, Index].Trim.Equals(Symbol.Trim) then
     begin
       Column := Index;
       Break;

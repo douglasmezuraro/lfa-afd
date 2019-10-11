@@ -24,7 +24,7 @@ type
     function AddStates(const States: TArray<TState>): TAFD;
     function AddInitialState(const State: TState): TAFD;
     function AddFinalStates(const States: TArray<TState>): TAFD;
-    function AddTransitions(const Transitions: TTransitions): TAFD;
+    function AddTransitions(const Transitions: TMatrix): TAFD;
     function Accept(const Word: TWord): Boolean;
   end;
 
@@ -166,18 +166,18 @@ begin
   Result := Self;
 end;
 
-function TAFD.AddTransitions(const Transitions: TTransitions): TAFD;
+function TAFD.AddTransitions(const Transitions: TMatrix): TAFD;
 var
   Row, Column: Integer;
   State: TState;
 begin
-  FTransitions := Transitions;
+  FTransitions := TTransitions.Create(Transitions);
 
-  for Row := 1 to Pred(Transitions.Rows) do
+  for Row := 1 to Pred(FTransitions.Rows) do
   begin
-    for Column := 1 to Pred(Transitions.Columns) do
+    for Column := 1 to Pred(FTransitions.Columns) do
     begin
-      State := Transitions.ToMatrix[Row, Column];
+      State := FTransitions.ToMatrix[Row, Column];
 
       if State.Trim.IsEmpty then
         continue;
