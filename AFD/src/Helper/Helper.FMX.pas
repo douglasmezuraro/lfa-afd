@@ -20,13 +20,10 @@ type
   end;
 
   TListBoxItemHelper = class Helper for TListBoxItem
-  private
-    function GetIsCheckedBackup: Boolean;
-    procedure SetIsCheckedBackup(const Value: Boolean);
   public
-    property IsCheckedBackup: Boolean read GetIsCheckedBackup write SetIsCheckedBackup;
+    procedure Check(const Checked: Boolean);
+    procedure Restore;
   end;
-
 
 implementation
 
@@ -72,14 +69,15 @@ end;
 
 { TListBoxItemHelper }
 
-function TListBoxItemHelper.GetIsCheckedBackup: Boolean;
+procedure TListBoxItemHelper.Check(const Checked: Boolean);
 begin
-  Result := TagString.ToBoolean;
+  IsChecked := Checked;
+  Tag := Value.ToInteger;
 end;
 
-procedure TListBoxItemHelper.SetIsCheckedBackup(const Value: Boolean);
+procedure TListBoxItemHelper.Restore;
 begin
-  TagString := Value.ToString;
+  IsChecked := Tag.ToBoolean;
 end;
 
 end.

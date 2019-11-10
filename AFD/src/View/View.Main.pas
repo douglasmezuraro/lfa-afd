@@ -92,8 +92,7 @@ var
 begin
   Item := TListBoxItem.Create(ListWords);
   try
-    Item.IsChecked := FAFD.Accept(Word);
-    Item.IsCheckedBackup := Item.IsChecked;
+    Item.Check(FAFD.Accept(Word));
     Item.Text := IfThen(Word.IsEmpty, TAFD.EmptySymbol, Word);
 
     ListWords.AddObject(Item);
@@ -206,7 +205,7 @@ end;
 
 procedure TMain.ListWordsChangeCheck(Sender: TObject);
 begin
-  (Sender as TListBoxItem).IsChecked := (Sender as TListBoxItem).IsCheckedBackup;
+  (Sender as TListBoxItem).Restore;
 end;
 
 procedure TMain.TabControlViewChange(Sender: TObject);
