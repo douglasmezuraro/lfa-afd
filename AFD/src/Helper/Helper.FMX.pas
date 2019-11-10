@@ -72,7 +72,7 @@ end;
 procedure TListBoxItemHelper.Check(const Checked: Boolean);
 begin
   IsChecked := Checked;
-  Tag := Value.ToInteger;
+  Tag := Checked.ToInteger;
 end;
 
 procedure TListBoxItemHelper.Restore;
