@@ -1,19 +1,14 @@
-unit Impl.Types;
+﻿unit Impl.Types;
 
 interface
 
-uses
-  System.SysUtils;
-
 type
-  TSymbol     = string;
-  TState      = string;
-  TTransition = string;
-  TWord       = string;
-  TMatrix     = TArray<TArray<string>>;
-  ENotDefined = class(Exception);
-  EDuplicated = class(Exception);
-  ENotFound   = class(Exception);
+  TSymbol = string;
+  TState  = string;
+  TWord   = string;
+
+const
+  Empty: TSymbol = 'ʎ';
 
 implementation
 

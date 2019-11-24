@@ -7,22 +7,21 @@ uses
 
 type
   TList = class sealed
-  private
+  strict private
     FList: TArray<string>;
   public
+    function Contains(const Item: string): Boolean;
+    function Count: Integer;
+    function HasDuplicated(out Item: string): Boolean;
+    function IsEmpty: Boolean;
+    function ToArray: TArray<string>;
+    function ToString: string; override;
     procedure Add(const Item: string); overload;
     procedure Add(const Items: TArray<string>); overload;
     procedure Clear;
-    function IsEmpty: Boolean;
-    function Contains(const Item: string): Boolean;
-    function Count: UInt32;
-    function ToString: string; override;
-    function ToArray: TArray<string>;
   end;
 
 implementation
-
-{ TList }
 
 procedure TList.Add(const Item: string);
 begin
@@ -45,20 +44,46 @@ end;
 
 function TList.Contains(const Item: string): Boolean;
 var
-  LItem: string;
+  Element: string;
 begin
-  for LItem in FList do
+  for Element in FList do
   begin
-    if LItem.Equals(Item) then
+    if Element.Equals(Item) then
       Exit(True);
   end;
 
   Result := False;
 end;
 
-function TList.Count: UInt32;
+function TList.Count: Integer;
 begin
   Result := Length(FList);
+end;
+
+function TList.HasDuplicated(out Item: string): Boolean;
+var
+  A, B: string;
+  Count: Integer;
+begin
+  for A in FList do
+  begin
+    Count := 0;
+    for B in FList do
+    begin
+      if not A.Equals(B) then
+        Continue;
+
+      Inc(Count);
+
+      if Count > 1 then
+      begin
+        Item := A;
+        Exit(True);
+      end;
+    end;
+  end;
+
+  Result := False;
 end;
 
 function TList.IsEmpty: Boolean;
@@ -73,17 +98,18 @@ end;
 
 function TList.ToString: string;
 var
-  Item: string;
+  Element: string;
 begin
-  for Item in FList do
+  for Element in FList do
   begin
     if Result.Trim.IsEmpty then
-      Result := Item
+      Result := Element
     else
-      Result := Result + ', ' + Item;
+      Result := Result + ', ' + Element;
   end;
 
   Result := '[' + Result + ']';
 end;
 
 end.
+

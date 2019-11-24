@@ -3,20 +3,17 @@
 interface
 
 uses
-  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants, FMX.Types,
-  FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls, FMX.Edit, FMX.TabControl,
-  FMX.Controls.Presentation, System.Rtti, FMX.Grid.Style, FMX.ScrollBox, FMX.Grid, Helper.FMX,
-  System.Actions, FMX.ActnList, FMX.Memo, System.StrUtils, Impl.Dialogs, Impl.AFD, Impl.Types,
-  Impl.Transitions, FMX.Layouts, FMX.ListBox, FMX.ListView.Types, FMX.ListView.Appearances,
-  FMX.ListView.Adapters.Base, FMX.ListView, System.ImageList, FMX.ImgList;
+  FMX.ActnList, FMX.Controls, FMX.Controls.Presentation, FMX.Edit, FMX.Forms,
+  FMX.Grid, FMX.Layouts, FMX.ListBox, FMX.ScrollBox, FMX.StdCtrls, FMX.TabControl,
+  FMX.Types, Helper.Edit, Helper.ListBox, Helper.ListBoxItem, Helper.StringGrid,
+  Impl.AFD, Impl.Dialogs, Impl.Transition, Impl.Transitions, Impl.Types, System.Actions,
+  System.Classes, System.StrUtils, System.SysUtils, System.Rtti, FMX.Grid.Style;
 
 type
   TMain = class sealed(TForm)
-    ActionBuildAFD: TAction;
     ActionCheck: TAction;
     ActionClear: TAction;
     ActionList: TActionList;
-    ButtonBuildAFD: TButton;
     ButtonCheck: TButton;
     ButtonClear: TButton;
     EditFinalStates: TEdit;
@@ -27,35 +24,35 @@ type
     Grid: TStringGrid;
     LabelFinalStates: TLabel;
     LabelInitialState: TLabel;
+    LabelLog: TLabel;
     LabelStates: TLabel;
     LabelSymbols: TLabel;
     LabelTransitions: TLabel;
     LabelWord: TLabel;
-    LabelWords: TLabel;
-    ListWords: TListBox;
+    ListLog: TListBox;
     PanelButtons: TPanel;
     TabControlView: TTabControl;
     TabItemInput: TTabItem;
     TabItemOutput: TTabItem;
-    procedure ActionBuildAFDExecute(Sender: TObject);
     procedure GridSelectCell(Sender: TObject; const ACol, ARow: Integer; var CanSelect: Boolean);
     procedure ActionCheckExecute(Sender: TObject);
     procedure ActionClearExecute(Sender: TObject);
-    procedure TabControlViewChange(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure EditSymbolsChange(Sender: TObject);
     procedure EditStatesChange(Sender: TObject);
-    procedure ListWordsChangeCheck(Sender: TObject);
+    procedure ListLogChangeCheck(Sender: TObject);
   strict private
     FAFD: TAFD;
-  private
     function GetFinalStates: TArray<TState>;
     function GetInitialState: TState;
     function GetStates: TArray<TState>;
     function GetSymbols: TArray<TSymbol>;
-    function GetTransitions: TMatrix;
+    function GetTransitions: TTransitions;
     function GetWord: TWord;
+  private
     procedure DrawMatrix;
+    procedure Check;
+    procedure Clear;
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
@@ -64,15 +61,13 @@ type
     property States: TArray<TState> read GetStates;
     property InitialState: TState read GetInitialState;
     property FinalStates: TArray<TState> read GetFinalStates;
-    property Transitions: TMatrix read GetTransitions;
+    property Transitions: TTransitions read GetTransitions;
     property Word: TWord read GetWord;
   end;
 
 implementation
 
 {$R *.fmx}
-
-{ TMain }
 
 constructor TMain.Create(AOwner: TComponent);
 begin
@@ -87,32 +82,41 @@ begin
 end;
 
 procedure TMain.ActionCheckExecute(Sender: TObject);
-var
-  Item: TListBoxItem;
 begin
-  Item := TListBoxItem.Create(ListWords);
-  try
-    Item.Check(FAFD.Accept(Word));
-    Item.Text := IfThen(Word.IsEmpty, TAFD.EmptySymbol, Word);
-
-    ListWords.AddObject(Item);
-  except
-    on E: Exception do
-    begin
-      TDialogs.Warning(E.Message);
-    end;
-  end;
+  Check;
 end;
 
 procedure TMain.ActionClearExecute(Sender: TObject);
 begin
+  Clear;
+end;
+
+procedure TMain.Check;
+begin
   FAFD.Clear;
-  EditSymbols.Text := string.Empty;
-  EditStates.Text := string.Empty;
-  EditInitialState.Text := string.Empty;
-  EditFinalStates.Text := string.Empty;
-  EditWord.Text := string.Empty;
-  ListWords.Items.Clear;
+  try
+    FAFD.Symbols      := Symbols;
+    FAFD.States       := States;
+    FAFD.InitialState := InitialState;
+    FAFD.FinalStates  := FinalStates;
+    FAFD.Transitions  := Transitions;
+
+    ListLog.Add(Word, FAFD.Accept(Word));
+  except
+    on Exception: EArgumentException do
+      TDialogs.Warning(Exception.Message);
+  end;
+end;
+
+procedure TMain.Clear;
+begin
+  FAFD.Clear;
+  EditSymbols.Clear;
+  EditStates.Clear;
+  EditInitialState.Clear;
+  EditFinalStates.Clear;
+  EditWord.Clear;
+  ListLog.Clear;
 end;
 
 procedure TMain.DrawMatrix;
@@ -148,26 +152,6 @@ begin
   TabControlView.ActiveTab := TabItemInput;
 end;
 
-procedure TMain.ActionBuildAFDExecute(Sender: TObject);
-begin
-  EditWord.Text := TWord.Empty;
-  ListWords.Items.Clear;
-  try
-    FAFD := FAFD.AddSymbols(Symbols)
-                .AddStates(States)
-                .AddInitialState(InitialState)
-                .AddFinalStates(FinalStates)
-                .AddTransitions(Transitions);
-
-    TabControlView.Next;
-  except
-    on E: Exception do
-    begin
-      TDialogs.Warning(E.Message);
-    end;
-  end;
-end;
-
 function TMain.GetInitialState: TState;
 begin
   Result := EditInitialState.Text.Trim;
@@ -175,27 +159,48 @@ end;
 
 function TMain.GetFinalStates: TArray<TState>;
 begin
-  Result := EditFinalStates.Text.Split([','], TStringSplitOptions.ExcludeEmpty);
+  Result := EditFinalStates.Text.Replace(' ', '').Split([','], TStringSplitOptions.ExcludeEmpty);
 end;
 
 function TMain.GetStates: TArray<TState>;
 begin
-  Result := EditStates.Text.Split([','], TStringSplitOptions.ExcludeEmpty);
+  Result := EditStates.Text.Replace(' ', '').Split([','], TStringSplitOptions.ExcludeEmpty);
 end;
 
 function TMain.GetSymbols: TArray<TSymbol>;
 begin
-  Result := EditSymbols.Text.Split([','], TStringSplitOptions.ExcludeEmpty);
+  Result := EditSymbols.Text.Replace(' ', '').Split([','], TStringSplitOptions.ExcludeEmpty);
 end;
 
-function TMain.GetTransitions: TMatrix;
+function TMain.GetTransitions: TTransitions;
+var
+  Column, Row: Integer;
+  Transition: TTransition;
 begin
-  Result := Grid.ToMatrix;
+  FAFD.Transitions.Clear;
+
+  for Row := 1 to Pred(Grid.RowCount) do
+  begin
+    for Column := 1 to Pred(Grid.ColumnCount) do
+    begin
+      if not Grid.Cells[Column, Row].IsEmpty then
+      begin
+        Transition := TTransition.Create;
+        Transition.Source := Grid.Cells[Grid.FirstColumn, Row];
+        Transition.Symbol := Grid.Cells[Column, Grid.FirstRow];
+        Transition.Target := Grid.Cells[Column, Row];
+
+        FAFD.Transitions.Add(Transition);
+      end;
+    end;
+  end;
+
+  Result := FAFD.Transitions;
 end;
 
 function TMain.GetWord: TWord;
 begin
-  Result := EditWord.Text;
+  Result := IfThen(EditWord.Text.Trim.IsEmpty, Empty, EditWord.Text.Replace(' ', ''));
 end;
 
 procedure TMain.GridSelectCell(Sender: TObject; const ACol, ARow: Integer; var CanSelect: Boolean);
@@ -203,14 +208,10 @@ begin
   CanSelect := (ACol <> Grid.FirstColumn) and (ARow <> Grid.FirstRow);
 end;
 
-procedure TMain.ListWordsChangeCheck(Sender: TObject);
+procedure TMain.ListLogChangeCheck(Sender: TObject);
 begin
   (Sender as TListBoxItem).Restore;
 end;
 
-procedure TMain.TabControlViewChange(Sender: TObject);
-begin
-  ButtonBuildAFD.Visible := TabControlView.ActiveTab = TabItemInput;
-end;
-
 end.
+

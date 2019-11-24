@@ -22,8 +22,6 @@ type
 
 implementation
 
-{ TDialogs }
-
 class function TDialogs.Confirmation(const Message: string): Boolean;
 var
   LResult: Boolean;

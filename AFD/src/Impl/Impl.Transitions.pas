@@ -3,82 +3,70 @@ unit Impl.Transitions;
 interface
 
 uses
-  Impl.Types, System.SysUtils;
+  Impl.Transition, Impl.Types, System.SysUtils;
 
 type
-  TTransitions = record
+  TTransitions = class sealed
   strict private
-    FMatrix: TMatrix;
-    FRows: Byte;
-    FColumns: Byte;
+    FTransitions: TArray<TTransition>;
   public
-    constructor Create(const Matrix: TMatrix); overload;
+    destructor Destroy; override;
     function IsEmpty: Boolean;
-    function HasTransition(const State: TState; const Symbol: TSymbol): Boolean;
+    function ToArray: TArray<TTransition>;
     function Transition(const State: TState; const Symbol: TSymbol): TTransition;
-    function ToMatrix: TMatrix;
-    property Rows: Byte read FRows;
-    property Columns: Byte read FColumns;
+    procedure Add(const Transition: TTransition);
+    procedure Clear;
   end;
 
 implementation
 
-{ TTransitions }
-
-constructor TTransitions.Create(const Matrix: TMatrix);
+destructor TTransitions.Destroy;
 begin
-  if Length(Matrix) = 0 then
-    Exit;
-
-  FMatrix := Matrix;
-  FRows := Length(FMatrix);
-  FColumns := Length(FMatrix[Low(FMatrix)]);
+  Clear;
+  inherited Destroy;
 end;
 
-function TTransitions.HasTransition(const State: TState; const Symbol: TSymbol): Boolean;
+procedure TTransitions.Add(const Transition: TTransition);
 begin
-  Result := not Transition(State, Symbol).Trim.IsEmpty;
+  SetLength(FTransitions, Length(FTransitions) + 1);
+  FTransitions[High(FTransitions)] := Transition;
 end;
 
-function TTransitions.IsEmpty: Boolean;
+procedure TTransitions.Clear;
+var
+  Transition: TTransition;
 begin
-  Result := (FRows < 1) or (FColumns < 1);
+  for Transition in FTransitions do
+    Transition.Free;
+
+  SetLength(FTransitions, 0);
 end;
 
-function TTransitions.ToMatrix: TMatrix;
+function TTransitions.ToArray: TArray<TTransition>;
 begin
-  Result := FMatrix;
+  Result := FTransitions;
 end;
 
 function TTransitions.Transition(const State: TState; const Symbol: TSymbol): TTransition;
 var
-  Index, Row, Column: Integer;
+  Transition: TTransition;
 begin
-  Row := Integer.MinValue;
-  Column := Integer.MinValue;
-
-  for Index := 1 to Pred(FRows) do
+  Result := nil;
+  for Transition in FTransitions do
   begin
-    if FMatrix[Index, 0].Trim.Equals(State.Trim) then
-    begin
-      Row := Index;
-      Break;
-    end;
+    if not Transition.Source.Equals(State) then
+      Continue;
+
+    if not Transition.Symbol.Equals(Symbol) then
+      Continue;
+
+    Exit(Transition);
   end;
+end;
 
-  for Index := 1 to Pred(FColumns) do
-  begin
-    if FMatrix[0, Index].Trim.Equals(Symbol.Trim) then
-    begin
-      Column := Index;
-      Break;
-    end;
-  end;
-
-  if (Row = Integer.MinValue) or (Column = Integer.MinValue) then
-    Exit(TTransition.Empty);
-
-  Result := FMatrix[Row, Column];
+function TTransitions.IsEmpty: Boolean;
+begin
+  Result := Length(FTransitions) = 0;
 end;
 
 end.

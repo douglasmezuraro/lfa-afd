@@ -96,16 +96,20 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="..\src\View\View.Main.pas">
-            <Form>Main</Form>
-            <FormType>fmx</FormType>
-        </DCCReference>
-        <DCCReference Include="..\src\Helper\Helper.FMX.pas"/>
+        <DCCReference Include="..\src\Helper\Helper.Edit.pas"/>
+        <DCCReference Include="..\src\Helper\Helper.ListBox.pas"/>
+        <DCCReference Include="..\src\Helper\Helper.ListBoxItem.pas"/>
+        <DCCReference Include="..\src\Helper\Helper.StringGrid.pas"/>
+        <DCCReference Include="..\src\Impl\Impl.AFD.pas"/>
+        <DCCReference Include="..\src\Impl\Impl.AFD.Validator.pas"/>
         <DCCReference Include="..\src\Impl\Impl.Dialogs.pas"/>
         <DCCReference Include="..\src\Impl\Impl.List.pas"/>
+        <DCCReference Include="..\src\Impl\Impl.Transition.pas"/>
         <DCCReference Include="..\src\Impl\Impl.Transitions.pas"/>
-        <DCCReference Include="..\src\Impl\Impl.AFD.pas"/>
         <DCCReference Include="..\src\Impl\Impl.Types.pas"/>
+        <DCCReference Include="..\src\View\View.Main.pas">
+            <Form>Main</Form>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
