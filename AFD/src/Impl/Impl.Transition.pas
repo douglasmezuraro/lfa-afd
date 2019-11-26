@@ -12,20 +12,20 @@ type
     FSource: TState;
     FTarget: TState;
   public
-    constructor Create(const Source, Target: TState; const Symbol: TSymbol); overload;
+    constructor Create(const Source: TState; const Symbol: TSymbol; const Target: TState); overload;
   public
     property Source: TState read FSource write FSource;
-    property Target: TState read FTarget write FTarget;
     property Symbol: TSymbol read FSymbol write FSymbol;
+    property Target: TState read FTarget write FTarget;
   end;
 
 implementation
 
-constructor TTransition.Create(const Source, Target: TState; const Symbol: TSymbol);
+constructor TTransition.Create(const Source: TState; const Symbol: TSymbol; const Target: TState);
 begin
   FSource := Source;
-  FTarget := Target;
   FSymbol := Symbol;
+  FTarget := Target;
 end;
 
 end.

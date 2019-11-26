@@ -44,15 +44,15 @@ end;
 
 procedure TTransitionsTest.TestAdd;
 begin
-  FTransitions.Add(TTransition.Create('Q0', 'Q1', 'a'));
+  FTransitions.Add(TTransition.Create('Q0', 'a', 'Q1'));
   CheckFalse(FTransitions.IsEmpty)
 end;
 
 procedure TTransitionsTest.TestClearWhenHasMoreThanOneTransition;
 begin
-  FTransitions.Add(TTransition.Create('Q0', 'Q1', 'a'));
-  FTransitions.Add(TTransition.Create('Q1', 'Q2', 'a'));
-  FTransitions.Add(TTransition.Create('Q2', 'Q3', 'c'));
+  FTransitions.Add(TTransition.Create('Q0', 'a', 'Q1'));
+  FTransitions.Add(TTransition.Create('Q1', 'a', 'Q2'));
+  FTransitions.Add(TTransition.Create('Q2', 'c', 'Q3'));
   FTransitions.Clear;
 
   CheckTrue(FTransitions.IsEmpty);
@@ -60,7 +60,7 @@ end;
 
 procedure TTransitionsTest.TestClearWhenHasOneTransition;
 begin
-  FTransitions.Add(TTransition.Create('Q0', 'Q1', 'a'));
+  FTransitions.Add(TTransition.Create('Q0', 'a', 'Q1'));
   FTransitions.Clear;
   CheckTrue(FTransitions.IsEmpty);
 end;
@@ -73,18 +73,18 @@ end;
 
 procedure TTransitionsTest.TestCountWhenHasMoreThenOneTransition;
 begin
-  FTransitions.Add(TTransition.Create('Q0', 'Q1', 'a'));
-  FTransitions.Add(TTransition.Create('Q1', 'Q2', 'a'));
-  FTransitions.Add(TTransition.Create('Q2', 'Q3', 'c'));
-  FTransitions.Add(TTransition.Create('Q3', 'Q4', 'd'));
-  FTransitions.Add(TTransition.Create('Q4', 'Q5', 'e'));
+  FTransitions.Add(TTransition.Create('Q0', 'a', 'Q1'));
+  FTransitions.Add(TTransition.Create('Q1', 'a', 'Q2'));
+  FTransitions.Add(TTransition.Create('Q2', 'c', 'Q3'));
+  FTransitions.Add(TTransition.Create('Q3', 'd', 'Q4'));
+  FTransitions.Add(TTransition.Create('Q4', 'e', 'Q5'));
 
   CheckEquals(5, FTransitions.Count);
 end;
 
 procedure TTransitionsTest.TestCountWhenHasOneTransition;
 begin
-  FTransitions.Add(TTransition.Create('Q0', 'Q1', 'a'));
+  FTransitions.Add(TTransition.Create('Q0', 'a', 'Q1'));
   CheckEquals(1, FTransitions.Count);
 end;
 
@@ -95,18 +95,18 @@ end;
 
 procedure TTransitionsTest.TestIsEmptyWhenHasMoreThanOneTransition;
 begin
-  FTransitions.Add(TTransition.Create('Q0', 'Q1', 'a'));
-  FTransitions.Add(TTransition.Create('Q1', 'Q2', 'a'));
-  FTransitions.Add(TTransition.Create('Q2', 'Q3', 'c'));
-  FTransitions.Add(TTransition.Create('Q3', 'Q4', 'd'));
-  FTransitions.Add(TTransition.Create('Q4', 'Q5', 'e'));
+  FTransitions.Add(TTransition.Create('Q0', 'a', 'Q1'));
+  FTransitions.Add(TTransition.Create('Q1', 'a', 'Q2'));
+  FTransitions.Add(TTransition.Create('Q2', 'c', 'Q3'));
+  FTransitions.Add(TTransition.Create('Q3', 'd', 'Q4'));
+  FTransitions.Add(TTransition.Create('Q4', 'e', 'Q5'));
 
   CheckFalse(FTransitions.IsEmpty);
 end;
 
 procedure TTransitionsTest.TestIsEmptyWhenHasOneTransition;
 begin
-  FTransitions.Add(TTransition.Create('Q0', 'Q1', 'a'));
+  FTransitions.Add(TTransition.Create('Q0', 'a', 'Q1));
   CheckFalse(FTransitions.IsEmpty);
 end;
 
@@ -119,9 +119,9 @@ procedure TTransitionsTest.TestToArrayWhenHasMoreThanOneTransition;
 var
   A, B, C: TTransition;
 begin
-  A := TTransition.Create('Q0', 'Q1', 'a');
-  B := TTransition.Create('Q1', 'Q2', 'a');
-  C := TTransition.Create('Q2', 'Q3', 'c');
+  A := TTransition.Create('Q0', 'a', 'Q1');
+  B := TTransition.Create('Q1', 'a', 'Q2');
+  C := TTransition.Create('Q2', 'c', 'Q3');
 
   FTransitions.Add([A, B, C]);
 
@@ -134,7 +134,7 @@ procedure TTransitionsTest.TestToArrayWhenHasOneTransition;
 var
   A: TTransition;
 begin
-  A := TTransition.Create('Q0', 'Q1', 'a');
+  A := TTransition.Create('Q0', 'a', 'Q1');
   FTransitions.Add(A);
 
   CheckTrue(A.Equals(FTransitions.ToArray[0]));
@@ -149,7 +149,7 @@ procedure TTransitionsTest.TestTransitionWhenTransitionExists;
 var
   A, B: TTransition;
 begin
-  A := TTransition.Create('Q0', 'Q1', 'a');
+  A := TTransition.Create('Q0', 'a', 'Q1');
   FTransitions.Add(A);
   B := FTransitions.Transition('Q0', 'a');
 
@@ -160,7 +160,7 @@ procedure TTransitionsTest.TestTransitionWhenTransitionNotExists;
 var
   A, B: TTransition;
 begin
-  A := TTransition.Create('Q0', 'Q1', 'a');
+  A := TTransition.Create('Q0', 'a', 'Q1');
   FTransitions.Add(A);
   B := FTransitions.Transition('Q0', 'b');
 

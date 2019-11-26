@@ -56,10 +56,10 @@ begin
     Automaton.States := ['Q0', 'Q1'];
     Automaton.InitialState := 'Q0';
     Automaton.FinalStates := ['Q1'];
-    Automaton.Transitions.Add(TTransition.Create('Q0', 'Q1', 'a'));
-    Automaton.Transitions.Add(TTransition.Create('Q0', 'Q1', 'b'));
-    Automaton.Transitions.Add(TTransition.Create('Q1', 'Q1', 'a'));
-    Automaton.Transitions.Add(TTransition.Create('Q1', 'Q1', 'b'));
+    Automaton.Transitions.Add(TTransition.Create('Q0', 'a', 'Q1'));
+    Automaton.Transitions.Add(TTransition.Create('Q0', 'b', 'Q1'));
+    Automaton.Transitions.Add(TTransition.Create('Q1', 'a', 'Q1'));
+    Automaton.Transitions.Add(TTransition.Create('Q1', 'b', 'Q1'));
 
     CheckTrue(FValidator.Validate(Automaton));
   finally
@@ -230,10 +230,10 @@ begin
     Automaton.States := ['Q0', 'Q1'];
     Automaton.InitialState := 'Q0';
     Automaton.FinalStates := ['Q1'];
-    Automaton.Transitions.Add(TTransition.Create(TState.Empty, 'Q1', 'a'));
-    Automaton.Transitions.Add(TTransition.Create('Q0', 'Q1', 'b'));
-    Automaton.Transitions.Add(TTransition.Create('Q1', 'Q1', 'a'));
-    Automaton.Transitions.Add(TTransition.Create('Q1', 'Q1', 'b'));
+    Automaton.Transitions.Add(TTransition.Create(TState.Empty, 'a', 'Q1'));
+    Automaton.Transitions.Add(TTransition.Create('Q0', 'b', 'Q1'));
+    Automaton.Transitions.Add(TTransition.Create('Q1', 'a', 'Q1'));
+    Automaton.Transitions.Add(TTransition.Create('Q1', 'b', 'Q1'));
 
     CheckFalse(FValidator.Validate(Automaton));
   finally
@@ -251,10 +251,10 @@ begin
     Automaton.States := ['Q0', 'Q1'];
     Automaton.InitialState := 'Q0';
     Automaton.FinalStates := ['Q1'];
-    Automaton.Transitions.Add(TTransition.Create('Q0', 'Q1', 'a'));
-    Automaton.Transitions.Add(TTransition.Create('Q2', 'Q1', 'b'));
-    Automaton.Transitions.Add(TTransition.Create('Q1', 'Q1', 'a'));
-    Automaton.Transitions.Add(TTransition.Create('Q1', 'Q1', 'b'));
+    Automaton.Transitions.Add(TTransition.Create('Q0', 'a', 'Q1'));
+    Automaton.Transitions.Add(TTransition.Create('Q2', 'b', 'Q1'));
+    Automaton.Transitions.Add(TTransition.Create('Q1', 'a', 'Q1'));
+    Automaton.Transitions.Add(TTransition.Create('Q1', 'b', 'Q1'));
 
     CheckFalse(FValidator.Validate(Automaton));
   finally
@@ -272,10 +272,10 @@ begin
     Automaton.States := ['Q0', 'Q1'];
     Automaton.InitialState := 'Q0';
     Automaton.FinalStates := ['Q1'];
-    Automaton.Transitions.Add(TTransition.Create('Q0', 'Q1', 'a'));
-    Automaton.Transitions.Add(TTransition.Create('Q0', 'Q1', 'b'));
-    Automaton.Transitions.Add(TTransition.Create('Q1', 'Q1', TSymbol.Empty));
-    Automaton.Transitions.Add(TTransition.Create('Q1', 'Q1', 'b'));
+    Automaton.Transitions.Add(TTransition.Create('Q0', 'a', 'Q1'));
+    Automaton.Transitions.Add(TTransition.Create('Q0', 'b', 'Q1'));
+    Automaton.Transitions.Add(TTransition.Create('Q1', TSymbol.Empty, 'Q1'));
+    Automaton.Transitions.Add(TTransition.Create('Q1', 'b', 'Q1'));
 
     CheckFalse(FValidator.Validate(Automaton));
   finally
@@ -293,10 +293,10 @@ begin
     Automaton.States := ['Q0', 'Q1'];
     Automaton.InitialState := 'Q0';
     Automaton.FinalStates := ['Q1'];
-    Automaton.Transitions.Add(TTransition.Create('Q0', 'Q1', 'a'));
-    Automaton.Transitions.Add(TTransition.Create('Q0', 'Q1', 'b'));
-    Automaton.Transitions.Add(TTransition.Create('Q1', 'Q1', 'a'));
-    Automaton.Transitions.Add(TTransition.Create('Q1', 'Q1', 'c'));
+    Automaton.Transitions.Add(TTransition.Create('Q0', 'a', 'Q1'));
+    Automaton.Transitions.Add(TTransition.Create('Q0', 'b', 'Q1'));
+    Automaton.Transitions.Add(TTransition.Create('Q1', 'a', 'Q1'));
+    Automaton.Transitions.Add(TTransition.Create('Q1', 'c', 'Q1'));
 
     CheckFalse(FValidator.Validate(Automaton));
   finally
@@ -314,10 +314,10 @@ begin
     Automaton.States := ['Q0', 'Q1'];
     Automaton.InitialState := 'Q0';
     Automaton.FinalStates := ['Q1'];
-    Automaton.Transitions.Add(TTransition.Create('Q0', TState.Empty, 'a'));
-    Automaton.Transitions.Add(TTransition.Create('Q0', 'Q1', 'b'));
-    Automaton.Transitions.Add(TTransition.Create('Q1', 'Q1', 'a'));
-    Automaton.Transitions.Add(TTransition.Create('Q1', 'Q1', 'c'));
+    Automaton.Transitions.Add(TTransition.Create('Q0', 'a', TState.Empty));
+    Automaton.Transitions.Add(TTransition.Create('Q0', 'b', 'Q1'));
+    Automaton.Transitions.Add(TTransition.Create('Q1', 'a', 'Q1'));
+    Automaton.Transitions.Add(TTransition.Create('Q1', 'c', 'Q1'));
 
     CheckFalse(FValidator.Validate(Automaton));
   finally
@@ -335,10 +335,10 @@ begin
     Automaton.States := ['Q0', 'Q1'];
     Automaton.InitialState := 'Q0';
     Automaton.FinalStates := ['Q1'];
-    Automaton.Transitions.Add(TTransition.Create('Q0', 'Q1', 'a'));
-    Automaton.Transitions.Add(TTransition.Create('Q0', 'Q1', 'b'));
-    Automaton.Transitions.Add(TTransition.Create('Q1', 'Q4', 'a'));
-    Automaton.Transitions.Add(TTransition.Create('Q1', 'Q1', 'c'));
+    Automaton.Transitions.Add(TTransition.Create('Q0', 'a', 'Q1'));
+    Automaton.Transitions.Add(TTransition.Create('Q0', 'b', 'Q1'));
+    Automaton.Transitions.Add(TTransition.Create('Q1', 'a', 'Q4'));
+    Automaton.Transitions.Add(TTransition.Create('Q1', 'c', 'Q1'));
 
     CheckFalse(FValidator.Validate(Automaton));
   finally
