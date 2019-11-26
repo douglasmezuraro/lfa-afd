@@ -106,7 +106,7 @@ end;
 
 procedure TTransitionsTest.TestIsEmptyWhenHasOneTransition;
 begin
-  FTransitions.Add(TTransition.Create('Q0', 'a', 'Q1));
+  FTransitions.Add(TTransition.Create('Q0', 'a', 'Q1'));
   CheckFalse(FTransitions.IsEmpty);
 end;
 

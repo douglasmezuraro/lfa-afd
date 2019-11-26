@@ -86,6 +86,7 @@
         <DCCReference Include="..\..\AFD\src\Impl\Impl.AFD.Validator.pas"/>
         <DCCReference Include="..\..\AFD\src\Impl\Impl.Transition.pas"/>
         <DCCReference Include="..\src\Impl\Impl.Transitions.Test.pas"/>
+        <DCCReference Include="..\src\Impl\Impl.FirstExam.Test.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
