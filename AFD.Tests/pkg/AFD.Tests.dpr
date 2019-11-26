@@ -24,7 +24,8 @@ uses
   Impl.List.Test in '..\src\Impl\Impl.List.Test.pas',
   TestFramework.Helpers in '..\src\TestFramework\TestFramework.Helpers.pas',
   Impl.AFD.Validator in '..\..\AFD\src\Impl\Impl.AFD.Validator.pas',
-  Impl.Transition in '..\..\AFD\src\Impl\Impl.Transition.pas';
+  Impl.Transition in '..\..\AFD\src\Impl\Impl.Transition.pas',
+  Impl.Transitions.Test in '..\src\Impl\Impl.Transitions.Test.pas';
 
 {$R *.RES}
 
