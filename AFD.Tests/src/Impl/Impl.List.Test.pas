@@ -15,28 +15,24 @@ type
   published
     procedure TestAddOneElement;
     procedure TestAddMoreThanOneElement;
-
     procedure TestIsEmptyWhenListIsEmpty;
     procedure TestIsEmptyWhenListIsNotEmpty;
-
     procedure TestClearWhenListIsEmpty;
     procedure TestClearWhenListHasOneElement;
     procedure TestClearWhenListHasMoreThanOneElement;
-
     procedure TestCountWhenListIsEmpty;
     procedure TestCountWhenListHasOneElement;
     procedure TestCountWhenListHasMoreThanOneElement;
-
     procedure TestContainsWhenListContainsTheElement;
     procedure TestContainsWhenListNotContainsTheElement;
-
     procedure TestToStringWhenListIsEmpty;
     procedure TestToStringWhenListHasOneElement;
     procedure TestToStringWhenListHasMoreThanOneElement;
-
     procedure TestToArrayWhenListIsEmpty;
     procedure TestToArrayWhenListHasOneElement;
     procedure TestToArrayWhenListHasMoreThanOneElement;
+    procedure TestHasDuplicatedWhenListDoesntHaveDuplicatedElement;
+    procedure TestHasDuplicatedWhenListHaveDuplicatedElement;
   end;
 
 implementation
@@ -99,6 +95,24 @@ end;
 procedure TListTest.TestCountWhenListIsEmpty;
 begin
   CheckEquals(0, FList.Count);
+end;
+
+procedure TListTest.TestHasDuplicatedWhenListDoesntHaveDuplicatedElement;
+var
+  Element: string;
+begin
+  FList.Add(['S0', 'S1', 'S2', 'S3', 'S1', 'S4']);
+  CheckTrue(Flist.HasDuplicated(Element));
+  CheckEquals('S1', Element);
+end;
+
+procedure TListTest.TestHasDuplicatedWhenListHaveDuplicatedElement;
+var
+  Element: string;
+begin
+  FList.Add(['S0', 'S1', 'S2', 'S3', 'S4']);
+  CheckFalse(Flist.HasDuplicated(Element));
+  CheckEquals(string.Empty, Element);
 end;
 
 procedure TListTest.TestCountWhenListHasOneElement;
