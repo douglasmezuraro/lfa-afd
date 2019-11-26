@@ -3,7 +3,7 @@ unit TestFramework.Helpers;
 interface
 
 uses
-  TestFramework, System.SysUtils, System.Rtti;
+  TestFramework, System.SysUtils;
 
 type
   TTestFrameworkHelper = class Helper for TAbstractTest

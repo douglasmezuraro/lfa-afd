@@ -7,7 +7,7 @@ uses
 
 type
   TListTest = class(TTestCase)
-  private
+  strict private
     FList: TList;
   public
     procedure SetUp; override;
