@@ -118,38 +118,31 @@ end;
 procedure TTransitionsTest.TestToArrayWhenHasMoreThanOneTransition;
 var
   A, B, C: TTransition;
-  Transitions: TArray<TTransition>;
 begin
   A := TTransition.Create('Q0', 'Q1', 'a');
   B := TTransition.Create('Q1', 'Q2', 'a');
   C := TTransition.Create('Q2', 'Q3', 'c');
 
   FTransitions.Add([A, B, C]);
-  Transitions := FTransitions.ToArray;
 
-  CheckTrue(A.Equals(Transitions[0]));
-  CheckTrue(B.Equals(Transitions[1]));
-  CheckTrue(C.Equals(Transitions[2]));
+  CheckTrue(A.Equals(FTransitions.ToArray[0]));
+  CheckTrue(B.Equals(FTransitions.ToArray[1]));
+  CheckTrue(C.Equals(FTransitions.ToArray[2]));
 end;
 
 procedure TTransitionsTest.TestToArrayWhenHasOneTransition;
 var
   A: TTransition;
-  Transitions: TArray<TTransition>;
 begin
   A := TTransition.Create('Q0', 'Q1', 'a');
   FTransitions.Add(A);
-  Transitions := FTransitions.ToArray;
 
-  CheckTrue(A.Equals(Transitions[0]));
+  CheckTrue(A.Equals(FTransitions.ToArray[0]));
 end;
 
 procedure TTransitionsTest.TestToArrayWhenIsEmpty;
-var
-  Transitions: TArray<TTransition>;
 begin
-  Transitions := FTransitions.ToArray;
-  CheckEquals(0, Length(Transitions));
+  CheckEquals(0, Length(FTransitions.ToArray));
 end;
 
 procedure TTransitionsTest.TestTransitionWhenTransitionExists;
