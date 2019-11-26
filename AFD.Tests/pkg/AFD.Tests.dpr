@@ -26,7 +26,7 @@ uses
   Impl.AFD.Validator in '..\..\AFD\src\Impl\Impl.AFD.Validator.pas',
   Impl.Transition in '..\..\AFD\src\Impl\Impl.Transition.pas',
   Impl.Transitions.Test in '..\src\Impl\Impl.Transitions.Test.pas',
-  Impl.FirstExam.Test in '..\src\Impl\Impl.FirstExam.Test.pas';
+  Impl.Exam.Test in '..\src\Impl\Impl.Exam.Test.pas';
 
 {$R *.RES}
 

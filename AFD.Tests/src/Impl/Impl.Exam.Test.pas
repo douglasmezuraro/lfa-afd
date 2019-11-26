@@ -1,4 +1,4 @@
-unit Impl.FirstExam.Test;
+unit Impl.Exam.Test;
 
 interface
 
@@ -6,14 +6,14 @@ uses
   TestFramework, Impl.AFD, Impl.Transition, Impl.Types;
 
 type
-  TFirstExam = class(TTestCase)
+  TExamTest = class(TTestCase)
   published
     procedure ExerciseOne;
   end;
 
 implementation
 
-procedure TFirstExam.ExerciseOne;
+procedure TExamTest.ExerciseOne;
 const
   MustAccept: TArray<TWord> = ['acabc', 'acbac', 'acabcaa', 'acbacaa', 'aaccabc', 'aaccbac', 'aaccabcaaaa', 'aaccbacaaaa', 'aaccabcaaaaaa', 'aaccbacaaaa'];
   MustNotAccept: TArray<TWord> = ['', 'a', 'b', 'c', 'ac', 'aca', 'acb', 'acab', 'acba', 'acabca', 'acbaca', 'acabcaaa', 'acbacaaa', 'acabcaaaaa', 'acbacaaaaa'];
@@ -52,6 +52,7 @@ begin
 end;
 
 initialization
-  RegisterTest(TFirstExam.Suite);
+  RegisterTest(TExamTest.Suite);
 
 end.
+
