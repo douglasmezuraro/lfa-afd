@@ -12,7 +12,7 @@ uses
   Impl.Types in '..\..\AFD\src\Impl\Impl.Types.pas',
   Impl.List in '..\..\AFD\src\Impl\Impl.List.pas',
   Impl.List.Test in '..\src\Impl\Impl.List.Test.pas',
-  TestFramework.Helpers in '..\src\TestFramework\TestFramework.Helpers.pas',
+  Helper.TestFramework in '..\src\Helper\Helper.TestFramework.pas',
   Impl.AFD.Validator in '..\..\AFD\src\Impl\Impl.AFD.Validator.pas',
   Impl.Transition in '..\..\AFD\src\Impl\Impl.Transition.pas',
   Impl.Transitions.Test in '..\src\Impl\Impl.Transitions.Test.pas',

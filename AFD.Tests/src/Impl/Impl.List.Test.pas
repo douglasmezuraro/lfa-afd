@@ -3,7 +3,7 @@ unit Impl.List.Test;
 interface
 
 uses
-  TestFramework, TestFramework.Helpers, Impl.List, System.SysUtils;
+  TestFramework, Helper.TestFramework, Impl.List, System.SysUtils;
 
 type
   TListTest = class(TTestCase)

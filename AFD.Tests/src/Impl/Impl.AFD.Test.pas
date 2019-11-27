@@ -3,7 +3,7 @@ unit Impl.AFD.Test;
 interface
 
 uses
-  TestFramework, TestFramework.Helpers, Impl.AFD, Impl.Transition, Impl.Types, System.SysUtils;
+  TestFramework, Impl.AFD, Impl.Transition, Impl.Types, System.SysUtils, Helper.TestFramework;
 
 type
   TAFDTest = class(TTestCase)
