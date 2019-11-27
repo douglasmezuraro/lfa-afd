@@ -1,9 +1,9 @@
-unit Impl.AFD.Validator;
+unit Impl.Validator;
 
 interface
 
 uses
-  Impl.AFD, Impl.List, Impl.Types, Impl.Transition, Impl.Transitions, System.SysUtils;
+  Impl.DeterministicFiniteAutomaton, Impl.List, Impl.Transition, Impl.Transitions, Impl.Types, System.SysUtils;
 
 type
   TValidator = class sealed
@@ -20,11 +20,11 @@ type
     function ValidateStates: Boolean;
     function ValidateFinalStates: Boolean;
     function ValidateTransitions: Boolean;
-    procedure Setup(const Automaton: TAFD);
+    procedure Setup(const Automaton: TDeterministicFiniteAutomaton);
   public
     constructor Create;
     destructor Destroy; override;
-    function Validate(const Automaton: TAFD): Boolean;
+    function Validate(const Automaton: TDeterministicFiniteAutomaton): Boolean;
     property Error: string read FError;
   end;
 
@@ -47,7 +47,7 @@ begin
   inherited Destroy;
 end;
 
-procedure TValidator.Setup(const Automaton: TAFD);
+procedure TValidator.Setup(const Automaton: TDeterministicFiniteAutomaton);
 begin
   FSymbols.Add(Automaton.Symbols);
   FStates.Add(Automaton.States);
@@ -56,7 +56,7 @@ begin
   FTransitions := Automaton.Transitions;
 end;
 
-function TValidator.Validate(const Automaton: TAFD): Boolean;
+function TValidator.Validate(const Automaton: TDeterministicFiniteAutomaton): Boolean;
 begin
   Setup(Automaton);
 

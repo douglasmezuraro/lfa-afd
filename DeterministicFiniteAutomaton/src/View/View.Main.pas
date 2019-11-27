@@ -3,11 +3,11 @@
 interface
 
 uses
-  FMX.ActnList, FMX.Controls, FMX.Controls.Presentation, FMX.Edit, FMX.Forms,
-  FMX.Grid, FMX.Layouts, FMX.ListBox, FMX.ScrollBox, FMX.StdCtrls, FMX.TabControl,
-  FMX.Types, Helper.Edit, Helper.ListBox, Helper.ListBoxItem, Helper.StringGrid,
-  Impl.AFD, Impl.Dialogs, Impl.Transition, Impl.Transitions, Impl.Types, System.Actions,
-  System.Classes, System.StrUtils, System.SysUtils, System.Rtti, FMX.Grid.Style;
+  FMX.ActnList, FMX.Controls, FMX.Controls.Presentation, FMX.Edit, FMX.Forms, FMX.Grid, FMX.Layouts,
+  FMX.ListBox, FMX.ScrollBox, FMX.StdCtrls, FMX.TabControl, FMX.Types, Helper.Edit, Helper.ListBox,
+  Helper.ListBoxItem, Helper.StringGrid, Impl.DeterministicFiniteAutomaton, Impl.Dialogs, Impl.Transition,
+  Impl.Transitions, Impl.Types, System.Actions, System.Classes, System.StrUtils, System.SysUtils,
+  System.Rtti, FMX.Grid.Style;
 
 type
   TMain = class sealed(TForm)
@@ -42,7 +42,7 @@ type
     procedure EditStatesChange(Sender: TObject);
     procedure ListLogChangeCheck(Sender: TObject);
   strict private
-    FAFD: TAFD;
+    FAutomaton: TDeterministicFiniteAutomaton;
     function GetFinalStates: TArray<TState>;
     function GetInitialState: TState;
     function GetStates: TArray<TState>;
@@ -72,12 +72,12 @@ implementation
 constructor TMain.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
-  FAFD := TAFD.Create;
+  FAutomaton := TDeterministicFiniteAutomaton.Create;
 end;
 
 destructor TMain.Destroy;
 begin
-  FAFD.Free;
+  FAutomaton.Free;
   inherited Destroy;
 end;
 
@@ -93,15 +93,15 @@ end;
 
 procedure TMain.Check;
 begin
-  FAFD.Clear;
+  FAutomaton.Clear;
   try
-    FAFD.Symbols      := Symbols;
-    FAFD.States       := States;
-    FAFD.InitialState := InitialState;
-    FAFD.FinalStates  := FinalStates;
-    FAFD.Transitions  := Transitions;
+    FAutomaton.Symbols      := Symbols;
+    FAutomaton.States       := States;
+    FAutomaton.InitialState := InitialState;
+    FAutomaton.FinalStates  := FinalStates;
+    FAutomaton.Transitions  := Transitions;
 
-    ListLog.Add(Word, FAFD.Accept(Word));
+    ListLog.Add(Word, FAutomaton.Accept(Word));
   except
     on Exception: EArgumentException do
       TDialogs.Warning(Exception.Message);
@@ -110,7 +110,7 @@ end;
 
 procedure TMain.Clear;
 begin
-  FAFD.Clear;
+  FAutomaton.Clear;
   EditSymbols.Clear;
   EditStates.Clear;
   EditInitialState.Clear;
@@ -177,7 +177,7 @@ var
   Column, Row: Integer;
   Transition: TTransition;
 begin
-  FAFD.Transitions.Clear;
+  FAutomaton.Transitions.Clear;
 
   for Row := 1 to Pred(Grid.RowCount) do
   begin
@@ -190,12 +190,12 @@ begin
         Transition.Symbol := Grid.Cells[Column, Grid.FirstRow];
         Transition.Target := Grid.Cells[Column, Row];
 
-        FAFD.Transitions.Add(Transition);
+        FAutomaton.Transitions.Add(Transition);
       end;
     end;
   end;
 
-  Result := FAFD.Transitions;
+  Result := FAutomaton.Transitions;
 end;
 
 function TMain.GetWord: TWord;

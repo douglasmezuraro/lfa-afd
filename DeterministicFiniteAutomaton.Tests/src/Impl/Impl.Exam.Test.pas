@@ -3,7 +3,7 @@ unit Impl.Exam.Test;
 interface
 
 uses
-  TestFramework, Impl.AFD, Impl.Transition, Impl.Types;
+  Impl.DeterministicFiniteAutomaton, Impl.Transition, Impl.Types, TestFramework;
 
 type
   TExamTest = class(TTestCase)
@@ -19,9 +19,9 @@ const
   MustNotAccept: TArray<TWord> = ['', 'a', 'b', 'c', 'ac', 'aca', 'acb', 'acab', 'acba', 'acabca', 'acbaca', 'acabcaaa', 'acbacaaa', 'acabcaaaaa', 'acbacaaaaa'];
 var
   Word: TWord;
-  Automaton: TAFD;
+  Automaton: TDeterministicFiniteAutomaton;
 begin
-  Automaton := TAFD.Create;
+  Automaton := TDeterministicFiniteAutomaton.Create;
   try
     Automaton.Symbols := ['a', 'b', 'c'];
     Automaton.States := ['Q0', 'Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'Q7', 'Q8'];

@@ -3,7 +3,7 @@
         <ProjectGuid>{4AB4828E-BEAF-4AB6-8BB9-FE74EA28FA7A}</ProjectGuid>
         <ProjectVersion>18.5</ProjectVersion>
         <FrameworkType>FMX</FrameworkType>
-        <MainSource>AFD.dpr</MainSource>
+        <MainSource>DeterministicFiniteAutomaton.dpr</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
@@ -53,7 +53,7 @@
         <Icns_MainIcns>$(BDS)\bin\delphi_PROJECTICNS.icns</Icns_MainIcns>
         <VerInfo_Locale>1046</VerInfo_Locale>
         <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
-        <SanitizedProjectName>AFD</SanitizedProjectName>
+        <SanitizedProjectName>DeterministicFiniteAutomaton</SanitizedProjectName>
         <DCC_UnitSearchPath>$(BDS)\Source\DUnit\src;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
@@ -100,8 +100,8 @@
         <DCCReference Include="..\src\Helper\Helper.ListBox.pas"/>
         <DCCReference Include="..\src\Helper\Helper.ListBoxItem.pas"/>
         <DCCReference Include="..\src\Helper\Helper.StringGrid.pas"/>
-        <DCCReference Include="..\src\Impl\Impl.AFD.pas"/>
-        <DCCReference Include="..\src\Impl\Impl.AFD.Validator.pas"/>
+        <DCCReference Include="..\src\Impl\Impl.DeterministicFiniteAutomaton.pas"/>
+        <DCCReference Include="..\src\Impl\Impl.Validator.pas"/>
         <DCCReference Include="..\src\Impl\Impl.Dialogs.pas"/>
         <DCCReference Include="..\src\Impl\Impl.List.pas"/>
         <DCCReference Include="..\src\Impl\Impl.Transition.pas"/>
@@ -128,11 +128,11 @@
         <BorlandProject>
             <Delphi.Personality>
                 <Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k260.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp260.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k250.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp250.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
                 </Excluded_Packages>
                 <Source>
-                    <Source Name="MainSource">AFD.dpr</Source>
+                    <Source Name="MainSource">DeterministicFiniteAutomaton.dpr</Source>
                 </Source>
             </Delphi.Personality>
             <Deployment Version="3">
@@ -166,9 +166,9 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="bin\AFD.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="bin\DeterministicFiniteAutomaton.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
-                        <RemoteName>AFD.exe</RemoteName>
+                        <RemoteName>DeterministicFiniteAutomaton.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

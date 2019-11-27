@@ -1,9 +1,10 @@
-unit Impl.AFD.Validator.Test;
+unit Impl.Validator.Test;
 
 interface
 
 uses
-  Impl.AFD, Impl.AFD.Validator, Impl.Transition, Impl.Transitions, Impl.Types, System.SysUtils, TestFramework;
+  Impl.DeterministicFiniteAutomaton, Impl.Transition, Impl.Transitions, Impl.Types, Impl.Validator,
+  System.SysUtils, TestFramework;
 
 type
   TAFDValidationsTest = class(TTestCase)
@@ -48,9 +49,9 @@ end;
 
 procedure TAFDValidationsTest.TestAcceptWhenAutomatonIsValid;
 var
-  Automaton: TAFD;
+  Automaton: TDeterministicFiniteAutomaton;
 begin
-  Automaton := TAFD.Create;
+  Automaton := TDeterministicFiniteAutomaton.Create;
   try
     Automaton.Symbols := ['a', 'b'];
     Automaton.States := ['Q0', 'Q1'];
@@ -69,9 +70,9 @@ end;
 
 procedure TAFDValidationsTest.TestAcceptWhenDuplicatedFinalStates;
 var
-  Automaton: TAFD;
+  Automaton: TDeterministicFiniteAutomaton;
 begin
-  Automaton := TAFD.Create;
+  Automaton := TDeterministicFiniteAutomaton.Create;
   try
   	Automaton.Symbols := ['a', 'b', 'c'];
     Automaton.States := ['Q0', 'Q1', 'Q2', 'Q3'];
@@ -86,9 +87,9 @@ end;
 
 procedure TAFDValidationsTest.TestAcceptWhenDuplicatedState;
 var
-  Automaton: TAFD;
+  Automaton: TDeterministicFiniteAutomaton;
 begin
-  Automaton := TAFD.Create;
+  Automaton := TDeterministicFiniteAutomaton.Create;
   try
     Automaton.Symbols := ['a', 'b', 'c'];
     Automaton.States := ['Q0', 'Q0', 'Q1', 'Q2', 'Q3'];
@@ -103,9 +104,9 @@ end;
 
 procedure TAFDValidationsTest.TestAcceptWhenDuplicatedSymbol;
 var
-  Automaton: TAFD;
+  Automaton: TDeterministicFiniteAutomaton;
 begin
-  Automaton := TAFD.Create;
+  Automaton := TDeterministicFiniteAutomaton.Create;
   try
     Automaton.Symbols := ['a', 'b', 'b', 'c'];
     Automaton.States := [];
@@ -120,9 +121,9 @@ end;
 
 procedure TAFDValidationsTest.TestAcceptWhenFinalStatesNotDefined;
 var
-  Automaton: TAFD;
+  Automaton: TDeterministicFiniteAutomaton;
 begin
-  Automaton := TAFD.Create;
+  Automaton := TDeterministicFiniteAutomaton.Create;
   try
     Automaton.Symbols := ['a', 'b', 'c'];
     Automaton.States := ['Q0', 'Q1', 'Q2', 'Q3'];
@@ -137,9 +138,9 @@ end;
 
 procedure TAFDValidationsTest.TestAcceptWhenFinalStatesNotFound;
 var
-  Automaton: TAFD;
+  Automaton: TDeterministicFiniteAutomaton;
 begin
-  Automaton := TAFD.Create;
+  Automaton := TDeterministicFiniteAutomaton.Create;
   try
     Automaton.Symbols := ['a', 'b', 'c'];
     Automaton.States := ['Q0', 'Q1', 'Q2', 'Q3'];
@@ -154,9 +155,9 @@ end;
 
 procedure TAFDValidationsTest.TestAcceptWhenInitialStateNotDefined;
 var
-  Automaton: TAFD;
+  Automaton: TDeterministicFiniteAutomaton;
 begin
-  Automaton := TAFD.Create;
+  Automaton := TDeterministicFiniteAutomaton.Create;
   try
     Automaton.Symbols := ['a', 'b', 'c'];
     Automaton.States := ['Q0', 'Q1', 'Q2', 'Q3'];
@@ -171,9 +172,9 @@ end;
 
 procedure TAFDValidationsTest.TestAcceptWhenInitialStateNotFound;
 var
-  Automaton: TAFD;
+  Automaton: TDeterministicFiniteAutomaton;
 begin
-  Automaton := TAFD.Create;
+  Automaton := TDeterministicFiniteAutomaton.Create;
   try
     Automaton.Symbols := ['a', 'b', 'c'];
     Automaton.States := ['Q0', 'Q1', 'Q2', 'Q3'];
@@ -188,9 +189,9 @@ end;
 
 procedure TAFDValidationsTest.TestAcceptWhenNoStatesDefined;
 var
-  Automaton: TAFD;
+  Automaton: TDeterministicFiniteAutomaton;
 begin
-  Automaton := TAFD.Create;
+  Automaton := TDeterministicFiniteAutomaton.Create;
   try
     Automaton.Symbols := ['a', 'b', 'c'];
     Automaton.States := [];
@@ -205,9 +206,9 @@ end;
 
 procedure TAFDValidationsTest.TestAcceptWhenNoSymbolsDefined;
 var
-  Automaton: TAFD;
+  Automaton: TDeterministicFiniteAutomaton;
 begin
-  Automaton := TAFD.Create;
+  Automaton := TDeterministicFiniteAutomaton.Create;
   try
     Automaton.Symbols := [];
     Automaton.States := [];
@@ -222,9 +223,9 @@ end;
 
 procedure TAFDValidationsTest.TestAcceptWhenTransitionHasSourceNotDefined;
 var
-  Automaton: TAFD;
+  Automaton: TDeterministicFiniteAutomaton;
 begin
-  Automaton := TAFD.Create;
+  Automaton := TDeterministicFiniteAutomaton.Create;
   try
     Automaton.Symbols := ['a', 'b'];
     Automaton.States := ['Q0', 'Q1'];
@@ -243,9 +244,9 @@ end;
 
 procedure TAFDValidationsTest.TestAcceptWhenTransitionHasSourceNotFound;
 var
-  Automaton: TAFD;
+  Automaton: TDeterministicFiniteAutomaton;
 begin
-  Automaton := TAFD.Create;
+  Automaton := TDeterministicFiniteAutomaton.Create;
   try
     Automaton.Symbols := ['a', 'b'];
     Automaton.States := ['Q0', 'Q1'];
@@ -264,9 +265,9 @@ end;
 
 procedure TAFDValidationsTest.TestAcceptWhenTransitionHasSymbolNotDefined;
 var
-  Automaton: TAFD;
+  Automaton: TDeterministicFiniteAutomaton;
 begin
-  Automaton := TAFD.Create;
+  Automaton := TDeterministicFiniteAutomaton.Create;
   try
     Automaton.Symbols := ['a', 'b'];
     Automaton.States := ['Q0', 'Q1'];
@@ -285,9 +286,9 @@ end;
 
 procedure TAFDValidationsTest.TestAcceptWhenTransitionHasSymbolNotFound;
 var
-  Automaton: TAFD;
+  Automaton: TDeterministicFiniteAutomaton;
 begin
-  Automaton := TAFD.Create;
+  Automaton := TDeterministicFiniteAutomaton.Create;
   try
     Automaton.Symbols := ['a', 'b'];
     Automaton.States := ['Q0', 'Q1'];
@@ -306,9 +307,9 @@ end;
 
 procedure TAFDValidationsTest.TestAcceptWhenTransitionHasTargetNotDefined;
 var
-  Automaton: TAFD;
+  Automaton: TDeterministicFiniteAutomaton;
 begin
-  Automaton := TAFD.Create;
+  Automaton := TDeterministicFiniteAutomaton.Create;
   try
     Automaton.Symbols := ['a', 'b'];
     Automaton.States := ['Q0', 'Q1'];
@@ -327,9 +328,9 @@ end;
 
 procedure TAFDValidationsTest.TestAcceptWhenTransitionHasTargetNotFound;
 var
-  Automaton: TAFD;
+  Automaton: TDeterministicFiniteAutomaton;
 begin
-  Automaton := TAFD.Create;
+  Automaton := TDeterministicFiniteAutomaton.Create;
   try
     Automaton.Symbols := ['a', 'b'];
     Automaton.States := ['Q0', 'Q1'];
@@ -348,9 +349,9 @@ end;
 
 procedure TAFDValidationsTest.TestAcceptWhenTransitionsNotDefined;
 var
-  Automaton: TAFD;
+  Automaton: TDeterministicFiniteAutomaton;
 begin
-  Automaton := TAFD.Create;
+  Automaton := TDeterministicFiniteAutomaton.Create;
   try
     Automaton.Symbols := ['a', 'b'];
     Automaton.States := ['Q0', 'Q1'];

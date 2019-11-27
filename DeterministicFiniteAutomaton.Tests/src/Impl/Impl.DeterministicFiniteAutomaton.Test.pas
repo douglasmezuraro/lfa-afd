@@ -1,14 +1,15 @@
-unit Impl.AFD.Test;
+unit Impl.DeterministicFiniteAutomaton.Test;
 
 interface
 
 uses
-  TestFramework, Impl.AFD, Impl.Transition, Impl.Types, System.SysUtils, Helper.TestFramework;
+  Helper.TestFramework, Impl.DeterministicFiniteAutomaton, Impl.Transition, Impl.Types,
+  System.SysUtils, TestFramework;
 
 type
   TAFDTest = class(TTestCase)
   strict private
-    FAutomaton: TAFD;
+    FAutomaton: TDeterministicFiniteAutomaton;
   public
     procedure SetUp; override;
     procedure TearDown; override;
@@ -23,7 +24,7 @@ implementation
 
 procedure TAFDTest.SetUp;
 begin
-  FAutomaton := TAFD.Create;
+  FAutomaton := TDeterministicFiniteAutomaton.Create;
   FAutomaton.Symbols := ['a', 'b', 'c'];
   FAutomaton.States := ['Q0', 'Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'Q7', 'Q8'];
   FAutomaton.FinalStates := ['Q6', 'Q8'];

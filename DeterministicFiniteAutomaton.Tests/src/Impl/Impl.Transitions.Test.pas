@@ -3,7 +3,7 @@ unit Impl.Transitions.Test;
 interface
 
 uses
-  Impl.Transitions, Impl.Transition, TestFramework;
+  Impl.Transition, Impl.Transitions, TestFramework;
 
 type
   TTransitionsTest = class(TTestCase)

@@ -1,4 +1,4 @@
-program AFD;
+program DeterministicFiniteAutomaton;
 
 uses
   System.StartUpCopy,
@@ -7,8 +7,8 @@ uses
   Helper.ListBox in '..\src\Helper\Helper.ListBox.pas',
   Helper.ListBoxItem in '..\src\Helper\Helper.ListBoxItem.pas',
   Helper.StringGrid in '..\src\Helper\Helper.StringGrid.pas',
-  Impl.AFD in '..\src\Impl\Impl.AFD.pas',
-  Impl.AFD.Validator in '..\src\Impl\Impl.AFD.Validator.pas',
+  Impl.DeterministicFiniteAutomaton in '..\src\Impl\Impl.DeterministicFiniteAutomaton.pas',
+  Impl.Validator in '..\src\Impl\Impl.Validator.pas',
   Impl.Dialogs in '..\src\Impl\Impl.Dialogs.pas',
   Impl.List in '..\src\Impl\Impl.List.pas',
   Impl.Transition in '..\src\Impl\Impl.Transition.pas',

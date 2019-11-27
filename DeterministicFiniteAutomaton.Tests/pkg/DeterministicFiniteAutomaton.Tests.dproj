@@ -8,7 +8,7 @@
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>1</TargetedPlatforms>
         <AppType>Console</AppType>
-        <MainSource>AFD.Tests.dpr</MainSource>
+        <MainSource>DeterministicFiniteAutomaton.Tests.dpr</MainSource>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
         <Base>true</Base>
@@ -46,7 +46,7 @@
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;$(DCC_Namespace)</DCC_Namespace>
         <DCC_UnitSearchPath>$(BDS)\Source\DUnit\src;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <DCC_Define>_CONSOLE_TESTRUNNER;$(DCC_Define)</DCC_Define>
-        <SanitizedProjectName>AFD_Tests</SanitizedProjectName>
+        <SanitizedProjectName>DeterministicFiniteAutomaton_Tests</SanitizedProjectName>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
         <DCC_UsePackage>DBXSqliteDriver;DBXDb2Driver;addictdb;dxExRw;smdCompletoDT;vclactnband;tb2k;vclFireDAC;RaveVCL;tethering;spFundamentals;FireDACADSDriver;SAXKWR;EQGrid;OXml_R;VarianWorkshop;FireDACMSSQLDriver;vcltouch;sppCompleto;PKIPDFBBox;vcldb;dxsb;PGPMIMEBBox;SFTPBBoxSrv;svn;spOrpheus;spVCL;spCommonAPI;pg5Completo;PGPBBox;rbRTL1617;sp4D5ViolacoesDependencia;sgcCompleto;ASiCBBox;FireDACDBXDriver;vclx;spConsultas;DAVBBoxCli;cgoCompletoDT;ZIPBBox;EDIBBox;scmCompleto;VCLRESTComponents;rbTCUI1617;RvCore;pg5cPrettyLabel;Box;tbxrt;vclie;bindengine;addict;FireDACMySQLDriver;dxcomn;wflViolacoesDependencia;spVclPkg;SAMLBBoxSrv;smdCompleto;DataSnapClient;spAddict;bindcompdbx;DBXSybaseASEDriver;IndyIPServer;prcImpl;PngComponents;IndySystem;spTablet;XMLBBox;spVCL_DT;dsnapcon;VirtualTreesR;DBPlannerPkg;FireDACMSAccDriver;fmxFireDAC;FireDACInfxDriver;vclimg;RvStandard;RvBarcode;spDados;spGravador;Jcl;spLdap;emshosting;spDxInspector;RvReport;DsgnBBox;dxBarDBNavR;spCompletoDadosConsultas_DT;pg5cCompleto;ccpCompleto;spEmbeddedWB;sasCompleto;DBXOdbcDriver;FireDACTDataDriver;FMXTee;DreamControls;digCompletoViolacoesPg5;DbxCommonDriver;intCompleto;xmlrtl;DataSnapNativeClient;fmxobj;spCompletoNew_DT;rtl;DbxClientDriver;DBXSybaseASADriver;dxDBEd;spCentralNotificacoes;appanalytics;spdxExpressBar;IndyIPClient;WPTAddict_DT;dxdbtr;bindcompvcl;vcldbx;TeeUI;dxELib;dxGrEd;HtmlLabelPkg;VclSmp;FireDACODBCDriver;spPatternsAPI;spVCLStylesEditor;DataSnapIndy10ServerTransport;BaseBBox;edtCompleto;DataSnapProviderClient;MailBBox;FireDACMongoDBDriver;spActiveDirectory;SFTPBBoxCli;PacotespPrinter;spCompleto_DT;DataSnapServerMidas;TVidGrab;spGenesis;DBXInterBaseDriver;RvGraphics;PKIECtrl;SAMLBBox;svnui;rbIDE1617;TMSLabelsButtonsPkg;DAVBBoxSrv;dxBarExtDBItemsR;DBXMSSQLDriver;spQuickPDF;spUIDControlsDT;DatasnapConnectorsFreePascal;spViewPDF;rbBDE1617;bindcompfmx;SSHBBoxCli;DBXOracleDriver;spCommonStructures;inetdb;CEF4Delphi;spVCLStyles;FmxTeeUI;emsedge;PDFBBox;fmx;fmxdae;SSHBBoxSrv;EQDBTL;spPatternsImpl;CloudBBox;spHTTP;wflCompleto;sajCompleto;PGPTLSBBox;digCompleto;dbexpress;IndyCore;smdPrettyListView;OfficeBBox;dsnap;DataSnapCommon;sggCompleto;bdertl;DataSnapConnectors;XDevice;SqlDir;EQTL;sarCompleto;rbRCL1617;SAXMSR;FTPSBBoxCli;EmbeddedWebBrowser;FireDACOracleDriver;DBXMySQLDriver;XFormat;ECQDBC;BurnCSP;DBXFirebirdDriver;Json_RT;SOAPBBoxCli;FireDACCommonODBC;ah_comp;MIMEBBox;spZip;cgoCompleto;ObjectDebugger;spImageEn;IndyIPCommon;ppWPToolsPack;vcl;XMLBBoxSec;FTPSBBoxSrv;FireDACDb2Driver;PBFolderDialog;spUtils;XLSSuit;PKIBBox;HTTPBBoxCli;aipCompleto;TeeDB;PKISSHBBox;dxForumLib;VCLZipDT;FireDACPgDriver;proCompleto;FireDACASADriver;dxObjIns;WPTools;spCompletoBase;Tee;DataSnapServer;vclwinx;FireDACDSDriver;dxIns;RvEngine;CustomIPTransport;vcldsnap;spCompletoNew;spDxInspector_DT;SMIMECAdESBBox;dxBarExtItemsR;bindcomp;DBXInformixDriver;SSLBBoxCli;spFormularios;dxBarR;SSLBBoxSrv;HTTPBBoxSrv;SMIMEBBox;aclCompleto;dbxcds;SAXR;PGPSSHBBox;adortl;pg5cPrettyListView;spSecureBlackBox;dxEdtr;ggpCompleto;rbTDBC1617;spCommonFunctions;dsnapxml;rbTC1617;dbrtl;inetdbxpress;IndyProtocols;LDAPBBox;spDUnit;SynEditR;spLockBox;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
@@ -76,18 +76,18 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="..\src\Impl\Impl.AFD.Validator.Test.pas"/>
-        <DCCReference Include="..\..\AFD\src\Impl\Impl.AFD.pas"/>
-        <DCCReference Include="..\..\AFD\src\Impl\Impl.Transitions.pas"/>
-        <DCCReference Include="..\..\AFD\src\Impl\Impl.Types.pas"/>
-        <DCCReference Include="..\..\AFD\src\Impl\Impl.List.pas"/>
+        <DCCReference Include="..\src\Impl\Impl.Validator.Test.pas"/>
+        <DCCReference Include="..\..\DeterministicFiniteAutomaton\src\Impl\Impl.Transitions.pas"/>
+        <DCCReference Include="..\..\DeterministicFiniteAutomaton\src\Impl\Impl.Types.pas"/>
+        <DCCReference Include="..\..\DeterministicFiniteAutomaton\src\Impl\Impl.List.pas"/>
         <DCCReference Include="..\src\Impl\Impl.List.Test.pas"/>
         <DCCReference Include="..\src\Helper\Helper.TestFramework.pas"/>
-        <DCCReference Include="..\..\AFD\src\Impl\Impl.AFD.Validator.pas"/>
-        <DCCReference Include="..\..\AFD\src\Impl\Impl.Transition.pas"/>
+        <DCCReference Include="..\..\DeterministicFiniteAutomaton\src\Impl\Impl.Transition.pas"/>
         <DCCReference Include="..\src\Impl\Impl.Transitions.Test.pas"/>
         <DCCReference Include="..\src\Impl\Impl.Exam.Test.pas"/>
-        <DCCReference Include="..\src\Impl\Impl.AFD.Test.pas"/>
+        <DCCReference Include="..\src\Impl\Impl.DeterministicFiniteAutomaton.Test.pas"/>
+        <DCCReference Include="..\..\DeterministicFiniteAutomaton\src\Impl\Impl.DeterministicFiniteAutomaton.pas"/>
+        <DCCReference Include="..\..\DeterministicFiniteAutomaton\src\Impl\Impl.Validator.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -106,7 +106,7 @@
         <BorlandProject>
             <Delphi.Personality>
                 <Source>
-                    <Source Name="MainSource">AFD.Tests.dpr</Source>
+                    <Source Name="MainSource">DeterministicFiniteAutomaton.Tests.dpr</Source>
                 </Source>
             </Delphi.Personality>
             <Deployment Version="3">
@@ -115,9 +115,9 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Win32\Debug\AFD.Tests.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="Win32\Debug\DeterministicFiniteAutomaton.Tests.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
-                        <RemoteName>AFD_Tests.exe</RemoteName>
+                        <RemoteName>DeterministicFiniteAutomaton_Tests.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

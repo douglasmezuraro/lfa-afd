@@ -1,12 +1,12 @@
-﻿unit Impl.AFD;
+﻿unit Impl.DeterministicFiniteAutomaton;
 
 interface
 
 uses
-  Impl.Types, Impl.Transition, Impl.Transitions, System.SysUtils, System.StrUtils;
+  Impl.Transition, Impl.Transitions, Impl.Types, System.StrUtils, System.SysUtils;
 
 type
-  TAFD = class sealed
+  TDeterministicFiniteAutomaton = class sealed
   strict private
     FSymbols: TArray<TSymbol>;
     FStates: TArray<TState>;
@@ -31,20 +31,20 @@ type
 implementation
 
 uses
-  Impl.AFD.Validator;
+  Impl.Validator;
 
-constructor TAFD.Create;
+constructor TDeterministicFiniteAutomaton.Create;
 begin
   FTransitions := TTransitions.Create;
 end;
 
-destructor TAFD.Destroy;
+destructor TDeterministicFiniteAutomaton.Destroy;
 begin
   FTransitions.Free;
   inherited;
 end;
 
-function TAFD.Accept(const Word: TWord): Boolean;
+function TDeterministicFiniteAutomaton.Accept(const Word: TWord): Boolean;
 var
   Validator: TValidator;
 begin
@@ -59,7 +59,7 @@ begin
   end;
 end;
 
-procedure TAFD.Clear;
+procedure TDeterministicFiniteAutomaton.Clear;
 begin
   FTransitions.Clear;
   SetLength(FSymbols, 0);
@@ -68,7 +68,7 @@ begin
   FInitialState := string.Empty;
 end;
 
-function TAFD.InternalAccept(const Word: TWord): Boolean;
+function TDeterministicFiniteAutomaton.InternalAccept(const Word: TWord): Boolean;
 var
   State: TState;
   Symbol: TSymbol;
