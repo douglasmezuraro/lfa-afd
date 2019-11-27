@@ -16,8 +16,6 @@ type
 
 implementation
 
-{ TTestFrameworkHelper }
-
 procedure TTestFrameworkHelper.CheckEquals(const Method: TProc; const ExpectedClass: ExceptionClass; const Msg: string);
 begin
   StartExpectingException(ExpectedClass);
@@ -37,7 +35,7 @@ begin
   if Length(A) <> Length(B) then
     Exit(False);
 
-  for Index := Low(A) to High(B) do
+  for Index := Low(A) to High(A) do
   begin
     if not A[Index].Equals(B[Index]) then
       Exit(False);

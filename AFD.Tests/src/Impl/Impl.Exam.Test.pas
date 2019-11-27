@@ -23,23 +23,23 @@ var
 begin
   Automaton := TAFD.Create;
   try
-    Automaton.Symbols      := ['a', 'b', 'c'];
-    Automaton.States       := ['S0', 'S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8'];
-    Automaton.FinalStates  := ['S6', 'S8'];
-    Automaton.InitialState := 'S0';
+    Automaton.Symbols := ['a', 'b', 'c'];
+    Automaton.States := ['Q0', 'Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'Q7', 'Q8'];
+    Automaton.FinalStates := ['Q6', 'Q8'];
+    Automaton.InitialState := 'Q0';
 
-    Automaton.Transitions.Add(TTransition.Create('S0', 'a', 'S1'));
-    Automaton.Transitions.Add(TTransition.Create('S1', 'a', 'S1'));
-    Automaton.Transitions.Add(TTransition.Create('S1', 'c', 'S2'));
-    Automaton.Transitions.Add(TTransition.Create('S2', 'a', 'S3'));
-    Automaton.Transitions.Add(TTransition.Create('S2', 'b', 'S4'));
-    Automaton.Transitions.Add(TTransition.Create('S2', 'c', 'S2'));
-    Automaton.Transitions.Add(TTransition.Create('S3', 'b', 'S5'));
-    Automaton.Transitions.Add(TTransition.Create('S4', 'a', 'S5'));
-    Automaton.Transitions.Add(TTransition.Create('S5', 'c', 'S6'));
-    Automaton.Transitions.Add(TTransition.Create('S6', 'a', 'S7'));
-    Automaton.Transitions.Add(TTransition.Create('S7', 'a', 'S8'));
-    Automaton.Transitions.Add(TTransition.Create('S8', 'a', 'S7'));
+    Automaton.Transitions.Add(TTransition.Create('Q0', 'a', 'Q1'));
+    Automaton.Transitions.Add(TTransition.Create('Q1', 'a', 'Q1'));
+    Automaton.Transitions.Add(TTransition.Create('Q1', 'c', 'Q2'));
+    Automaton.Transitions.Add(TTransition.Create('Q2', 'a', 'Q3'));
+    Automaton.Transitions.Add(TTransition.Create('Q2', 'b', 'Q4'));
+    Automaton.Transitions.Add(TTransition.Create('Q2', 'c', 'Q2'));
+    Automaton.Transitions.Add(TTransition.Create('Q3', 'b', 'Q5'));
+    Automaton.Transitions.Add(TTransition.Create('Q4', 'a', 'Q5'));
+    Automaton.Transitions.Add(TTransition.Create('Q5', 'c', 'Q6'));
+    Automaton.Transitions.Add(TTransition.Create('Q6', 'a', 'Q7'));
+    Automaton.Transitions.Add(TTransition.Create('Q7', 'a', 'Q8'));
+    Automaton.Transitions.Add(TTransition.Create('Q8', 'a', 'Q7'));
 
     for Word in MustAccept do
       CheckTrue(Automaton.Accept(Word));

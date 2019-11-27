@@ -132,12 +132,12 @@ end;
 
 procedure TTransitionsTest.TestToArrayWhenHasOneTransition;
 var
-  A: TTransition;
+  Transition: TTransition;
 begin
-  A := TTransition.Create('Q0', 'a', 'Q1');
-  FTransitions.Add(A);
+  Transition := TTransition.Create('Q0', 'a', 'Q1');
+  FTransitions.Add(Transition);
 
-  CheckTrue(A.Equals(FTransitions.ToArray[0]));
+  CheckTrue(Transition.Equals(FTransitions.ToArray[0]));
 end;
 
 procedure TTransitionsTest.TestToArrayWhenIsEmpty;

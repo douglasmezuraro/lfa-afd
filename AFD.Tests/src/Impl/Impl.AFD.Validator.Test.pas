@@ -74,9 +74,9 @@ begin
   Automaton := TAFD.Create;
   try
   	Automaton.Symbols := ['a', 'b', 'c'];
-    Automaton.States := ['S0', 'S1', 'S2', 'S3'];
-    Automaton.InitialState := 'S0';
-    Automaton.FinalStates := ['S3', 'S3'];
+    Automaton.States := ['Q0', 'Q1', 'Q2', 'Q3'];
+    Automaton.InitialState := 'Q0';
+    Automaton.FinalStates := ['Q3', 'Q3'];
 
     CheckFalse(FValidator.Validate(Automaton));
   finally
@@ -91,7 +91,7 @@ begin
   Automaton := TAFD.Create;
   try
     Automaton.Symbols := ['a', 'b', 'c'];
-    Automaton.States := ['S0', 'S0', 'S1', 'S2', 'S3'];
+    Automaton.States := ['Q0', 'Q0', 'Q1', 'Q2', 'Q3'];
     Automaton.InitialState := TState.Empty;
     Automaton.FinalStates := [];
 
@@ -125,8 +125,8 @@ begin
   Automaton := TAFD.Create;
   try
     Automaton.Symbols := ['a', 'b', 'c'];
-    Automaton.States := ['S0', 'S1', 'S2', 'S3'];
-    Automaton.InitialState := 'S0';
+    Automaton.States := ['Q0', 'Q1', 'Q2', 'Q3'];
+    Automaton.InitialState := 'Q0';
     Automaton.FinalStates := [];
 
     CheckFalse(FValidator.Validate(Automaton));
@@ -142,9 +142,9 @@ begin
   Automaton := TAFD.Create;
   try
     Automaton.Symbols := ['a', 'b', 'c'];
-    Automaton.States := ['S0', 'S1', 'S2', 'S3'];
-    Automaton.InitialState := 'S0';
-    Automaton.FinalStates := ['S4'];
+    Automaton.States := ['Q0', 'Q1', 'Q2', 'Q3'];
+    Automaton.InitialState := 'Q0';
+    Automaton.FinalStates := ['Q4'];
 
     CheckFalse(FValidator.Validate(Automaton));
   finally
@@ -159,7 +159,7 @@ begin
   Automaton := TAFD.Create;
   try
     Automaton.Symbols := ['a', 'b', 'c'];
-    Automaton.States := ['S0', 'S1', 'S2', 'S3'];
+    Automaton.States := ['Q0', 'Q1', 'Q2', 'Q3'];
     Automaton.InitialState := TState.Empty;
     Automaton.FinalStates := [];
 
@@ -176,8 +176,8 @@ begin
   Automaton := TAFD.Create;
   try
     Automaton.Symbols := ['a', 'b', 'c'];
-    Automaton.States := ['S0', 'S1', 'S2', 'S3'];
-    Automaton.InitialState := 'S4';
+    Automaton.States := ['Q0', 'Q1', 'Q2', 'Q3'];
+    Automaton.InitialState := 'Q4';
     Automaton.FinalStates := [];
 
     CheckFalse(FValidator.Validate(Automaton));
