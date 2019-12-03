@@ -97,8 +97,6 @@
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
         <DCCReference Include="..\src\Helper\Helper.Edit.pas"/>
-        <DCCReference Include="..\src\Helper\Helper.ListBox.pas"/>
-        <DCCReference Include="..\src\Helper\Helper.ListBoxItem.pas"/>
         <DCCReference Include="..\src\Helper\Helper.StringGrid.pas"/>
         <DCCReference Include="..\src\Impl\Impl.DeterministicFiniteAutomaton.pas"/>
         <DCCReference Include="..\src\Impl\Impl.Validator.pas"/>

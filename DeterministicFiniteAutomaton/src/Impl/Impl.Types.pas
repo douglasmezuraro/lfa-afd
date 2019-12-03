@@ -8,7 +8,8 @@ type
   TWord   = string;
 
 const
-  Empty: TSymbol = 'ʎ';
+  Lambda: TSymbol = 'ʎ';
+  Result: array[Boolean] of string = ('Rejected', 'Accepted');
 
 implementation
 

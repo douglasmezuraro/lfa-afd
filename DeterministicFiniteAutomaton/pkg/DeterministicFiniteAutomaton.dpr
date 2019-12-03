@@ -4,8 +4,6 @@ uses
   System.StartUpCopy,
   FMX.Forms,
   Helper.Edit in '..\src\Helper\Helper.Edit.pas',
-  Helper.ListBox in '..\src\Helper\Helper.ListBox.pas',
-  Helper.ListBoxItem in '..\src\Helper\Helper.ListBoxItem.pas',
   Helper.StringGrid in '..\src\Helper\Helper.StringGrid.pas',
   Impl.DeterministicFiniteAutomaton in '..\src\Impl\Impl.DeterministicFiniteAutomaton.pas',
   Impl.Validator in '..\src\Impl\Impl.Validator.pas',
