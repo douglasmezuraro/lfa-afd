@@ -1,4 +1,4 @@
-unit Impl.Validator.Test;
+unit Test.Validator;
 
 interface
 
@@ -54,13 +54,13 @@ begin
   Automaton := TDeterministicFiniteAutomaton.Create;
   try
     Automaton.Symbols := ['a', 'b'];
-    Automaton.States := ['Q0', 'Q1'];
-    Automaton.InitialState := 'Q0';
-    Automaton.FinalStates := ['Q1'];
-    Automaton.Transitions.Add(TTransition.Create('Q0', 'a', 'Q1'));
-    Automaton.Transitions.Add(TTransition.Create('Q0', 'b', 'Q1'));
-    Automaton.Transitions.Add(TTransition.Create('Q1', 'a', 'Q1'));
-    Automaton.Transitions.Add(TTransition.Create('Q1', 'b', 'Q1'));
+    Automaton.States := ['q0', 'q1'];
+    Automaton.InitialState := 'q0';
+    Automaton.FinalStates := ['q1'];
+    Automaton.Transitions.Add(TTransition.Create('q0', 'a', 'q1'));
+    Automaton.Transitions.Add(TTransition.Create('q0', 'b', 'q1'));
+    Automaton.Transitions.Add(TTransition.Create('q1', 'a', 'q1'));
+    Automaton.Transitions.Add(TTransition.Create('q1', 'b', 'q1'));
 
     CheckTrue(FValidator.Validate(Automaton));
   finally
@@ -75,9 +75,9 @@ begin
   Automaton := TDeterministicFiniteAutomaton.Create;
   try
   	Automaton.Symbols := ['a', 'b', 'c'];
-    Automaton.States := ['Q0', 'Q1', 'Q2', 'Q3'];
-    Automaton.InitialState := 'Q0';
-    Automaton.FinalStates := ['Q3', 'Q3'];
+    Automaton.States := ['q0', 'q1', 'q2', 'q3'];
+    Automaton.InitialState := 'q0';
+    Automaton.FinalStates := ['q3', 'q3'];
 
     CheckFalse(FValidator.Validate(Automaton));
   finally
@@ -92,7 +92,7 @@ begin
   Automaton := TDeterministicFiniteAutomaton.Create;
   try
     Automaton.Symbols := ['a', 'b', 'c'];
-    Automaton.States := ['Q0', 'Q0', 'Q1', 'Q2', 'Q3'];
+    Automaton.States := ['q0', 'q0', 'q1', 'q2', 'q3'];
     Automaton.InitialState := TState.Empty;
     Automaton.FinalStates := [];
 
@@ -126,8 +126,8 @@ begin
   Automaton := TDeterministicFiniteAutomaton.Create;
   try
     Automaton.Symbols := ['a', 'b', 'c'];
-    Automaton.States := ['Q0', 'Q1', 'Q2', 'Q3'];
-    Automaton.InitialState := 'Q0';
+    Automaton.States := ['q0', 'q1', 'q2', 'q3'];
+    Automaton.InitialState := 'q0';
     Automaton.FinalStates := [];
 
     CheckFalse(FValidator.Validate(Automaton));
@@ -143,9 +143,9 @@ begin
   Automaton := TDeterministicFiniteAutomaton.Create;
   try
     Automaton.Symbols := ['a', 'b', 'c'];
-    Automaton.States := ['Q0', 'Q1', 'Q2', 'Q3'];
-    Automaton.InitialState := 'Q0';
-    Automaton.FinalStates := ['Q4'];
+    Automaton.States := ['q0', 'q1', 'q2', 'q3'];
+    Automaton.InitialState := 'q0';
+    Automaton.FinalStates := ['q4'];
 
     CheckFalse(FValidator.Validate(Automaton));
   finally
@@ -160,7 +160,7 @@ begin
   Automaton := TDeterministicFiniteAutomaton.Create;
   try
     Automaton.Symbols := ['a', 'b', 'c'];
-    Automaton.States := ['Q0', 'Q1', 'Q2', 'Q3'];
+    Automaton.States := ['q0', 'q1', 'q2', 'q3'];
     Automaton.InitialState := TState.Empty;
     Automaton.FinalStates := [];
 
@@ -177,8 +177,8 @@ begin
   Automaton := TDeterministicFiniteAutomaton.Create;
   try
     Automaton.Symbols := ['a', 'b', 'c'];
-    Automaton.States := ['Q0', 'Q1', 'Q2', 'Q3'];
-    Automaton.InitialState := 'Q4';
+    Automaton.States := ['q0', 'q1', 'q2', 'q3'];
+    Automaton.InitialState := 'q4';
     Automaton.FinalStates := [];
 
     CheckFalse(FValidator.Validate(Automaton));
@@ -228,13 +228,13 @@ begin
   Automaton := TDeterministicFiniteAutomaton.Create;
   try
     Automaton.Symbols := ['a', 'b'];
-    Automaton.States := ['Q0', 'Q1'];
-    Automaton.InitialState := 'Q0';
-    Automaton.FinalStates := ['Q1'];
-    Automaton.Transitions.Add(TTransition.Create(TState.Empty, 'a', 'Q1'));
-    Automaton.Transitions.Add(TTransition.Create('Q0', 'b', 'Q1'));
-    Automaton.Transitions.Add(TTransition.Create('Q1', 'a', 'Q1'));
-    Automaton.Transitions.Add(TTransition.Create('Q1', 'b', 'Q1'));
+    Automaton.States := ['q0', 'q1'];
+    Automaton.InitialState := 'q0';
+    Automaton.FinalStates := ['q1'];
+    Automaton.Transitions.Add(TTransition.Create(TState.Empty, 'a', 'q1'));
+    Automaton.Transitions.Add(TTransition.Create('q0', 'b', 'q1'));
+    Automaton.Transitions.Add(TTransition.Create('q1', 'a', 'q1'));
+    Automaton.Transitions.Add(TTransition.Create('q1', 'b', 'q1'));
 
     CheckFalse(FValidator.Validate(Automaton));
   finally
@@ -249,13 +249,13 @@ begin
   Automaton := TDeterministicFiniteAutomaton.Create;
   try
     Automaton.Symbols := ['a', 'b'];
-    Automaton.States := ['Q0', 'Q1'];
-    Automaton.InitialState := 'Q0';
-    Automaton.FinalStates := ['Q1'];
-    Automaton.Transitions.Add(TTransition.Create('Q0', 'a', 'Q1'));
-    Automaton.Transitions.Add(TTransition.Create('Q2', 'b', 'Q1'));
-    Automaton.Transitions.Add(TTransition.Create('Q1', 'a', 'Q1'));
-    Automaton.Transitions.Add(TTransition.Create('Q1', 'b', 'Q1'));
+    Automaton.States := ['q0', 'q1'];
+    Automaton.InitialState := 'q0';
+    Automaton.FinalStates := ['q1'];
+    Automaton.Transitions.Add(TTransition.Create('q0', 'a', 'q1'));
+    Automaton.Transitions.Add(TTransition.Create('q2', 'b', 'q1'));
+    Automaton.Transitions.Add(TTransition.Create('q1', 'a', 'q1'));
+    Automaton.Transitions.Add(TTransition.Create('q1', 'b', 'q1'));
 
     CheckFalse(FValidator.Validate(Automaton));
   finally
@@ -270,13 +270,13 @@ begin
   Automaton := TDeterministicFiniteAutomaton.Create;
   try
     Automaton.Symbols := ['a', 'b'];
-    Automaton.States := ['Q0', 'Q1'];
-    Automaton.InitialState := 'Q0';
-    Automaton.FinalStates := ['Q1'];
-    Automaton.Transitions.Add(TTransition.Create('Q0', 'a', 'Q1'));
-    Automaton.Transitions.Add(TTransition.Create('Q0', 'b', 'Q1'));
-    Automaton.Transitions.Add(TTransition.Create('Q1', TSymbol.Empty, 'Q1'));
-    Automaton.Transitions.Add(TTransition.Create('Q1', 'b', 'Q1'));
+    Automaton.States := ['q0', 'q1'];
+    Automaton.InitialState := 'q0';
+    Automaton.FinalStates := ['q1'];
+    Automaton.Transitions.Add(TTransition.Create('q0', 'a', 'q1'));
+    Automaton.Transitions.Add(TTransition.Create('q0', 'b', 'q1'));
+    Automaton.Transitions.Add(TTransition.Create('q1', TSymbol.Empty, 'q1'));
+    Automaton.Transitions.Add(TTransition.Create('q1', 'b', 'q1'));
 
     CheckFalse(FValidator.Validate(Automaton));
   finally
@@ -291,13 +291,13 @@ begin
   Automaton := TDeterministicFiniteAutomaton.Create;
   try
     Automaton.Symbols := ['a', 'b'];
-    Automaton.States := ['Q0', 'Q1'];
-    Automaton.InitialState := 'Q0';
-    Automaton.FinalStates := ['Q1'];
-    Automaton.Transitions.Add(TTransition.Create('Q0', 'a', 'Q1'));
-    Automaton.Transitions.Add(TTransition.Create('Q0', 'b', 'Q1'));
-    Automaton.Transitions.Add(TTransition.Create('Q1', 'a', 'Q1'));
-    Automaton.Transitions.Add(TTransition.Create('Q1', 'c', 'Q1'));
+    Automaton.States := ['q0', 'q1'];
+    Automaton.InitialState := 'q0';
+    Automaton.FinalStates := ['q1'];
+    Automaton.Transitions.Add(TTransition.Create('q0', 'a', 'q1'));
+    Automaton.Transitions.Add(TTransition.Create('q0', 'b', 'q1'));
+    Automaton.Transitions.Add(TTransition.Create('q1', 'a', 'q1'));
+    Automaton.Transitions.Add(TTransition.Create('q1', 'c', 'q1'));
 
     CheckFalse(FValidator.Validate(Automaton));
   finally
@@ -312,13 +312,13 @@ begin
   Automaton := TDeterministicFiniteAutomaton.Create;
   try
     Automaton.Symbols := ['a', 'b'];
-    Automaton.States := ['Q0', 'Q1'];
-    Automaton.InitialState := 'Q0';
-    Automaton.FinalStates := ['Q1'];
-    Automaton.Transitions.Add(TTransition.Create('Q0', 'a', TState.Empty));
-    Automaton.Transitions.Add(TTransition.Create('Q0', 'b', 'Q1'));
-    Automaton.Transitions.Add(TTransition.Create('Q1', 'a', 'Q1'));
-    Automaton.Transitions.Add(TTransition.Create('Q1', 'c', 'Q1'));
+    Automaton.States := ['q0', 'q1'];
+    Automaton.InitialState := 'q0';
+    Automaton.FinalStates := ['q1'];
+    Automaton.Transitions.Add(TTransition.Create('q0', 'a', TState.Empty));
+    Automaton.Transitions.Add(TTransition.Create('q0', 'b', 'q1'));
+    Automaton.Transitions.Add(TTransition.Create('q1', 'a', 'q1'));
+    Automaton.Transitions.Add(TTransition.Create('q1', 'c', 'q1'));
 
     CheckFalse(FValidator.Validate(Automaton));
   finally
@@ -333,13 +333,13 @@ begin
   Automaton := TDeterministicFiniteAutomaton.Create;
   try
     Automaton.Symbols := ['a', 'b'];
-    Automaton.States := ['Q0', 'Q1'];
-    Automaton.InitialState := 'Q0';
-    Automaton.FinalStates := ['Q1'];
-    Automaton.Transitions.Add(TTransition.Create('Q0', 'a', 'Q1'));
-    Automaton.Transitions.Add(TTransition.Create('Q0', 'b', 'Q1'));
-    Automaton.Transitions.Add(TTransition.Create('Q1', 'a', 'Q4'));
-    Automaton.Transitions.Add(TTransition.Create('Q1', 'c', 'Q1'));
+    Automaton.States := ['q0', 'q1'];
+    Automaton.InitialState := 'q0';
+    Automaton.FinalStates := ['q1'];
+    Automaton.Transitions.Add(TTransition.Create('q0', 'a', 'q1'));
+    Automaton.Transitions.Add(TTransition.Create('q0', 'b', 'q1'));
+    Automaton.Transitions.Add(TTransition.Create('q1', 'a', 'q4'));
+    Automaton.Transitions.Add(TTransition.Create('q1', 'c', 'q1'));
 
     CheckFalse(FValidator.Validate(Automaton));
   finally
@@ -354,9 +354,9 @@ begin
   Automaton := TDeterministicFiniteAutomaton.Create;
   try
     Automaton.Symbols := ['a', 'b'];
-    Automaton.States := ['Q0', 'Q1'];
-    Automaton.InitialState := 'Q0';
-    Automaton.FinalStates := ['Q1'];
+    Automaton.States := ['q0', 'q1'];
+    Automaton.InitialState := 'q0';
+    Automaton.FinalStates := ['q1'];
 
     CheckFalse(FValidator.Validate(Automaton));
   finally

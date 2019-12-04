@@ -3,23 +3,26 @@
 interface
 
 uses
-  FMX.ActnList, FMX.Controls, FMX.Controls.Presentation, FMX.Edit, FMX.Forms, FMX.Grid, FMX.Layouts,
-  FMX.ListBox, FMX.ScrollBox, FMX.StdCtrls, FMX.TabControl, FMX.Types, Helper.Edit,
-  Helper.StringGrid, Impl.DeterministicFiniteAutomaton, Impl.Dialogs, Impl.Transition,
-  Impl.Transitions, Impl.Types, System.Actions, System.Classes, System.StrUtils, System.SysUtils,
-  System.Rtti, FMX.Grid.Style;
+  FMX.ActnList, FMX.Controls, FMX.Controls.Presentation, FMX.Edit, FMX.Forms, FMX.Grid, FMX.Grid.Style,
+  FMX.Layouts, FMX.ListBox, FMX.ScrollBox, FMX.StdCtrls, FMX.TabControl, FMX.Types, Helper.Edit,
+  Helper.StringGrid, Impl.DeterministicFiniteAutomaton, Impl.Dialogs, Impl.Transition, Impl.Transitions,
+  Impl.Types, System.Actions, System.Classes, System.Rtti, System.SysUtils;
 
 type
   TMain = class sealed(TForm)
     ActionCheck: TAction;
     ActionClear: TAction;
     ActionList: TActionList;
+    ButtonCheck: TButton;
     ButtonClear: TButton;
+    ColumnInput: TStringColumn;
+    ColumnResult: TStringColumn;
     EditFinalStates: TEdit;
     EditInitialState: TEdit;
     EditStates: TEdit;
     EditSymbols: TEdit;
     GridInput: TStringGrid;
+    GridOutput: TStringGrid;
     LabelFinalStates: TLabel;
     LabelInitialState: TLabel;
     LabelStates: TLabel;
@@ -29,18 +32,14 @@ type
     TabControlView: TTabControl;
     TabItemInput: TTabItem;
     TabItemOutput: TTabItem;
-    GridOutput: TStringGrid;
-    ButtonCheck: TButton;
-    ColumnInput: TStringColumn;
-    ColumnResult: TStringColumn;
-    procedure GridInputSelectCell(Sender: TObject; const ACol, ARow: Integer; var CanSelect: Boolean);
     procedure ActionCheckExecute(Sender: TObject);
     procedure ActionClearExecute(Sender: TObject);
-    procedure FormShow(Sender: TObject);
-    procedure EditSymbolsChange(Sender: TObject);
     procedure EditStatesChange(Sender: TObject);
-    procedure TabControlViewChange(Sender: TObject);
+    procedure EditSymbolsChange(Sender: TObject);
     procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char; Shift: TShiftState);
+    procedure FormShow(Sender: TObject);
+    procedure GridInputSelectCell(Sender: TObject; const ACol, ARow: Integer; var CanSelect: Boolean);
+    procedure TabControlViewChange(Sender: TObject);
   strict private
     FAutomaton: TDeterministicFiniteAutomaton;
     function GetFinalStates: TArray<TState>;
@@ -112,6 +111,7 @@ begin
   EditStates.Clear;
   EditInitialState.Clear;
   EditFinalStates.Clear;
+  GridInput.Clear(True);
   GridOutput.Clear;
 end;
 
@@ -145,11 +145,8 @@ end;
 
 procedure TMain.FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char; Shift: TShiftState);
 begin
-  if GridInput.IsFocused then
-    GridInput.Notify(Key, Shift);
-
   if GridOutput.IsFocused then
-    GridOutput.Notify(Key, Shift);
+    GridOutput.Notify(Key);
 end;
 
 procedure TMain.FormShow(Sender: TObject);

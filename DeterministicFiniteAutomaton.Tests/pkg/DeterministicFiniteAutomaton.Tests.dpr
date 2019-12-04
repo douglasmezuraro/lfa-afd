@@ -6,16 +6,16 @@ program DeterministicFiniteAutomaton.Tests;
 
 uses
   DUnitTestRunner,
-  Impl.Validator.Test in '..\src\Impl\Impl.Validator.Test.pas',
+  Test.Validator in '..\src\Test\Test.Validator.pas',
   Impl.Transitions in '..\..\DeterministicFiniteAutomaton\src\Impl\Impl.Transitions.pas',
   Impl.Types in '..\..\DeterministicFiniteAutomaton\src\Impl\Impl.Types.pas',
   Impl.List in '..\..\DeterministicFiniteAutomaton\src\Impl\Impl.List.pas',
-  Impl.List.Test in '..\src\Impl\Impl.List.Test.pas',
+  Test.List in '..\src\Test\Test.List.pas',
   Helper.TestFramework in '..\src\Helper\Helper.TestFramework.pas',
   Impl.Transition in '..\..\DeterministicFiniteAutomaton\src\Impl\Impl.Transition.pas',
-  Impl.Transitions.Test in '..\src\Impl\Impl.Transitions.Test.pas',
-  Impl.Exam.Test in '..\src\Impl\Impl.Exam.Test.pas',
-  Impl.DeterministicFiniteAutomaton.Test in '..\src\Impl\Impl.DeterministicFiniteAutomaton.Test.pas',
+  Test.Transitions in '..\src\Test\Test.Transitions.pas',
+  Test.Exam in '..\src\Test\Test.Exam.pas',
+  Test.DeterministicFiniteAutomaton in '..\src\Test\Test.DeterministicFiniteAutomaton.pas',
   Impl.DeterministicFiniteAutomaton in '..\..\DeterministicFiniteAutomaton\src\Impl\Impl.DeterministicFiniteAutomaton.pas',
   Impl.Validator in '..\..\DeterministicFiniteAutomaton\src\Impl\Impl.Validator.pas';
 

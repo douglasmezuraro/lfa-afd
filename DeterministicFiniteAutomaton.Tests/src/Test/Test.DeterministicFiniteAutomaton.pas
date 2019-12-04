@@ -1,4 +1,4 @@
-unit Impl.DeterministicFiniteAutomaton.Test;
+unit Test.DeterministicFiniteAutomaton;
 
 interface
 
@@ -26,22 +26,22 @@ procedure TAFDTest.SetUp;
 begin
   FAutomaton := TDeterministicFiniteAutomaton.Create;
   FAutomaton.Symbols := ['a', 'b', 'c'];
-  FAutomaton.States := ['Q0', 'Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'Q7', 'Q8'];
-  FAutomaton.FinalStates := ['Q6', 'Q8'];
-  FAutomaton.InitialState := 'Q0';
+  FAutomaton.States := ['q0', 'q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8'];
+  FAutomaton.FinalStates := ['q6', 'q8'];
+  FAutomaton.InitialState := 'q0';
 
-  FAutomaton.Transitions.Add(TTransition.Create('Q0', 'a', 'Q1'));
-  FAutomaton.Transitions.Add(TTransition.Create('Q1', 'a', 'Q1'));
-  FAutomaton.Transitions.Add(TTransition.Create('Q1', 'c', 'Q2'));
-  FAutomaton.Transitions.Add(TTransition.Create('Q2', 'a', 'Q3'));
-  FAutomaton.Transitions.Add(TTransition.Create('Q2', 'b', 'Q4'));
-  FAutomaton.Transitions.Add(TTransition.Create('Q2', 'c', 'Q2'));
-  FAutomaton.Transitions.Add(TTransition.Create('Q3', 'b', 'Q5'));
-  FAutomaton.Transitions.Add(TTransition.Create('Q4', 'a', 'Q5'));
-  FAutomaton.Transitions.Add(TTransition.Create('Q5', 'c', 'Q6'));
-  FAutomaton.Transitions.Add(TTransition.Create('Q6', 'a', 'Q7'));
-  FAutomaton.Transitions.Add(TTransition.Create('Q7', 'a', 'Q8'));
-  FAutomaton.Transitions.Add(TTransition.Create('Q8', 'a', 'Q7'));
+  FAutomaton.Transitions.Add(TTransition.Create('q0', 'a', 'q1'));
+  FAutomaton.Transitions.Add(TTransition.Create('q1', 'a', 'q1'));
+  FAutomaton.Transitions.Add(TTransition.Create('q1', 'c', 'q2'));
+  FAutomaton.Transitions.Add(TTransition.Create('q2', 'a', 'q3'));
+  FAutomaton.Transitions.Add(TTransition.Create('q2', 'b', 'q4'));
+  FAutomaton.Transitions.Add(TTransition.Create('q2', 'c', 'q2'));
+  FAutomaton.Transitions.Add(TTransition.Create('q3', 'b', 'q5'));
+  FAutomaton.Transitions.Add(TTransition.Create('q4', 'a', 'q5'));
+  FAutomaton.Transitions.Add(TTransition.Create('q5', 'c', 'q6'));
+  FAutomaton.Transitions.Add(TTransition.Create('q6', 'a', 'q7'));
+  FAutomaton.Transitions.Add(TTransition.Create('q7', 'a', 'q8'));
+  FAutomaton.Transitions.Add(TTransition.Create('q8', 'a', 'q7'));
 end;
 
 procedure TAFDTest.TearDown;

@@ -3,7 +3,7 @@ unit Helper.StringGrid;
 interface
 
 uses
-  FMX.Grid, System.Classes, System.UITypes, System.SysUtils;
+  FMX.Grid, System.UITypes, System.SysUtils;
 
 type
   TStringGridHelper = class Helper for TStringGrid
@@ -12,27 +12,28 @@ type
     FirstColumn: Byte = 0;
   private
     function Eof: Boolean;
-    procedure DefineRowCount(const Rows: Byte);
-    procedure DefineColumnCount(const Columns: Byte);
     function GetValue(const Column: TColumn): string;
-    procedure SetValue(const Column: TColumn; const Value: string);
+    procedure DefineColumnCount(const Columns: Byte);
+    procedure DefineRowCount(const Rows: Byte);
     procedure Delete;
     procedure Insert;
+    procedure SetValue(const Column: TColumn; const Value: string);
   public
     function IsEmpty: Boolean;
-    procedure Clear;
+    procedure Clear(const RemoveColumns: Boolean = False);
     procedure DefineSize(const Rows, Columns: Byte);
     procedure ForEach(const Method: TProc);
-    procedure Notify(const Key: Word; const Shift: TShiftState);
+    procedure Notify(const Key: Word);
     property Value[Const Column: TColumn]: string read GetValue write SetValue;
   end;
 
 implementation
 
-procedure TStringGridHelper.Clear;
+procedure TStringGridHelper.Clear(const RemoveColumns: Boolean);
 begin
   RowCount := 0;
-  ClearColumns;
+  if RemoveColumns then
+    ClearColumns;
 end;
 
 procedure TStringGridHelper.DefineColumnCount(const Columns: Byte);
@@ -91,6 +92,9 @@ end;
 
 function TStringGridHelper.GetValue(const Column: TColumn): string;
 begin
+  if not ContainsObject(Column) then
+    Exit(string.Empty);
+
   Result := Cells[Column.Index, Row];
 end;
 
@@ -106,20 +110,18 @@ begin
   Result := RowCount = 0;
 end;
 
-procedure TStringGridHelper.Notify(const Key: Word; const Shift: TShiftState);
+procedure TStringGridHelper.Notify(const Key: Word);
 begin
-  if not (ssCtrl in Shift) then
-    Exit;
-
   case Key of
-    vkInsert, vkDown: Insert;
+    vkInsert: Insert;
     vkDelete: Delete;
   end;
 end;
 
 procedure TStringGridHelper.SetValue(const Column: TColumn; const Value: string);
 begin
-  Cells[Column.Index, Row] := Value;
+  if ContainsObject(Column) then
+    Cells[Column.Index, Row] := Value;
 end;
 
 end.
