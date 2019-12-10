@@ -7,7 +7,7 @@ uses
   System.SysUtils, TestFramework;
 
 type
-  TAFDTest = class(TTestCase)
+  TAFDTest = class sealed(TTestCase)
   strict private
     FAutomaton: TDeterministicFiniteAutomaton;
   public

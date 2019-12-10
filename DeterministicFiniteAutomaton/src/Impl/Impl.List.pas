@@ -39,7 +39,7 @@ end;
 
 procedure TList.Clear;
 begin
-  SetLength(FList, 0);
+  FList := nil;
 end;
 
 function TList.Contains(const Item: string): Boolean;
@@ -70,7 +70,7 @@ begin
     Count := 0;
     for B in FList do
     begin
-      if not A.Equals(B) then
+      if A <> B then
         Continue;
 
       Inc(Count);
@@ -88,7 +88,7 @@ end;
 
 function TList.IsEmpty: Boolean;
 begin
-  Result := Count = 0;
+  Result := FList = nil;
 end;
 
 function TList.ToArray: TArray<string>;

@@ -6,7 +6,7 @@ uses
   Impl.Transition, Impl.Transitions, TestFramework;
 
 type
-  TTransitionsTest = class(TTestCase)
+  TTransitionsTest = class sealed(TTestCase)
   strict private
     FTransitions: TTransitions;
   public

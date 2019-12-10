@@ -7,7 +7,7 @@ uses
   System.SysUtils, TestFramework;
 
 type
-  TAFDValidationsTest = class(TTestCase)
+  TAFDValidationsTest = class sealed(TTestCase)
   strict private
     FValidator: TValidator;
   public

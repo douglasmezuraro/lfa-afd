@@ -49,7 +49,7 @@ begin
   for Transition in FTransitions do
     Transition.Free;
 
-  SetLength(FTransitions, 0);
+  FTransitions := nil;
 end;
 
 function TTransitions.Count: Integer;
@@ -81,7 +81,7 @@ end;
 
 function TTransitions.IsEmpty: Boolean;
 begin
-  Result := Length(FTransitions) = 0;
+  Result := FTransitions = nil;
 end;
 
 end.

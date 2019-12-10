@@ -6,7 +6,7 @@ uses
   Impl.DeterministicFiniteAutomaton, Impl.Transition, Impl.Types, TestFramework;
 
 type
-  TExamTest = class(TTestCase)
+  TExamTest = class sealed(TTestCase)
   published
     procedure ExerciseOne;
   end;

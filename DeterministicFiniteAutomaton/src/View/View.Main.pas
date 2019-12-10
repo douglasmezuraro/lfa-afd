@@ -48,7 +48,7 @@ type
     function GetSymbols: TArray<TSymbol>;
     function GetTransitions: TTransitions;
   private
-    procedure DrawMatrix;
+    procedure DrawGrid;
     procedure Check;
     procedure Clear;
     procedure Setup;
@@ -115,13 +115,13 @@ begin
   GridOutput.Clear;
 end;
 
-procedure TMain.DrawMatrix;
+procedure TMain.DrawGrid;
 var
   Row, Column: Byte;
 begin
   GridInput.Clear;
 
-  if (Length(States) = 0) or (Length(Symbols) = 0) then
+  if (States = nil) or (Symbols = nil) then
     Exit;
 
   GridInput.DefineSize(Length(States) + 1, Length(Symbols) + 1);
@@ -135,12 +135,12 @@ end;
 
 procedure TMain.EditStatesChange(Sender: TObject);
 begin
-  DrawMatrix;
+  DrawGrid;
 end;
 
 procedure TMain.EditSymbolsChange(Sender: TObject);
 begin
-  DrawMatrix;
+  DrawGrid;
 end;
 
 procedure TMain.FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char; Shift: TShiftState);

@@ -6,7 +6,7 @@ uses
  Impl.List, System.SysUtils, TestFramework;
 
 type
-  TListTest = class(TTestCase)
+  TListTest = class sealed(TTestCase)
   strict private
     FList: TList;
   public
