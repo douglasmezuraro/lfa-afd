@@ -191,6 +191,8 @@ object Main: TMain
       StyleLookup = ''
       TabOrder = 0
       Text = 'Output'
+      ExplicitSize.cx = 58.000000000000000000
+      ExplicitSize.cy = 26.000000000000000000
       object GridOutput: TStringGrid
         Align = Client
         CanFocus = True

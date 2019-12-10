@@ -92,9 +92,6 @@ end;
 
 function TStringGridHelper.GetValue(const Column: TColumn): string;
 begin
-  if not ContainsObject(Column) then
-    Exit(string.Empty);
-
   Result := Cells[Column.Index, Row];
 end;
 
@@ -120,8 +117,7 @@ end;
 
 procedure TStringGridHelper.SetValue(const Column: TColumn; const Value: string);
 begin
-  if ContainsObject(Column) then
-    Cells[Column.Index, Row] := Value;
+  Cells[Column.Index, Row] := Value;
 end;
 
 end.
