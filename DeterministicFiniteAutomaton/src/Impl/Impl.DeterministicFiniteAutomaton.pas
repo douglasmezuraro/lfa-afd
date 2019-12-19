@@ -13,8 +13,6 @@ type
     FInitialState: TState;
     FFinalStates: TArray<TState>;
     FTransitions: TTransitions;
-  private
-    function InternalAccept(const Word: TWord): Boolean;
   public
     constructor Create;
     destructor Destroy; override;
@@ -30,9 +28,6 @@ type
 
 implementation
 
-uses
-  Impl.Validator;
-
 constructor TDeterministicFiniteAutomaton.Create;
 begin
   FTransitions := TTransitions.Create;
@@ -45,30 +40,6 @@ begin
 end;
 
 function TDeterministicFiniteAutomaton.Accept(const Word: TWord): Boolean;
-var
-  Validator: TValidator;
-begin
-  Validator := TValidator.Create;
-  try
-    if not Validator.Validate(Self) then
-      raise EArgumentException.Create(Validator.Error);
-
-    Result := InternalAccept(Word);
-  finally
-    Validator.Free;
-  end;
-end;
-
-procedure TDeterministicFiniteAutomaton.Clear;
-begin
-  FTransitions.Clear;
-  SetLength(FSymbols, 0);
-  SetLength(FStates, 0);
-  SetLength(FFinalStates, 0);
-  FInitialState := string.Empty;
-end;
-
-function TDeterministicFiniteAutomaton.InternalAccept(const Word: TWord): Boolean;
 var
   State: TState;
   Symbol: TSymbol;
@@ -87,6 +58,15 @@ begin
   end;
 
   Result := MatchStr(State, FFinalStates);
+end;
+
+procedure TDeterministicFiniteAutomaton.Clear;
+begin
+  FTransitions.Clear;
+  FSymbols := nil;
+  FStates := nil;
+  FFinalStates := nil;
+  FInitialState := string.Empty;
 end;
 
 end.

@@ -6,7 +6,7 @@ uses
   FMX.ActnList, FMX.Controls, FMX.Controls.Presentation, FMX.Edit, FMX.Forms, FMX.Grid, FMX.Grid.Style,
   FMX.Layouts, FMX.ListBox, FMX.ScrollBox, FMX.StdCtrls, FMX.TabControl, FMX.Types, Helper.Edit,
   Helper.StringGrid, Impl.DeterministicFiniteAutomaton, Impl.Dialogs, Impl.Transition, Impl.Transitions,
-  Impl.Types, System.Actions, System.Classes, System.Rtti, System.SysUtils;
+  Impl.Types, Impl.Validator, System.Actions, System.Classes, System.Rtti, System.SysUtils;
 
 type
   TMain = class sealed(TForm)
@@ -48,6 +48,7 @@ type
     function GetSymbols: TArray<TSymbol>;
     function GetTransitions: TTransitions;
   private
+    function Validate: TValidationResult;
     procedure DrawGrid;
     procedure Check;
     procedure Clear;
@@ -92,16 +93,18 @@ end;
 procedure TMain.Check;
 begin
   Setup;
-  try
-    GridOutput.ForEach(
-      procedure
-      begin
-        GridOutput.Value[ColumnResult] := Result[FAutomaton.Accept(GridOutput.Value[ColumnInput])];
-      end);
-  except
-    on Exception: EArgumentException do
-      TDialogs.Warning(Exception.Message);
+
+  if not Validate.Key then
+  begin
+    TDialogs.Warning(Validate.Value);
+    Exit;
   end;
+
+  GridOutput.ForEach(
+    procedure
+    begin
+      GridOutput.Value[ColumnResult] := Result[FAutomaton.Accept(GridOutput.Value[ColumnInput])];
+    end);
 end;
 
 procedure TMain.Clear;
@@ -219,6 +222,18 @@ end;
 procedure TMain.TabControlViewChange(Sender: TObject);
 begin
   ButtonCheck.Visible := (Sender as TTabControl).ActiveTab <> TabItemInput;
+end;
+
+function TMain.Validate: TValidationResult;
+var
+  Validator: TValidator;
+begin
+  Validator := TValidator.Create;
+  try
+    Result := Validator.Validate(FAutomaton);
+  finally
+    Validator.Free;
+  end;
 end;
 
 end.

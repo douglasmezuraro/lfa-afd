@@ -3,9 +3,14 @@ unit Impl.Validator;
 interface
 
 uses
-  Impl.DeterministicFiniteAutomaton, Impl.List, Impl.Transition, Impl.Transitions, Impl.Types, System.SysUtils;
+  Impl.DeterministicFiniteAutomaton, Impl.List, Impl.Transition, Impl.Transitions, Impl.Types, System.SysUtils,
+  System.Generics.Collections;
 
 type
+  TResult = Boolean;
+  TMessage = string;
+  TValidationResult = TPair<TResult, TMessage>;
+
   TValidator = class sealed
   strict private
     FSymbols: TList;
@@ -24,8 +29,8 @@ type
   public
     constructor Create;
     destructor Destroy; override;
-    function Validate(const Automaton: TDeterministicFiniteAutomaton): Boolean;
-    property Error: string read FError;
+  public
+    function Validate(const Automaton: TDeterministicFiniteAutomaton): TValidationResult;
   end;
 
 implementation
@@ -56,23 +61,26 @@ begin
   FTransitions := Automaton.Transitions;
 end;
 
-function TValidator.Validate(const Automaton: TDeterministicFiniteAutomaton): Boolean;
+function TValidator.Validate(const Automaton: TDeterministicFiniteAutomaton): TValidationResult;
 begin
   Setup(Automaton);
 
   if not ValidateSymbols then
-    Exit(False);
+    Exit(TValidationResult.Create(False, FError));
 
   if not ValidateStates then
-    Exit(False);
+    Exit(TValidationResult.Create(False, FError));
 
   if not ValidateInitialState then
-    Exit(False);
+    Exit(TValidationResult.Create(False, FError));
 
   if not ValidateFinalStates then
-    Exit(False);
+    Exit(TValidationResult.Create(False, FError));
 
-  Result := ValidateTransitions;
+  if not ValidateTransitions then
+    Exit(TValidationResult.Create(False, FError));
+
+  Result := TValidationResult.Create(True, TMessage.Empty);
 end;
 
 function TValidator.ValidateFinalStates: Boolean;
@@ -81,13 +89,22 @@ var
 begin
   Result := False;
 
-  if FStates.IsEmpty then
+  if FFinalStates.IsEmpty then
   begin
     FError := 'The final states is not defined.';
     Exit;
   end;
 
-  if FStates.HasDuplicated(State) then
+  for State in FFinalStates.ToArray do
+  begin
+    if not FStates.Contains(State) then
+    begin
+      FError := Format('The final state %s is not in states list %s.', [State.QuotedString, FStates.ToString]);
+      Exit;
+    end;
+  end;
+
+  if FFinalStates.HasDuplicated(State) then
   begin
     FError := Format('The final state %s is duplicated.', [State.QuotedString]);
     Exit;
