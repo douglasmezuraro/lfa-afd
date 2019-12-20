@@ -84,7 +84,7 @@ var
 begin
   Result := False;
 
-  if FFinalStates.IsEmpty then
+  if (not FStates.IsEmpty) and (FFinalStates.IsEmpty) then
   begin
     FMessage := 'The final states is not defined.';
     Exit;
@@ -112,13 +112,13 @@ function TValidator.ValidateInitialState: Boolean;
 begin
   Result := False;
 
-  if FInitialState.IsEmpty then
+  if (not FStates.IsEmpty) and (FInitialState.IsEmpty) then
   begin
     FMessage := 'The initial state is not defined.';
     Exit;
   end;
 
-  if not FStates.Contains(FInitialState) then
+  if (not FStates.IsEmpty) and (not FStates.Contains(FInitialState)) then
   begin
     FMessage := Format('The state %s is not in states list %s.', [FInitialState.QuotedString, FStates.ToString]);
     Exit;
@@ -132,12 +132,6 @@ var
   State: TState;
 begin
   Result := False;
-
-  if FStates.IsEmpty then
-  begin
-    FMessage := 'The states is not defined.';
-    Exit;
-  end;
 
   if FStates.HasDuplicated(State) then
   begin
@@ -154,12 +148,6 @@ var
 begin
   Result := False;
 
-  if FSymbols.IsEmpty then
-  begin
-    FMessage := 'The symbols is not defined.';
-    Exit;
-  end;
-
   if FSymbols.HasDuplicated(Symbol) then
   begin
     FMessage := Format('The symbol %s is duplicated.', [Symbol.QuotedString]);
@@ -175,7 +163,7 @@ var
 begin
   Result := False;
 
-  if FTransitions.IsEmpty then
+  if (not FSymbols.IsEmpty) and (not FStates.IsEmpty) and (FTransitions.IsEmpty) then
   begin
     FMessage := 'The transitions has been not defined.';
     Exit;
