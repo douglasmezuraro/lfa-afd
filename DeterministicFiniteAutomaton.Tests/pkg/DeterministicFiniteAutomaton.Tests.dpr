@@ -17,7 +17,8 @@ uses
   Test.Exam in '..\src\Test\Test.Exam.pas',
   Test.DeterministicFiniteAutomaton in '..\src\Test\Test.DeterministicFiniteAutomaton.pas',
   Impl.DeterministicFiniteAutomaton in '..\..\DeterministicFiniteAutomaton\src\Impl\Impl.DeterministicFiniteAutomaton.pas',
-  Impl.Validator in '..\..\DeterministicFiniteAutomaton\src\Impl\Impl.Validator.pas';
+  Impl.Validator in '..\..\DeterministicFiniteAutomaton\src\Impl\Impl.Validator.pas',
+  Test.Exercises in '..\src\Test\Test.Exercises.pas';
 
 {$R *.RES}
 
