@@ -14,19 +14,24 @@ type
     procedure TearDown; override;
   published
     /// <summary>
-    ///   L1 = {}
+    ///   L1 = {Wε{}}
     /// </summary>
     procedure ExerciseOne;
 
     /// <summary>
-    ///   L2 = {ʎ}
+    ///   L2 = {Wε{ʎ}}
     /// </summary>
     procedure ExerciseTwo;
 
     /// <summary>
-    ///   L3 = {0}
+    ///   L3 = {Wε{0}}
     /// </summary>
     procedure ExerciseTree;
+
+    /// <summary>
+    ///   L3 = {Wε{ʎ,0}}
+    /// </summary>
+    procedure ExerciseFour;
 
     /// <summary>
     ///   L5 = {a^n/n>0}
@@ -69,7 +74,7 @@ end;
 procedure TExercisesTest.ExerciseOne;
 const
   MustAccept: TArray<TWord> = [];
-  MustReject: set of AnsiChar = ['a'..'z', '0'..'9'];
+  MustReject: set of AnsiChar = ['a'..'z', 'A'..'Z', '0'..'9'];
 var
   CWord: AnsiChar;
   SWord: TWord;
@@ -89,7 +94,7 @@ end;
 procedure TExercisesTest.ExerciseTwo;
 const
   MustAccept: TArray<TWord> = [''];
-  MustReject: set of AnsiChar = ['a'..'z', '0'..'9'];
+  MustReject: set of AnsiChar = ['a'..'z', 'A'..'Z', '0'..'9'];
 var
   CWord: AnsiChar;
   SWord: TWord;
@@ -109,7 +114,7 @@ end;
 procedure TExercisesTest.ExerciseTree;
 const
   MustAccept: TArray<TWord> = ['0'];
-  MustReject: set of AnsiChar = ['a'..'z', '1'..'9'];
+  MustReject: set of AnsiChar = ['a'..'z', 'A'..'Z', '1'..'9'];
 var
   CWord: AnsiChar;
   SWord: TWord;
@@ -118,6 +123,28 @@ begin
   FAutomaton.States := ['q0', 'q1'];
   FAutomaton.InitialState := 'q0';
   FAutomaton.FinalStates := ['q1'];
+
+  FAutomaton.Transitions.Add(TTransition.Create('q0', '0', 'q1'));
+
+  for SWord in MustAccept do
+    CheckTrue(FAutomaton.Accept(SWord));
+
+  for CWord in MustReject do
+    CheckFalse(FAutomaton.Accept(TWord(CWord)));
+end;
+
+procedure TExercisesTest.ExerciseFour;
+const
+  MustAccept: TArray<TWord> = ['', '0'];
+  MustReject: set of AnsiChar = ['a'..'z', 'A'..'Z', '1'..'9'];
+var
+  CWord: AnsiChar;
+  SWord: TWord;
+begin
+  FAutomaton.Symbols := ['0'];
+  FAutomaton.States := ['q0'];
+  FAutomaton.InitialState := 'q0';
+  FAutomaton.FinalStates := ['q0', 'q1'];
 
   FAutomaton.Transitions.Add(TTransition.Create('q0', '0', 'q1'));
 
