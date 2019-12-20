@@ -19,6 +19,11 @@ type
     procedure ExerciseOne;
 
     /// <summary>
+    ///   L2 = {ʎ}
+    /// </summary>
+    procedure ExerciseTwo;
+
+    /// <summary>
     ///   L5 = {a^n/n>0}
     /// </summary>
     procedure ExerciseFive;
@@ -59,7 +64,7 @@ end;
 procedure TExercisesTest.ExerciseOne;
 const
   MustAccept: TArray<TWord> = [];
-  MustReject: TArray<TWord> = ['a', 'b', 'c'];
+  MustReject = ['a'..'z', '0'..'9'];
 var
   Word: TWord;
 begin
@@ -67,6 +72,25 @@ begin
   FAutomaton.States := [];
   FAutomaton.InitialState := '';
   FAutomaton.FinalStates := [];
+
+  for Word in MustAccept do
+    CheckTrue(FAutomaton.Accept(Word));
+
+  for Word in MustReject do
+    CheckFalse(FAutomaton.Accept(Word));
+end;
+
+procedure TExercisesTest.ExerciseTwo;
+const
+  MustAccept: TArray<TWord> = [''];
+  MustReject = ['a'..'z', '0'..'9'];
+var
+  Word: TWord;
+begin
+  FAutomaton.Symbols := [];
+  FAutomaton.States := ['q0'];
+  FAutomaton.InitialState := 'q0';
+  FAutomaton.FinalStates := ['q0'];
 
   for Word in MustAccept do
     CheckTrue(FAutomaton.Accept(Word));
