@@ -24,6 +24,11 @@ type
     procedure ExerciseTwo;
 
     /// <summary>
+    ///   L3 = {0}
+    /// </summary>
+    procedure ExerciseTree;
+
+    /// <summary>
     ///   L5 = {a^n/n>0}
     /// </summary>
     procedure ExerciseFive;
@@ -64,39 +69,63 @@ end;
 procedure TExercisesTest.ExerciseOne;
 const
   MustAccept: TArray<TWord> = [];
-  MustReject = ['a'..'z', '0'..'9'];
+  MustReject: set of AnsiChar = ['a'..'z', '0'..'9'];
 var
-  Word: TWord;
+  CWord: AnsiChar;
+  SWord: TWord;
 begin
   FAutomaton.Symbols := [];
   FAutomaton.States := [];
   FAutomaton.InitialState := '';
   FAutomaton.FinalStates := [];
 
-  for Word in MustAccept do
-    CheckTrue(FAutomaton.Accept(Word));
+  for SWord in MustAccept do
+    CheckTrue(FAutomaton.Accept(SWord));
 
-  for Word in MustReject do
-    CheckFalse(FAutomaton.Accept(Word));
+  for CWord in MustReject do
+    CheckFalse(FAutomaton.Accept(TWord(CWord)));
 end;
 
 procedure TExercisesTest.ExerciseTwo;
 const
   MustAccept: TArray<TWord> = [''];
-  MustReject = ['a'..'z', '0'..'9'];
+  MustReject: set of AnsiChar = ['a'..'z', '0'..'9'];
 var
-  Word: TWord;
+  CWord: AnsiChar;
+  SWord: TWord;
 begin
   FAutomaton.Symbols := [];
   FAutomaton.States := ['q0'];
   FAutomaton.InitialState := 'q0';
   FAutomaton.FinalStates := ['q0'];
 
-  for Word in MustAccept do
-    CheckTrue(FAutomaton.Accept(Word));
+  for SWord in MustAccept do
+    CheckTrue(FAutomaton.Accept(SWord));
 
-  for Word in MustReject do
-    CheckFalse(FAutomaton.Accept(Word));
+  for CWord in MustReject do
+    CheckFalse(FAutomaton.Accept(TWord(CWord)));
+end;
+
+procedure TExercisesTest.ExerciseTree;
+const
+  MustAccept: TArray<TWord> = ['0'];
+  MustReject: set of AnsiChar = ['a'..'z', '1'..'9'];
+var
+  CWord: AnsiChar;
+  SWord: TWord;
+begin
+  FAutomaton.Symbols := ['0'];
+  FAutomaton.States := ['q0', 'q1'];
+  FAutomaton.InitialState := 'q0';
+  FAutomaton.FinalStates := ['q1'];
+
+  FAutomaton.Transitions.Add(TTransition.Create('q0', '0', 'q1'));
+
+  for SWord in MustAccept do
+    CheckTrue(FAutomaton.Accept(SWord));
+
+  for CWord in MustReject do
+    CheckFalse(FAutomaton.Accept(TWord(CWord)));
 end;
 
 procedure TExercisesTest.ExerciseFive;
