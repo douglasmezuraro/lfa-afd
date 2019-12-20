@@ -27,6 +27,11 @@ type
     ///   L7 = {a(b^n)a/n>=0,n é par}
     /// </summary>
     procedure ExerciseSeven;
+
+    /// <summary>
+    ///   L8 = {a((bc)^n)/n>0}
+    /// </summary>
+    procedure ExerciseEight;
   end;
 
 implementation
@@ -101,6 +106,31 @@ begin
   FAutomaton.Transitions.Add(TTransition.Create('q1', 'a', 'q3'));
   FAutomaton.Transitions.Add(TTransition.Create('q1', 'b', 'q2'));
   FAutomaton.Transitions.Add(TTransition.Create('q2', 'b', 'q1'));
+
+  for Word in MustAccept do
+    CheckTrue(FAutomaton.Accept(Word));
+
+  for Word in MustReject do
+    CheckFalse(FAutomaton.Accept(Word));
+end;
+
+procedure TExercisesTest.ExerciseEight;
+const
+  MustAccept: TArray<TWord> = ['abca', 'abcbca', 'abcbcbca', 'abcbcbcbca', 'abcbcbcbcbca'];
+  MustReject: TArray<TWord> = ['', 'ʎ', 'a', 'b', 'c', 'aa', 'ab', 'ac', 'bc', 'aba', 'aca'];
+var
+  Word: TWord;
+begin
+  FAutomaton.Symbols := ['a', 'b', 'c'];
+  FAutomaton.States := ['q0', 'q1', 'q2', 'q3', 'q4'];
+  FAutomaton.InitialState := 'q0';
+  FAutomaton.FinalStates := ['q4'];
+
+  FAutomaton.Transitions.Add(TTransition.Create('q0', 'a', 'q1'));
+  FAutomaton.Transitions.Add(TTransition.Create('q1', 'b', 'q2'));
+  FAutomaton.Transitions.Add(TTransition.Create('q2', 'c', 'q3'));
+  FAutomaton.Transitions.Add(TTransition.Create('q3', 'a', 'q4'));
+  FAutomaton.Transitions.Add(TTransition.Create('q3', 'b', 'q2'));
 
   for Word in MustAccept do
     CheckTrue(FAutomaton.Accept(Word));
