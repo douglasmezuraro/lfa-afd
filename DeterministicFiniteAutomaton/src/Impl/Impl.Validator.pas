@@ -3,14 +3,9 @@ unit Impl.Validator;
 interface
 
 uses
-  Impl.DeterministicFiniteAutomaton, Impl.List, Impl.Transition, Impl.Transitions, Impl.Types, System.SysUtils,
-  System.Generics.Collections;
+  Impl.DeterministicFiniteAutomaton, Impl.List, Impl.Transition, Impl.Transitions, Impl.Types, System.SysUtils;
 
 type
-  TResult = Boolean;
-  TMessage = string;
-  TValidationResult = TPair<TResult, TMessage>;
-
   TValidator = class sealed
   strict private
     FSymbols: TList;
@@ -18,7 +13,7 @@ type
     FInitialState: TState;
     FFinalStates: TList;
     FTransitions: TTransitions;
-    FError: string;
+    FMessage: TMessage;
   private
     function ValidateInitialState: Boolean;
     function ValidateSymbols: Boolean;
@@ -40,7 +35,7 @@ begin
   FSymbols := TList.Create;
   FStates := TList.Create;
   FFinalStates := TList.Create;
-  FError := string.Empty;
+  FMessage := TMessage.Empty;
   FInitialState := TState.Empty;
 end;
 
@@ -66,19 +61,19 @@ begin
   Setup(Automaton);
 
   if not ValidateSymbols then
-    Exit(TValidationResult.Create(False, FError));
+    Exit(TValidationResult.Create(False, FMessage));
 
   if not ValidateStates then
-    Exit(TValidationResult.Create(False, FError));
+    Exit(TValidationResult.Create(False, FMessage));
 
   if not ValidateInitialState then
-    Exit(TValidationResult.Create(False, FError));
+    Exit(TValidationResult.Create(False, FMessage));
 
   if not ValidateFinalStates then
-    Exit(TValidationResult.Create(False, FError));
+    Exit(TValidationResult.Create(False, FMessage));
 
   if not ValidateTransitions then
-    Exit(TValidationResult.Create(False, FError));
+    Exit(TValidationResult.Create(False, FMessage));
 
   Result := TValidationResult.Create(True, TMessage.Empty);
 end;
@@ -91,7 +86,7 @@ begin
 
   if FFinalStates.IsEmpty then
   begin
-    FError := 'The final states is not defined.';
+    FMessage := 'The final states is not defined.';
     Exit;
   end;
 
@@ -99,14 +94,14 @@ begin
   begin
     if not FStates.Contains(State) then
     begin
-      FError := Format('The final state %s is not in states list %s.', [State.QuotedString, FStates.ToString]);
+      FMessage := Format('The final state %s is not in states list %s.', [State.QuotedString, FStates.ToString]);
       Exit;
     end;
   end;
 
   if FFinalStates.HasDuplicated(State) then
   begin
-    FError := Format('The final state %s is duplicated.', [State.QuotedString]);
+    FMessage := Format('The final state %s is duplicated.', [State.QuotedString]);
     Exit;
   end;
 
@@ -119,13 +114,13 @@ begin
 
   if FInitialState.IsEmpty then
   begin
-    FError := 'The initial state is not defined.';
+    FMessage := 'The initial state is not defined.';
     Exit;
   end;
 
   if not FStates.Contains(FInitialState) then
   begin
-    FError := Format('The state %s is not in states list %s.', [FInitialState.QuotedString, FStates.ToString]);
+    FMessage := Format('The state %s is not in states list %s.', [FInitialState.QuotedString, FStates.ToString]);
     Exit;
   end;
 
@@ -140,13 +135,13 @@ begin
 
   if FStates.IsEmpty then
   begin
-    FError := 'The states is not defined.';
+    FMessage := 'The states is not defined.';
     Exit;
   end;
 
   if FStates.HasDuplicated(State) then
   begin
-    FError := Format('The state %s is duplicated.', [State.QuotedString]);
+    FMessage := Format('The state %s is duplicated.', [State.QuotedString]);
     Exit;
   end;
 
@@ -161,13 +156,13 @@ begin
 
   if FSymbols.IsEmpty then
   begin
-    FError := 'The symbols is not defined.';
+    FMessage := 'The symbols is not defined.';
     Exit;
   end;
 
   if FSymbols.HasDuplicated(Symbol) then
   begin
-    FError := Format('The symbol %s is duplicated.', [Symbol.QuotedString]);
+    FMessage := Format('The symbol %s is duplicated.', [Symbol.QuotedString]);
     Exit;
   end;
 
@@ -182,7 +177,7 @@ begin
 
   if FTransitions.IsEmpty then
   begin
-    FError := 'The transitions has been not defined.';
+    FMessage := 'The transitions has been not defined.';
     Exit;
   end;
 
@@ -190,19 +185,19 @@ begin
   begin
     if not FStates.Contains(Transition.Source) then
     begin
-      FError := Format('The source state %s is not in states list %s.', [Transition.Source.QuotedString, FStates.ToString]);
+      FMessage := Format('The source state %s is not in states list %s.', [Transition.Source.QuotedString, FStates.ToString]);
       Exit;
     end;
 
     if not FSymbols.Contains(Transition.Symbol) then
     begin
-      FError := Format('The symbol %s is not in symbols list %s.', [Transition.Symbol.QuotedString, FSymbols.ToString]);
+      FMessage := Format('The symbol %s is not in symbols list %s.', [Transition.Symbol.QuotedString, FSymbols.ToString]);
       Exit;
     end;
 
     if not FStates.Contains(Transition.Target) then
     begin
-      FError := Format('The target state %s is not in states list %s.', [Transition.Target.QuotedString, FStates.ToString]);
+      FMessage := Format('The target state %s is not in states list %s.', [Transition.Target.QuotedString, FStates.ToString]);
       Exit;
     end;
   end;

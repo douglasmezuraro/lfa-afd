@@ -62,7 +62,7 @@ begin
     Automaton.Transitions.Add(TTransition.Create('q1', 'a', 'q1'));
     Automaton.Transitions.Add(TTransition.Create('q1', 'b', 'q1'));
 
-    CheckTrue(FValidator.Validate(Automaton));
+    CheckTrue(FValidator.Validate(Automaton).Key);
   finally
     Automaton.Free;
   end;
@@ -79,7 +79,7 @@ begin
     Automaton.InitialState := 'q0';
     Automaton.FinalStates := ['q3', 'q3'];
 
-    CheckFalse(FValidator.Validate(Automaton));
+    CheckFalse(FValidator.Validate(Automaton).Key);
   finally
     Automaton.Free;
   end;
@@ -96,7 +96,7 @@ begin
     Automaton.InitialState := TState.Empty;
     Automaton.FinalStates := [];
 
-    CheckFalse(FValidator.Validate(Automaton));
+    CheckFalse(FValidator.Validate(Automaton).Key);
   finally
     Automaton.Free;
   end;
@@ -113,7 +113,7 @@ begin
     Automaton.InitialState := TState.Empty;
     Automaton.FinalStates := [];
 
-    CheckFalse(FValidator.Validate(Automaton));
+    CheckFalse(FValidator.Validate(Automaton).Key);
   finally
     Automaton.Free;
   end;
@@ -130,7 +130,7 @@ begin
     Automaton.InitialState := 'q0';
     Automaton.FinalStates := [];
 
-    CheckFalse(FValidator.Validate(Automaton));
+    CheckFalse(FValidator.Validate(Automaton).Key);
   finally
     Automaton.Free;
   end;
@@ -147,7 +147,7 @@ begin
     Automaton.InitialState := 'q0';
     Automaton.FinalStates := ['q4'];
 
-    CheckFalse(FValidator.Validate(Automaton));
+    CheckFalse(FValidator.Validate(Automaton).Key);
   finally
     Automaton.Free;
   end;
@@ -164,7 +164,7 @@ begin
     Automaton.InitialState := TState.Empty;
     Automaton.FinalStates := [];
 
-    CheckFalse(FValidator.Validate(Automaton));
+    CheckFalse(FValidator.Validate(Automaton).Key);
   finally
     Automaton.Free;
   end;
@@ -181,7 +181,7 @@ begin
     Automaton.InitialState := 'q4';
     Automaton.FinalStates := [];
 
-    CheckFalse(FValidator.Validate(Automaton));
+    CheckFalse(FValidator.Validate(Automaton).Key);
   finally
     Automaton.Free;
   end;
@@ -198,7 +198,7 @@ begin
     Automaton.InitialState := TState.Empty;
     Automaton.FinalStates := [];
 
-    CheckFalse(FValidator.Validate(Automaton));
+    CheckFalse(FValidator.Validate(Automaton).Key);
   finally
     Automaton.Free;
   end;
@@ -215,7 +215,7 @@ begin
     Automaton.InitialState := TState.Empty;
     Automaton.FinalStates := [];
 
-    CheckFalse(FValidator.Validate(Automaton));
+    CheckFalse(FValidator.Validate(Automaton).Key);
   finally
     Automaton.Free;
   end;
@@ -236,7 +236,7 @@ begin
     Automaton.Transitions.Add(TTransition.Create('q1', 'a', 'q1'));
     Automaton.Transitions.Add(TTransition.Create('q1', 'b', 'q1'));
 
-    CheckFalse(FValidator.Validate(Automaton));
+    CheckFalse(FValidator.Validate(Automaton).Key);
   finally
     Automaton.Free;
   end;
@@ -257,7 +257,7 @@ begin
     Automaton.Transitions.Add(TTransition.Create('q1', 'a', 'q1'));
     Automaton.Transitions.Add(TTransition.Create('q1', 'b', 'q1'));
 
-    CheckFalse(FValidator.Validate(Automaton));
+    CheckFalse(FValidator.Validate(Automaton).Key);
   finally
     Automaton.Free;
   end;
@@ -278,7 +278,7 @@ begin
     Automaton.Transitions.Add(TTransition.Create('q1', TSymbol.Empty, 'q1'));
     Automaton.Transitions.Add(TTransition.Create('q1', 'b', 'q1'));
 
-    CheckFalse(FValidator.Validate(Automaton));
+    CheckFalse(FValidator.Validate(Automaton).Key);
   finally
     Automaton.Free;
   end;
@@ -299,7 +299,7 @@ begin
     Automaton.Transitions.Add(TTransition.Create('q1', 'a', 'q1'));
     Automaton.Transitions.Add(TTransition.Create('q1', 'c', 'q1'));
 
-    CheckFalse(FValidator.Validate(Automaton));
+    CheckFalse(FValidator.Validate(Automaton).Key);
   finally
     Automaton.Free;
   end;
@@ -320,7 +320,7 @@ begin
     Automaton.Transitions.Add(TTransition.Create('q1', 'a', 'q1'));
     Automaton.Transitions.Add(TTransition.Create('q1', 'c', 'q1'));
 
-    CheckFalse(FValidator.Validate(Automaton));
+    CheckFalse(FValidator.Validate(Automaton).Key);
   finally
     Automaton.Free;
   end;
@@ -341,7 +341,7 @@ begin
     Automaton.Transitions.Add(TTransition.Create('q1', 'a', 'q4'));
     Automaton.Transitions.Add(TTransition.Create('q1', 'c', 'q1'));
 
-    CheckFalse(FValidator.Validate(Automaton));
+    CheckFalse(FValidator.Validate(Automaton).Key);
   finally
     Automaton.Free;
   end;
@@ -358,7 +358,7 @@ begin
     Automaton.InitialState := 'q0';
     Automaton.FinalStates := ['q1'];
 
-    CheckFalse(FValidator.Validate(Automaton));
+    CheckFalse(FValidator.Validate(Automaton).Key);
   finally
     Automaton.Free;
   end;

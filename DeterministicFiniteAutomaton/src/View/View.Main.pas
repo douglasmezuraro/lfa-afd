@@ -100,11 +100,10 @@ begin
     Exit;
   end;
 
-  GridOutput.ForEach(
-    procedure
-    begin
-      GridOutput.Value[ColumnResult] := Result[FAutomaton.Accept(GridOutput.Value[ColumnInput])];
-    end);
+  GridOutput.ForEach(procedure
+                     begin
+                       GridOutput.Value[ColumnResult] := ResultMessage[FAutomaton.Accept(GridOutput.Value[ColumnInput])];
+                     end);
 end;
 
 procedure TMain.Clear;
@@ -212,11 +211,11 @@ end;
 procedure TMain.Setup;
 begin
   FAutomaton.Clear;
-  FAutomaton.Symbols      := Symbols;
-  FAutomaton.States       := States;
+  FAutomaton.Symbols := Symbols;
+  FAutomaton.States := States;
   FAutomaton.InitialState := InitialState;
-  FAutomaton.FinalStates  := FinalStates;
-  FAutomaton.Transitions  := Transitions;
+  FAutomaton.FinalStates := FinalStates;
+  FAutomaton.Transitions := Transitions;
 end;
 
 procedure TMain.TabControlViewChange(Sender: TObject);
