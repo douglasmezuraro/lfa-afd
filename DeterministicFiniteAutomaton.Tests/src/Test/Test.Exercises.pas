@@ -14,6 +14,11 @@ type
     procedure TearDown; override;
   published
     /// <summary>
+    ///   L1 = {}
+    /// </summary>
+    procedure ExerciseOne;
+
+    /// <summary>
     ///   L5 = {a^n/n>0}
     /// </summary>
     procedure ExerciseFive;
@@ -49,6 +54,25 @@ end;
 procedure TExercisesTest.TearDown;
 begin
   FAutomaton.Free;
+end;
+
+procedure TExercisesTest.ExerciseOne;
+const
+  MustAccept: TArray<TWord> = [];
+  MustReject: TArray<TWord> = ['a', 'b', 'c'];
+var
+  Word: TWord;
+begin
+  FAutomaton.Symbols := [];
+  FAutomaton.States := [];
+  FAutomaton.InitialState := '';
+  FAutomaton.FinalStates := [];
+
+  for Word in MustAccept do
+    CheckTrue(FAutomaton.Accept(Word));
+
+  for Word in MustReject do
+    CheckFalse(FAutomaton.Accept(Word));
 end;
 
 procedure TExercisesTest.ExerciseFive;
