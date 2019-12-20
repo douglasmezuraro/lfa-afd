@@ -14,9 +14,20 @@ type
     procedure TearDown; override;
   published
     procedure ExerciseFive;
+    procedure ExerciseSix;
   end;
 
 implementation
+
+procedure TExercisesTest.SetUp;
+begin
+  FAutomaton := TDeterministicFiniteAutomaton.Create;
+end;
+
+procedure TExercisesTest.TearDown;
+begin
+  FAutomaton.Free;
+end;
 
 procedure TExercisesTest.ExerciseFive;
 const
@@ -40,14 +51,26 @@ begin
     CheckFalse(FAutomaton.Accept(Word));
 end;
 
-procedure TExercisesTest.SetUp;
+procedure TExercisesTest.ExerciseSix;
+const
+  MustAccept: TArray<TWord> = ['a', 'aaa', 'aaaaa', 'aaaaaaa', 'aaaaaaaaa', 'aaaaaaaaaaa'];
+  MustReject: TArray<TWord> = ['', 'ʎ', 'aa', 'aaaa', 'aaaaaa', 'aaaaaaaa', 'aaaaaaaaaa'];
+var
+  Word: TWord;
 begin
-  FAutomaton := TDeterministicFiniteAutomaton.Create;
-end;
+  FAutomaton.Symbols := ['a'];
+  FAutomaton.States := ['q0', 'q1'];
+  FAutomaton.InitialState := 'q0';
+  FAutomaton.FinalStates := ['q1'];
 
-procedure TExercisesTest.TearDown;
-begin
-  FAutomaton.Free;
+  FAutomaton.Transitions.Add(TTransition.Create('q0', 'a', 'q1'));
+  FAutomaton.Transitions.Add(TTransition.Create('q1', 'a', 'q0'));
+
+  for Word in MustAccept do
+    CheckTrue(FAutomaton.Accept(Word));
+
+  for Word in MustReject do
+    CheckFalse(FAutomaton.Accept(Word));
 end;
 
 initialization
