@@ -3,7 +3,7 @@ unit Test.List;
 interface
 
 uses
- Impl.List, System.SysUtils, TestFramework;
+ Helper.TestFramework, Impl.List, System.SysUtils, TestFramework;
 
 type
   TListTest = class sealed(TTestCase)
@@ -31,8 +31,9 @@ type
     procedure TestToArrayWhenListIsEmpty;
     procedure TestToArrayWhenListHasOneElement;
     procedure TestToArrayWhenListHasMoreThanOneElement;
-    procedure TestHasDuplicatedWhenListDoesntHaveDuplicatedElement;
-    procedure TestHasDuplicatedWhenListHaveDuplicatedElement;
+    procedure TestDuplicatedWhenListDontHaveDuplicatedElement;
+    procedure TestDuplicatedWhenListHaveOneDuplicatedElement;
+    procedure TestDuplicatedWhenListHaveMoreThanOneDuplicatedElement;
   end;
 
 implementation
@@ -90,22 +91,46 @@ begin
   CheckTrue(FList.IsEmpty);
 end;
 
-procedure TListTest.TestHasDuplicatedWhenListDoesntHaveDuplicatedElement;
+procedure TListTest.TestDuplicatedWhenListDontHaveDuplicatedElement;
 var
-  Element: string;
-begin
-  FList.Add(['q0', 'q1', 'q2', 'q3', 'q1', 'q4']);
-  CheckTrue(Flist.HasDuplicated(Element));
-  CheckEquals('q1', Element);
-end;
-
-procedure TListTest.TestHasDuplicatedWhenListHaveDuplicatedElement;
-var
-  Element: string;
+  Duplicated: TList;
 begin
   FList.Add(['q0', 'q1', 'q2', 'q3', 'q4']);
-  CheckFalse(Flist.HasDuplicated(Element));
-  CheckEquals(string.Empty, Element);
+
+  Duplicated := FList.Duplicated;
+  try
+    CheckEquals([], Duplicated.ToArray);
+  finally
+    Duplicated.Free;
+  end;
+end;
+
+procedure TListTest.TestDuplicatedWhenListHaveOneDuplicatedElement;
+var
+  Duplicated: TList;
+begin
+  FList.Add(['q0', 'q1', 'q2', 'q3', 'q2']);
+
+  Duplicated := FList.Duplicated;
+  try
+    CheckEquals(['q2'], Duplicated.ToArray);
+  finally
+    Duplicated.Free;
+  end;
+end;
+
+procedure TListTest.TestDuplicatedWhenListHaveMoreThanOneDuplicatedElement;
+var
+  Duplicated: TList;
+begin
+  FList.Add(['q0', 'q1', 'q2', 'q2', 'q3', 'q1', 'q4', 'q2']);
+
+  Duplicated := FList.Duplicated;
+  try
+    CheckEquals(['q1', 'q2'], Duplicated.ToArray);
+  finally
+    Duplicated.Free;
+  end;
 end;
 
 procedure TListTest.TestCountWhenListIsEmpty;

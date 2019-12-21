@@ -12,7 +12,7 @@ type
   public
     function Contains(const Item: string): Boolean;
     function Count: Integer;
-    function HasDuplicated(out Item: string): Boolean;
+    function Duplicated: TList;
     function IsEmpty: Boolean;
     function ToArray: TArray<string>;
     function ToString: string; override;
@@ -60,30 +60,30 @@ begin
   Result := Length(FList);
 end;
 
-function TList.HasDuplicated(out Item: string): Boolean;
+function TList.Duplicated: TList;
 var
   A, B: string;
   Count: Integer;
+  List: TList;
 begin
+  List := TList.Create;
   for A in FList do
   begin
     Count := 0;
     for B in FList do
     begin
-      if A <> B then
+      if not A.Equals(B) then
         Continue;
 
       Inc(Count);
 
-      if Count > 1 then
+      if (Count > 1) and (not List.Contains(A)) then
       begin
-        Item := A;
-        Exit(True);
+        List.Add(A);
       end;
     end;
   end;
-
-  Result := False;
+  Result := List;
 end;
 
 function TList.IsEmpty: Boolean;

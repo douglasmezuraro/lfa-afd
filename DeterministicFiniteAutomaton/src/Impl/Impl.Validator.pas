@@ -81,6 +81,7 @@ end;
 function TValidator.ValidateFinalStates: Boolean;
 var
   State: TState;
+  Duplicated: TList;
 begin
   Result := False;
 
@@ -99,10 +100,15 @@ begin
     end;
   end;
 
-  if FFinalStates.HasDuplicated(State) then
-  begin
-    FMessage := Format('The final state %s is duplicated.', [State.QuotedString]);
-    Exit;
+  Duplicated := FFinalStates.Duplicated;
+  try
+    if not Duplicated.IsEmpty then
+    begin
+      FMessage := Format('The final state %s is duplicated.', [Duplicated.ToString]);
+      Exit;
+    end;
+  finally
+    Duplicated.Free;
   end;
 
   Result := True;
@@ -129,32 +135,36 @@ end;
 
 function TValidator.ValidateStates: Boolean;
 var
-  State: TState;
+  Duplicated: TList;
 begin
-  Result := False;
-
-  if FStates.HasDuplicated(State) then
-  begin
-    FMessage := Format('The state %s is duplicated.', [State.QuotedString]);
-    Exit;
+  Duplicated := FStates.Duplicated;
+  try
+    Result := True;
+    if not Duplicated.IsEmpty then
+    begin
+      FMessage := Format('The state %s is duplicated.', [Duplicated.ToString]);
+      Exit(False);
+    end;
+  finally
+    Duplicated.Free;
   end;
-
-  Result := True;
 end;
 
 function TValidator.ValidateSymbols: Boolean;
 var
-  Symbol: TSymbol;
+  Duplicated: TList;
 begin
-  Result := False;
-
-  if FSymbols.HasDuplicated(Symbol) then
-  begin
-    FMessage := Format('The symbol %s is duplicated.', [Symbol.QuotedString]);
-    Exit;
+  Duplicated := FSymbols.Duplicated;
+  try
+    Result := True;
+    if not Duplicated.IsEmpty then
+    begin
+      FMessage := Format('The symbol %s is duplicated.', [Duplicated.ToString]);
+      Exit(False);
+    end;
+  finally
+    Duplicated.Free;
   end;
-
-  Result := True;
 end;
 
 function TValidator.ValidateTransitions: Boolean;
