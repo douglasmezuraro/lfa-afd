@@ -97,18 +97,26 @@ begin
 end;
 
 function TList.ToString: string;
+const
+  Separator: string = ', ';
 var
   Element: string;
+  Builder: TStringBuilder;
 begin
-  for Element in FList do
-  begin
-    if Result.Trim.IsEmpty then
-      Result := Element
-    else
-      Result := Result + ', ' + Element;
-  end;
+  if IsEmpty then
+    Exit('[]');
 
-  Result := '[' + Result + ']';
+  Builder := TStringBuilder.Create('[');
+  try
+    for Element in FList do
+    begin
+      Builder.Append(Element).Append(Separator);
+    end;
+
+    Result := Builder.Remove(Builder.Length - Separator.Length, Separator.Length).Append(']').ToString;
+  finally
+    Builder.Free;
+  end;
 end;
 
 end.
