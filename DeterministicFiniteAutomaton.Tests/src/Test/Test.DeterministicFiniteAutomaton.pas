@@ -15,7 +15,6 @@ type
     procedure TearDown; override;
   published
     procedure TestClear;
-    procedure TestAcceptWhenAutomatonIsNotValid;
     procedure TestAcceptWhenLanguageRecognizesTheWord;
     procedure TestAcceptWhenLanguageNotRecognizesTheWord;
   end;
@@ -47,18 +46,6 @@ end;
 procedure TAFDTest.TearDown;
 begin
   FAutomaton.Free;
-end;
-
-procedure TAFDTest.TestAcceptWhenAutomatonIsNotValid;
-begin
-  FAutomaton.Transitions.Clear;
-
-  CheckEquals(
-    procedure
-    begin
-      FAutomaton.Accept('acbacaa');
-    end,
-    EArgumentException);
 end;
 
 procedure TAFDTest.TestAcceptWhenLanguageNotRecognizesTheWord;

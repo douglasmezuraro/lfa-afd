@@ -11,17 +11,9 @@ type
     function EqualsArray(const A, B: TArray<string>): Boolean;
   public
     procedure CheckEquals(const Expected, Actual: TArray<string>; const Msg: string = string.Empty); overload;
-    procedure CheckEquals(const Method: TProc; const ExpectedClass: ExceptionClass; const Msg: string = string.Empty); overload;
   end;
 
 implementation
-
-procedure TTestFrameworkHelper.CheckEquals(const Method: TProc; const ExpectedClass: ExceptionClass; const Msg: string);
-begin
-  StartExpectingException(ExpectedClass);
-  Method;
-  StopExpectingException(Msg);
-end;
 
 procedure TTestFrameworkHelper.CheckEquals(const Expected, Actual: TArray<string>; const Msg: string);
 begin

@@ -10,27 +10,29 @@ type
   TAFDValidationsTest = class sealed(TTestCase)
   strict private
     FValidator: TValidator;
+    FAutomaton: TDeterministicFiniteAutomaton;
   public
     procedure SetUp; override;
     procedure TearDown; override;
   published
-    procedure TestAcceptWhenNoSymbolsDefined;
-    procedure TestAcceptWhenDuplicatedSymbol;
-    procedure TestAcceptWhenNoStatesDefined;
-    procedure TestAcceptWhenDuplicatedState;
-    procedure TestAcceptWhenInitialStateNotDefined;
-    procedure TestAcceptWhenInitialStateNotFound;
-    procedure TestAcceptWhenFinalStatesNotDefined;
-    procedure TestAcceptWhenDuplicatedFinalStates;
-    procedure TestAcceptWhenFinalStatesNotFound;
-    procedure TestAcceptWhenTransitionsNotDefined;
-    procedure TestAcceptWhenTransitionHasSourceNotDefined;
-    procedure TestAcceptWhenTransitionHasSourceNotFound;
-    procedure TestAcceptWhenTransitionHasSymbolNotDefined;
-    procedure TestAcceptWhenTransitionHasSymbolNotFound;
-    procedure TestAcceptWhenTransitionHasTargetNotDefined;
-    procedure TestAcceptWhenTransitionHasTargetNotFound;
-    procedure TestAcceptWhenAutomatonIsValid;
+    procedure TestValidateWhenAutomatonHasDuplicatedSymbol;
+    procedure TestValidateWhenAutomatonHasDuplicatedState;
+    procedure TestValidateWhenAutomatonHasNotStatesAndInitialStateIsNotDefined;
+    procedure TestValidateWhenAutomatonHasStatesAndIntitialStatesIsNotDefined;
+    procedure TestValidateWhenAutomatonInitialStateIsNotFound;
+    procedure TestValidateWhenAutomatonHasNotStatesAndFinalStatesIsNotDefined;
+    procedure TestValidateWhenAutomatonHasStatesFinalStatesIsNotDefined;
+    procedure TestValidateWhenAutomatonHasDuplicatedFinalStates;
+    procedure TestValidateWhenAutomatonHasFinalStatesNotFound;
+    procedure TestValidateWhenAutomatonHasNotStatesAndTransitionsIsNotDefined;
+    procedure TestValidateWhenAutomatonHasStatesAndTransitionsIsNotDefined;
+    procedure TestValidateWhenAutomatonHasTransitionHasSourceNotDefined;
+    procedure TestValidateWhenAutomatonHasTransitionHasSourceNotFound;
+    procedure TestValidateWhenAutomatonHasTransitionHasSymbolNotDefined;
+    procedure TestValidateWhenAutomatonHasTransitionHasSymbolNotFound;
+    procedure TestValidateWhenAutomatonHasTransitionHasTargetNotDefined;
+    procedure TestValidateWhenAutomatonHasTransitionHasTargetNotFound;
+    procedure TestValidateWhenAutomatonIsValid;
   end;
 
 implementation
@@ -39,329 +41,229 @@ procedure TAFDValidationsTest.SetUp;
 begin
   inherited SetUp;
   FValidator := TValidator.Create;
+  FAutomaton := TDeterministicFiniteAutomaton.Create;
 end;
 
 procedure TAFDValidationsTest.TearDown;
 begin
+  FAutomaton.Free;
   FValidator.Free;
   inherited TearDown;
 end;
 
-procedure TAFDValidationsTest.TestAcceptWhenAutomatonIsValid;
-var
-  Automaton: TDeterministicFiniteAutomaton;
+procedure TAFDValidationsTest.TestValidateWhenAutomatonIsValid;
 begin
-  Automaton := TDeterministicFiniteAutomaton.Create;
-  try
-    Automaton.Symbols := ['a', 'b'];
-    Automaton.States := ['q0', 'q1'];
-    Automaton.InitialState := 'q0';
-    Automaton.FinalStates := ['q1'];
-    Automaton.Transitions.Add(TTransition.Create('q0', 'a', 'q1'));
-    Automaton.Transitions.Add(TTransition.Create('q0', 'b', 'q1'));
-    Automaton.Transitions.Add(TTransition.Create('q1', 'a', 'q1'));
-    Automaton.Transitions.Add(TTransition.Create('q1', 'b', 'q1'));
+  FAutomaton.Symbols := ['a', 'b'];
+  FAutomaton.States := ['q0', 'q1'];
+  FAutomaton.InitialState := 'q0';
+  FAutomaton.FinalStates := ['q1'];
 
-    CheckTrue(FValidator.Validate(Automaton).Key);
-  finally
-    Automaton.Free;
-  end;
+  FAutomaton.Transitions.Add(TTransition.Create('q0', 'a', 'q1'));
+  FAutomaton.Transitions.Add(TTransition.Create('q0', 'b', 'q1'));
+  FAutomaton.Transitions.Add(TTransition.Create('q1', 'a', 'q1'));
+  FAutomaton.Transitions.Add(TTransition.Create('q1', 'b', 'q1'));
+
+  CheckTrue(FValidator.Validate(FAutomaton).Key);
 end;
 
-procedure TAFDValidationsTest.TestAcceptWhenDuplicatedFinalStates;
-var
-  Automaton: TDeterministicFiniteAutomaton;
+procedure TAFDValidationsTest.TestValidateWhenAutomatonHasDuplicatedFinalStates;
 begin
-  Automaton := TDeterministicFiniteAutomaton.Create;
-  try
-  	Automaton.Symbols := ['a', 'b', 'c'];
-    Automaton.States := ['q0', 'q1', 'q2', 'q3'];
-    Automaton.InitialState := 'q0';
-    Automaton.FinalStates := ['q3', 'q3'];
+  FAutomaton.Symbols := ['a', 'b', 'c'];
+  FAutomaton.States := ['q0', 'q1', 'q2', 'q3'];
+  FAutomaton.InitialState := 'q0';
+  FAutomaton.FinalStates := ['q3', 'q3'];
 
-    CheckFalse(FValidator.Validate(Automaton).Key);
-  finally
-    Automaton.Free;
-  end;
+  CheckFalse(FValidator.Validate(FAutomaton).Key);
 end;
 
-procedure TAFDValidationsTest.TestAcceptWhenDuplicatedState;
-var
-  Automaton: TDeterministicFiniteAutomaton;
+procedure TAFDValidationsTest.TestValidateWhenAutomatonHasDuplicatedState;
 begin
-  Automaton := TDeterministicFiniteAutomaton.Create;
-  try
-    Automaton.Symbols := ['a', 'b', 'c'];
-    Automaton.States := ['q0', 'q0', 'q1', 'q2', 'q3'];
-    Automaton.InitialState := TState.Empty;
-    Automaton.FinalStates := [];
+  FAutomaton.Symbols := ['a', 'b', 'c'];
+  FAutomaton.States := ['q0', 'q0', 'q1', 'q2', 'q3'];
+  FAutomaton.InitialState := TState.Empty;
+  FAutomaton.FinalStates := [];
 
-    CheckFalse(FValidator.Validate(Automaton).Key);
-  finally
-    Automaton.Free;
-  end;
+  CheckFalse(FValidator.Validate(FAutomaton).Key);
 end;
 
-procedure TAFDValidationsTest.TestAcceptWhenDuplicatedSymbol;
-var
-  Automaton: TDeterministicFiniteAutomaton;
+procedure TAFDValidationsTest.TestValidateWhenAutomatonHasDuplicatedSymbol;
 begin
-  Automaton := TDeterministicFiniteAutomaton.Create;
-  try
-    Automaton.Symbols := ['a', 'b', 'b', 'c'];
-    Automaton.States := [];
-    Automaton.InitialState := TState.Empty;
-    Automaton.FinalStates := [];
+  FAutomaton.Symbols := ['a', 'b', 'b', 'c'];
+  FAutomaton.States := [];
+  FAutomaton.InitialState := TState.Empty;
+  FAutomaton.FinalStates := [];
 
-    CheckFalse(FValidator.Validate(Automaton).Key);
-  finally
-    Automaton.Free;
-  end;
+  CheckFalse(FValidator.Validate(FAutomaton).Key);
 end;
 
-procedure TAFDValidationsTest.TestAcceptWhenFinalStatesNotDefined;
-var
-  Automaton: TDeterministicFiniteAutomaton;
+procedure TAFDValidationsTest.TestValidateWhenAutomatonHasStatesFinalStatesIsNotDefined;
 begin
-  Automaton := TDeterministicFiniteAutomaton.Create;
-  try
-    Automaton.Symbols := ['a', 'b', 'c'];
-    Automaton.States := ['q0', 'q1', 'q2', 'q3'];
-    Automaton.InitialState := 'q0';
-    Automaton.FinalStates := [];
+  FAutomaton.Symbols := ['a', 'b', 'c'];
+  FAutomaton.States := ['q0', 'q1', 'q2', 'q3'];
+  FAutomaton.InitialState := 'q0';
+  FAutomaton.FinalStates := [];
 
-    CheckFalse(FValidator.Validate(Automaton).Key);
-  finally
-    Automaton.Free;
-  end;
+  CheckFalse(FValidator.Validate(FAutomaton).Key);
 end;
 
-procedure TAFDValidationsTest.TestAcceptWhenFinalStatesNotFound;
-var
-  Automaton: TDeterministicFiniteAutomaton;
+procedure TAFDValidationsTest.TestValidateWhenAutomatonHasFinalStatesNotFound;
 begin
-  Automaton := TDeterministicFiniteAutomaton.Create;
-  try
-    Automaton.Symbols := ['a', 'b', 'c'];
-    Automaton.States := ['q0', 'q1', 'q2', 'q3'];
-    Automaton.InitialState := 'q0';
-    Automaton.FinalStates := ['q4'];
+  FAutomaton.Symbols := ['a', 'b', 'c'];
+  FAutomaton.States := ['q0', 'q1', 'q2', 'q3'];
+  FAutomaton.InitialState := 'q0';
+  FAutomaton.FinalStates := ['q4'];
 
-    CheckFalse(FValidator.Validate(Automaton).Key);
-  finally
-    Automaton.Free;
-  end;
+  CheckFalse(FValidator.Validate(FAutomaton).Key);
 end;
 
-procedure TAFDValidationsTest.TestAcceptWhenInitialStateNotDefined;
-var
-  Automaton: TDeterministicFiniteAutomaton;
+procedure TAFDValidationsTest.TestValidateWhenAutomatonHasNotStatesAndFinalStatesIsNotDefined;
 begin
-  Automaton := TDeterministicFiniteAutomaton.Create;
-  try
-    Automaton.Symbols := ['a', 'b', 'c'];
-    Automaton.States := ['q0', 'q1', 'q2', 'q3'];
-    Automaton.InitialState := TState.Empty;
-    Automaton.FinalStates := [];
+  FAutomaton.Symbols := ['a', 'b', 'c', 'd'];
+  FAutomaton.States := [];
+  FAutomaton.InitialState := TState.Empty;
+  FAutomaton.FinalStates := [];
 
-    CheckFalse(FValidator.Validate(Automaton).Key);
-  finally
-    Automaton.Free;
-  end;
+  CheckTrue(FValidator.Validate(FAutomaton).Key);
 end;
 
-procedure TAFDValidationsTest.TestAcceptWhenInitialStateNotFound;
-var
-  Automaton: TDeterministicFiniteAutomaton;
+procedure TAFDValidationsTest.TestValidateWhenAutomatonHasNotStatesAndInitialStateIsNotDefined;
 begin
-  Automaton := TDeterministicFiniteAutomaton.Create;
-  try
-    Automaton.Symbols := ['a', 'b', 'c'];
-    Automaton.States := ['q0', 'q1', 'q2', 'q3'];
-    Automaton.InitialState := 'q4';
-    Automaton.FinalStates := [];
+  FAutomaton.Symbols := ['a', 'b', 'c'];
+  FAutomaton.States := [];
+  FAutomaton.InitialState := TState.Empty;
+  FAutomaton.FinalStates := [];
 
-    CheckFalse(FValidator.Validate(Automaton).Key);
-  finally
-    Automaton.Free;
-  end;
+  CheckTrue(FValidator.Validate(FAutomaton).Key);
 end;
 
-procedure TAFDValidationsTest.TestAcceptWhenNoStatesDefined;
-var
-  Automaton: TDeterministicFiniteAutomaton;
+procedure TAFDValidationsTest.TestValidateWhenAutomatonHasNotStatesAndTransitionsIsNotDefined;
 begin
-  Automaton := TDeterministicFiniteAutomaton.Create;
-  try
-    Automaton.Symbols := ['a', 'b', 'c'];
-    Automaton.States := [];
-    Automaton.InitialState := TState.Empty;
-    Automaton.FinalStates := [];
+  FAutomaton.Symbols := [];
+  FAutomaton.States := [];
+  FAutomaton.InitialState := TState.Empty;
+  FAutomaton.FinalStates := [];
 
-    CheckFalse(FValidator.Validate(Automaton).Key);
-  finally
-    Automaton.Free;
-  end;
+  CheckTrue(FValidator.Validate(FAutomaton).Key);
 end;
 
-procedure TAFDValidationsTest.TestAcceptWhenNoSymbolsDefined;
-var
-  Automaton: TDeterministicFiniteAutomaton;
+procedure TAFDValidationsTest.TestValidateWhenAutomatonHasStatesAndIntitialStatesIsNotDefined;
 begin
-  Automaton := TDeterministicFiniteAutomaton.Create;
-  try
-    Automaton.Symbols := [];
-    Automaton.States := [];
-    Automaton.InitialState := TState.Empty;
-    Automaton.FinalStates := [];
+  FAutomaton.Symbols := ['a', 'b', 'c'];
+  FAutomaton.States := ['q0', 'q1'];
+  FAutomaton.InitialState := TState.Empty;
+  FAutomaton.FinalStates := ['q1'];
 
-    CheckFalse(FValidator.Validate(Automaton).Key);
-  finally
-    Automaton.Free;
-  end;
+  CheckFalse(FValidator.Validate(FAutomaton).Key);
 end;
 
-procedure TAFDValidationsTest.TestAcceptWhenTransitionHasSourceNotDefined;
-var
-  Automaton: TDeterministicFiniteAutomaton;
+procedure TAFDValidationsTest.TestValidateWhenAutomatonInitialStateIsNotFound;
 begin
-  Automaton := TDeterministicFiniteAutomaton.Create;
-  try
-    Automaton.Symbols := ['a', 'b'];
-    Automaton.States := ['q0', 'q1'];
-    Automaton.InitialState := 'q0';
-    Automaton.FinalStates := ['q1'];
-    Automaton.Transitions.Add(TTransition.Create(TState.Empty, 'a', 'q1'));
-    Automaton.Transitions.Add(TTransition.Create('q0', 'b', 'q1'));
-    Automaton.Transitions.Add(TTransition.Create('q1', 'a', 'q1'));
-    Automaton.Transitions.Add(TTransition.Create('q1', 'b', 'q1'));
+  FAutomaton.Symbols := ['a', 'b', 'c'];
+  FAutomaton.States := ['q0', 'q1', 'q2', 'q3'];
+  FAutomaton.InitialState := 'q4';
+  FAutomaton.FinalStates := [];
 
-    CheckFalse(FValidator.Validate(Automaton).Key);
-  finally
-    Automaton.Free;
-  end;
+  CheckFalse(FValidator.Validate(FAutomaton).Key);
 end;
 
-procedure TAFDValidationsTest.TestAcceptWhenTransitionHasSourceNotFound;
-var
-  Automaton: TDeterministicFiniteAutomaton;
+procedure TAFDValidationsTest.TestValidateWhenAutomatonHasTransitionHasSourceNotDefined;
 begin
-  Automaton := TDeterministicFiniteAutomaton.Create;
-  try
-    Automaton.Symbols := ['a', 'b'];
-    Automaton.States := ['q0', 'q1'];
-    Automaton.InitialState := 'q0';
-    Automaton.FinalStates := ['q1'];
-    Automaton.Transitions.Add(TTransition.Create('q0', 'a', 'q1'));
-    Automaton.Transitions.Add(TTransition.Create('q2', 'b', 'q1'));
-    Automaton.Transitions.Add(TTransition.Create('q1', 'a', 'q1'));
-    Automaton.Transitions.Add(TTransition.Create('q1', 'b', 'q1'));
+  FAutomaton.Symbols := ['a', 'b'];
+  FAutomaton.States := ['q0', 'q1'];
+  FAutomaton.InitialState := 'q0';
+  FAutomaton.FinalStates := ['q1'];
 
-    CheckFalse(FValidator.Validate(Automaton).Key);
-  finally
-    Automaton.Free;
-  end;
+  FAutomaton.Transitions.Add(TTransition.Create(TState.Empty, 'a', 'q1'));
+  FAutomaton.Transitions.Add(TTransition.Create('q0', 'b', 'q1'));
+  FAutomaton.Transitions.Add(TTransition.Create('q1', 'a', 'q1'));
+  FAutomaton.Transitions.Add(TTransition.Create('q1', 'b', 'q1'));
+
+  CheckFalse(FValidator.Validate(FAutomaton).Key);
 end;
 
-procedure TAFDValidationsTest.TestAcceptWhenTransitionHasSymbolNotDefined;
-var
-  Automaton: TDeterministicFiniteAutomaton;
+procedure TAFDValidationsTest.TestValidateWhenAutomatonHasTransitionHasSourceNotFound;
 begin
-  Automaton := TDeterministicFiniteAutomaton.Create;
-  try
-    Automaton.Symbols := ['a', 'b'];
-    Automaton.States := ['q0', 'q1'];
-    Automaton.InitialState := 'q0';
-    Automaton.FinalStates := ['q1'];
-    Automaton.Transitions.Add(TTransition.Create('q0', 'a', 'q1'));
-    Automaton.Transitions.Add(TTransition.Create('q0', 'b', 'q1'));
-    Automaton.Transitions.Add(TTransition.Create('q1', TSymbol.Empty, 'q1'));
-    Automaton.Transitions.Add(TTransition.Create('q1', 'b', 'q1'));
+  FAutomaton.Symbols := ['a', 'b'];
+  FAutomaton.States := ['q0', 'q1'];
+  FAutomaton.InitialState := 'q0';
+  FAutomaton.FinalStates := ['q1'];
 
-    CheckFalse(FValidator.Validate(Automaton).Key);
-  finally
-    Automaton.Free;
-  end;
+  FAutomaton.Transitions.Add(TTransition.Create('q0', 'a', 'q1'));
+  FAutomaton.Transitions.Add(TTransition.Create('q2', 'b', 'q1'));
+  FAutomaton.Transitions.Add(TTransition.Create('q1', 'a', 'q1'));
+  FAutomaton.Transitions.Add(TTransition.Create('q1', 'b', 'q1'));
+
+  CheckFalse(FValidator.Validate(FAutomaton).Key);
 end;
 
-procedure TAFDValidationsTest.TestAcceptWhenTransitionHasSymbolNotFound;
-var
-  Automaton: TDeterministicFiniteAutomaton;
+procedure TAFDValidationsTest.TestValidateWhenAutomatonHasTransitionHasSymbolNotDefined;
 begin
-  Automaton := TDeterministicFiniteAutomaton.Create;
-  try
-    Automaton.Symbols := ['a', 'b'];
-    Automaton.States := ['q0', 'q1'];
-    Automaton.InitialState := 'q0';
-    Automaton.FinalStates := ['q1'];
-    Automaton.Transitions.Add(TTransition.Create('q0', 'a', 'q1'));
-    Automaton.Transitions.Add(TTransition.Create('q0', 'b', 'q1'));
-    Automaton.Transitions.Add(TTransition.Create('q1', 'a', 'q1'));
-    Automaton.Transitions.Add(TTransition.Create('q1', 'c', 'q1'));
+  FAutomaton.Symbols := ['a', 'b'];
+  FAutomaton.States := ['q0', 'q1'];
+  FAutomaton.InitialState := 'q0';
+  FAutomaton.FinalStates := ['q1'];
 
-    CheckFalse(FValidator.Validate(Automaton).Key);
-  finally
-    Automaton.Free;
-  end;
+  FAutomaton.Transitions.Add(TTransition.Create('q0', 'a', 'q1'));
+  FAutomaton.Transitions.Add(TTransition.Create('q0', 'b', 'q1'));
+  FAutomaton.Transitions.Add(TTransition.Create('q1', TSymbol.Empty, 'q1'));
+  FAutomaton.Transitions.Add(TTransition.Create('q1', 'b', 'q1'));
+
+  CheckFalse(FValidator.Validate(FAutomaton).Key);
 end;
 
-procedure TAFDValidationsTest.TestAcceptWhenTransitionHasTargetNotDefined;
-var
-  Automaton: TDeterministicFiniteAutomaton;
+procedure TAFDValidationsTest.TestValidateWhenAutomatonHasTransitionHasSymbolNotFound;
 begin
-  Automaton := TDeterministicFiniteAutomaton.Create;
-  try
-    Automaton.Symbols := ['a', 'b'];
-    Automaton.States := ['q0', 'q1'];
-    Automaton.InitialState := 'q0';
-    Automaton.FinalStates := ['q1'];
-    Automaton.Transitions.Add(TTransition.Create('q0', 'a', TState.Empty));
-    Automaton.Transitions.Add(TTransition.Create('q0', 'b', 'q1'));
-    Automaton.Transitions.Add(TTransition.Create('q1', 'a', 'q1'));
-    Automaton.Transitions.Add(TTransition.Create('q1', 'c', 'q1'));
+  FAutomaton.Symbols := ['a', 'b'];
+  FAutomaton.States := ['q0', 'q1'];
+  FAutomaton.InitialState := 'q0';
+  FAutomaton.FinalStates := ['q1'];
 
-    CheckFalse(FValidator.Validate(Automaton).Key);
-  finally
-    Automaton.Free;
-  end;
+  FAutomaton.Transitions.Add(TTransition.Create('q0', 'a', 'q1'));
+  FAutomaton.Transitions.Add(TTransition.Create('q0', 'b', 'q1'));
+  FAutomaton.Transitions.Add(TTransition.Create('q1', 'a', 'q1'));
+  FAutomaton.Transitions.Add(TTransition.Create('q1', 'c', 'q1'));
+
+  CheckFalse(FValidator.Validate(FAutomaton).Key);
 end;
 
-procedure TAFDValidationsTest.TestAcceptWhenTransitionHasTargetNotFound;
-var
-  Automaton: TDeterministicFiniteAutomaton;
+procedure TAFDValidationsTest.TestValidateWhenAutomatonHasTransitionHasTargetNotDefined;
 begin
-  Automaton := TDeterministicFiniteAutomaton.Create;
-  try
-    Automaton.Symbols := ['a', 'b'];
-    Automaton.States := ['q0', 'q1'];
-    Automaton.InitialState := 'q0';
-    Automaton.FinalStates := ['q1'];
-    Automaton.Transitions.Add(TTransition.Create('q0', 'a', 'q1'));
-    Automaton.Transitions.Add(TTransition.Create('q0', 'b', 'q1'));
-    Automaton.Transitions.Add(TTransition.Create('q1', 'a', 'q4'));
-    Automaton.Transitions.Add(TTransition.Create('q1', 'c', 'q1'));
+  FAutomaton.Symbols := ['a', 'b'];
+  FAutomaton.States := ['q0', 'q1'];
+  FAutomaton.InitialState := 'q0';
+  FAutomaton.FinalStates := ['q1'];
 
-    CheckFalse(FValidator.Validate(Automaton).Key);
-  finally
-    Automaton.Free;
-  end;
+  FAutomaton.Transitions.Add(TTransition.Create('q0', 'a', TState.Empty));
+  FAutomaton.Transitions.Add(TTransition.Create('q0', 'b', 'q1'));
+  FAutomaton.Transitions.Add(TTransition.Create('q1', 'a', 'q1'));
+  FAutomaton.Transitions.Add(TTransition.Create('q1', 'c', 'q1'));
+
+  CheckFalse(FValidator.Validate(FAutomaton).Key);
 end;
 
-procedure TAFDValidationsTest.TestAcceptWhenTransitionsNotDefined;
-var
-  Automaton: TDeterministicFiniteAutomaton;
+procedure TAFDValidationsTest.TestValidateWhenAutomatonHasTransitionHasTargetNotFound;
 begin
-  Automaton := TDeterministicFiniteAutomaton.Create;
-  try
-    Automaton.Symbols := ['a', 'b'];
-    Automaton.States := ['q0', 'q1'];
-    Automaton.InitialState := 'q0';
-    Automaton.FinalStates := ['q1'];
+  FAutomaton.Symbols := ['a', 'b'];
+  FAutomaton.States := ['q0', 'q1'];
+  FAutomaton.InitialState := 'q0';
+  FAutomaton.FinalStates := ['q1'];
 
-    CheckFalse(FValidator.Validate(Automaton).Key);
-  finally
-    Automaton.Free;
-  end;
+  FAutomaton.Transitions.Add(TTransition.Create('q0', 'a', 'q1'));
+  FAutomaton.Transitions.Add(TTransition.Create('q0', 'b', 'q1'));
+  FAutomaton.Transitions.Add(TTransition.Create('q1', 'a', 'q4'));
+  FAutomaton.Transitions.Add(TTransition.Create('q1', 'c', 'q1'));
+
+  CheckFalse(FValidator.Validate(FAutomaton).Key);
+end;
+
+procedure TAFDValidationsTest.TestValidateWhenAutomatonHasStatesAndTransitionsIsNotDefined;
+begin
+  FAutomaton.Symbols := ['a', 'b'];
+  FAutomaton.States := ['q0', 'q1'];
+  FAutomaton.InitialState := 'q0';
+  FAutomaton.FinalStates := ['q1'];
+
+  CheckFalse(FValidator.Validate(FAutomaton).Key);
 end;
 
 initialization
