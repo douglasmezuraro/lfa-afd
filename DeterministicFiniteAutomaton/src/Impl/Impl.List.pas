@@ -16,25 +16,29 @@ type
     function IsEmpty: Boolean;
     function ToArray: TArray<string>;
     function ToString: string; override;
-    procedure Add(const Item: string); overload;
-    procedure Add(const Items: TArray<string>); overload;
+    function Add(const Item: string): TList; overload;
+    function Add(const Items: TArray<string>): TList; overload;
     procedure Clear;
   end;
 
 implementation
 
-procedure TList.Add(const Item: string);
+function TList.Add(const Item: string): TList;
 begin
   SetLength(FList, Count + 1);
   FList[High(FList)] := Item;
+
+  Result := Self;
 end;
 
-procedure TList.Add(const Items: TArray<string>);
+function TList.Add(const Items: TArray<string>): TList;
 var
   Element: string;
 begin
   for Element in Items do
     Add(Element);
+
+  Result := Self;
 end;
 
 procedure TList.Clear;

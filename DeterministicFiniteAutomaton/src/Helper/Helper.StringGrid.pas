@@ -24,7 +24,7 @@ type
     procedure DefineSize(const Rows, Columns: Byte);
     procedure ForEach(const Method: TProc);
     procedure Notify(const Key: Word);
-    property Value[Const Column: TColumn]: string read GetValue write SetValue;
+    property Value[const Column: TColumn]: string read GetValue write SetValue;
   end;
 
 implementation

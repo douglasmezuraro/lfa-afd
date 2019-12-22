@@ -29,18 +29,18 @@ begin
   FAutomaton.FinalStates := ['q6', 'q8'];
   FAutomaton.InitialState := 'q0';
 
-  FAutomaton.Transitions.Add(TTransition.Create('q0', 'a', 'q1'));
-  FAutomaton.Transitions.Add(TTransition.Create('q1', 'a', 'q1'));
-  FAutomaton.Transitions.Add(TTransition.Create('q1', 'c', 'q2'));
-  FAutomaton.Transitions.Add(TTransition.Create('q2', 'a', 'q3'));
-  FAutomaton.Transitions.Add(TTransition.Create('q2', 'b', 'q4'));
-  FAutomaton.Transitions.Add(TTransition.Create('q2', 'c', 'q2'));
-  FAutomaton.Transitions.Add(TTransition.Create('q3', 'b', 'q5'));
-  FAutomaton.Transitions.Add(TTransition.Create('q4', 'a', 'q5'));
-  FAutomaton.Transitions.Add(TTransition.Create('q5', 'c', 'q6'));
-  FAutomaton.Transitions.Add(TTransition.Create('q6', 'a', 'q7'));
-  FAutomaton.Transitions.Add(TTransition.Create('q7', 'a', 'q8'));
-  FAutomaton.Transitions.Add(TTransition.Create('q8', 'a', 'q7'));
+  FAutomaton.Transitions.Add(TTransition.Create('q0', 'a', 'q1'))
+                        .Add(TTransition.Create('q1', 'a', 'q1'))
+                        .Add(TTransition.Create('q1', 'c', 'q2'))
+                        .Add(TTransition.Create('q2', 'a', 'q3'))
+                        .Add(TTransition.Create('q2', 'b', 'q4'))
+                        .Add(TTransition.Create('q2', 'c', 'q2'))
+                        .Add(TTransition.Create('q3', 'b', 'q5'))
+                        .Add(TTransition.Create('q4', 'a', 'q5'))
+                        .Add(TTransition.Create('q5', 'c', 'q6'))
+                        .Add(TTransition.Create('q6', 'a', 'q7'))
+                        .Add(TTransition.Create('q7', 'a', 'q8'))
+                        .Add(TTransition.Create('q8', 'a', 'q7'));
 end;
 
 procedure TAFDTest.TearDown;

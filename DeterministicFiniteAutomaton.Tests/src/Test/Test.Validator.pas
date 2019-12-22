@@ -58,10 +58,10 @@ begin
   FAutomaton.InitialState := 'q0';
   FAutomaton.FinalStates := ['q1'];
 
-  FAutomaton.Transitions.Add(TTransition.Create('q0', 'a', 'q1'));
-  FAutomaton.Transitions.Add(TTransition.Create('q0', 'b', 'q1'));
-  FAutomaton.Transitions.Add(TTransition.Create('q1', 'a', 'q1'));
-  FAutomaton.Transitions.Add(TTransition.Create('q1', 'b', 'q1'));
+  FAutomaton.Transitions.Add(TTransition.Create('q0', 'a', 'q1'))
+                        .Add(TTransition.Create('q0', 'b', 'q1'))
+                        .Add(TTransition.Create('q1', 'a', 'q1'))
+                        .Add(TTransition.Create('q1', 'b', 'q1'));
 
   CheckTrue(FValidator.Validate(FAutomaton).Key);
 end;
@@ -173,10 +173,10 @@ begin
   FAutomaton.InitialState := 'q0';
   FAutomaton.FinalStates := ['q1'];
 
-  FAutomaton.Transitions.Add(TTransition.Create(TState.Empty, 'a', 'q1'));
-  FAutomaton.Transitions.Add(TTransition.Create('q0', 'b', 'q1'));
-  FAutomaton.Transitions.Add(TTransition.Create('q1', 'a', 'q1'));
-  FAutomaton.Transitions.Add(TTransition.Create('q1', 'b', 'q1'));
+  FAutomaton.Transitions.Add(TTransition.Create(TState.Empty, 'a', 'q1'))
+                        .Add(TTransition.Create('q0', 'b', 'q1'))
+                        .Add(TTransition.Create('q1', 'a', 'q1'))
+                        .Add(TTransition.Create('q1', 'b', 'q1'));
 
   CheckFalse(FValidator.Validate(FAutomaton).Key);
 end;
@@ -188,10 +188,10 @@ begin
   FAutomaton.InitialState := 'q0';
   FAutomaton.FinalStates := ['q1'];
 
-  FAutomaton.Transitions.Add(TTransition.Create('q0', 'a', 'q1'));
-  FAutomaton.Transitions.Add(TTransition.Create('q2', 'b', 'q1'));
-  FAutomaton.Transitions.Add(TTransition.Create('q1', 'a', 'q1'));
-  FAutomaton.Transitions.Add(TTransition.Create('q1', 'b', 'q1'));
+  FAutomaton.Transitions.Add(TTransition.Create('q0', 'a', 'q1'))
+                        .Add(TTransition.Create('q2', 'b', 'q1'))
+                        .Add(TTransition.Create('q1', 'a', 'q1'))
+                        .Add(TTransition.Create('q1', 'b', 'q1'));
 
   CheckFalse(FValidator.Validate(FAutomaton).Key);
 end;
@@ -203,10 +203,10 @@ begin
   FAutomaton.InitialState := 'q0';
   FAutomaton.FinalStates := ['q1'];
 
-  FAutomaton.Transitions.Add(TTransition.Create('q0', 'a', 'q1'));
-  FAutomaton.Transitions.Add(TTransition.Create('q0', 'b', 'q1'));
-  FAutomaton.Transitions.Add(TTransition.Create('q1', TSymbol.Empty, 'q1'));
-  FAutomaton.Transitions.Add(TTransition.Create('q1', 'b', 'q1'));
+  FAutomaton.Transitions.Add(TTransition.Create('q0', 'a', 'q1'))
+                        .Add(TTransition.Create('q0', 'b', 'q1'))
+                        .Add(TTransition.Create('q1', TSymbol.Empty, 'q1'))
+                        .Add(TTransition.Create('q1', 'b', 'q1'));
 
   CheckFalse(FValidator.Validate(FAutomaton).Key);
 end;
@@ -218,10 +218,10 @@ begin
   FAutomaton.InitialState := 'q0';
   FAutomaton.FinalStates := ['q1'];
 
-  FAutomaton.Transitions.Add(TTransition.Create('q0', 'a', 'q1'));
-  FAutomaton.Transitions.Add(TTransition.Create('q0', 'b', 'q1'));
-  FAutomaton.Transitions.Add(TTransition.Create('q1', 'a', 'q1'));
-  FAutomaton.Transitions.Add(TTransition.Create('q1', 'c', 'q1'));
+  FAutomaton.Transitions.Add(TTransition.Create('q0', 'a', 'q1'))
+                        .Add(TTransition.Create('q0', 'b', 'q1'))
+                        .Add(TTransition.Create('q1', 'a', 'q1'))
+                        .Add(TTransition.Create('q1', 'c', 'q1'));
 
   CheckFalse(FValidator.Validate(FAutomaton).Key);
 end;
@@ -233,10 +233,10 @@ begin
   FAutomaton.InitialState := 'q0';
   FAutomaton.FinalStates := ['q1'];
 
-  FAutomaton.Transitions.Add(TTransition.Create('q0', 'a', TState.Empty));
-  FAutomaton.Transitions.Add(TTransition.Create('q0', 'b', 'q1'));
-  FAutomaton.Transitions.Add(TTransition.Create('q1', 'a', 'q1'));
-  FAutomaton.Transitions.Add(TTransition.Create('q1', 'c', 'q1'));
+  FAutomaton.Transitions.Add(TTransition.Create('q0', 'a', TState.Empty))
+                        .Add(TTransition.Create('q0', 'b', 'q1'))
+                        .Add(TTransition.Create('q1', 'a', 'q1'))
+                        .Add(TTransition.Create('q1', 'c', 'q1'));
 
   CheckFalse(FValidator.Validate(FAutomaton).Key);
 end;
@@ -248,10 +248,10 @@ begin
   FAutomaton.InitialState := 'q0';
   FAutomaton.FinalStates := ['q1'];
 
-  FAutomaton.Transitions.Add(TTransition.Create('q0', 'a', 'q1'));
-  FAutomaton.Transitions.Add(TTransition.Create('q0', 'b', 'q1'));
-  FAutomaton.Transitions.Add(TTransition.Create('q1', 'a', 'q4'));
-  FAutomaton.Transitions.Add(TTransition.Create('q1', 'c', 'q1'));
+  FAutomaton.Transitions.Add(TTransition.Create('q0', 'a', 'q1'))
+                        .Add(TTransition.Create('q0', 'b', 'q1'))
+                        .Add(TTransition.Create('q1', 'a', 'q4'))
+                        .Add(TTransition.Create('q1', 'c', 'q1'));
 
   CheckFalse(FValidator.Validate(FAutomaton).Key);
 end;

@@ -13,7 +13,9 @@ type
     procedure SetUp; override;
     procedure TearDown; override;
   published
-    procedure TestAdd;
+    procedure TestAddOneElement;
+    procedure TestAddMoreThanOneElement;
+    procedure TestAddRange;
     procedure TestClearWhenHasMoreThanOneTransition;
     procedure TestClearWhenHasOneTransition;
     procedure TestClearWhenIsEmpty;
@@ -42,17 +44,40 @@ begin
   FTransitions.Free;
 end;
 
-procedure TTransitionsTest.TestAdd;
+procedure TTransitionsTest.TestAddOneElement;
 begin
   FTransitions.Add(TTransition.Create('q0', 'a', 'q1'));
   CheckFalse(FTransitions.IsEmpty)
 end;
 
+procedure TTransitionsTest.TestAddMoreThanOneElement;
+begin
+  FTransitions.Add(TTransition.Create('q0', 'a', 'q1'))
+              .Add(TTransition.Create('q1', 'b', 'q2'))
+              .Add(TTransition.Create('q2', 'c', 'q3'))
+              .Add(TTransition.Create('q3', 'd', 'q4'))
+              .Add(TTransition.Create('q4', 'e', 'q5'));
+
+  CheckFalse(FTransitions.IsEmpty);
+end;
+
+procedure TTransitionsTest.TestAddRange;
+begin
+  FTransitions.Add([TTransition.Create('q0', 'a', 'q1'),
+                    TTransition.Create('q1', 'b', 'q2'),
+                    TTransition.Create('q2', 'c', 'q3'),
+                    TTransition.Create('q3', 'd', 'q4'),
+                    TTransition.Create('q4', 'e', 'q5')]);
+
+  CheckFalse(FTransitions.IsEmpty);
+end;
+
 procedure TTransitionsTest.TestClearWhenHasMoreThanOneTransition;
 begin
-  FTransitions.Add(TTransition.Create('q0', 'a', 'q1'));
-  FTransitions.Add(TTransition.Create('q1', 'a', 'q2'));
-  FTransitions.Add(TTransition.Create('q2', 'c', 'q3'));
+  FTransitions.Add(TTransition.Create('q0', 'a', 'q1'))
+              .Add(TTransition.Create('q1', 'a', 'q2'))
+              .Add(TTransition.Create('q2', 'c', 'q3'));
+ 
   FTransitions.Clear;
 
   CheckTrue(FTransitions.IsEmpty);
@@ -73,11 +98,11 @@ end;
 
 procedure TTransitionsTest.TestCountWhenHasMoreThenOneTransition;
 begin
-  FTransitions.Add(TTransition.Create('q0', 'a', 'q1'));
-  FTransitions.Add(TTransition.Create('q1', 'a', 'q2'));
-  FTransitions.Add(TTransition.Create('q2', 'c', 'q3'));
-  FTransitions.Add(TTransition.Create('q3', 'd', 'q4'));
-  FTransitions.Add(TTransition.Create('q4', 'e', 'q5'));
+  FTransitions.Add(TTransition.Create('q0', 'a', 'q1'))
+              .Add(TTransition.Create('q1', 'a', 'q2'))
+              .Add(TTransition.Create('q2', 'c', 'q3'))
+              .Add(TTransition.Create('q3', 'd', 'q4'))
+              .Add(TTransition.Create('q4', 'e', 'q5'));
 
   CheckEquals(5, FTransitions.Count);
 end;
@@ -95,11 +120,11 @@ end;
 
 procedure TTransitionsTest.TestIsEmptyWhenHasMoreThanOneTransition;
 begin
-  FTransitions.Add(TTransition.Create('q0', 'a', 'q1'));
-  FTransitions.Add(TTransition.Create('q1', 'a', 'q2'));
-  FTransitions.Add(TTransition.Create('q2', 'c', 'q3'));
-  FTransitions.Add(TTransition.Create('q3', 'd', 'q4'));
-  FTransitions.Add(TTransition.Create('q4', 'e', 'q5'));
+  FTransitions.Add(TTransition.Create('q0', 'a', 'q1'))
+              .Add(TTransition.Create('q1', 'a', 'q2'))
+              .Add(TTransition.Create('q2', 'c', 'q3'))
+              .Add(TTransition.Create('q3', 'd', 'q4'))
+              .Add(TTransition.Create('q4', 'e', 'q5'));
 
   CheckFalse(FTransitions.IsEmpty);
 end;

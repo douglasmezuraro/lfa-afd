@@ -15,7 +15,7 @@ type
     function IsEmpty: Boolean;
     function ToArray: TArray<TTransition>;
     function Transition(const State: TState; const Symbol: TSymbol): TTransition;
-    procedure Add(const Transition: TTransition); overload;
+    function Add(const Transition: TTransition): TTransitions; overload;
     procedure Add(const Transitions: TArray<TTransition>); overload;
     procedure Clear;
   end;
@@ -36,10 +36,12 @@ begin
     Add(Transition);
 end;
 
-procedure TTransitions.Add(const Transition: TTransition);
+function TTransitions.Add(const Transition: TTransition): TTransitions;
 begin
   SetLength(FTransitions, Length(FTransitions) + 1);
   FTransitions[High(FTransitions)] := Transition;
+
+  Result := Self;
 end;
 
 procedure TTransitions.Clear;
