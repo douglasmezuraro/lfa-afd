@@ -181,7 +181,7 @@ end;
 
 procedure TListTest.TestToArrayWhenListIsEmpty;
 begin
-  CheckEquals(0, Length(FList.ToArray));
+  CheckEquals(nil, FList.ToArray);
 end;
 
 procedure TListTest.TestToArrayWhenListHasOneElement;

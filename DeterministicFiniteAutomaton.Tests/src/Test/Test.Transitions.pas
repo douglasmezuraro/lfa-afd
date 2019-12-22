@@ -3,7 +3,7 @@ unit Test.Transitions;
 interface
 
 uses
-  Impl.Transition, Impl.Transitions, TestFramework;
+  Helper.TestFramework, Impl.Transition, Impl.Transitions, TestFramework;
 
 type
   TTransitionsTest = class sealed(TTestCase)
@@ -150,9 +150,9 @@ begin
 
   FTransitions.Add([A, B, C]);
 
-  CheckTrue(A.Equals(FTransitions.ToArray[0]));
-  CheckTrue(B.Equals(FTransitions.ToArray[1]));
-  CheckTrue(C.Equals(FTransitions.ToArray[2]));
+  CheckEquals(A, FTransitions.ToArray[0]);
+  CheckEquals(B, FTransitions.ToArray[1]);
+  CheckEquals(C, FTransitions.ToArray[2]);
 end;
 
 procedure TTransitionsTest.TestToArrayWhenHasOneTransition;
@@ -162,7 +162,7 @@ begin
   Transition := TTransition.Create('q0', 'a', 'q1');
   FTransitions.Add(Transition);
 
-  CheckTrue(Transition.Equals(FTransitions.ToArray[0]));
+  CheckEquals(Transition, FTransitions.ToArray[0]);
 end;
 
 procedure TTransitionsTest.TestToArrayWhenIsEmpty;
@@ -178,7 +178,7 @@ begin
   FTransitions.Add(A);
   B := FTransitions.Transition('q0', 'a');
 
-  CheckTrue(A.Equals(B));
+  CheckEquals(A, B);
 end;
 
 procedure TTransitionsTest.TestTransitionWhenTransitionNotExists;
@@ -189,7 +189,7 @@ begin
   FTransitions.Add(A);
   B := FTransitions.Transition('q0', 'b');
 
-  CheckFalse(A.Equals(B));
+  CheckNotEquals(A, B);
 end;
 
 initialization
