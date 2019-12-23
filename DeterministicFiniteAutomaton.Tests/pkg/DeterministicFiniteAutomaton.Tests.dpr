@@ -6,6 +6,7 @@ program DeterministicFiniteAutomaton.Tests;
 
 uses
   DUnitTestRunner,
+  MidasLib,
   Test.Validator in '..\src\Test\Test.Validator.pas',
   Impl.Transitions in '..\..\DeterministicFiniteAutomaton\src\Impl\Impl.Transitions.pas',
   Impl.Types in '..\..\DeterministicFiniteAutomaton\src\Impl\Impl.Types.pas',

@@ -3,7 +3,7 @@
 interface
 
 uses
-  Impl.Transition, Impl.Transitions, Impl.Types, System.StrUtils, System.SysUtils;
+  Impl.Transition, Impl.Transitions, Impl.Types, System.SysUtils;
 
 type
   TDeterministicFiniteAutomaton = class sealed
@@ -13,6 +13,8 @@ type
     FInitialState: TState;
     FFinalStates: TArray<TState>;
     FTransitions: TTransitions;
+  private
+    function IsFinalState(const State: TState): Boolean;
   public
     constructor Create;
     destructor Destroy; override;
@@ -39,6 +41,19 @@ begin
   inherited;
 end;
 
+function TDeterministicFiniteAutomaton.IsFinalState(const State: TState): Boolean;
+var
+  LState: TState;
+begin
+  for LState in FFinalStates do
+  begin
+    if LState.Equals(State) then
+      Exit(True);
+  end;
+
+  Result := False;
+end;
+
 function TDeterministicFiniteAutomaton.Accept(const Word: TWord): Boolean;
 var
   State: TState;
@@ -57,7 +72,7 @@ begin
     State := Transition.Target;
   end;
 
-  Result := MatchStr(State, FFinalStates);
+  Result := IsFinalState(State);
 end;
 
 procedure TDeterministicFiniteAutomaton.Clear;
@@ -66,7 +81,7 @@ begin
   FSymbols := nil;
   FStates := nil;
   FFinalStates := nil;
-  FInitialState := string.Empty;
+  FInitialState := TState.Empty;
 end;
 
 end.

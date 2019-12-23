@@ -3,7 +3,7 @@ object Main: TMain
   Top = 0
   Caption = 'Deterministic Finite Automaton'
   ClientHeight = 600
-  ClientWidth = 600
+  ClientWidth = 480
   Position = ScreenCenter
   FormFactor.Width = 320
   FormFactor.Height = 480
@@ -15,7 +15,7 @@ object Main: TMain
     Align = Bottom
     Locked = True
     Position.Y = 555.000000000000000000
-    Size.Width = 600.000000000000000000
+    Size.Width = 480.000000000000000000
     Size.Height = 45.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 1
@@ -25,7 +25,7 @@ object Main: TMain
       Enabled = True
       ImageIndex = -1
       Locked = True
-      Position.X = 500.000000000000000000
+      Position.X = 380.000000000000000000
       Size.Width = 100.000000000000000000
       Size.Height = 45.000000000000000000
       Size.PlatformDefault = False
@@ -46,24 +46,24 @@ object Main: TMain
   object TabControlView: TTabControl
     Align = Client
     Locked = True
-    Size.Width = 600.000000000000000000
+    Size.Width = 480.000000000000000000
     Size.Height = 555.000000000000000000
     Size.PlatformDefault = False
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     TabPosition = PlatformDefault
     OnChange = TabControlViewChange
     Sizes = (
-      600s
+      480s
       529s
-      600s
+      480s
       529s)
     object TabItemInput: TTabItem
       CustomIcon = <
         item
         end>
       Locked = True
-      IsSelected = False
+      IsSelected = True
       Size.Width = 48.000000000000000000
       Size.Height = 26.000000000000000000
       Size.PlatformDefault = False
@@ -76,18 +76,18 @@ object Main: TMain
         Locked = True
         FocusControl = EditSymbols
         Position.X = 16.000000000000000000
-        Position.Y = 8.000000000000000000
+        Position.Y = 56.000000000000000000
         Text = #931
-        TabOrder = 0
+        TabOrder = 2
       end
       object EditSymbols: TEdit
         Touch.InteractiveGestures = [LongTap, DoubleTap]
         Anchors = [akLeft, akTop, akRight]
-        TabOrder = 1
+        TabOrder = 3
         Position.X = 15.000000000000000000
-        Position.Y = 24.000000000000000000
+        Position.Y = 72.000000000000000000
         Locked = True
-        Size.Width = 565.000000000000000000
+        Size.Width = 445.000000000000000000
         Size.Height = 22.000000000000000000
         Size.PlatformDefault = False
         TextPrompt = 'Symbols'
@@ -97,18 +97,18 @@ object Main: TMain
         Locked = True
         FocusControl = EditStates
         Position.X = 16.000000000000000000
-        Position.Y = 56.000000000000000000
+        Position.Y = 8.000000000000000000
         Text = 'E'
-        TabOrder = 2
+        TabOrder = 0
       end
       object EditStates: TEdit
         Touch.InteractiveGestures = [LongTap, DoubleTap]
         Anchors = [akLeft, akTop, akRight]
-        TabOrder = 3
+        TabOrder = 1
         Position.X = 15.000000000000000000
-        Position.Y = 72.000000000000000000
+        Position.Y = 24.000000000000000000
         Locked = True
-        Size.Width = 565.000000000000000000
+        Size.Width = 445.000000000000000000
         Size.Height = 22.000000000000000000
         Size.PlatformDefault = False
         TextPrompt = 'States'
@@ -129,7 +129,7 @@ object Main: TMain
         Position.X = 15.000000000000000000
         Position.Y = 120.000000000000000000
         Locked = True
-        Size.Width = 565.000000000000000000
+        Size.Width = 445.000000000000000000
         Size.Height = 22.000000000000000000
         Size.PlatformDefault = False
         TextPrompt = 'Initial state'
@@ -149,7 +149,7 @@ object Main: TMain
         Position.X = 15.000000000000000000
         Position.Y = 166.000000000000000000
         Locked = True
-        Size.Width = 565.000000000000000000
+        Size.Width = 445.000000000000000000
         Size.Height = 22.000000000000000000
         Size.PlatformDefault = False
         TextPrompt = 'Final states'
@@ -169,14 +169,14 @@ object Main: TMain
         Locked = True
         Position.X = 16.000000000000000000
         Position.Y = 215.000000000000000000
-        Size.Width = 565.000000000000000000
+        Size.Width = 445.000000000000000000
         Size.Height = 299.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 9
         RowCount = 0
         Options = [Editing, AlwaysShowEditor, ColumnResize, ColLines, RowLines, Tabs, HeaderClick, AutoDisplacement]
         OnSelectCell = GridInputSelectCell
-        Viewport.Width = 561.000000000000000000
+        Viewport.Width = 441.000000000000000000
         Viewport.Height = 295.000000000000000000
       end
     end
@@ -184,7 +184,7 @@ object Main: TMain
       CustomIcon = <
         item
         end>
-      IsSelected = True
+      IsSelected = False
       Size.Width = 58.000000000000000000
       Size.Height = 26.000000000000000000
       Size.PlatformDefault = False
@@ -198,17 +198,17 @@ object Main: TMain
         CanFocus = True
         ClipChildren = True
         Locked = True
-        Size.Width = 600.000000000000000000
+        Size.Width = 480.000000000000000000
         Size.Height = 529.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
         RowCount = 0
-        Viewport.Width = 596.000000000000000000
+        Viewport.Width = 476.000000000000000000
         Viewport.Height = 504.000000000000000000
         object ColumnInput: TStringColumn
           Locked = True
           Header = 'Input'
-          Size.Width = 430.000000000000000000
+          Size.Width = 340.000000000000000000
         end
         object ColumnResult: TStringColumn
           Locked = True

@@ -10,14 +10,14 @@ type
   strict private
     FList: TArray<string>;
   public
+    function Add(const Item: string): TList; overload;
+    function Add(const Items: TArray<string>): TList; overload;
     function Contains(const Item: string): Boolean;
     function Count: Integer;
     function Duplicated: TList;
     function IsEmpty: Boolean;
     function ToArray: TArray<string>;
     function ToString: string; override;
-    function Add(const Item: string): TList; overload;
-    function Add(const Items: TArray<string>): TList; overload;
     procedure Clear;
   end;
 

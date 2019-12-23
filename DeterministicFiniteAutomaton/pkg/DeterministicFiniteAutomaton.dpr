@@ -1,8 +1,9 @@
 program DeterministicFiniteAutomaton;
 
 uses
-  System.StartUpCopy,
   FMX.Forms,
+  MidasLib,
+  System.StartUpCopy,
   Helper.Edit in '..\src\Helper\Helper.Edit.pas',
   Helper.StringGrid in '..\src\Helper\Helper.StringGrid.pas',
   Impl.DeterministicFiniteAutomaton in '..\src\Impl\Impl.DeterministicFiniteAutomaton.pas',

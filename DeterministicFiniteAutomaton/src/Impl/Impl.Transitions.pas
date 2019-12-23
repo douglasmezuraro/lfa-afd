@@ -11,12 +11,13 @@ type
     FTransitions: TArray<TTransition>;
   public
     destructor Destroy; override;
+  public
+    function Add(const Transition: TTransition): TTransitions; overload;
+    function Add(const Transitions: TArray<TTransition>): TTransitions; overload;
     function Count: Integer;
     function IsEmpty: Boolean;
     function ToArray: TArray<TTransition>;
     function Transition(const State: TState; const Symbol: TSymbol): TTransition;
-    function Add(const Transition: TTransition): TTransitions; overload;
-    procedure Add(const Transitions: TArray<TTransition>); overload;
     procedure Clear;
   end;
 
@@ -28,12 +29,14 @@ begin
   inherited Destroy;
 end;
 
-procedure TTransitions.Add(const Transitions: TArray<TTransition>);
+function TTransitions.Add(const Transitions: TArray<TTransition>): TTransitions;
 var
   Transition: TTransition;
 begin
   for Transition in Transitions do
     Add(Transition);
+
+  Result := Self;
 end;
 
 function TTransitions.Add(const Transition: TTransition): TTransitions;

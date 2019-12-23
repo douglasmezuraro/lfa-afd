@@ -3,7 +3,7 @@ unit Helper.StringGrid;
 interface
 
 uses
-  FMX.Grid, System.UITypes, System.SysUtils;
+  FMX.Grid, System.SysUtils, System.UITypes;
 
 type
   TStringGridHelper = class Helper for TStringGrid
@@ -13,15 +13,15 @@ type
   private
     function Eof: Boolean;
     function GetValue(const Column: TColumn): string;
-    procedure DefineColumnCount(const Columns: Byte);
-    procedure DefineRowCount(const Rows: Byte);
+    procedure DefineColumns(const Columns: Byte);
+    procedure DefineRows(const Rows: Byte);
     procedure Delete;
     procedure Insert;
     procedure SetValue(const Column: TColumn; const Value: string);
   public
     function IsEmpty: Boolean;
     procedure Clear(const RemoveColumns: Boolean = False);
-    procedure DefineSize(const Rows, Columns: Byte);
+    procedure Draw(const Rows, Columns: Byte);
     procedure ForEach(const Method: TProc);
     procedure Notify(const Key: Word);
     property Value[const Column: TColumn]: string read GetValue write SetValue;
@@ -36,22 +36,22 @@ begin
     ClearColumns;
 end;
 
-procedure TStringGridHelper.DefineColumnCount(const Columns: Byte);
+procedure TStringGridHelper.DefineColumns(const Columns: Byte);
 begin
   ClearColumns;
   while ColumnCount <> Columns do
     AddObject(TStringColumn.Create(Self));
 end;
 
-procedure TStringGridHelper.DefineRowCount(const Rows: Byte);
+procedure TStringGridHelper.DefineRows(const Rows: Byte);
 begin
   RowCount := Rows;
 end;
 
-procedure TStringGridHelper.DefineSize(const Rows, Columns: Byte);
+procedure TStringGridHelper.Draw(const Rows, Columns: Byte);
 begin
-  DefineRowCount(Rows);
-  DefineColumnCount(Columns);
+  DefineRows(Rows);
+  DefineColumns(Columns);
 end;
 
 procedure TStringGridHelper.Delete;

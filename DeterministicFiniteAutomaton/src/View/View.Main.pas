@@ -126,7 +126,7 @@ begin
   if (States = nil) or (Symbols = nil) then
     Exit;
 
-  GridInput.DefineSize(Length(States) + 1, Length(Symbols) + 1);
+  GridInput.Draw(Length(States) + 1, Length(Symbols) + 1);
 
   for Row := 1 to Pred(GridInput.RowCount) do
     GridInput.Cells[GridInput.FirstColumn, Row] := States[Row - 1].Trim;
