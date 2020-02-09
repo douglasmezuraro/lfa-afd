@@ -3,7 +3,7 @@ unit Helper.StringGrid;
 interface
 
 uses
-  FMX.Grid, System.SysUtils, System.UITypes;
+  FMX.Grid, System.SysUtils, System.UITypes, System.Types;
 
 type
   TStringGridHelper = class Helper for TStringGrid
@@ -18,6 +18,7 @@ type
     procedure Delete;
     procedure Insert;
     procedure SetValue(const Column: TColumn; const Value: string);
+    function GetCoordinate(const A, B: string): TPoint;
   public
     function IsEmpty: Boolean;
     procedure Clear(const RemoveColumns: Boolean = False);
@@ -25,6 +26,7 @@ type
     procedure ForEach(const Method: TProc);
     procedure Notify(const Key: Word);
     property Value[const Column: TColumn]: string read GetValue write SetValue;
+    property Coordinate[const A, B: string]: TPoint read GetCoordinate;
   end;
 
 implementation
@@ -88,6 +90,42 @@ begin
     Method;
     Row := Succ(Row);
   end;
+end;
+
+function TStringGridHelper.GetCoordinate(const A, B: string): TPoint;
+
+  function X: Integer;
+  var
+    LColumn: Integer;
+  begin
+    for LColumn := FirstColumn to Pred(ColumnCount) do
+    begin
+      if Cells[LColumn, FirstRow].Equals(B) then
+      begin
+        Exit(LColumn);
+      end;
+    end;
+
+    Result := TPoint.Zero.X;
+  end;
+
+  function Y: Integer;
+  var
+    LRow: Integer;
+  begin
+    for LRow := FirstRow to Pred(RowCount) do
+    begin
+      if Cells[FirstColumn, LRow].Equals(A) then
+      begin
+        Exit(LRow);
+      end;
+    end;
+
+    Result := TPoint.Zero.Y;
+  end;
+
+begin
+  Result.Create(X, Y);
 end;
 
 function TStringGridHelper.GetValue(const Column: TColumn): string;

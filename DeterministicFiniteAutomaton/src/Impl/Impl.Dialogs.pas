@@ -9,6 +9,8 @@ type
   TDialogs = class sealed
   strict private
     const HelpCtx: Byte = 0;
+  private
+    class function OpenDialog(const Dialog: TOpenDialog; const Extension: string; out FileName: string): Boolean;
   public
     class function Confirmation(const Message: string): Boolean; overload;
     class function Confirmation(const Message: string; const Args: array of const): Boolean; overload;
@@ -18,6 +20,8 @@ type
     class procedure Information(const Message: string; const Args: array of const); overload;
     class procedure Warning(const Message: string); overload;
     class procedure Warning(const Message: string; const Args: array of const); overload;
+    class function OpenFile(const Extension: string; out FileName: string): Boolean;
+    class function SaveFile(const Extension: string; out FileName: string): Boolean;
   end;
 
 implementation
@@ -68,6 +72,39 @@ end;
 class procedure TDialogs.Warning(const Message: string);
 begin
   TDialogService.MessageDialog(Message, TMsgDlgType.mtWarning, [TMsgDlgBtn.mbOK], TMsgDlgBtn.mbOK, HelpCtx, nil);
+end;
+
+class function TDialogs.OpenDialog(const Dialog: TOpenDialog; const Extension: string; out FileName: string): Boolean;
+begin
+  Result := False;
+
+  if not Assigned(Dialog) then
+    Exit;
+
+  Dialog.Filter := '|*.' + Extension;
+  try
+    if Dialog.Execute then
+    begin
+      FileName := Dialog.FileName;
+
+      if not FileName.EndsWith('.' + Extension) then
+        FileName := FileName + '.' + Extension;
+
+      Result := True;
+    end;
+  finally
+    Dialog.Free;
+  end;
+end;
+
+class function TDialogs.OpenFile(const Extension: string; out FileName: string): Boolean;
+begin
+  Result := OpenDialog(TOpenDialog.Create(nil), Extension, FileName);
+end;
+
+class function TDialogs.SaveFile(const Extension: string; out FileName: string): Boolean;
+begin
+  Result := OpenDialog(TSaveDialog.Create(nil), Extension, FileName);
 end;
 
 end.
