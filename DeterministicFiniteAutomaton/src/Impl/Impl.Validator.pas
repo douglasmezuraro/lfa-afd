@@ -3,15 +3,16 @@ unit Impl.Validator;
 interface
 
 uses
-  Impl.DeterministicFiniteAutomaton, Impl.List, Impl.Transition, Impl.Transitions, Impl.Types, System.SysUtils;
+  Impl.DeterministicFiniteAutomaton, Impl.List, Impl.Transition, Impl.Transitions, Impl.Types,
+  System.SysUtils;
 
 type
   TValidator = class sealed
   strict private
-    FSymbols: TList;
-    FStates: TList;
+    FSymbols: TList<TSymbol>;
+    FStates: TList<TState>;
     FInitialState: TState;
-    FFinalStates: TList;
+    FFinalStates: TList<TState>;
     FTransitions: TTransitions;
     FMessage: TMessage;
   private
@@ -32,9 +33,9 @@ implementation
 
 constructor TValidator.Create;
 begin
-  FSymbols := TList.Create;
-  FStates := TList.Create;
-  FFinalStates := TList.Create;
+  FSymbols := TList<TSymbol>.Create;
+  FStates := TList<TState>.Create;
+  FFinalStates := TList<TState>.Create;
   FMessage := TMessage.Empty;
   FInitialState := TState.Empty;
 end;
@@ -49,9 +50,9 @@ end;
 
 procedure TValidator.Setup(const Automaton: TDeterministicFiniteAutomaton);
 begin
-  FSymbols.Add(Automaton.Symbols);
-  FStates.Add(Automaton.States);
-  FFinalStates.Add(Automaton.FinalStates);
+  FSymbols.AddRange(Automaton.Symbols);
+  FStates.AddRange(Automaton.States);
+  FFinalStates.AddRange(Automaton.FinalStates);
   FInitialState := Automaton.InitialState;
   FTransitions := Automaton.Transitions;
 end;
@@ -81,7 +82,7 @@ end;
 function TValidator.ValidateFinalStates: Boolean;
 var
   State: TState;
-  Duplicated: TList;
+  Duplicated: TList<TState>;
 begin
   Result := False;
 
@@ -135,7 +136,7 @@ end;
 
 function TValidator.ValidateStates: Boolean;
 var
-  Duplicated: TList;
+  Duplicated: TList<TState>;
 begin
   Duplicated := FStates.Duplicated;
   try
@@ -152,7 +153,7 @@ end;
 
 function TValidator.ValidateSymbols: Boolean;
 var
-  Duplicated: TList;
+  Duplicated: TList<TSymbol>;
 begin
   Duplicated := FSymbols.Duplicated;
   try

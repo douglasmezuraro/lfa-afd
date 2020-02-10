@@ -9,12 +9,12 @@ uses
   Impl.DeterministicFiniteAutomaton in '..\src\Impl\Impl.DeterministicFiniteAutomaton.pas',
   Impl.Validator in '..\src\Impl\Impl.Validator.pas',
   Impl.Dialogs in '..\src\Impl\Impl.Dialogs.pas',
-  Impl.List in '..\src\Impl\Impl.List.pas',
   Impl.Transition in '..\src\Impl\Impl.Transition.pas',
   Impl.Transitions in '..\src\Impl\Impl.Transitions.pas',
   Impl.Types in '..\src\Impl\Impl.Types.pas',
   View.Main in '..\src\View\View.Main.pas' {Main},
-  Helper.Json in '..\src\Helper\Helper.Json.pas';
+  Helper.Json in '..\src\Helper\Helper.Json.pas',
+  Impl.List in '..\src\Impl\Impl.List.pas';
 
 {$R *.res}
 
