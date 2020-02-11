@@ -7,7 +7,7 @@ uses
   FMX.Layouts, FMX.ListBox, FMX.ScrollBox, FMX.StdCtrls, FMX.TabControl, FMX.Types, Helper.Edit,
   Helper.StringGrid, Impl.DeterministicFiniteAutomaton, Impl.Dialogs, Impl.Transition, Impl.Transitions,
   Impl.Types, Impl.Validator, System.Actions, System.Classes, System.Rtti, System.SysUtils,
-  FMX.Menus, Helper.Json, Rest.Json, Types;
+  FMX.Menus, Helper.Json, Rest.Json, System.Types;
 
 type
   TMain = class sealed(TForm)
