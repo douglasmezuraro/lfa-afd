@@ -85,11 +85,11 @@
         <DCCReference Include="..\..\DeterministicFiniteAutomaton\src\Impl\Impl.List.pas"/>
         <DCCReference Include="..\src\Test\Test.List.pas"/>
         <DCCReference Include="..\src\Helper\Helper.TestFramework.pas"/>
-        <DCCReference Include="..\..\DeterministicFiniteAutomaton\src\Impl\Impl.Transition.pas"/>
+        <DCCReference Include="..\..\DeterministicFiniteAutomaton\src\DFA\DFA.Transition.pas"/>
         <DCCReference Include="..\src\Test\Test.Transitions.pas"/>
         <DCCReference Include="..\src\Test\Test.DeterministicFiniteAutomaton.pas"/>
-        <DCCReference Include="..\..\DeterministicFiniteAutomaton\src\Impl\Impl.DeterministicFiniteAutomaton.pas"/>
-        <DCCReference Include="..\..\DeterministicFiniteAutomaton\src\Impl\Impl.Validator.pas"/>
+        <DCCReference Include="..\..\DeterministicFiniteAutomaton\src\DFA\DFA.Automaton.pas"/>
+        <DCCReference Include="..\..\DeterministicFiniteAutomaton\src\DFA\DFA.Validator.pas"/>
         <DCCReference Include="..\src\Test\Test.Exercises.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>

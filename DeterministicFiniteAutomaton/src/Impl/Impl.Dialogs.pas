@@ -8,34 +8,34 @@ uses
 type
   TDialogs = class sealed
   strict private
-    const HelpCtx: Byte = 0;
+    const HelpCtx = 0;
   private
-    class function OpenDialog(const Dialog: TOpenDialog; const Extension: string; out FileName: string): Boolean;
+    class function OpenDialog(const ADialog: TOpenDialog; const AExtension: string; out AFileName: string): Boolean;
   public
-    class function Confirmation(const Message: string): Boolean; overload;
-    class function Confirmation(const Message: string; const Args: array of const): Boolean; overload;
-    class procedure Error(const Message: string); overload;
-    class procedure Error(const Message: string; const Args: array of const); overload;
-    class procedure Information(const Message: string); overload;
-    class procedure Information(const Message: string; const Args: array of const); overload;
-    class procedure Warning(const Message: string); overload;
-    class procedure Warning(const Message: string; const Args: array of const); overload;
-    class function OpenFile(const Extension: string; out FileName: string): Boolean;
-    class function SaveFile(const Extension: string; out FileName: string): Boolean;
+    class function Confirmation(const AMessage: string): Boolean; overload;
+    class function Confirmation(const AMessage: string; const AArgs: array of const): Boolean; overload;
+    class procedure Error(const AMessage: string); overload;
+    class procedure Error(const AMessage: string; const AArgs: array of const); overload;
+    class procedure Information(const AMessage: string); overload;
+    class procedure Information(const AMessage: string; const AArgs: array of const); overload;
+    class procedure Warning(const AMessage: string); overload;
+    class procedure Warning(const AMessage: string; const AArgs: array of const); overload;
+    class function OpenFile(const AExtension: string; out AFileName: string): Boolean;
+    class function SaveFile(const AExtension: string; out AFileName: string): Boolean;
   end;
 
 implementation
 
-class function TDialogs.Confirmation(const Message: string; const Args: array of const): Boolean;
+class function TDialogs.Confirmation(const AMessage: string; const AArgs: array of const): Boolean;
 begin
-  Result := Confirmation(Format(Message, Args));
+  Result := Confirmation(Format(AMessage, AArgs));
 end;
 
-class function TDialogs.Confirmation(const Message: string): Boolean;
+class function TDialogs.Confirmation(const AMessage: string): Boolean;
 var
   LResult: Boolean;
 begin
-  TDialogService.MessageDialog(Message, TMsgDlgType.mtConfirmation, FMX.Dialogs.mbYesNo, TMsgDlgBtn.mbNo, HelpCtx,
+  TDialogService.MessageDialog(AMessage, TMsgDlgType.mtConfirmation, FMX.Dialogs.mbYesNo, TMsgDlgBtn.mbNo, HelpCtx,
     procedure(const AResult: TModalResult)
     begin
       LResult := IsPositiveResult(AResult);
@@ -44,67 +44,71 @@ begin
   Result := LResult;
 end;
 
-class procedure TDialogs.Error(const Message: string; const Args: array of const);
+class procedure TDialogs.Error(const AMessage: string; const AArgs: array of const);
 begin
-  Error(Format(Message, Args));
+  Error(Format(AMessage, AArgs));
 end;
 
-class procedure TDialogs.Error(const Message: string);
+class procedure TDialogs.Error(const AMessage: string);
 begin
-  TDialogService.MessageDialog(Message, TMsgDlgType.mtError, [TMsgDlgBtn.mbOK], TMsgDlgBtn.mbOK, HelpCtx, nil);
+  TDialogService.MessageDialog(AMessage, TMsgDlgType.mtError, [TMsgDlgBtn.mbOK], TMsgDlgBtn.mbOK, HelpCtx, nil);
 end;
 
-class procedure TDialogs.Information(const Message: string; const Args: array of const);
+class procedure TDialogs.Information(const AMessage: string; const AArgs: array of const);
 begin
-  Information(Format(Message, Args));
+  Information(Format(AMessage, AArgs));
 end;
 
-class procedure TDialogs.Information(const Message: string);
+class procedure TDialogs.Information(const AMessage: string);
 begin
-  TDialogService.MessageDialog(Message, TMsgDlgType.mtInformation, [TMsgDlgBtn.mbOK], TMsgDlgBtn.mbOK, HelpCtx, nil);
+  TDialogService.MessageDialog(AMessage, TMsgDlgType.mtInformation, [TMsgDlgBtn.mbOK], TMsgDlgBtn.mbOK, HelpCtx, nil);
 end;
 
-class procedure TDialogs.Warning(const Message: string; const Args: array of const);
+class procedure TDialogs.Warning(const AMessage: string; const AArgs: array of const);
 begin
-  Warning(Format(Message, Args));
+  Warning(Format(AMessage, AArgs));
 end;
 
-class procedure TDialogs.Warning(const Message: string);
+class procedure TDialogs.Warning(const AMessage: string);
 begin
-  TDialogService.MessageDialog(Message, TMsgDlgType.mtWarning, [TMsgDlgBtn.mbOK], TMsgDlgBtn.mbOK, HelpCtx, nil);
+  TDialogService.MessageDialog(AMessage, TMsgDlgType.mtWarning, [TMsgDlgBtn.mbOK], TMsgDlgBtn.mbOK, HelpCtx, nil);
 end;
 
-class function TDialogs.OpenDialog(const Dialog: TOpenDialog; const Extension: string; out FileName: string): Boolean;
+class function TDialogs.OpenDialog(const ADialog: TOpenDialog; const AExtension: string; out AFileName: string): Boolean;
 begin
-  Result := False;
+  if not Assigned(ADialog) then
+  begin
+    Exit(False);
+  end;
 
-  if not Assigned(Dialog) then
-    Exit;
-
-  Dialog.Filter := '|*.' + Extension;
+  ADialog.Filter := '|*.' + AExtension;
   try
-    if Dialog.Execute then
+    if ADialog.Execute then
     begin
-      FileName := Dialog.FileName;
+      AFileName := ADialog.FileName;
 
-      if not FileName.EndsWith('.' + Extension) then
-        FileName := FileName + '.' + Extension;
+      if not AFileName.EndsWith('.' + AExtension) then
+      begin
+        AFileName := AFileName + '.' + AExtension;
+      end;
 
-      Result := True;
+      Exit(True);
     end;
+
+    Result := False;
   finally
-    Dialog.Free;
+    ADialog.Free;
   end;
 end;
 
-class function TDialogs.OpenFile(const Extension: string; out FileName: string): Boolean;
+class function TDialogs.OpenFile(const AExtension: string; out AFileName: string): Boolean;
 begin
-  Result := OpenDialog(TOpenDialog.Create(nil), Extension, FileName);
+  Result := OpenDialog(TOpenDialog.Create(nil), AExtension, AFileName);
 end;
 
-class function TDialogs.SaveFile(const Extension: string; out FileName: string): Boolean;
+class function TDialogs.SaveFile(const AExtension: string; out AFileName: string): Boolean;
 begin
-  Result := OpenDialog(TSaveDialog.Create(nil), Extension, FileName);
+  Result := OpenDialog(TSaveDialog.Create(nil), AExtension, AFileName);
 end;
 
 end.

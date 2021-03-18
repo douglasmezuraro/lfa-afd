@@ -3,11 +3,12 @@
 interface
 
 uses
-  FMX.ActnList, FMX.Controls, FMX.Controls.Presentation, FMX.Edit, FMX.Forms, FMX.Grid, FMX.Grid.Style,
-  FMX.Layouts, FMX.ListBox, FMX.ScrollBox, FMX.StdCtrls, FMX.TabControl, FMX.Types, Helper.Edit,
-  Helper.StringGrid, Impl.DeterministicFiniteAutomaton, Impl.Dialogs, Impl.Transition, Impl.Transitions,
-  Impl.Types, Impl.Validator, System.Actions, System.Classes, System.Rtti, System.SysUtils,
-  FMX.Menus, Helper.Json, Rest.Json, System.Types;
+  FMX.ActnList, FMX.Controls, FMX.Controls.Presentation, FMX.Edit, FMX.Forms, FMX.Grid,
+  FMX.StdCtrls, FMX.TabControl, FMX.Types, Helper.Edit,
+  Helper.StringGrid, Impl.Dialogs, System.Classes, System.SysUtils,
+  FMX.Menus, System.Types, System.Generics.Collections,
+
+  System.Rtti, FMX.Grid.Style, System.Actions, FMX.ScrollBox, DFA;
 
 type
   TMain = class sealed(TForm)
@@ -39,103 +40,99 @@ type
     MenuItemSaveFile: TMenuItem;
     ActionOpenFile: TAction;
     ActionSaveFile: TAction;
-    procedure ActionCheckExecute(Sender: TObject);
-    procedure ActionClearExecute(Sender: TObject);
-    procedure EditStatesChange(Sender: TObject);
-    procedure EditSymbolsChange(Sender: TObject);
-    procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char; Shift: TShiftState);
-    procedure FormShow(Sender: TObject);
-    procedure GridInputSelectCell(Sender: TObject; const ACol, ARow: Integer; var CanSelect: Boolean);
-    procedure TabControlViewChange(Sender: TObject);
-    procedure ActionOpenFileExecute(Sender: TObject);
-    procedure ActionSaveFileExecute(Sender: TObject);
+    procedure ActionCheckExecute(ASender: TObject);
+    procedure ActionClearExecute(ASender: TObject);
+    procedure EditStatesChange(ASender: TObject);
+    procedure EditSymbolsChange(ASender: TObject);
+    procedure FormKeyUp(ASender: TObject; var AKey: Word; var AKeyChar: Char; AShift: TShiftState);
+    procedure FormShow(ASender: TObject);
+    procedure GridInputSelectCell(ASender: TObject; const AColumn, ARow: Integer; var CanSelect: Boolean);
+    procedure TabControlViewChange(ASender: TObject);
+    procedure ActionOpenFileExecute(ASender: TObject);
+    procedure ActionSaveFileExecute(ASender: TObject);
   strict private
-    FAutomaton: TDeterministicFiniteAutomaton;
     function GetFinalStates: TArray<TState>;
-    procedure SetFinalStates(const FinalStates: TArray<TState>);
+    procedure SetFinalStates(const AFinalStates: TArray<TState>);
     function GetInitialState: TState;
-    procedure SetInitialState(const InitialState: TState);
+    procedure SetInitialState(const AInitialState: TState);
     function GetStates: TArray<TState>;
-    procedure SetStates(const States: TArray<TState>);
+    procedure SetStates(const AStates: TArray<TState>);
     function GetSymbols: TArray<TSymbol>;
-    procedure SetSymbols(const Symbols: TArray<TSymbol>);
-    function GetTransitions: TTransitions;
-    procedure SetTransitions(const Transitions: TTransitions);
+    procedure SetSymbols(const ASymbols: TArray<TSymbol>);
+    function GetTransitions: TArray<TTransition>;
+    procedure SetTransitions(const ATransitions: TArray<TTransition>);
   private
-    function Validate: TValidationResult;
     procedure DrawGrid;
     procedure Check;
     procedure Clear;
-    procedure ModelToView;
     procedure OpenFile;
     procedure SaveFile;
-    procedure ViewToModel;
   public
-    constructor Create(AOwner: TComponent); override;
-    destructor Destroy; override;
-  published
     property Symbols: TArray<TSymbol> read GetSymbols write SetSymbols;
     property States: TArray<TState> read GetStates write SetStates;
     property InitialState: TState read GetInitialState write SetInitialState;
     property FinalStates: TArray<TState> read GetFinalStates write SetFinalStates;
-    property Transitions: TTransitions read GetTransitions write SetTransitions;
+    property Transitions: TArray<TTransition> read GetTransitions write SetTransitions;
   end;
 
 implementation
 
 {$R *.fmx}
 
-constructor TMain.Create(AOwner: TComponent);
-begin
-  inherited Create(AOwner);
-  FAutomaton := TDeterministicFiniteAutomaton.Create;
-end;
-
-destructor TMain.Destroy;
-begin
-  FAutomaton.Free;
-  inherited Destroy;
-end;
-
-procedure TMain.ActionCheckExecute(Sender: TObject);
+procedure TMain.ActionCheckExecute(ASender: TObject);
 begin
   Check;
 end;
 
-procedure TMain.ActionClearExecute(Sender: TObject);
+procedure TMain.ActionClearExecute(ASender: TObject);
 begin
   Clear;
 end;
 
-procedure TMain.ActionOpenFileExecute(Sender: TObject);
+procedure TMain.ActionOpenFileExecute(ASender: TObject);
 begin
   OpenFile;
 end;
 
-procedure TMain.ActionSaveFileExecute(Sender: TObject);
+procedure TMain.ActionSaveFileExecute(ASender: TObject);
 begin
   SaveFile;
 end;
 
 procedure TMain.Check;
+const
+  RESULT_MESSAGE: array[Boolean] of string = ('Rejected', 'Accepted');
+var
+  LDTO: TDTO;
+  LAutomaton: TDeterministicFiniteAutomaton;
 begin
-  ViewToModel;
+  LDTO.Symbols := Symbols;
+  LDTO.States := States;
+  LDTO.InitialState := InitialState;
+  LDTO.FinalStates := FinalStates;
+  LDTO.Transitions := Transitions;
 
-  if not Validate.Key then
-  begin
-    TDialogs.Warning(Validate.Value);
-    Exit;
+  try
+    LAutomaton := TDeterministicFiniteAutomaton.Create(LDTO);
+    try
+      GridOutput.ForEach(
+        procedure
+        begin
+          GridOutput.Value[ColumnResult] := RESULT_MESSAGE[LAutomaton.Accept(GridOutput.Value[ColumnInput])];
+        end);
+    finally
+      LAutomaton.Free;
+    end;
+  except
+    on E: Exception do
+    begin
+      TDialogs.Information(E.Message);
+    end;
   end;
-
-  GridOutput.ForEach(procedure
-                     begin
-                       GridOutput.Value[ColumnResult] := ResultMessage[FAutomaton.Accept(GridOutput.Value[ColumnInput])];
-                     end);
 end;
 
 procedure TMain.Clear;
 begin
-  FAutomaton.Clear;
   EditSymbols.Clear;
   EditStates.Clear;
   EditInitialState.Clear;
@@ -146,39 +143,47 @@ end;
 
 procedure TMain.DrawGrid;
 var
-  Row, Column: Byte;
+  LRow, LColumn: Integer;
 begin
   GridInput.Clear;
 
   if (States = nil) or (Symbols = nil) then
+  begin
     Exit;
+  end;
 
   GridInput.Draw(Length(States) + 1, Length(Symbols) + 1);
 
-  for Row := 1 to Pred(GridInput.RowCount) do
-    GridInput.Cells[GridInput.FirstColumn, Row] := States[Row - 1].Trim;
+  for LRow := 1 to Pred(GridInput.RowCount) do
+  begin
+    GridInput.Cells[GridInput.FirstColumn, LRow] := States[LRow - 1].Trim;
+  end;
 
-  for Column := 1 to Pred(GridInput.ColumnCount) do
-    GridInput.Cells[Column, GridInput.FirstRow] := Symbols[Column - 1].Trim;
+  for LColumn := 1 to Pred(GridInput.ColumnCount) do
+  begin
+    GridInput.Cells[LColumn, GridInput.FirstRow] := Symbols[LColumn - 1].Trim;
+  end;
 end;
 
-procedure TMain.EditStatesChange(Sender: TObject);
+procedure TMain.EditStatesChange(ASender: TObject);
 begin
   DrawGrid;
 end;
 
-procedure TMain.EditSymbolsChange(Sender: TObject);
+procedure TMain.EditSymbolsChange(ASender: TObject);
 begin
   DrawGrid;
 end;
 
-procedure TMain.FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char; Shift: TShiftState);
+procedure TMain.FormKeyUp(ASender: TObject; var AKey: Word; var AKeyChar: Char; AShift: TShiftState);
 begin
   if GridOutput.IsFocused then
-    GridOutput.Notify(Key);
+  begin
+    GridOutput.Notify(AKey);
+  end;
 end;
 
-procedure TMain.FormShow(Sender: TObject);
+procedure TMain.FormShow(ASender: TObject);
 begin
   ButtonCheck.Visible := False;
   TabControlView.ActiveTab := TabItemInput;
@@ -204,128 +209,96 @@ begin
   Result := EditSymbols.Text.Replace(' ', '').Split([','], TStringSplitOptions.ExcludeEmpty);
 end;
 
-function TMain.GetTransitions: TTransitions;
+function TMain.GetTransitions: TArray<TTransition>;
 var
-  Column, Row: Integer;
-  Transition: TTransition;
+  LRow, LColumn: Integer;
+  LTransition: TTransition;
+  LList: TList<TTransition>;
 begin
-  FAutomaton.Transitions.Clear;
-
-  for Row := 1 to Pred(GridInput.RowCount) do
-  begin
-    for Column := 1 to Pred(GridInput.ColumnCount) do
+  LList := TList<TTransition>.Create;
+  try
+    for LRow := 1 to Pred(GridInput.RowCount) do
     begin
-      if not GridInput.Cells[Column, Row].IsEmpty then
+      for LColumn := 1 to Pred(GridInput.ColumnCount) do
       begin
-        Transition := TTransition.Create;
-        Transition.Source := GridInput.Cells[GridInput.FirstColumn, Row];
-        Transition.Symbol := GridInput.Cells[Column, GridInput.FirstRow];
-        Transition.Target := GridInput.Cells[Column, Row];
+        if not GridInput.Cells[LColumn, LRow].IsEmpty then
+        begin
+          LTransition := TTransition.Create;
+          LTransition.Source := GridInput.Cells[GridInput.FirstColumn, LRow];
+          LTransition.Symbol := GridInput.Cells[LColumn, GridInput.FirstRow];
+          LTransition.Target := GridInput.Cells[LColumn, LRow];
 
-        FAutomaton.Transitions.Add(Transition);
+          LList.Add(LTransition);
+        end;
       end;
     end;
+
+    Result := LList.ToArray;
+  finally
+    LList.Free;
   end;
-
-  Result := FAutomaton.Transitions;
 end;
 
-procedure TMain.GridInputSelectCell(Sender: TObject; const ACol, ARow: Integer; var CanSelect: Boolean);
+procedure TMain.GridInputSelectCell(ASender: TObject; const AColumn, ARow: Integer; var CanSelect: Boolean);
 begin
-  CanSelect := (ACol <> GridInput.FirstColumn) and (ARow <> GridInput.FirstRow);
-end;
-
-procedure TMain.ModelToView;
-begin
-  Symbols := FAutomaton.Symbols;
-  States := FAutomaton.States;
-  InitialState := FAutomaton.InitialState;
-  FinalStates := FAutomaton.FinalStates;
-  Transitions := FAutomaton.Transitions;
+  CanSelect := (AColumn <> GridInput.FirstColumn) and (ARow <> GridInput.FirstRow);
 end;
 
 procedure TMain.OpenFile;
 var
-  FileName: string;
+  LFileName: string;
 begin
-  if TDialogs.OpenFile('json', FileName) then
+  if TDialogs.OpenFile('json', LFileName) then
   begin
-    if Assigned(FAutomaton) then
-      FAutomaton.Free;
-
-    FAutomaton := TJson.OpenFromFile<TDeterministicFiniteAutomaton>(FileName);
-    ModelToView;
+    raise ENotImplemented.Create('OpenFile is currently not implemented.');
   end;
 end;
 
 procedure TMain.SaveFile;
 var
-  FileName: string;
+  LFileName: string;
 begin
-  if TDialogs.SaveFile('json', FileName) then
+  if TDialogs.SaveFile('json', LFileName) then
   begin
-    ViewToModel;
-    TJson.SaveToFile<TDeterministicFiniteAutomaton>(FAutomaton, FileName);
+    raise ENotImplemented.Create('SaveFile is currently not implemented.');
   end;
 end;
 
-procedure TMain.SetFinalStates(const FinalStates: TArray<TState>);
+procedure TMain.SetFinalStates(const AFinalStates: TArray<TState>);
 begin
-  EditFinalStates.Text := string.Join(', ', FinalStates);
+  EditFinalStates.Text := string.Join(', ', AFinalStates);
 end;
 
-procedure TMain.SetInitialState(const InitialState: TState);
+procedure TMain.SetInitialState(const AInitialState: TState);
 begin
-  EditInitialState.Text := InitialState;
+  EditInitialState.Text := AInitialState;
 end;
 
-procedure TMain.SetStates(const States: TArray<TState>);
+procedure TMain.SetStates(const AStates: TArray<TState>);
 begin
-  EditStates.Text := string.Join(', ', States);
+  EditStates.Text := string.Join(', ', AStates);
 end;
 
-procedure TMain.SetSymbols(const Symbols: TArray<TSymbol>);
+procedure TMain.SetSymbols(const ASymbols: TArray<TSymbol>);
 begin
-  EditSymbols.Text := string.Join(', ', Symbols);
+  EditSymbols.Text := string.Join(', ', ASymbols);
 end;
 
-procedure TMain.SetTransitions(const Transitions: TTransitions);
+procedure TMain.SetTransitions(const ATransitions: TArray<TTransition>);
 var
-  Transition: TTransition;
-  Coordinate: TPoint;
+  LTransition: TTransition;
+  LCoordinate: TPoint;
 begin
-  for Transition in Transitions.ToArray do
+  for LTransition in ATransitions do
   begin
-    Coordinate := GridInput.Coordinate[Transition.Source, Transition.Symbol];
-    GridInput.Cells[Coordinate.X, Coordinate.Y] := Transition.Target;
+    LCoordinate := GridInput.Coordinate[LTransition.Source, LTransition.Symbol];
+    GridInput.Cells[LCoordinate.X, LCoordinate.Y] := LTransition.Target;
   end;
 end;
 
-procedure TMain.ViewToModel;
+procedure TMain.TabControlViewChange(ASender: TObject);
 begin
-  FAutomaton.Clear;
-  FAutomaton.Symbols := Symbols;
-  FAutomaton.States := States;
-  FAutomaton.InitialState := InitialState;
-  FAutomaton.FinalStates := FinalStates;
-  FAutomaton.Transitions := Transitions;
-end;
-
-procedure TMain.TabControlViewChange(Sender: TObject);
-begin
-  ButtonCheck.Visible := (Sender as TTabControl).ActiveTab <> TabItemInput;
-end;
-
-function TMain.Validate: TValidationResult;
-var
-  Validator: TValidator;
-begin
-  Validator := TValidator.Create;
-  try
-    Result := Validator.Validate(FAutomaton);
-  finally
-    Validator.Free;
-  end;
+  ButtonCheck.Visible := (ASender as TTabControl).ActiveTab <> TabItemInput;
 end;
 
 end.

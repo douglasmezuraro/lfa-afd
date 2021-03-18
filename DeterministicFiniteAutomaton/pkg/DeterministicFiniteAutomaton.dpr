@@ -3,18 +3,17 @@ program DeterministicFiniteAutomaton;
 uses
   FMX.Forms,
   MidasLib,
+  System.SysUtils,
   System.StartUpCopy,
   Helper.Edit in '..\src\Helper\Helper.Edit.pas',
   Helper.StringGrid in '..\src\Helper\Helper.StringGrid.pas',
-  Impl.DeterministicFiniteAutomaton in '..\src\Impl\Impl.DeterministicFiniteAutomaton.pas',
-  Impl.Validator in '..\src\Impl\Impl.Validator.pas',
+  DFA.Automaton in '..\src\DFA\DFA.Automaton.pas',
+  DFA.Validator in '..\src\DFA\DFA.Validator.pas',
   Impl.Dialogs in '..\src\Impl\Impl.Dialogs.pas',
-  Impl.Transition in '..\src\Impl\Impl.Transition.pas',
-  Impl.Transitions in '..\src\Impl\Impl.Transitions.pas',
-  Impl.Types in '..\src\Impl\Impl.Types.pas',
   View.Main in '..\src\View\View.Main.pas' {Main},
   Helper.Json in '..\src\Helper\Helper.Json.pas',
-  Impl.List in '..\src\Impl\Impl.List.pas';
+  DFA in '..\src\DFA\DFA.pas',
+  DFA.Types in '..\src\DFA\DFA.Types.pas';
 
 {$R *.res}
 
@@ -26,8 +25,8 @@ begin
   Application.CreateForm(TMain, Main);
   Application.Run;
 
-  {$WARN SYMBOL_PLATFORM OFF}
-  ReportMemoryLeaksOnShutdown := ByteBool(DebugHook);
-  {$WARN SYMBOL_PLATFORM ON}
+{$WARN SYMBOL_PLATFORM OFF}
+  ReportMemoryLeaksOnShutdown := DebugHook.ToBoolean;
+{$WARN SYMBOL_PLATFORM ON}
 end.
 

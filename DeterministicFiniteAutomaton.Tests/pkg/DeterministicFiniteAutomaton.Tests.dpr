@@ -13,11 +13,11 @@ uses
   Impl.List in '..\..\DeterministicFiniteAutomaton\src\Impl\Impl.List.pas',
   Test.List in '..\src\Test\Test.List.pas',
   Helper.TestFramework in '..\src\Helper\Helper.TestFramework.pas',
-  Impl.Transition in '..\..\DeterministicFiniteAutomaton\src\Impl\Impl.Transition.pas',
+  DFA.Transition in '..\..\DeterministicFiniteAutomaton\src\DFA\DFA.Transition.pas',
   Test.Transitions in '..\src\Test\Test.Transitions.pas',
   Test.DeterministicFiniteAutomaton in '..\src\Test\Test.DeterministicFiniteAutomaton.pas',
-  Impl.DeterministicFiniteAutomaton in '..\..\DeterministicFiniteAutomaton\src\Impl\Impl.DeterministicFiniteAutomaton.pas',
-  Impl.Validator in '..\..\DeterministicFiniteAutomaton\src\Impl\Impl.Validator.pas',
+  DFA.Automaton in '..\..\DeterministicFiniteAutomaton\src\DFA\DFA.Automaton.pas',
+  DFA.Validator in '..\..\DeterministicFiniteAutomaton\src\DFA\DFA.Validator.pas',
   Test.Exercises in '..\src\Test\Test.Exercises.pas';
 
 {$R *.RES}

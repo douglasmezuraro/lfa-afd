@@ -8,52 +8,56 @@ uses
 type
   TStringGridHelper = class Helper for TStringGrid
   public const
-    FirstRow: Byte = 0;
-    FirstColumn: Byte = 0;
+    FirstRow = 0;
+    FirstColumn = 0;
   private
     function Eof: Boolean;
-    function GetValue(const Column: TColumn): string;
-    procedure DefineColumns(const Columns: Byte);
-    procedure DefineRows(const Rows: Byte);
+    function GetValue(const AColumn: TColumn): string;
+    procedure DefineColumns(const AColumns: Integer);
+    procedure DefineRows(const ARows: Integer);
     procedure Delete;
     procedure Insert;
-    procedure SetValue(const Column: TColumn; const Value: string);
-    function GetCoordinate(const A, B: string): TPoint;
+    procedure SetValue(const AColumn: TColumn; const Value: string);
+    function GetCoordinate(const AX, AY: string): TPoint;
   public
     function IsEmpty: Boolean;
-    procedure Clear(const RemoveColumns: Boolean = False);
-    procedure Draw(const Rows, Columns: Byte);
-    procedure ForEach(const Method: TProc);
-    procedure Notify(const Key: Word);
-    property Value[const Column: TColumn]: string read GetValue write SetValue;
-    property Coordinate[const A, B: string]: TPoint read GetCoordinate;
+    procedure Clear(const AClearColumns: Boolean = False);
+    procedure Draw(const ARows, AColumns: Integer);
+    procedure ForEach(const AProc: TProc);
+    procedure Notify(const AKey: Word);
+    property Value[const AColumn: TColumn]: string read GetValue write SetValue;
+    property Coordinate[const AX, AY: string]: TPoint read GetCoordinate;
   end;
 
 implementation
 
-procedure TStringGridHelper.Clear(const RemoveColumns: Boolean);
+procedure TStringGridHelper.Clear(const AClearColumns: Boolean);
 begin
   RowCount := 0;
-  if RemoveColumns then
+  if AClearColumns then
+  begin
     ClearColumns;
+  end;
 end;
 
-procedure TStringGridHelper.DefineColumns(const Columns: Byte);
+procedure TStringGridHelper.DefineColumns(const AColumns: Integer);
 begin
   ClearColumns;
-  while ColumnCount <> Columns do
+  while ColumnCount <> AColumns do
+  begin
     AddObject(TStringColumn.Create(Self));
+  end;
 end;
 
-procedure TStringGridHelper.DefineRows(const Rows: Byte);
+procedure TStringGridHelper.DefineRows(const ARows: Integer);
 begin
-  RowCount := Rows;
+  RowCount := ARows;
 end;
 
-procedure TStringGridHelper.Draw(const Rows, Columns: Byte);
+procedure TStringGridHelper.Draw(const ARows, AColumns: Integer);
 begin
-  DefineRows(Rows);
-  DefineColumns(Columns);
+  DefineRows(ARows);
+  DefineColumns(AColumns);
 end;
 
 procedure TStringGridHelper.Delete;
@@ -61,7 +65,9 @@ var
   LColumn, LRow: Integer;
 begin
   if IsEmpty then
+  begin
     Exit;
+  end;
 
   if Selected <> RowCount then
   begin
@@ -82,17 +88,17 @@ begin
   Result := Row = RowCount;
 end;
 
-procedure TStringGridHelper.ForEach(const Method: TProc);
+procedure TStringGridHelper.ForEach(const AProc: TProc);
 begin
   Row := FirstRow;
   while not Eof do
   begin
-    Method;
+    AProc;
     Row := Succ(Row);
   end;
 end;
 
-function TStringGridHelper.GetCoordinate(const A, B: string): TPoint;
+function TStringGridHelper.GetCoordinate(const AX, AY: string): TPoint;
 
   function X: Integer;
   var
@@ -100,7 +106,7 @@ function TStringGridHelper.GetCoordinate(const A, B: string): TPoint;
   begin
     for LColumn := FirstColumn to Pred(ColumnCount) do
     begin
-      if Cells[LColumn, FirstRow].Equals(B) then
+      if Cells[LColumn, FirstRow].Equals(AY) then
       begin
         Exit(LColumn);
       end;
@@ -115,7 +121,7 @@ function TStringGridHelper.GetCoordinate(const A, B: string): TPoint;
   begin
     for LRow := FirstRow to Pred(RowCount) do
     begin
-      if Cells[FirstColumn, LRow].Equals(A) then
+      if Cells[FirstColumn, LRow].Equals(AX) then
       begin
         Exit(LRow);
       end;
@@ -128,9 +134,9 @@ begin
   Result.Create(X, Y);
 end;
 
-function TStringGridHelper.GetValue(const Column: TColumn): string;
+function TStringGridHelper.GetValue(const AColumn: TColumn): string;
 begin
-  Result := Cells[Column.Index, Row];
+  Result := Cells[AColumn.Index, Row];
 end;
 
 procedure TStringGridHelper.Insert;
@@ -145,17 +151,23 @@ begin
   Result := RowCount = 0;
 end;
 
-procedure TStringGridHelper.Notify(const Key: Word);
+procedure TStringGridHelper.Notify(const AKey: Word);
 begin
-  case Key of
-    vkInsert: Insert;
-    vkDelete: Delete;
+  case AKey of
+    vkInsert:
+      begin
+        Insert;
+      end;
+    vkDelete:
+      begin
+        Delete;
+      end;
   end;
 end;
 
-procedure TStringGridHelper.SetValue(const Column: TColumn; const Value: string);
+procedure TStringGridHelper.SetValue(const AColumn: TColumn; const Value: string);
 begin
-  Cells[Column.Index, Row] := Value;
+  Cells[AColumn.Index, Row] := Value;
 end;
 
 end.
