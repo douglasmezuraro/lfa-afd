@@ -219,8 +219,8 @@ end;
 
 procedure TExercisesFixture.ExerciseOne(const AWord: string; const AExpected: Boolean);
 var
-	LDTO: TDTO;
-	LActual: Boolean;
+  LDTO: TDTO;
+  LActual: Boolean;
 begin
   LDTO.States := [];
   LDTO.Symbols := [];
@@ -234,8 +234,8 @@ end;
 
 procedure TExercisesFixture.ExerciseTwo(const AWord: string; const AExpected: Boolean);
 var
-	LDTO: TDTO;
-	LActual: Boolean;
+  LDTO: TDTO;
+  LActual: Boolean;
 begin
   LDTO.States := ['s0'];
   LDTO.Symbols := [];
@@ -249,8 +249,8 @@ end;
 
 procedure TExercisesFixture.ExerciseTree(const AWord: string; const AExpected: Boolean);
 var
-	LDTO: TDTO;
-	LActual: Boolean;
+  LDTO: TDTO;
+  LActual: Boolean;
 begin
   LDTO.States := ['s0', 's1'];
   LDTO.Symbols := ['0'];
@@ -266,8 +266,8 @@ end;
 
 procedure TExercisesFixture.ExerciseFour(const AWord: string; const AExpected: Boolean);
 var
-	LDTO: TDTO;
-	LActual: Boolean;
+  LDTO: TDTO;
+  LActual: Boolean;
 begin
   LDTO.States := ['s0', 's1'];
   LDTO.Symbols := ['0'];
@@ -283,8 +283,8 @@ end;
 
 procedure TExercisesFixture.ExerciseFive(const AWord: string; const AExpected: Boolean);
 var
-	LDTO: TDTO;
-	LActual: Boolean;
+  LDTO: TDTO;
+  LActual: Boolean;
 begin
   LDTO.States := ['s0', 's1'];
   LDTO.Symbols := ['a'];
@@ -301,8 +301,8 @@ end;
 
 procedure TExercisesFixture.ExerciseSix(const AWord: string; const AExpected: Boolean);
 var
-	LDTO: TDTO;
-	LActual: Boolean;
+  LDTO: TDTO;
+  LActual: Boolean;
 begin
   LDTO.States := ['s0', 's1'];
   LDTO.Symbols := ['a'];
@@ -319,8 +319,8 @@ end;
 
 procedure TExercisesFixture.ExerciseSeven(const AWord: string; const AExpected: Boolean);
 var
-	LDTO: TDTO;
-	LActual: Boolean;
+  LDTO: TDTO;
+  LActual: Boolean;
 begin
   LDTO.States := ['s0', 's1', 's2', 's3'];
   LDTO.Symbols := ['a', 'b'];
@@ -339,8 +339,8 @@ end;
 
 procedure TExercisesFixture.ExerciseEight(const AWord: string; const AExpected: Boolean);
 var
-	LDTO: TDTO;
-	LActual: Boolean;
+  LDTO: TDTO;
+  LActual: Boolean;
 begin
   LDTO.States := ['s0', 's1', 's2', 's3', 's4'];
   LDTO.Symbols := ['a', 'b', 'c'];
@@ -360,8 +360,8 @@ end;
 
 procedure TExercisesFixture.ExerciseNine(const AWord: string; const AExpected: Boolean);
 var
-	LDTO: TDTO;
-	LActual: Boolean;
+  LDTO: TDTO;
+  LActual: Boolean;
 begin
   LDTO.States := ['s0', 's1', 's2', 's3'];
   LDTO.Symbols := ['a', 'b', 'c'];
@@ -383,8 +383,8 @@ end;
 
 procedure TExercisesFixture.ExerciseTen(const AWord: string; const AExpected: Boolean);
 var
-	LDTO: TDTO;
-	LActual: Boolean;
+  LDTO: TDTO;
+  LActual: Boolean;
 begin
   LDTO.States := ['s0', 's1', 's2', 's3', 's4', 's5'];
   LDTO.Symbols := ['a', 'b'];
