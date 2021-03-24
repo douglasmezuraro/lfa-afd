@@ -8,6 +8,8 @@ uses
 type
   [TestFixture]
   TExercisesFixture = class sealed
+  private
+    function Check(const ADTO: TDTO; const AWord: TWord): Boolean;
   public
     [Test]
     [Category('L1 = {W ε {}}')]
@@ -203,11 +205,22 @@ type
 
 implementation
 
+function TExercisesFixture.Check(const ADTO: TDTO; const AWord: TWord): Boolean;
+var
+  LAutomaton: TDeterministicFiniteAutomaton;
+begin
+  LAutomaton := TDeterministicFiniteAutomaton.Create(ADTO);
+  try
+    Result := LAutomaton.Check(AWord);
+  finally
+    LAutomaton.Free;
+  end;
+end;
+
 procedure TExercisesFixture.ExerciseOne(const AWord: string; const AExpected: Boolean);
 var
 	LDTO: TDTO;
 	LActual: Boolean;
-	LAutomaton: TDeterministicFiniteAutomaton;
 begin
   LDTO.States := [];
   LDTO.Symbols := [];
@@ -215,20 +228,14 @@ begin
   LDTO.FinalStates := [];
   LDTO.Transitions := [];
 
-	LAutomaton := TDeterministicFiniteAutomaton.Create(LDTO);
-	try
-		LActual := LAutomaton.Check(AWord);
-		Assert.AreEqual(LActual, AExpected);
-	finally
-		LAutomaton.Free;
-	end;
+  LActual := Check(LDTO, AWord);
+  Assert.AreEqual(LActual, AExpected);
 end;
 
 procedure TExercisesFixture.ExerciseTwo(const AWord: string; const AExpected: Boolean);
 var
 	LDTO: TDTO;
 	LActual: Boolean;
-	LAutomaton: TDeterministicFiniteAutomaton;
 begin
   LDTO.States := ['s0'];
   LDTO.Symbols := [];
@@ -236,20 +243,14 @@ begin
   LDTO.FinalStates := ['s0'];
   LDTO.Transitions := [];
 
-	LAutomaton := TDeterministicFiniteAutomaton.Create(LDTO);
-	try
-		LActual := LAutomaton.Check(AWord);
-		Assert.AreEqual(LActual, AExpected);
-	finally
-		LAutomaton.Free;
-	end;
+  LActual := Check(LDTO, AWord);
+  Assert.AreEqual(LActual, AExpected);
 end;
 
 procedure TExercisesFixture.ExerciseTree(const AWord: string; const AExpected: Boolean);
 var
 	LDTO: TDTO;
 	LActual: Boolean;
-	LAutomaton: TDeterministicFiniteAutomaton;
 begin
   LDTO.States := ['s0', 's1'];
   LDTO.Symbols := ['0'];
@@ -259,20 +260,14 @@ begin
     TTransition.Create('s0', '0', 's1')
   ];
 
-	LAutomaton := TDeterministicFiniteAutomaton.Create(LDTO);
-	try
-		LActual := LAutomaton.Check(AWord);
-		Assert.AreEqual(LActual, AExpected);
-	finally
-		LAutomaton.Free;
-	end;
+  LActual := Check(LDTO, AWord);
+  Assert.AreEqual(LActual, AExpected);
 end;
 
 procedure TExercisesFixture.ExerciseFour(const AWord: string; const AExpected: Boolean);
 var
 	LDTO: TDTO;
 	LActual: Boolean;
-	LAutomaton: TDeterministicFiniteAutomaton;
 begin
   LDTO.States := ['s0', 's1'];
   LDTO.Symbols := ['0'];
@@ -282,20 +277,14 @@ begin
     TTransition.Create('s0', '0', 's1')
   ];
 
-	LAutomaton := TDeterministicFiniteAutomaton.Create(LDTO);
-	try
-		LActual := LAutomaton.Check(AWord);
-		Assert.AreEqual(LActual, AExpected);
-	finally
-		LAutomaton.Free;
-	end;
+  LActual := Check(LDTO, AWord);
+  Assert.AreEqual(LActual, AExpected);
 end;
 
 procedure TExercisesFixture.ExerciseFive(const AWord: string; const AExpected: Boolean);
 var
 	LDTO: TDTO;
 	LActual: Boolean;
-	LAutomaton: TDeterministicFiniteAutomaton;
 begin
   LDTO.States := ['s0', 's1'];
   LDTO.Symbols := ['a'];
@@ -306,20 +295,14 @@ begin
     TTransition.Create('s1', 'a', 's1')
   ];
 
-	LAutomaton := TDeterministicFiniteAutomaton.Create(LDTO);
-	try
-		LActual := LAutomaton.Check(AWord);
-		Assert.AreEqual(LActual, AExpected);
-	finally
-		LAutomaton.Free;
-	end;
+  LActual := Check(LDTO, AWord);
+  Assert.AreEqual(LActual, AExpected);
 end;
 
 procedure TExercisesFixture.ExerciseSix(const AWord: string; const AExpected: Boolean);
 var
 	LDTO: TDTO;
 	LActual: Boolean;
-	LAutomaton: TDeterministicFiniteAutomaton;
 begin
   LDTO.States := ['s0', 's1'];
   LDTO.Symbols := ['a'];
@@ -330,20 +313,14 @@ begin
     TTransition.Create('s1', 'a', 's0')
   ];
 
-	LAutomaton := TDeterministicFiniteAutomaton.Create(LDTO);
-	try
-		LActual := LAutomaton.Check(AWord);
-		Assert.AreEqual(LActual, AExpected);
-	finally
-		LAutomaton.Free;
-	end;
+  LActual := Check(LDTO, AWord);
+  Assert.AreEqual(LActual, AExpected);
 end;
 
 procedure TExercisesFixture.ExerciseSeven(const AWord: string; const AExpected: Boolean);
 var
 	LDTO: TDTO;
 	LActual: Boolean;
-	LAutomaton: TDeterministicFiniteAutomaton;
 begin
   LDTO.States := ['s0', 's1', 's2', 's3'];
   LDTO.Symbols := ['a', 'b'];
@@ -356,20 +333,14 @@ begin
     TTransition.Create('s2', 'b', 's1')
   ];
 
-	LAutomaton := TDeterministicFiniteAutomaton.Create(LDTO);
-	try
-		LActual := LAutomaton.Check(AWord);
-		Assert.AreEqual(LActual, AExpected);
-	finally
-		LAutomaton.Free;
-	end;
+  LActual := Check(LDTO, AWord);
+  Assert.AreEqual(LActual, AExpected);
 end;
 
 procedure TExercisesFixture.ExerciseEight(const AWord: string; const AExpected: Boolean);
 var
 	LDTO: TDTO;
 	LActual: Boolean;
-	LAutomaton: TDeterministicFiniteAutomaton;
 begin
   LDTO.States := ['s0', 's1', 's2', 's3', 's4'];
   LDTO.Symbols := ['a', 'b', 'c'];
@@ -383,20 +354,14 @@ begin
     TTransition.Create('s3', 'b', 's2')
   ];
 
-	LAutomaton := TDeterministicFiniteAutomaton.Create(LDTO);
-	try
-		LActual := LAutomaton.Check(AWord);
-		Assert.AreEqual(LActual, AExpected);
-	finally
-		LAutomaton.Free;
-	end;
+  LActual := Check(LDTO, AWord);
+  Assert.AreEqual(LActual, AExpected);
 end;
 
 procedure TExercisesFixture.ExerciseNine(const AWord: string; const AExpected: Boolean);
 var
 	LDTO: TDTO;
 	LActual: Boolean;
-	LAutomaton: TDeterministicFiniteAutomaton;
 begin
   LDTO.States := ['s0', 's1', 's2', 's3'];
   LDTO.Symbols := ['a', 'b', 'c'];
@@ -412,20 +377,14 @@ begin
     TTransition.Create('s3', 'c', 's3')
   ];
 
-	LAutomaton := TDeterministicFiniteAutomaton.Create(LDTO);
-	try
-		LActual := LAutomaton.Check(AWord);
-		Assert.AreEqual(LActual, AExpected);
-	finally
-		LAutomaton.Free;
-	end;
+  LActual := Check(LDTO, AWord);
+  Assert.AreEqual(LActual, AExpected);
 end;
 
 procedure TExercisesFixture.ExerciseTen(const AWord: string; const AExpected: Boolean);
 var
 	LDTO: TDTO;
 	LActual: Boolean;
-	LAutomaton: TDeterministicFiniteAutomaton;
 begin
   LDTO.States := ['s0', 's1', 's2', 's3', 's4', 's5'];
   LDTO.Symbols := ['a', 'b'];
@@ -442,13 +401,8 @@ begin
     TTransition.Create('s5', 'a', 's2')
   ];
 
-	LAutomaton := TDeterministicFiniteAutomaton.Create(LDTO);
-	try
-		LActual := LAutomaton.Check(AWord);
-		Assert.AreEqual(LActual, AExpected);
-	finally
-		LAutomaton.Free;
-	end;
+  LActual := Check(LDTO, AWord);
+  Assert.AreEqual(LActual, AExpected);
 end;
 
 initialization
