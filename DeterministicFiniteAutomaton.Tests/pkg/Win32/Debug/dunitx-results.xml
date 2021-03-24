@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
-<test-results name="C:\Users\douglas.mezuraro\Documents\GitHub\lfa-afd\DeterministicFiniteAutomaton.Tests\pkg\Win32\Debug\DeterministicFiniteAutomaton.Tests.exe" total="141" errors="0" failures="0" ignored="0" inconclusive="0" not-run="0" skipped="0" invalid="0" date="2021-03-24" time="0.019">
+<test-results name="C:\Users\douglas.mezuraro\Documents\GitHub\lfa-afd\DeterministicFiniteAutomaton.Tests\pkg\Win32\Debug\DeterministicFiniteAutomaton.Tests.exe" total="141" errors="0" failures="0" ignored="0" inconclusive="0" not-run="0" skipped="0" invalid="0" date="2021-03-24" time="0.010">
   <culture-info current-culture="en" current-uiculture="en" />
-  <test-suite type="Assembly" name="DeterministicFiniteAutomaton.Tests.exe" executed="true" result="Success" success="True" time="0.019" asserts="0">
+  <test-suite type="Assembly" name="DeterministicFiniteAutomaton.Tests.exe" executed="true" result="Success" success="True" time="0.010" asserts="0">
     <results>
-        <test-suite type="Namespace" name="Fixture" executed="true" result="Success" success="True" time="0.018" asserts="0" >
+        <test-suite type="Namespace" name="Fixture" executed="true" result="Success" success="True" time="0.009" asserts="0" >
           <results>
-              <test-suite type="Fixture" name="TExercisesFixture" executed="True" result="Success" success="True" time="0.018" >
+              <test-suite type="Fixture" name="TExercisesFixture" executed="True" result="Success" success="True" time="0.009" >
                 <results>
                   <test-case name="ExerciseOne.Check if the &quot;&quot; word belongs to the L1 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
                     <categories>
@@ -262,13 +262,13 @@
                       <category name="0}}" />
                     </categories>
                   </test-case>
-                  <test-case name="ExerciseFour.Check if the &quot;7&quot; word belongs to the L4 language" executed="True" result="Success" success="True" time="0.005" asserts="0" >
+                  <test-case name="ExerciseFour.Check if the &quot;7&quot; word belongs to the L4 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
                     <categories>
                       <category name="L4 = {W ε {ʎ" />
                       <category name="0}}" />
                     </categories>
                   </test-case>
-                  <test-case name="ExerciseFour.Check if the &quot;8&quot; word belongs to the L4 language" executed="True" result="Success" success="True" time="0.002" asserts="0" >
+                  <test-case name="ExerciseFour.Check if the &quot;8&quot; word belongs to the L4 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
                     <categories>
                       <category name="L4 = {W ε {ʎ" />
                       <category name="0}}" />
@@ -320,7 +320,7 @@
                       <category name="L5 = {aⁿ | n > 0}" />
                     </categories>
                   </test-case>
-                  <test-case name="ExerciseFive.Check if the &quot;b&quot; word belongs to the L5 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                  <test-case name="ExerciseFive.Check if the &quot;b&quot; word belongs to the L5 language" executed="True" result="Success" success="True" time="0.001" asserts="0" >
                     <categories>
                       <category name="L5 = {aⁿ | n > 0}" />
                     </categories>
@@ -383,7 +383,7 @@
                       <category name="n é ímpar}" />
                     </categories>
                   </test-case>
-                  <test-case name="ExerciseSix.Check if the &quot;aaaaaaa&quot; word belongs to the L6 language" executed="True" result="Success" success="True" time="0.001" asserts="0" >
+                  <test-case name="ExerciseSix.Check if the &quot;aaaaaaa&quot; word belongs to the L6 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
                     <categories>
                       <category name="L6 = {aⁿ | n > 0" />
                       <category name="n é ímpar}" />
@@ -529,7 +529,7 @@
                       <category name="L8 = {a((bc)ⁿ) | n > 0}" />
                     </categories>
                   </test-case>
-                  <test-case name="ExerciseEight.Check if the &quot;abcbcbcbcbca&quot; word belongs to the L8 language" executed="True" result="Success" success="True" time="0.001" asserts="0" >
+                  <test-case name="ExerciseEight.Check if the &quot;abcbcbcbcbca&quot; word belongs to the L8 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
                     <categories>
                       <category name="L8 = {a((bc)ⁿ) | n > 0}" />
                     </categories>
@@ -727,7 +727,7 @@
                       <category name="m é par}" />
                     </categories>
                   </test-case>
-                  <test-case name="ExerciseTen.Check if the &quot;aabbaa&quot; word belongs to the L10 language" executed="True" result="Success" success="True" time="0.001" asserts="0" >
+                  <test-case name="ExerciseTen.Check if the &quot;aabbaa&quot; word belongs to the L10 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
                     <categories>
                       <category name="L10 = {(aⁿ)bb(aᵐ) | n >= 0" />
                       <category name="m> = 0" />
