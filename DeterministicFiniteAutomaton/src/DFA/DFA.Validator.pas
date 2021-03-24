@@ -179,6 +179,11 @@ procedure TValidator.ValidateTransitions;
 var
   LTransition: TTransition;
 begin
+  if (FSymbols.Count > 0) and (FStates.Count > 0) and (FTransitions.Count = 0) then
+  begin
+    raise ETransitionsNotDefined.Create('The transitions has been not defined.');
+  end;
+
   for LTransition in FTransitions.ToArray do
   begin
     if not FStates.Contains(LTransition.Source) then

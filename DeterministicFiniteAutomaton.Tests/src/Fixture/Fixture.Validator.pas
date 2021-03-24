@@ -12,55 +12,46 @@ type
     procedure Validate(const ADTO: TDTO);
   public
     [Test]
-    procedure TestValidateWhenAutomatonHasDuplicatedSymbol;
+    procedure WhenHasDuplicatedSymbol;
 
     [Test]
-    procedure TestValidateWhenAutomatonHasDuplicatedState;
+    procedure WhenHasDuplicatedState;
 
     [Test]
-    procedure TestValidateWhenAutomatonHasNotStatesAndInitialStateIsNotDefined;
+    procedure WhenHasStatesAndIntitialStateIsNotDefined;
 
     [Test]
-    procedure TestValidateWhenAutomatonHasStatesAndIntitialStatesIsNotDefined;
+    procedure WhenStatesNotContaisTheInitialState;
 
     [Test]
-    procedure TestValidateWhenAutomatonInitialStateIsNotFound;
+    procedure WhenHasStatesAndFinalStatesIsNotDefined;
 
     [Test]
-    procedure TestValidateWhenAutomatonHasNotStatesAndFinalStatesIsNotDefined;
+    procedure WhenHasDuplicatedFinalStates;
 
     [Test]
-    procedure TestValidateWhenAutomatonHasStatesFinalStatesIsNotDefined;
+    procedure WhenStastesNotContainsTheFinalState;
 
     [Test]
-    procedure TestValidateWhenAutomatonHasDuplicatedFinalStates;
+    procedure WhenTransitionsIsNotDefined;
 
     [Test]
-    procedure TestValidateWhenAutomatonHasFinalStatesNotFound;
+    procedure WhenTransitionSourceIsNotDefined;
 
     [Test]
-    procedure TestValidateWhenAutomatonHasNotStatesAndTransitionsIsNotDefined;
+    procedure WhenStatesNotContainsTransitionSource;
 
     [Test]
-    procedure TestValidateWhenAutomatonHasStatesAndTransitionsIsNotDefined;
+    procedure WhenTransitionSymbolWasNotDefined;
 
     [Test]
-    procedure TestValidateWhenAutomatonHasTransitionHasSourceNotDefined;
+    procedure WhenSymbolsNotContainsTransitionSymbol;
 
     [Test]
-    procedure TestValidateWhenAutomatonHasTransitionHasSourceNotFound;
+    procedure WhenTransitionTargetIsNotDefined;
 
     [Test]
-    procedure TestValidateWhenAutomatonHasTransitionHasSymbolNotDefined;
-
-    [Test]
-    procedure TestValidateWhenAutomatonHasTransitionHasSymbolNotFound;
-
-    [Test]
-    procedure TestValidateWhenAutomatonHasTransitionHasTargetNotDefined;
-
-    [Test]
-    procedure TestValidateWhenAutomatonHasTransitionHasTargetNotFound;
+    procedure WhenStatesNotContaisTransitionTarget;
 
     [Test]
     procedure TestValidateWhenAutomatonIsValid;
@@ -80,7 +71,7 @@ begin
   end;
 end;
 
-procedure TValidatorFixture.TestValidateWhenAutomatonHasDuplicatedSymbol;
+procedure TValidatorFixture.WhenHasDuplicatedSymbol;
 var
   LDTO: TDTO;
 begin
@@ -97,7 +88,7 @@ begin
     end);
 end;
 
-procedure TValidatorFixture.TestValidateWhenAutomatonHasDuplicatedState;
+procedure TValidatorFixture.WhenHasDuplicatedState;
 var
   LDTO: TDTO;
 begin
@@ -114,24 +105,7 @@ begin
     end);
 end;
 
-procedure TValidatorFixture.TestValidateWhenAutomatonHasNotStatesAndInitialStateIsNotDefined;
-var
-  LDTO: TDTO;
-begin
-  LDTO.States := [];
-  LDTO.Symbols := ['a', 'b', 'c'];
-  LDTO.InitialState := TState.Empty;
-  LDTO.FinalStates := [];
-  LDTO.Transitions := [];
-
-  Assert.WillRaise(
-    procedure
-    begin
-      Validate(LDTO);
-    end);
-end;
-
-procedure TValidatorFixture.TestValidateWhenAutomatonHasStatesAndIntitialStatesIsNotDefined;
+procedure TValidatorFixture.WhenHasStatesAndIntitialStateIsNotDefined;
 var
   LDTO: TDTO;
 begin
@@ -148,7 +122,7 @@ begin
     end);
 end;
 
-procedure TValidatorFixture.TestValidateWhenAutomatonInitialStateIsNotFound;
+procedure TValidatorFixture.WhenStatesNotContaisTheInitialState;
 var
   LDTO: TDTO;
 begin
@@ -165,24 +139,7 @@ begin
     end);
 end;
 
-procedure TValidatorFixture.TestValidateWhenAutomatonHasNotStatesAndFinalStatesIsNotDefined;
-var
-  LDTO: TDTO;
-begin
-  LDTO.States := [];
-  LDTO.Symbols := ['a', 'b', 'c', 'd'];
-  LDTO.InitialState := TState.Empty;
-  LDTO.FinalStates := [];
-  LDTO.Transitions := [];
-
-  Assert.WillRaise(
-    procedure
-    begin
-      Validate(LDTO);
-    end);
-end;
-
-procedure TValidatorFixture.TestValidateWhenAutomatonHasStatesFinalStatesIsNotDefined;
+procedure TValidatorFixture.WhenHasStatesAndFinalStatesIsNotDefined;
 var
   LDTO: TDTO;
 begin
@@ -199,7 +156,7 @@ begin
     end);
 end;
 
-procedure TValidatorFixture.TestValidateWhenAutomatonHasDuplicatedFinalStates;
+procedure TValidatorFixture.WhenHasDuplicatedFinalStates;
 var
   LDTO: TDTO;
 begin
@@ -216,7 +173,7 @@ begin
     end);
 end;
 
-procedure TValidatorFixture.TestValidateWhenAutomatonHasFinalStatesNotFound;
+procedure TValidatorFixture.WhenStastesNotContainsTheFinalState;
 var
   LDTO: TDTO;
 begin
@@ -233,24 +190,7 @@ begin
     end);
 end;
 
-procedure TValidatorFixture.TestValidateWhenAutomatonHasNotStatesAndTransitionsIsNotDefined;
-var
-  LDTO: TDTO;
-begin
-  LDTO.States := [];
-  LDTO.Symbols := [];
-  LDTO.InitialState := TState.Empty;
-  LDTO.FinalStates := [];
-  LDTO.Transitions := [];
-
-  Assert.WillRaise(
-    procedure
-    begin
-      Validate(LDTO);
-    end);
-end;
-
-procedure TValidatorFixture.TestValidateWhenAutomatonHasStatesAndTransitionsIsNotDefined;
+procedure TValidatorFixture.WhenTransitionsIsNotDefined;
 var
   LDTO: TDTO;
 begin
@@ -267,7 +207,7 @@ begin
     end);
 end;
 
-procedure TValidatorFixture.TestValidateWhenAutomatonHasTransitionHasSourceNotDefined;
+procedure TValidatorFixture.WhenTransitionSourceIsNotDefined;
 var
   LDTO: TDTO;
 begin
@@ -289,7 +229,7 @@ begin
     end);
 end;
 
-procedure TValidatorFixture.TestValidateWhenAutomatonHasTransitionHasSourceNotFound;
+procedure TValidatorFixture.WhenStatesNotContainsTransitionSource;
 var
   LDTO: TDTO;
 begin
@@ -311,7 +251,7 @@ begin
     end);
 end;
 
-procedure TValidatorFixture.TestValidateWhenAutomatonHasTransitionHasSymbolNotDefined;
+procedure TValidatorFixture.WhenTransitionSymbolWasNotDefined;
 var
   LDTO: TDTO;
 begin
@@ -333,7 +273,7 @@ begin
     end);
 end;
 
-procedure TValidatorFixture.TestValidateWhenAutomatonHasTransitionHasSymbolNotFound;
+procedure TValidatorFixture.WhenSymbolsNotContainsTransitionSymbol;
 var
   LDTO: TDTO;
 begin
@@ -355,7 +295,7 @@ begin
     end);
 end;
 
-procedure TValidatorFixture.TestValidateWhenAutomatonHasTransitionHasTargetNotDefined;
+procedure TValidatorFixture.WhenTransitionTargetIsNotDefined;
 var
   LDTO: TDTO;
 begin
@@ -377,7 +317,7 @@ begin
     end);
 end;
 
-procedure TValidatorFixture.TestValidateWhenAutomatonHasTransitionHasTargetNotFound;
+procedure TValidatorFixture.WhenStatesNotContaisTransitionTarget;
 var
   LDTO: TDTO;
 begin
@@ -414,7 +354,7 @@ begin
     TTransition.Create('q1', 'b', 'q1')
   ];
 
-  Assert.WillNotRaise(
+  Assert.WillNotRaiseAny(
     procedure
     begin
       Validate(LDTO);
