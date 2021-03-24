@@ -6,15 +6,12 @@ uses
   DFA.Types, DFA.Automaton, DFA.Validator;
 
 type
-  EDuplicated = DFA.Types.EDuplicated;
-  ENotDefined = DFA.Types.ENotDefined;
-  ENotContains = DFA.Types.ENotContains;
-  EInitialStateNotDefined = DFA.Types.EInitialStateNotDefined;
-  EFinalStatesNotDefined = DFA.Types.EFinalStatesNotDefined;
-  ESourceStateNotDefined = DFA.Types.ESourceStateNotDefined;
-  ETargetStateNotDefined = DFA.Types.ETargetStateNotDefined;
-  ESymbolNotDefined = DFA.Types.ESymbolNotDefined;
-  ETransitionsNotDefined = DFA.Types.ETransitionsNotDefined;
+  EInitialStateIsNotDefined = DFA.Types.EInitialStateIsNotDefined;
+  EFinalStatesIsNotDefined = DFA.Types.EFinalStatesIsNotDefined;
+  ETransitionSourceStateIsNotDefined = DFA.Types.ETransitionSourceStateIsNotDefined;
+  ETransitionTargetStateIsNotDefined = DFA.Types.ETransitionTargetStateIsNotDefined;
+  ESymbolIsNotDefined = DFA.Types.ESymbolIsNotDefined;
+  ETransitionsIsNotDefined = DFA.Types.ETransitionsIsNotDefined;
   EStatesNotContaisTheState = DFA.Types.EStatesNotContaisTheState;
   ESymbolsNotContainsTheSymbol = DFA.Types.ESymbolsNotContainsTheSymbol;
   EDuplicatedState = DFA.Types.EDuplicatedState;

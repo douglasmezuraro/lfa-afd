@@ -112,7 +112,7 @@ procedure TValidator.ValidateInitialState;
 begin
   if (FStates.Count > 0) and (FInitialState.IsEmpty) then
   begin
-    raise EInitialStateNotDefined.Create('The initial state is not defined.');
+    raise EInitialStateIsNotDefined.Create('The initial state is not defined.');
   end;
 
   if FInitialState.IsEmpty then
@@ -157,7 +157,7 @@ var
 begin
   if (FFinalStates.Count = 0) and (FStates.Count > 1) then
   begin
-    raise EFinalStatesNotDefined.Create('The final states is not defined.');
+    raise EFinalStatesIsNotDefined.Create('The final states is not defined.');
   end;
 
   for LState in FFinalStates do
@@ -181,14 +181,14 @@ var
 begin
   if (FSymbols.Count > 0) and (FStates.Count > 0) and (FTransitions.Count = 0) then
   begin
-    raise ETransitionsNotDefined.Create('The transitions has been not defined.');
+    raise ETransitionsIsNotDefined.Create('The transitions has been not defined.');
   end;
 
   for LTransition in FTransitions.ToArray do
   begin
     if LTransition.Source.IsEmpty then
     begin
-      raise ESourceStateNotDefined.Create('The transition source state is not defined.');
+      raise ETransitionSourceStateIsNotDefined.Create('The transition source state is not defined.');
     end;
 
     if not FStates.Contains(LTransition.Source) then
@@ -198,7 +198,7 @@ begin
 
     if LTransition.Symbol.IsEmpty then
     begin
-      raise ESymbolNotDefined.Create('The transition symbol is not defined.');
+      raise ESymbolIsNotDefined.Create('The transition symbol is not defined.');
     end;
 
     if not FSymbols.Contains(LTransition.Symbol) then
@@ -208,7 +208,7 @@ begin
 
     if LTransition.Target.IsEmpty then
     begin
-      raise ETargetStateNotDefined.Create('The transition target state is not defined');
+      raise ETransitionTargetStateIsNotDefined.Create('The transition target state is not defined');
     end;
 
     if not FStates.Contains(LTransition.Target) then

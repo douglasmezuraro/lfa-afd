@@ -54,7 +54,7 @@ type
     procedure WhenStatesNotContaisTransitionTarget;
 
     [Test]
-    procedure TestValidateWhenAutomatonIsValid;
+    procedure WhenIsValid;
   end;
 
 implementation
@@ -90,7 +90,8 @@ begin
       Validate(LDTO);
     end,
     EDuplicatedSymbol,
-    'The symbol "a" is duplicated.');
+    'The symbol "a" is duplicated.'
+  );
 end;
 
 procedure TValidatorFixture.WhenHasDuplicatedState;
@@ -112,7 +113,8 @@ begin
       Validate(LDTO);
     end,
     EDuplicatedState,
-    'The state "s1" is duplicated.');
+    'The state "s1" is duplicated.'
+  );
 end;
 
 procedure TValidatorFixture.WhenHasStatesAndIntitialStateIsNotDefined;
@@ -133,8 +135,9 @@ begin
     begin
       Validate(LDTO);
     end,
-    EInitialStateNotDefined,
-    'The initial state is not defined.');
+    EInitialStateIsNotDefined,
+    'The initial state is not defined.'
+  );
 end;
 
 procedure TValidatorFixture.WhenStatesNotContaisTheInitialState;
@@ -156,7 +159,8 @@ begin
       Validate(LDTO);
     end,
     EStatesNotContaisTheState,
-    'The state "s3" is not in states list "[s0, s1]".');
+    'The state "s3" is not in states list "[s0, s1]".'
+  );
 end;
 
 procedure TValidatorFixture.WhenHasStatesAndFinalStatesIsNotDefined;
@@ -177,8 +181,9 @@ begin
     begin
       Validate(LDTO);
     end,
-    EFinalStatesNotDefined,
-    'The final states is not defined.');
+    EFinalStatesIsNotDefined,
+    'The final states is not defined.'
+  );
 end;
 
 procedure TValidatorFixture.WhenHasDuplicatedFinalStates;
@@ -200,7 +205,8 @@ begin
       Validate(LDTO);
     end,
     EDuplicatedState,
-    'The state "s1" is duplicated.');
+    'The state "s1" is duplicated.'
+  );
 end;
 
 procedure TValidatorFixture.WhenStastesNotContainsTheFinalState;
@@ -222,7 +228,8 @@ begin
       Validate(LDTO);
     end,
     EStatesNotContaisTheState,
-    'The final state "s2" is not in states list "[s0, s1]".');
+    'The final state "s2" is not in states list "[s0, s1]".'
+  );
 end;
 
 procedure TValidatorFixture.WhenTransitionsIsNotDefined;
@@ -240,8 +247,9 @@ begin
     begin
       Validate(LDTO);
     end,
-    ETransitionsNotDefined,
-    'The transitions has been not defined.');
+    ETransitionsIsNotDefined,
+    'The transitions has been not defined.'
+  );
 end;
 
 procedure TValidatorFixture.WhenTransitionSourceIsNotDefined;
@@ -262,8 +270,9 @@ begin
     begin
       Validate(LDTO);
     end,
-    ESourceStateNotDefined,
-    'The transition source state is not defined.');
+    ETransitionSourceStateIsNotDefined,
+    'The transition source state is not defined.'
+  );
 end;
 
 procedure TValidatorFixture.WhenStatesNotContainsTransitionSource;
@@ -285,7 +294,8 @@ begin
       Validate(LDTO);
     end,
     EStatesNotContaisTheState,
-    'The source state "s2" is not in states list "[s0, s1]".');
+    'The source state "s2" is not in states list "[s0, s1]".'
+  );
 end;
 
 procedure TValidatorFixture.WhenTransitionSymbolWasNotDefined;
@@ -306,8 +316,9 @@ begin
     begin
       Validate(LDTO);
     end,
-    ESymbolNotDefined,
-    'The transition symbol is not defined.');
+    ESymbolIsNotDefined,
+    'The transition symbol is not defined.'
+  );
 end;
 
 procedure TValidatorFixture.WhenSymbolsNotContainsTransitionSymbol;
@@ -329,7 +340,8 @@ begin
       Validate(LDTO);
     end,
     ESymbolsNotContainsTheSymbol,
-    'The symbol "b" is not in symbols list "[a]".');
+    'The symbol "b" is not in symbols list "[a]".'
+  );
 end;
 
 procedure TValidatorFixture.WhenTransitionTargetIsNotDefined;
@@ -350,8 +362,9 @@ begin
     begin
       Validate(LDTO);
     end,
-    ETargetStateNotDefined,
-    'The transition target state is not defined');
+    ETransitionTargetStateIsNotDefined,
+    'The transition target state is not defined'
+  );
 end;
 
 procedure TValidatorFixture.WhenStatesNotContaisTransitionTarget;
@@ -373,10 +386,11 @@ begin
       Validate(LDTO);
     end,
     EStatesNotContaisTheState,
-    'The target state "s2" is not in states list "[s0, s1]".');
+    'The target state "s2" is not in states list "[s0, s1]".'
+  );
 end;
 
-procedure TValidatorFixture.TestValidateWhenAutomatonIsValid;
+procedure TValidatorFixture.WhenIsValid;
 var
   LDTO: TDTO;
 begin
@@ -393,7 +407,8 @@ begin
     procedure
     begin
       Validate(LDTO);
-    end);
+    end
+  );
 end;
 
 initialization

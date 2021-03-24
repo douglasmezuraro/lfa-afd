@@ -7,14 +7,14 @@ uses
 
 type
   EDuplicated = class abstract(EArgumentException);
-  ENotDefined = class abstract(EArgumentException);
+  EIsNotDefined = class abstract(EArgumentException);
   ENotContains = class abstract(EArgumentException);
-  EInitialStateNotDefined = class sealed(ENotDefined);
-  EFinalStatesNotDefined = class sealed(ENotDefined);
-  ETransitionsNotDefined = class sealed(ENotDefined);
-  ESourceStateNotDefined = class sealed(ENotDefined);
-  ETargetStateNotDefined = class sealed(ENotDefined);
-  ESymbolNotDefined = class sealed(ENotDefined);
+  EInitialStateIsNotDefined = class sealed(EIsNotDefined);
+  EFinalStatesIsNotDefined = class sealed(EIsNotDefined);
+  ETransitionsIsNotDefined = class sealed(EIsNotDefined);
+  ETransitionSourceStateIsNotDefined = class sealed(EIsNotDefined);
+  ETransitionTargetStateIsNotDefined = class sealed(EIsNotDefined);
+  ESymbolIsNotDefined = class sealed(EIsNotDefined);
   EStatesNotContaisTheState = class sealed(ENotContains);
   ESymbolsNotContainsTheSymbol = class sealed(ENotContains);
   EDuplicatedState = class sealed(EDuplicated);
