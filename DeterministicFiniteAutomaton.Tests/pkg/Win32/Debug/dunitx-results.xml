@@ -1,0 +1,840 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<test-results name="C:\Users\douglas.mezuraro\Documents\GitHub\lfa-afd\DeterministicFiniteAutomaton.Tests\pkg\Win32\Debug\DeterministicFiniteAutomaton.Tests.exe" total="141" errors="0" failures="0" ignored="0" inconclusive="0" not-run="0" skipped="0" invalid="0" date="2021-03-24" time="0.019">
+  <culture-info current-culture="en" current-uiculture="en" />
+  <test-suite type="Assembly" name="DeterministicFiniteAutomaton.Tests.exe" executed="true" result="Success" success="True" time="0.019" asserts="0">
+    <results>
+        <test-suite type="Namespace" name="Fixture" executed="true" result="Success" success="True" time="0.018" asserts="0" >
+          <results>
+              <test-suite type="Fixture" name="TExercisesFixture" executed="True" result="Success" success="True" time="0.018" >
+                <results>
+                  <test-case name="ExerciseOne.Check if the &quot;&quot; word belongs to the L1 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L1 = {W ε {}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseOne.Check if the &quot;a&quot; word belongs to the L1 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L1 = {W ε {}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseOne.Check if the &quot;b&quot; word belongs to the L1 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L1 = {W ε {}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseOne.Check if the &quot;c&quot; word belongs to the L1 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L1 = {W ε {}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseOne.Check if the &quot;x&quot; word belongs to the L1 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L1 = {W ε {}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseOne.Check if the &quot;y&quot; word belongs to the L1 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L1 = {W ε {}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseOne.Check if the &quot;z&quot; word belongs to the L1 language" executed="True" result="Success" success="True" time="0.001" asserts="0" >
+                    <categories>
+                      <category name="L1 = {W ε {}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseOne.Check if the &quot;0&quot; word belongs to the L1 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L1 = {W ε {}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseOne.Check if the &quot;1&quot; word belongs to the L1 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L1 = {W ε {}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseOne.Check if the &quot;2&quot; word belongs to the L1 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L1 = {W ε {}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseOne.Check if the &quot;7&quot; word belongs to the L1 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L1 = {W ε {}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseOne.Check if the &quot;8&quot; word belongs to the L1 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L1 = {W ε {}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseOne.Check if the &quot;9&quot; word belongs to the L1 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L1 = {W ε {}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseTwo.Check if the &quot;&quot; word belongs to the L2 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L2 = {W ε {ʎ}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseTwo.Check if the &quot;a&quot; word belongs to the L2 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L2 = {W ε {ʎ}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseTwo.Check if the &quot;b&quot; word belongs to the L2 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L2 = {W ε {ʎ}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseTwo.Check if the &quot;c&quot; word belongs to the L2 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L2 = {W ε {ʎ}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseTwo.Check if the &quot;x&quot; word belongs to the L2 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L2 = {W ε {ʎ}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseTwo.Check if the &quot;y&quot; word belongs to the L2 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L2 = {W ε {ʎ}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseTwo.Check if the &quot;z&quot; word belongs to the L2 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L2 = {W ε {ʎ}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseTwo.Check if the &quot;0&quot; word belongs to the L2 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L2 = {W ε {ʎ}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseTwo.Check if the &quot;1&quot; word belongs to the L2 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L2 = {W ε {ʎ}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseTwo.Check if the &quot;2&quot; word belongs to the L2 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L2 = {W ε {ʎ}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseTwo.Check if the &quot;7&quot; word belongs to the L2 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L2 = {W ε {ʎ}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseTwo.Check if the &quot;8&quot; word belongs to the L2 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L2 = {W ε {ʎ}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseTwo.Check if the &quot;9&quot; word belongs to the L2 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L2 = {W ε {ʎ}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseTree.Check if the &quot;0&quot; word belongs to the L3 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L3 = {W ε {0}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseTree.Check if the &quot;&quot; word belongs to the L3 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L3 = {W ε {0}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseTree.Check if the &quot;a&quot; word belongs to the L3 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L3 = {W ε {0}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseTree.Check if the &quot;b&quot; word belongs to the L3 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L3 = {W ε {0}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseTree.Check if the &quot;c&quot; word belongs to the L3 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L3 = {W ε {0}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseTree.Check if the &quot;x&quot; word belongs to the L3 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L3 = {W ε {0}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseTree.Check if the &quot;y&quot; word belongs to the L3 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L3 = {W ε {0}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseTree.Check if the &quot;z&quot; word belongs to the L3 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L3 = {W ε {0}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseTree.Check if the &quot;1&quot; word belongs to the L3 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L3 = {W ε {0}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseTree.Check if the &quot;2&quot; word belongs to the L3 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L3 = {W ε {0}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseTree.Check if the &quot;7&quot; word belongs to the L3 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L3 = {W ε {0}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseTree.Check if the &quot;8&quot; word belongs to the L3 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L3 = {W ε {0}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseTree.Check if the &quot;9&quot; word belongs to the L3 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L3 = {W ε {0}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseFour.Check if the &quot;&quot; word belongs to the L4 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L4 = {W ε {ʎ" />
+                      <category name="0}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseFour.Check if the &quot;0&quot; word belongs to the L4 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L4 = {W ε {ʎ" />
+                      <category name="0}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseFour.Check if the &quot;a&quot; word belongs to the L4 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L4 = {W ε {ʎ" />
+                      <category name="0}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseFour.Check if the &quot;b&quot; word belongs to the L4 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L4 = {W ε {ʎ" />
+                      <category name="0}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseFour.Check if the &quot;c&quot; word belongs to the L4 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L4 = {W ε {ʎ" />
+                      <category name="0}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseFour.Check if the &quot;x&quot; word belongs to the L4 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L4 = {W ε {ʎ" />
+                      <category name="0}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseFour.Check if the &quot;y&quot; word belongs to the L4 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L4 = {W ε {ʎ" />
+                      <category name="0}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseFour.Check if the &quot;z&quot; word belongs to the L4 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L4 = {W ε {ʎ" />
+                      <category name="0}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseFour.Check if the &quot;1&quot; word belongs to the L4 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L4 = {W ε {ʎ" />
+                      <category name="0}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseFour.Check if the &quot;2&quot; word belongs to the L4 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L4 = {W ε {ʎ" />
+                      <category name="0}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseFour.Check if the &quot;7&quot; word belongs to the L4 language" executed="True" result="Success" success="True" time="0.005" asserts="0" >
+                    <categories>
+                      <category name="L4 = {W ε {ʎ" />
+                      <category name="0}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseFour.Check if the &quot;8&quot; word belongs to the L4 language" executed="True" result="Success" success="True" time="0.002" asserts="0" >
+                    <categories>
+                      <category name="L4 = {W ε {ʎ" />
+                      <category name="0}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseFour.Check if the &quot;9&quot; word belongs to the L4 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L4 = {W ε {ʎ" />
+                      <category name="0}}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseFive.Check if the &quot;&quot; word belongs to the L5 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L5 = {aⁿ | n > 0}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseFive.Check if the &quot;aa&quot; word belongs to the L5 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L5 = {aⁿ | n > 0}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseFive.Check if the &quot;aaa&quot; word belongs to the L5 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L5 = {aⁿ | n > 0}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseFive.Check if the &quot;aaaa&quot; word belongs to the L5 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L5 = {aⁿ | n > 0}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseFive.Check if the &quot;aaaaa&quot; word belongs to the L5 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L5 = {aⁿ | n > 0}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseFive.Check if the &quot;aaaaaa&quot; word belongs to the L5 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L5 = {aⁿ | n > 0}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseFive.Check if the &quot;aaaaaaa&quot; word belongs to the L5 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L5 = {aⁿ | n > 0}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseFive.Check if the &quot;aaaaaaaaa&quot; word belongs to the L5 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L5 = {aⁿ | n > 0}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseFive.Check if the &quot;b&quot; word belongs to the L5 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L5 = {aⁿ | n > 0}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseFive.Check if the &quot;c&quot; word belongs to the L5 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L5 = {aⁿ | n > 0}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseFive.Check if the &quot;d&quot; word belongs to the L5 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L5 = {aⁿ | n > 0}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseFive.Check if the &quot;ab&quot; word belongs to the L5 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L5 = {aⁿ | n > 0}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseFive.Check if the &quot;aba&quot; word belongs to the L5 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L5 = {aⁿ | n > 0}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseFive.Check if the &quot;ba&quot; word belongs to the L5 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L5 = {aⁿ | n > 0}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseFive.Check if the &quot;ac&quot; word belongs to the L5 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L5 = {aⁿ | n > 0}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseFive.Check if the &quot;aca&quot; word belongs to the L5 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L5 = {aⁿ | n > 0}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseFive.Check if the &quot;ca&quot; word belongs to the L5 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L5 = {aⁿ | n > 0}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseSix.Check if the &quot;a&quot; word belongs to the L6 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L6 = {aⁿ | n > 0" />
+                      <category name="n é ímpar}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseSix.Check if the &quot;aaa&quot; word belongs to the L6 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L6 = {aⁿ | n > 0" />
+                      <category name="n é ímpar}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseSix.Check if the &quot;aaaaa&quot; word belongs to the L6 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L6 = {aⁿ | n > 0" />
+                      <category name="n é ímpar}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseSix.Check if the &quot;aaaaaaa&quot; word belongs to the L6 language" executed="True" result="Success" success="True" time="0.001" asserts="0" >
+                    <categories>
+                      <category name="L6 = {aⁿ | n > 0" />
+                      <category name="n é ímpar}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseSix.Check if the &quot;aaaaaaaaa&quot; word belongs to the L6 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L6 = {aⁿ | n > 0" />
+                      <category name="n é ímpar}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseSix.Check if the &quot;aaaaaaaaaaa&quot; word belongs to the L6 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L6 = {aⁿ | n > 0" />
+                      <category name="n é ímpar}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseSix.Check if the &quot;&quot; word belongs to the L6 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L6 = {aⁿ | n > 0" />
+                      <category name="n é ímpar}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseSix.Check if the &quot;aa&quot; word belongs to the L6 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L6 = {aⁿ | n > 0" />
+                      <category name="n é ímpar}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseSix.Check if the &quot;aaaa&quot; word belongs to the L6 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L6 = {aⁿ | n > 0" />
+                      <category name="n é ímpar}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseSix.Check if the &quot;aaaaaa&quot; word belongs to the L6 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L6 = {aⁿ | n > 0" />
+                      <category name="n é ímpar}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseSix.Check if the &quot;aaaaaaaa&quot; word belongs to the L6 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L6 = {aⁿ | n > 0" />
+                      <category name="n é ímpar}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseSix.Check if the &quot;aaaaaaaaaa&quot; word belongs to the L6 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L6 = {aⁿ | n > 0" />
+                      <category name="n é ímpar}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseSeven.Check if the &quot;aa word belongs to the L7 language&quot; " executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L7 = {a(bⁿ)a | n >= 0" />
+                      <category name="n é par}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseSeven.Check if the &quot;abba word belongs to the L7 language&quot; " executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L7 = {a(bⁿ)a | n >= 0" />
+                      <category name="n é par}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseSeven.Check if the &quot;abbbba word belongs to the L7 language&quot; " executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L7 = {a(bⁿ)a | n >= 0" />
+                      <category name="n é par}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseSeven.Check if the &quot;abbbbbba word belongs to the L7 language&quot; " executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L7 = {a(bⁿ)a | n >= 0" />
+                      <category name="n é par}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseSeven.Check if the &quot;abbbbbbbba word belongs to the L7 language&quot; " executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L7 = {a(bⁿ)a | n >= 0" />
+                      <category name="n é par}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseSeven.Check if the &quot;abbbbbbbbbba word belongs to the L7 language&quot; " executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L7 = {a(bⁿ)a | n >= 0" />
+                      <category name="n é par}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseSeven.Check if the &quot;&quot; word belongs to the L7 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L7 = {a(bⁿ)a | n >= 0" />
+                      <category name="n é par}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseSeven.Check if the &quot;aba&quot; word belongs to the L7 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L7 = {a(bⁿ)a | n >= 0" />
+                      <category name="n é par}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseSeven.Check if the &quot;abbba&quot; word belongs to the L7 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L7 = {a(bⁿ)a | n >= 0" />
+                      <category name="n é par}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseSeven.Check if the &quot;abbbbba&quot; word belongs to the L7 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L7 = {a(bⁿ)a | n >= 0" />
+                      <category name="n é par}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseSeven.Check if the &quot;abbbbbbba&quot; word belongs to the L7 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L7 = {a(bⁿ)a | n >= 0" />
+                      <category name="n é par}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseSeven.Check if the &quot;abbbbbbbbba&quot; word belongs to the L7 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L7 = {a(bⁿ)a | n >= 0" />
+                      <category name="n é par}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseEight.Check if the &quot;abca&quot; word belongs to the L8 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L8 = {a((bc)ⁿ) | n > 0}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseEight.Check if the &quot;abcbca&quot; word belongs to the L8 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L8 = {a((bc)ⁿ) | n > 0}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseEight.Check if the &quot;abcbcbca&quot; word belongs to the L8 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L8 = {a((bc)ⁿ) | n > 0}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseEight.Check if the &quot;abcbcbcbca&quot; word belongs to the L8 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L8 = {a((bc)ⁿ) | n > 0}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseEight.Check if the &quot;abcbcbcbcbca&quot; word belongs to the L8 language" executed="True" result="Success" success="True" time="0.001" asserts="0" >
+                    <categories>
+                      <category name="L8 = {a((bc)ⁿ) | n > 0}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseEight.Check if the &quot;&quot; word belongs to the L8 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L8 = {a((bc)ⁿ) | n > 0}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseEight.Check if the &quot;a&quot; word belongs to the L8 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L8 = {a((bc)ⁿ) | n > 0}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseEight.Check if the &quot;b&quot; word belongs to the L8 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L8 = {a((bc)ⁿ) | n > 0}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseEight.Check if the &quot;c&quot; word belongs to the L8 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L8 = {a((bc)ⁿ) | n > 0}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseEight.Check if the &quot;aa&quot; word belongs to the L8 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L8 = {a((bc)ⁿ) | n > 0}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseEight.Check if the &quot;ab&quot; word belongs to the L8 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L8 = {a((bc)ⁿ) | n > 0}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseEight.Check if the &quot;ac&quot; word belongs to the L8 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L8 = {a((bc)ⁿ) | n > 0}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseEight.Check if the &quot;bc&quot; word belongs to the L8 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L8 = {a((bc)ⁿ) | n > 0}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseEight.Check if the &quot;aba&quot; word belongs to the L8 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L8 = {a((bc)ⁿ) | n > 0}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseEight.Check if the &quot;aca&quot; word belongs to the L8 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L8 = {a((bc)ⁿ) | n > 0}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseNine.Check if the &quot;a&quot; word belongs to the L9 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L9 = {(aⁿ)(bᵐ)(cᵖ) | n > 0" />
+                      <category name="m >= 0" />
+                      <category name="p >= 0}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseNine.Check if the &quot;aa&quot; word belongs to the L9 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L9 = {(aⁿ)(bᵐ)(cᵖ) | n > 0" />
+                      <category name="m >= 0" />
+                      <category name="p >= 0}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseNine.Check if the &quot;aaa&quot; word belongs to the L9 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L9 = {(aⁿ)(bᵐ)(cᵖ) | n > 0" />
+                      <category name="m >= 0" />
+                      <category name="p >= 0}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseNine.Check if the &quot;ab&quot; word belongs to the L9 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L9 = {(aⁿ)(bᵐ)(cᵖ) | n > 0" />
+                      <category name="m >= 0" />
+                      <category name="p >= 0}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseNine.Check if the &quot;ac&quot; word belongs to the L9 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L9 = {(aⁿ)(bᵐ)(cᵖ) | n > 0" />
+                      <category name="m >= 0" />
+                      <category name="p >= 0}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseNine.Check if the &quot;abc&quot; word belongs to the L9 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L9 = {(aⁿ)(bᵐ)(cᵖ) | n > 0" />
+                      <category name="m >= 0" />
+                      <category name="p >= 0}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseNine.Check if the &quot;aabbcc&quot; word belongs to the L9 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L9 = {(aⁿ)(bᵐ)(cᵖ) | n > 0" />
+                      <category name="m >= 0" />
+                      <category name="p >= 0}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseNine.Check if the &quot;aaaaabbbbbcccccccc&quot; word belongs to the L9 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L9 = {(aⁿ)(bᵐ)(cᵖ) | n > 0" />
+                      <category name="m >= 0" />
+                      <category name="p >= 0}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseNine.Teste if the &quot;ʎ&quot; word belongs to the L9 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L9 = {(aⁿ)(bᵐ)(cᵖ) | n > 0" />
+                      <category name="m >= 0" />
+                      <category name="p >= 0}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseNine.Teste if the &quot;b&quot; word belongs to the L9 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L9 = {(aⁿ)(bᵐ)(cᵖ) | n > 0" />
+                      <category name="m >= 0" />
+                      <category name="p >= 0}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseNine.Teste if the &quot;c&quot; word belongs to the L9 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L9 = {(aⁿ)(bᵐ)(cᵖ) | n > 0" />
+                      <category name="m >= 0" />
+                      <category name="p >= 0}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseNine.Teste if the &quot;bc&quot; word belongs to the L9 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L9 = {(aⁿ)(bᵐ)(cᵖ) | n > 0" />
+                      <category name="m >= 0" />
+                      <category name="p >= 0}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseNine.Teste if the &quot;cb&quot; word belongs to the L9 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L9 = {(aⁿ)(bᵐ)(cᵖ) | n > 0" />
+                      <category name="m >= 0" />
+                      <category name="p >= 0}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseNine.Teste if the &quot;ca&quot; word belongs to the L9 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L9 = {(aⁿ)(bᵐ)(cᵖ) | n > 0" />
+                      <category name="m >= 0" />
+                      <category name="p >= 0}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseNine.Teste if the &quot;ba&quot; word belongs to the L9 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L9 = {(aⁿ)(bᵐ)(cᵖ) | n > 0" />
+                      <category name="m >= 0" />
+                      <category name="p >= 0}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseNine.Teste if the &quot;bbcc&quot; word belongs to the L9 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L9 = {(aⁿ)(bᵐ)(cᵖ) | n > 0" />
+                      <category name="m >= 0" />
+                      <category name="p >= 0}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseNine.Teste if the &quot;cba&quot; word belongs to the L9 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L9 = {(aⁿ)(bᵐ)(cᵖ) | n > 0" />
+                      <category name="m >= 0" />
+                      <category name="p >= 0}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseTen.Check if the &quot;bb&quot; word belongs to the L10 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L10 = {(aⁿ)bb(aᵐ) | n >= 0" />
+                      <category name="m> = 0" />
+                      <category name="n é par" />
+                      <category name="m é par}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseTen.Check if the &quot;aabb&quot; word belongs to the L10 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L10 = {(aⁿ)bb(aᵐ) | n >= 0" />
+                      <category name="m> = 0" />
+                      <category name="n é par" />
+                      <category name="m é par}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseTen.Check if the &quot;bbaa&quot; word belongs to the L10 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L10 = {(aⁿ)bb(aᵐ) | n >= 0" />
+                      <category name="m> = 0" />
+                      <category name="n é par" />
+                      <category name="m é par}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseTen.Check if the &quot;aabbaa&quot; word belongs to the L10 language" executed="True" result="Success" success="True" time="0.001" asserts="0" >
+                    <categories>
+                      <category name="L10 = {(aⁿ)bb(aᵐ) | n >= 0" />
+                      <category name="m> = 0" />
+                      <category name="n é par" />
+                      <category name="m é par}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseTen.Check if the &quot;aaaabb&quot; word belongs to the L10 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L10 = {(aⁿ)bb(aᵐ) | n >= 0" />
+                      <category name="m> = 0" />
+                      <category name="n é par" />
+                      <category name="m é par}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseTen.Check if the &quot;aaaabbaa&quot; word belongs to the L10 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L10 = {(aⁿ)bb(aᵐ) | n >= 0" />
+                      <category name="m> = 0" />
+                      <category name="n é par" />
+                      <category name="m é par}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseTen.Check if the &quot;aaaabbaaaa&quot; word belongs to the L10 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L10 = {(aⁿ)bb(aᵐ) | n >= 0" />
+                      <category name="m> = 0" />
+                      <category name="n é par" />
+                      <category name="m é par}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseTen.Check if the &quot;&quot; word belongs to the L10 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L10 = {(aⁿ)bb(aᵐ) | n >= 0" />
+                      <category name="m> = 0" />
+                      <category name="n é par" />
+                      <category name="m é par}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseTen.Check if the &quot;a&quot; word belongs to the L10 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L10 = {(aⁿ)bb(aᵐ) | n >= 0" />
+                      <category name="m> = 0" />
+                      <category name="n é par" />
+                      <category name="m é par}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseTen.Check if the &quot;b&quot; word belongs to the L10 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L10 = {(aⁿ)bb(aᵐ) | n >= 0" />
+                      <category name="m> = 0" />
+                      <category name="n é par" />
+                      <category name="m é par}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseTen.Check if the &quot;aa&quot; word belongs to the L10 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L10 = {(aⁿ)bb(aᵐ) | n >= 0" />
+                      <category name="m> = 0" />
+                      <category name="n é par" />
+                      <category name="m é par}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseTen.Check if the &quot;abb&quot; word belongs to the L10 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L10 = {(aⁿ)bb(aᵐ) | n >= 0" />
+                      <category name="m> = 0" />
+                      <category name="n é par" />
+                      <category name="m é par}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseTen.Check if the &quot;bba&quot; word belongs to the L10 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L10 = {(aⁿ)bb(aᵐ) | n >= 0" />
+                      <category name="m> = 0" />
+                      <category name="n é par" />
+                      <category name="m é par}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseTen.Check if the &quot;abba&quot; word belongs to the L10 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L10 = {(aⁿ)bb(aᵐ) | n >= 0" />
+                      <category name="m> = 0" />
+                      <category name="n é par" />
+                      <category name="m é par}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseTen.Check if the &quot;aaabba&quot; word belongs to the L10 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L10 = {(aⁿ)bb(aᵐ) | n >= 0" />
+                      <category name="m> = 0" />
+                      <category name="n é par" />
+                      <category name="m é par}" />
+                    </categories>
+                  </test-case>
+                  <test-case name="ExerciseTen.Check if the &quot;aabaaa&quot; word belongs to the L10 language" executed="True" result="Success" success="True" time="0.000" asserts="0" >
+                    <categories>
+                      <category name="L10 = {(aⁿ)bb(aᵐ) | n >= 0" />
+                      <category name="m> = 0" />
+                      <category name="n é par" />
+                      <category name="m é par}" />
+                    </categories>
+                  </test-case>
+                </results>
+              </test-suite>
+          </results>
+        </test-suite>
+    </results>
+  </test-suite>
+</test-results>

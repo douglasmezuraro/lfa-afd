@@ -118,7 +118,7 @@ begin
       GridOutput.ForEach(
         procedure
         begin
-          GridOutput.Value[ColumnResult] := RESULT_MESSAGE[LAutomaton.Accept(GridOutput.Value[ColumnInput])];
+          GridOutput.Value[ColumnResult] := RESULT_MESSAGE[LAutomaton.Check(GridOutput.Value[ColumnInput])];
         end);
     finally
       LAutomaton.Free;

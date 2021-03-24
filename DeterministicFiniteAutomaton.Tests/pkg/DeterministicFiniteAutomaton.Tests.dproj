@@ -79,18 +79,12 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="..\src\Test\Test.Validator.pas"/>
-        <DCCReference Include="..\..\DeterministicFiniteAutomaton\src\Impl\Impl.Transitions.pas"/>
-        <DCCReference Include="..\..\DeterministicFiniteAutomaton\src\Impl\Impl.Types.pas"/>
-        <DCCReference Include="..\..\DeterministicFiniteAutomaton\src\Impl\Impl.List.pas"/>
-        <DCCReference Include="..\src\Test\Test.List.pas"/>
-        <DCCReference Include="..\src\Helper\Helper.TestFramework.pas"/>
-        <DCCReference Include="..\..\DeterministicFiniteAutomaton\src\DFA\DFA.Transition.pas"/>
-        <DCCReference Include="..\src\Test\Test.Transitions.pas"/>
-        <DCCReference Include="..\src\Test\Test.DeterministicFiniteAutomaton.pas"/>
+        <DCCReference Include="..\src\Fixture\Fixture.Validator.pas"/>
+        <DCCReference Include="..\src\Fixture\Fixture.Exercises.pas"/>
         <DCCReference Include="..\..\DeterministicFiniteAutomaton\src\DFA\DFA.Automaton.pas"/>
+        <DCCReference Include="..\..\DeterministicFiniteAutomaton\src\DFA\DFA.pas"/>
+        <DCCReference Include="..\..\DeterministicFiniteAutomaton\src\DFA\DFA.Types.pas"/>
         <DCCReference Include="..\..\DeterministicFiniteAutomaton\src\DFA\DFA.Validator.pas"/>
-        <DCCReference Include="..\src\Test\Test.Exercises.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

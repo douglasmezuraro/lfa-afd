@@ -3,8 +3,7 @@ unit Test.Validator;
 interface
 
 uses
-  Impl.DeterministicFiniteAutomaton, Impl.Transition, Impl.Transitions, Impl.Types, Impl.Validator,
-  System.SysUtils, TestFramework;
+  DFA, System.SysUtils, TestFramework;
 
 type
   TAFDValidationsTest = class sealed(TTestCase)

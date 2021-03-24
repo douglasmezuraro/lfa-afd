@@ -18,7 +18,7 @@ type
   public
     constructor Create(const ADTO: TDTO);
     destructor Destroy; override;
-    function Accept(const AWord: TWord): Boolean;
+    function Check(const AWord: TWord): Boolean;
   end;
 
 implementation
@@ -53,7 +53,7 @@ begin
   inherited Destroy;
 end;
 
-function TDeterministicFiniteAutomaton.Accept(const AWord: TWord): Boolean;
+function TDeterministicFiniteAutomaton.Check(const AWord: TWord): Boolean;
 var
   LSymbol: TSymbol;
   LState, LCurrentState: TState;

@@ -11,7 +11,6 @@ type
   ENotContains = class abstract(EArgumentException);
   EInitialStateNotDefined = class sealed(ENotDefined);
   EFinalStatesNotDefined = class sealed(ENotDefined);
-  ETransitionsNotDefined  = class sealed(ENotDefined);
   EStatesNotContaisTheState = class sealed(ENotContains);
   ESymbolsNotContainsTheSymbol = class sealed(ENotContains);
   EDuplicatedState = class sealed(EDuplicated);

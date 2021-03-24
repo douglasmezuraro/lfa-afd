@@ -1,28 +1,67 @@
 program DeterministicFiniteAutomaton.Tests;
 
-{$IFDEF CONSOLE_TESTRUNNER}
+
+{$IFNDEF TESTINSIGHT}
 {$APPTYPE CONSOLE}
-{$ENDIF}
+{$ENDIF}{$STRONGLINKTYPES ON}
 
 uses
-  DUnitTestRunner,
   MidasLib,
-  Test.Validator in '..\src\Test\Test.Validator.pas',
-  Impl.Transitions in '..\..\DeterministicFiniteAutomaton\src\Impl\Impl.Transitions.pas',
-  Impl.Types in '..\..\DeterministicFiniteAutomaton\src\Impl\Impl.Types.pas',
-  Impl.List in '..\..\DeterministicFiniteAutomaton\src\Impl\Impl.List.pas',
-  Test.List in '..\src\Test\Test.List.pas',
-  Helper.TestFramework in '..\src\Helper\Helper.TestFramework.pas',
-  DFA.Transition in '..\..\DeterministicFiniteAutomaton\src\DFA\DFA.Transition.pas',
-  Test.Transitions in '..\src\Test\Test.Transitions.pas',
-  Test.DeterministicFiniteAutomaton in '..\src\Test\Test.DeterministicFiniteAutomaton.pas',
+  System.SysUtils,
+  {$IFDEF TESTINSIGHT}
+  TestInsight.DUnitX,
+  {$ENDIF }
+  DUnitX.Loggers.Console,
+  DUnitX.Loggers.Xml.NUnit,
+  DUnitX.TestFramework,
+  Fixture.Validator in '..\src\Fixture\Fixture.Validator.pas',
+  Fixture.Exercises in '..\src\Fixture\Fixture.Exercises.pas',
   DFA.Automaton in '..\..\DeterministicFiniteAutomaton\src\DFA\DFA.Automaton.pas',
-  DFA.Validator in '..\..\DeterministicFiniteAutomaton\src\DFA\DFA.Validator.pas',
-  Test.Exercises in '..\src\Test\Test.Exercises.pas';
+  DFA in '..\..\DeterministicFiniteAutomaton\src\DFA\DFA.pas',
+  DFA.Types in '..\..\DeterministicFiniteAutomaton\src\DFA\DFA.Types.pas',
+  DFA.Validator in '..\..\DeterministicFiniteAutomaton\src\DFA\DFA.Validator.pas';
 
-{$R *.RES}
+procedure Run;
+var
+  LRunner: ITestRunner;
+begin
+  TDUnitX.CheckCommandLine;
+
+  LRunner := TDUnitX.CreateRunner;
+  LRunner.UseRTTI := True;
+  LRunner.FailsOnNoAsserts := True;
+  LRunner.AddLogger(TDUnitXConsoleLogger.Create(True));
+  LRunner.AddLogger(TDUnitXXMLNUnitFileLogger.Create(TDUnitX.Options.XMLOutputFile));
+
+  if not LRunner.Execute.AllPassed then
+  begin
+    System.ExitCode := DUnitX.TestFramework.EXIT_ERRORS;
+  end;
+
+{$IFNDEF CI}
+  if TDUnitX.Options.ExitBehavior = TDUnitXExitBehavior.Pause then
+  begin
+    System.Write('Done.. press <Enter> key to quit.');
+    System.Readln;
+  end;
+{$ENDIF}
+end;
 
 begin
-  DUnitTestRunner.RunRegisteredTests;
+{$IFDEF TESTINSIGHT}
+  TestInsight.DUnitX.RunRegisteredTests;
+  Exit;
+{$ENDIF}
+  try
+    Run;
+  {$WARN SYMBOL_PLATFORM OFF}
+    ReportMemoryLeaksOnShutdown := DebugHook.ToBoolean;
+  {$WARN SYMBOL_PLATFORM DEFAULT}
+  except
+    on E: Exception do
+    begin
+      System.Writeln(E.ClassName, ': ', E.Message);
+    end;
+  end;
 end.
 

@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{D50507EC-57EF-49C9-B359-3E8923DC42DC}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="DeterministicFiniteAutomaton\pkg\DeterministicFiniteAutomaton.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="DeterministicFiniteAutomaton.Tests\pkg\DeterministicFiniteAutomaton.Tests.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="DeterministicFiniteAutomaton">
+        <MSBuild Projects="DeterministicFiniteAutomaton\pkg\DeterministicFiniteAutomaton.dproj"/>
+    </Target>
+    <Target Name="DeterministicFiniteAutomaton:Clean">
+        <MSBuild Projects="DeterministicFiniteAutomaton\pkg\DeterministicFiniteAutomaton.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DeterministicFiniteAutomaton:Make">
+        <MSBuild Projects="DeterministicFiniteAutomaton\pkg\DeterministicFiniteAutomaton.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="DeterministicFiniteAutomaton_Tests">
+        <MSBuild Projects="DeterministicFiniteAutomaton.Tests\pkg\DeterministicFiniteAutomaton.Tests.dproj"/>
+    </Target>
+    <Target Name="DeterministicFiniteAutomaton_Tests:Clean">
+        <MSBuild Projects="DeterministicFiniteAutomaton.Tests\pkg\DeterministicFiniteAutomaton.Tests.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DeterministicFiniteAutomaton_Tests:Make">
+        <MSBuild Projects="DeterministicFiniteAutomaton.Tests\pkg\DeterministicFiniteAutomaton.Tests.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="DeterministicFiniteAutomaton;DeterministicFiniteAutomaton_Tests"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="DeterministicFiniteAutomaton:Clean;DeterministicFiniteAutomaton_Tests:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="DeterministicFiniteAutomaton:Make;DeterministicFiniteAutomaton_Tests:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

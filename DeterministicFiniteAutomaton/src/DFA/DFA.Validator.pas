@@ -110,9 +110,14 @@ end;
 
 procedure TValidator.ValidateInitialState;
 begin
-  if FInitialState.Trim.IsEmpty then
+  if (FStates.Count > 0) and (FInitialState.IsEmpty) then
   begin
     raise EInitialStateNotDefined.Create('The initial state is not defined.');
+  end;
+
+  if FInitialState.IsEmpty then
+  begin
+    Exit;
   end;
 
   if not FStates.Contains(FInitialState) then
@@ -150,7 +155,7 @@ var
   LState: TState;
   LDuplicated: TArray<TState>;
 begin
-  if FFinalStates.Count = 0 then
+  if (FStates.Count = 0) and (FFinalStates.Count > 1) then
   begin
     raise EFinalStatesNotDefined.Create('The final states is not defined.');
   end;
@@ -174,11 +179,6 @@ procedure TValidator.ValidateTransitions;
 var
   LTransition: TTransition;
 begin
-  if FTransitions.Count = 0 then
-  begin
-    raise ETransitionsNotDefined.Create('The transitions has been not defined.');
-  end;
-
   for LTransition in FTransitions.ToArray do
   begin
     if not FStates.Contains(LTransition.Source) then
