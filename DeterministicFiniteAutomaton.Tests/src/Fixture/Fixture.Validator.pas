@@ -75,283 +75,318 @@ procedure TValidatorFixture.WhenHasDuplicatedSymbol;
 var
   LDTO: TDTO;
 begin
-  LDTO.States := [];
-  LDTO.Symbols := ['a', 'b', 'b', 'c'];
-  LDTO.InitialState := TState.Empty;
-  LDTO.FinalStates := [];
-  LDTO.Transitions := [];
+  LDTO.States := ['s0', 's1'];
+  LDTO.Symbols := ['a', 'a'];
+  LDTO.InitialState := 's0';
+  LDTO.FinalStates := ['s1'];
+  LDTO.Transitions := [
+    TTransition.Create('s0', 'a', 's1'),
+    TTransition.Create('s1', 'a', 's1')
+  ];
 
   Assert.WillRaise(
     procedure
     begin
       Validate(LDTO);
-    end);
+    end,
+    EDuplicatedSymbol,
+    'The symbol "a" is duplicated.');
 end;
 
 procedure TValidatorFixture.WhenHasDuplicatedState;
 var
   LDTO: TDTO;
 begin
-  LDTO.States := ['q0', 'q0', 'q1', 'q2', 'q3'];
-  LDTO.Symbols := ['a', 'b', 'c'];
-  LDTO.InitialState := TState.Empty;
-  LDTO.FinalStates := [];
-  LDTO.Transitions := [];
+  LDTO.States := ['s0', 's1', 's1'];
+  LDTO.Symbols := ['a'];
+  LDTO.InitialState := 's0';
+  LDTO.FinalStates := ['s1'];
+  LDTO.Transitions := [
+    TTransition.Create('s0', 'a', 's1'),
+    TTransition.Create('s1', 'a', 's1')
+  ];
 
   Assert.WillRaise(
     procedure
     begin
       Validate(LDTO);
-    end);
+    end,
+    EDuplicatedState,
+    'The state "s1" is duplicated.');
 end;
 
 procedure TValidatorFixture.WhenHasStatesAndIntitialStateIsNotDefined;
 var
   LDTO: TDTO;
 begin
-  LDTO.States := ['q0', 'q1'];
-  LDTO.Symbols := ['a', 'b', 'c'];
+  LDTO.States := ['s0', 's1'];
+  LDTO.Symbols := ['a'];
   LDTO.InitialState := TState.Empty;
-  LDTO.FinalStates := ['q1'];
-  LDTO.Transitions := [];
+  LDTO.FinalStates := ['s1'];
+  LDTO.Transitions := [
+    TTransition.Create('s0', 'a', 's1'),
+    TTransition.Create('s1', 'a', 's1')
+  ];
 
   Assert.WillRaise(
     procedure
     begin
       Validate(LDTO);
-    end);
+    end,
+    EInitialStateNotDefined,
+    'The initial state is not defined.');
 end;
 
 procedure TValidatorFixture.WhenStatesNotContaisTheInitialState;
 var
   LDTO: TDTO;
 begin
-  LDTO.States := ['q0', 'q1', 'q2', 'q3'];
-  LDTO.Symbols := ['a', 'b', 'c'];
-  LDTO.InitialState := 'q4';
-  LDTO.FinalStates := [];
-  LDTO.Transitions := [];
+  LDTO.States := ['s0', 's1'];
+  LDTO.Symbols := ['a'];
+  LDTO.InitialState := 's2';
+  LDTO.FinalStates := ['s1'];
+  LDTO.Transitions := [
+    TTransition.Create('s0', 'a', 's1'),
+    TTransition.Create('s1', 'a', 's1')
+  ];
 
   Assert.WillRaise(
     procedure
     begin
       Validate(LDTO);
-    end);
+    end,
+    EStatesNotContaisTheState,
+    'The state "s3" is not in states list "[s0, s1]".');
 end;
 
 procedure TValidatorFixture.WhenHasStatesAndFinalStatesIsNotDefined;
 var
   LDTO: TDTO;
 begin
-  LDTO.States := ['q0', 'q1', 'q2', 'q3'];
-  LDTO.Symbols := ['a', 'b', 'c'];
-  LDTO.InitialState := 'q0';
+  LDTO.States := ['s0', 's1'];
+  LDTO.Symbols := ['a'];
+  LDTO.InitialState := 's0';
   LDTO.FinalStates := [];
-  LDTO.Transitions := [];
+  LDTO.Transitions := [
+    TTransition.Create('s0', 'a', 's1'),
+    TTransition.Create('s1', 'a', 's1')
+  ];
 
   Assert.WillRaise(
     procedure
     begin
       Validate(LDTO);
-    end);
+    end,
+    EFinalStatesNotDefined,
+    'The final states is not defined.');
 end;
 
 procedure TValidatorFixture.WhenHasDuplicatedFinalStates;
 var
   LDTO: TDTO;
 begin
-  LDTO.States := ['q0', 'q1', 'q2', 'q3'];
-  LDTO.Symbols := ['a', 'b', 'c'];
-  LDTO.InitialState := 'q0';
-  LDTO.FinalStates := ['q3', 'q3'];
-  LDTO.Transitions := [];
+  LDTO.States := ['s0', 's1'];
+  LDTO.Symbols := ['a'];
+  LDTO.InitialState := 's0';
+  LDTO.FinalStates := ['s1', 's1'];
+  LDTO.Transitions := [
+    TTransition.Create('s0', 'a', 's1'),
+    TTransition.Create('s1', 'a', 's1')
+  ];
 
   Assert.WillRaise(
     procedure
     begin
       Validate(LDTO);
-    end);
+    end,
+    EDuplicatedState,
+    'The state "s1" is duplicated.');
 end;
 
 procedure TValidatorFixture.WhenStastesNotContainsTheFinalState;
 var
   LDTO: TDTO;
 begin
-  LDTO.States := ['q0', 'q1', 'q2', 'q3'];
-  LDTO.Symbols := ['a', 'b', 'c'];
-  LDTO.InitialState := 'q0';
-  LDTO.FinalStates := ['q4'];
-  LDTO.Transitions := [];
+  LDTO.States := ['s0', 's1'];
+  LDTO.Symbols := ['a'];
+  LDTO.InitialState := 's0';
+  LDTO.FinalStates := ['s2'];
+  LDTO.Transitions := [
+    TTransition.Create('s0', 'a', 's1'),
+    TTransition.Create('s1', 'a', 's1')
+  ];
 
   Assert.WillRaise(
     procedure
     begin
       Validate(LDTO);
-    end);
+    end,
+    EStatesNotContaisTheState,
+    'The final state "s2" is not in states list "[s0, s1]".');
 end;
 
 procedure TValidatorFixture.WhenTransitionsIsNotDefined;
 var
   LDTO: TDTO;
 begin
-  LDTO.States := ['q0', 'q1'];
-  LDTO.Symbols := ['a', 'b'];
-  LDTO.InitialState := 'q0';
-  LDTO.FinalStates := ['q1'];
+  LDTO.States := ['s0', 's1'];
+  LDTO.Symbols := ['a'];
+  LDTO.InitialState := 's0';
+  LDTO.FinalStates := ['s1'];
   LDTO.Transitions := [];
 
   Assert.WillRaise(
     procedure
     begin
       Validate(LDTO);
-    end);
+    end,
+    ETransitionsNotDefined,
+    'The transitions has been not defined.');
 end;
 
 procedure TValidatorFixture.WhenTransitionSourceIsNotDefined;
 var
   LDTO: TDTO;
 begin
-  LDTO.States := ['q0', 'q1'];
-  LDTO.Symbols := ['a', 'b'];
-  LDTO.InitialState := 'q0';
-  LDTO.FinalStates := ['q1'];
+  LDTO.States := ['s0', 's1'];
+  LDTO.Symbols := ['a'];
+  LDTO.InitialState := 's0';
+  LDTO.FinalStates := ['s1'];
   LDTO.Transitions := [
-    TTransition.Create('', 'a', 'q1'),
-    TTransition.Create('q0', 'b', 'q1'),
-    TTransition.Create('q1', 'a', 'q1'),
-    TTransition.Create('q1', 'b', 'q1')
+    TTransition.Create('', 'a', 's1'),
+    TTransition.Create('s1', 'a', 's1')
   ];
 
   Assert.WillRaise(
     procedure
     begin
       Validate(LDTO);
-    end);
+    end,
+    ESourceStateNotDefined,
+    'The transition source state is not defined.');
 end;
 
 procedure TValidatorFixture.WhenStatesNotContainsTransitionSource;
 var
   LDTO: TDTO;
 begin
-  LDTO.States := ['q0', 'q1'];
-  LDTO.Symbols := ['a', 'b'];
-  LDTO.InitialState := 'q0';
-  LDTO.FinalStates := ['q1'];
+  LDTO.States := ['s0', 's1'];
+  LDTO.Symbols := ['a'];
+  LDTO.InitialState := 's0';
+  LDTO.FinalStates := ['s1'];
   LDTO.Transitions := [
-    TTransition.Create('q0', 'a', 'q1'),
-    TTransition.Create('q2', 'b', 'q1'),
-    TTransition.Create('q1', 'a', 'q1'),
-    TTransition.Create('q1', 'b', 'q1')
+    TTransition.Create('s2', 'a', 's1'),
+    TTransition.Create('s1', 'a', 's1')
   ];
 
   Assert.WillRaise(
     procedure
     begin
       Validate(LDTO);
-    end);
+    end,
+    EStatesNotContaisTheState,
+    'The source state "s2" is not in states list "[s0, s1]".');
 end;
 
 procedure TValidatorFixture.WhenTransitionSymbolWasNotDefined;
 var
   LDTO: TDTO;
 begin
-  LDTO.States := ['q0', 'q1'];
-  LDTO.Symbols := ['a', 'b'];
-  LDTO.InitialState := 'q0';
-  LDTO.FinalStates := ['q1'];
+  LDTO.States := ['s0', 's1'];
+  LDTO.Symbols := ['a'];
+  LDTO.InitialState := 's0';
+  LDTO.FinalStates := ['s1'];
   LDTO.Transitions := [
-    TTransition.Create('q0', 'a', 'q1'),
-    TTransition.Create('q0', 'b', 'q1'),
-    TTransition.Create('q1', '', 'q1'),
-    TTransition.Create('q1', 'b', 'q1')
+    TTransition.Create('s0', '', 's1'),
+    TTransition.Create('s1', 'a', 's1')
   ];
 
   Assert.WillRaise(
     procedure
     begin
       Validate(LDTO);
-    end);
+    end,
+    ESymbolNotDefined,
+    'The transition symbol is not defined.');
 end;
 
 procedure TValidatorFixture.WhenSymbolsNotContainsTransitionSymbol;
 var
   LDTO: TDTO;
 begin
-  LDTO.States := ['q0', 'q1'];
-  LDTO.Symbols := ['a', 'b'];
-  LDTO.InitialState := 'q0';
-  LDTO.FinalStates := ['q1'];
+  LDTO.States := ['s0', 's1'];
+  LDTO.Symbols := ['a'];
+  LDTO.InitialState := 's0';
+  LDTO.FinalStates := ['s1'];
   LDTO.Transitions := [
-    TTransition.Create('q0', 'a', 'q1'),
-    TTransition.Create('q0', 'b', 'q1'),
-    TTransition.Create('q1', 'a', 'q1'),
-    TTransition.Create('q1', 'c', 'q1')
+    TTransition.Create('s0', 'b', 's1'),
+    TTransition.Create('s1', 'a', 's1')
   ];
 
   Assert.WillRaise(
     procedure
     begin
       Validate(LDTO);
-    end);
+    end,
+    ESymbolsNotContainsTheSymbol,
+    'The symbol "b" is not in symbols list "[a]".');
 end;
 
 procedure TValidatorFixture.WhenTransitionTargetIsNotDefined;
 var
   LDTO: TDTO;
 begin
-  LDTO.States := ['q0', 'q1'];
-  LDTO.Symbols := ['a', 'b'];
-  LDTO.InitialState := 'q0';
-  LDTO.FinalStates := ['q1'];
+  LDTO.States := ['s0', 's1'];
+  LDTO.Symbols := ['a'];
+  LDTO.InitialState := 's0';
+  LDTO.FinalStates := ['s1'];
   LDTO.Transitions := [
-    TTransition.Create('q0', 'a', ''),
-    TTransition.Create('q0', 'b', 'q1'),
-    TTransition.Create('q1', 'a', 'q1'),
-    TTransition.Create('q1', 'c', 'q1')
+    TTransition.Create('s0', 'a', ''),
+    TTransition.Create('s1', 'a', 's1')
   ];
 
   Assert.WillRaise(
     procedure
     begin
       Validate(LDTO);
-    end);
+    end,
+    ETargetStateNotDefined,
+    'The transition target state is not defined');
 end;
 
 procedure TValidatorFixture.WhenStatesNotContaisTransitionTarget;
 var
   LDTO: TDTO;
 begin
-  LDTO.States := ['q0', 'q1'];
-  LDTO.Symbols := ['a', 'b'];
-  LDTO.InitialState := 'q0';
-  LDTO.FinalStates := ['q1'];
+  LDTO.States := ['s0', 's1'];
+  LDTO.Symbols := ['a'];
+  LDTO.InitialState := 's0';
+  LDTO.FinalStates := ['s1'];
   LDTO.Transitions := [
-    TTransition.Create('q0', 'a', 'q1'),
-    TTransition.Create('q0', 'b', 'q1'),
-    TTransition.Create('q1', 'a', 'q4'),
-    TTransition.Create('q1', 'c', 'q1')
+    TTransition.Create('s0', 'a', 's2'),
+    TTransition.Create('s1', 'a', 's1')
   ];
 
   Assert.WillRaise(
     procedure
     begin
       Validate(LDTO);
-    end);
+    end,
+    EStatesNotContaisTheState,
+    'The target state "s2" is not in states list "[s0, s1]".');
 end;
 
 procedure TValidatorFixture.TestValidateWhenAutomatonIsValid;
 var
   LDTO: TDTO;
 begin
-  LDTO.States := ['q0', 'q1'];
-  LDTO.Symbols := ['a', 'b'];
-  LDTO.InitialState := 'q0';
-  LDTO.FinalStates := ['q1'];
+  LDTO.States := ['s0', 's1'];
+  LDTO.Symbols := ['a'];
+  LDTO.InitialState := 's0';
+  LDTO.FinalStates := ['s1'];
   LDTO.Transitions := [
-    TTransition.Create('q0', 'a', 'q1'),
-    TTransition.Create('q0', 'b', 'q1'),
-    TTransition.Create('q1', 'a', 'q1'),
-    TTransition.Create('q1', 'b', 'q1')
+    TTransition.Create('s0', 'a', 's1'),
+    TTransition.Create('s1', 'a', 's1')
   ];
 
   Assert.WillNotRaiseAny(

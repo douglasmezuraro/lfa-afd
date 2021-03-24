@@ -11,6 +11,9 @@ type
   ENotContains = DFA.Types.ENotContains;
   EInitialStateNotDefined = DFA.Types.EInitialStateNotDefined;
   EFinalStatesNotDefined = DFA.Types.EFinalStatesNotDefined;
+  ESourceStateNotDefined = DFA.Types.ESourceStateNotDefined;
+  ETargetStateNotDefined = DFA.Types.ETargetStateNotDefined;
+  ESymbolNotDefined = DFA.Types.ESymbolNotDefined;
   ETransitionsNotDefined = DFA.Types.ETransitionsNotDefined;
   EStatesNotContaisTheState = DFA.Types.EStatesNotContaisTheState;
   ESymbolsNotContainsTheSymbol = DFA.Types.ESymbolsNotContainsTheSymbol;

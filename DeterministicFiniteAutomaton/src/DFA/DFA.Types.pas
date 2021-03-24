@@ -12,6 +12,9 @@ type
   EInitialStateNotDefined = class sealed(ENotDefined);
   EFinalStatesNotDefined = class sealed(ENotDefined);
   ETransitionsNotDefined = class sealed(ENotDefined);
+  ESourceStateNotDefined = class sealed(ENotDefined);
+  ETargetStateNotDefined = class sealed(ENotDefined);
+  ESymbolNotDefined = class sealed(ENotDefined);
   EStatesNotContaisTheState = class sealed(ENotContains);
   ESymbolsNotContainsTheSymbol = class sealed(ENotContains);
   EDuplicatedState = class sealed(EDuplicated);

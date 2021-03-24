@@ -155,7 +155,7 @@ var
   LState: TState;
   LDuplicated: TArray<TState>;
 begin
-  if (FStates.Count = 0) and (FFinalStates.Count > 1) then
+  if (FFinalStates.Count = 0) and (FStates.Count > 1) then
   begin
     raise EFinalStatesNotDefined.Create('The final states is not defined.');
   end;
@@ -186,14 +186,29 @@ begin
 
   for LTransition in FTransitions.ToArray do
   begin
+    if LTransition.Source.IsEmpty then
+    begin
+      raise ESourceStateNotDefined.Create('The transition source state is not defined.');
+    end;
+
     if not FStates.Contains(LTransition.Source) then
     begin
       raise EStatesNotContaisTheState.CreateFmt('The source state "%s" is not in states list "%s".', [LTransition.Source, PrettyPrintList(FStates)]);
     end;
 
+    if LTransition.Symbol.IsEmpty then
+    begin
+      raise ESymbolNotDefined.Create('The transition symbol is not defined.');
+    end;
+
     if not FSymbols.Contains(LTransition.Symbol) then
     begin
       raise ESymbolsNotContainsTheSymbol.CreateFmt('The symbol "%s" is not in symbols list "%s".', [LTransition.Symbol, PrettyPrintList(FSymbols)]);
+    end;
+
+    if LTransition.Target.IsEmpty then
+    begin
+      raise ETargetStateNotDefined.Create('The transition target state is not defined');
     end;
 
     if not FStates.Contains(LTransition.Target) then
