@@ -3,7 +3,7 @@ unit DFA;
 interface
 
 uses
-  DFA.Types, DFA.Automaton;
+  DFA.Types, DFA.Automaton, DFA.Validator;
 
 type
   EDuplicated = DFA.Types.EDuplicated;
