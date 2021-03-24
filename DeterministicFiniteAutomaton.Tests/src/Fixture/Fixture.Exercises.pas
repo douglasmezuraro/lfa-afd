@@ -3,11 +3,12 @@
 interface
 
 uses
-  DUnitX.TestFramework, System.Generics.Collections, DFA;
+  DUnitX.TestFramework, System.SysUtils, DFA;
 
 type
   [TestFixture]
   TExercisesFixture = class sealed
+  public
     [Test]
     [Category('L1 = {W ε {}}')]
     [TestCase('Check if the "" word belongs to the L1 language', '' + ',' + 'False')]
@@ -103,7 +104,7 @@ type
     procedure ExerciseFive(const AWord: string; const AExpected: Boolean);
 
     [Test]
-    [Category('L6 = {aⁿ | n > 0, n é ímpar}')]
+    [Category('L6 = {aⁿ | n > 0; n is odd}')]
     [TestCase('Check if the "a" word belongs to the L6 language', 'a' + ',' + 'True')]
     [TestCase('Check if the "aaa" word belongs to the L6 language', 'aaa' + ',' + 'True')]
     [TestCase('Check if the "aaaaa" word belongs to the L6 language', 'aaaaa' + ',' + 'True')]
@@ -120,21 +121,21 @@ type
     procedure ExerciseSix(const AWord: string; const AExpected: Boolean);
 
     [Test]
-    [Category('L7 = {a(bⁿ)a | n >= 0, n é par}')]
-		[TestCase('Check if the "aa word belongs to the L7 language" ', 'aa' + ',' + 'True')]
-		[TestCase('Check if the "abba word belongs to the L7 language" ', 'abba' + ',' + 'True')]
-		[TestCase('Check if the "abbbba word belongs to the L7 language" ', 'abbbba' + ',' + 'True')]
-		[TestCase('Check if the "abbbbbba word belongs to the L7 language" ', 'abbbbbba' + ',' + 'True')]
-		[TestCase('Check if the "abbbbbbbba word belongs to the L7 language" ', 'abbbbbbbba' + ',' + 'True')]
-		[TestCase('Check if the "abbbbbbbbbba word belongs to the L7 language" ', 'abbbbbbbbbba' + ',' + 'True')]
-		[TestCase('Check if the "" word belongs to the L7 language', '' + ',' + 'False')]
-		//[TestCase('Check if the "ʎ" word belongs to the L7 language', 'ʎ' + ',' + 'False')]
-		[TestCase('Check if the "aba" word belongs to the L7 language', 'aba' + ',' + 'False')]
-		[TestCase('Check if the "abbba" word belongs to the L7 language', 'abbba' + ',' + 'False')]
-		[TestCase('Check if the "abbbbba" word belongs to the L7 language', 'abbbbba' + ',' + 'False')]
-		[TestCase('Check if the "abbbbbbba" word belongs to the L7 language', 'abbbbbbba' + ',' + 'False')]
-		[TestCase('Check if the "abbbbbbbbba" word belongs to the L7 language', 'abbbbbbbbba' + ',' + 'False')]
-    procedure ExerciseSeven(const AWord: string; const AExpected: Boolean);
+    [Category('L7 = {a(bⁿ)a | n >= 0, n is even}')]
+    [TestCase('Check if the "aa word belongs to the L7 language" ', 'aa' + ',' + 'True')]
+    [TestCase('Check if the "abba word belongs to the L7 language" ', 'abba' + ',' + 'True')]
+    [TestCase('Check if the "abbbba word belongs to the L7 language" ', 'abbbba' + ',' + 'True')]
+    [TestCase('Check if the "abbbbbba word belongs to the L7 language" ', 'abbbbbba' + ',' + 'True')]
+    [TestCase('Check if the "abbbbbbbba word belongs to the L7 language" ', 'abbbbbbbba' + ',' + 'True')]
+    [TestCase('Check if the "abbbbbbbbbba word belongs to the L7 language" ', 'abbbbbbbbbba' + ',' + 'True')]
+    [TestCase('Check if the "" word belongs to the L7 language', '' + ',' + 'False')]
+    //[TestCase('Check if the "ʎ" word belongs to the L7 language', 'ʎ' + ',' + 'False')]
+    [TestCase('Check if the "aba" word belongs to the L7 language', 'aba' + ',' + 'False')]
+    [TestCase('Check if the "abbba" word belongs to the L7 language', 'abbba' + ',' + 'False')]
+    [TestCase('Check if the "abbbbba" word belongs to the L7 language', 'abbbbba' + ',' + 'False')]
+    [TestCase('Check if the "abbbbbbba" word belongs to the L7 language', 'abbbbbbba' + ',' + 'False')]
+    [TestCase('Check if the "abbbbbbbbba" word belongs to the L7 language', 'abbbbbbbbba' + ',' + 'False')]
+    procedure ExerciseSeven (const AWord: string; const AExpected: Boolean);
 
     [Test]
     [Category('L8 = {a((bc)ⁿ) | n > 0}')]
@@ -157,7 +158,7 @@ type
     procedure ExerciseEight(const AWord: string; const AExpected: Boolean);
 
     [Test]
-    [Category('L9 = {(aⁿ)(bᵐ)(cᵖ) | n > 0, m >= 0, p >= 0}')]
+    [Category('L9 = {(aⁿ)(bᵐ)(cᵖ) | n > 0; m >= 0; p >= 0}')]
     [TestCase('Check if the "a" word belongs to the L9 language', 'a' + ',' + 'True')]
     [TestCase('Check if the "aa" word belongs to the L9 language', 'aa' + ',' + 'True')]
     [TestCase('Check if the "aaa" word belongs to the L9 language', 'aaa' + ',' + 'True')]
@@ -179,7 +180,7 @@ type
     procedure ExerciseNine(const AWord: string; const AExpected: Boolean);
 
     [Test]
-    [Category('L10 = {(aⁿ)bb(aᵐ) | n >= 0, m> = 0, n é par, m é par}')]
+    [Category('L10 = {(aⁿ)bb(aᵐ) | n >= 0; m> = 0; n is even; m is even}')]
     [TestCase('Check if the "bb" word belongs to the L10 language', 'bb' + ',' + 'True')]
     [TestCase('Check if the "aabb" word belongs to the L10 language', 'aabb' + ',' + 'True')]
     [TestCase('Check if the "bbaa" word belongs to the L10 language', 'bbaa' + ',' + 'True')]
@@ -207,18 +208,12 @@ var
 	LDTO: TDTO;
 	LActual: Boolean;
 	LAutomaton: TDeterministicFiniteAutomaton;
-	LTransitions: TList<TTransition>;
 begin
-	LTransitions := TList<TTransition>.Create;
-	try
-		LDTO.States := [];
-		LDTO.Symbols := [];
-		LDTO.InitialState := '';
-		LDTO.FinalStates := [];
-		LDTO.Transitions := LTransitions.ToArray;
-	finally
-		LTransitions.Free;
-	end;
+  LDTO.States := [];
+  LDTO.Symbols := [];
+  LDTO.InitialState := TState.Empty;
+  LDTO.FinalStates := [];
+  LDTO.Transitions := [];
 
 	LAutomaton := TDeterministicFiniteAutomaton.Create(LDTO);
 	try
@@ -234,18 +229,12 @@ var
 	LDTO: TDTO;
 	LActual: Boolean;
 	LAutomaton: TDeterministicFiniteAutomaton;
-	LTransitions: TList<TTransition>;
 begin
-	LTransitions := TList<TTransition>.Create;
-	try
-		LDTO.States := ['s0'];
-		LDTO.Symbols := [];
-		LDTO.InitialState := 's0';
-		LDTO.FinalStates := ['s0'];
-		LDTO.Transitions := LTransitions.ToArray;
-	finally
-		LTransitions.Free;
-	end;
+  LDTO.States := ['s0'];
+  LDTO.Symbols := [];
+  LDTO.InitialState := 's0';
+  LDTO.FinalStates := ['s0'];
+  LDTO.Transitions := [];
 
 	LAutomaton := TDeterministicFiniteAutomaton.Create(LDTO);
 	try
@@ -261,20 +250,14 @@ var
 	LDTO: TDTO;
 	LActual: Boolean;
 	LAutomaton: TDeterministicFiniteAutomaton;
-	LTransitions: TList<TTransition>;
 begin
-	LTransitions := TList<TTransition>.Create;
-	try
-    LTransitions.Add(TTransition.Create('s0', '0', 's1'));
-
-		LDTO.States := ['s0', 's1'];
-		LDTO.Symbols := ['0'];
-		LDTO.InitialState := 's0';
-		LDTO.FinalStates := ['s1'];
-		LDTO.Transitions := LTransitions.ToArray;
-	finally
-		LTransitions.Free;
-	end;
+  LDTO.States := ['s0', 's1'];
+  LDTO.Symbols := ['0'];
+  LDTO.InitialState := 's0';
+  LDTO.FinalStates := ['s1'];
+  LDTO.Transitions := [
+    TTransition.Create('s0', '0', 's1')
+  ];
 
 	LAutomaton := TDeterministicFiniteAutomaton.Create(LDTO);
 	try
@@ -290,20 +273,14 @@ var
 	LDTO: TDTO;
 	LActual: Boolean;
 	LAutomaton: TDeterministicFiniteAutomaton;
-	LTransitions: TList<TTransition>;
 begin
-	LTransitions := TList<TTransition>.Create;
-	try
-    LTransitions.Add(TTransition.Create('s0', '0', 's1'));
-
-		LDTO.States := ['s0', 's1'];
-		LDTO.Symbols := ['0'];
-		LDTO.InitialState := 's0';
-		LDTO.FinalStates := ['s0', 's1'];
-		LDTO.Transitions := LTransitions.ToArray;
-	finally
-		LTransitions.Free;
-	end;
+  LDTO.States := ['s0', 's1'];
+  LDTO.Symbols := ['0'];
+  LDTO.InitialState := 's0';
+  LDTO.FinalStates := ['s0', 's1'];
+  LDTO.Transitions := [
+    TTransition.Create('s0', '0', 's1')
+  ];
 
 	LAutomaton := TDeterministicFiniteAutomaton.Create(LDTO);
 	try
@@ -319,21 +296,15 @@ var
 	LDTO: TDTO;
 	LActual: Boolean;
 	LAutomaton: TDeterministicFiniteAutomaton;
-	LTransitions: TList<TTransition>;
 begin
-	LTransitions := TList<TTransition>.Create;
-	try
-    LTransitions.Add(TTransition.Create('s0', 'a', 's1'));
-    LTransitions.Add(TTransition.Create('s1', 'a', 's1'));
-
-		LDTO.States := ['s0', 's1'];
-		LDTO.Symbols := ['a'];
-		LDTO.InitialState := 's0';
-		LDTO.FinalStates := ['s1'];
-		LDTO.Transitions := LTransitions.ToArray;
-	finally
-		LTransitions.Free;
-	end;
+  LDTO.States := ['s0', 's1'];
+  LDTO.Symbols := ['a'];
+  LDTO.InitialState := 's0';
+  LDTO.FinalStates := ['s1'];
+  LDTO.Transitions := [
+    TTransition.Create('s0', 'a', 's1'),
+    TTransition.Create('s1', 'a', 's1')
+  ];
 
 	LAutomaton := TDeterministicFiniteAutomaton.Create(LDTO);
 	try
@@ -349,21 +320,15 @@ var
 	LDTO: TDTO;
 	LActual: Boolean;
 	LAutomaton: TDeterministicFiniteAutomaton;
-	LTransitions: TList<TTransition>;
 begin
-	LTransitions := TList<TTransition>.Create;
-	try
-    LTransitions.Add(TTransition.Create('s0', 'a', 's1'));
-    LTransitions.Add(TTransition.Create('s1', 'a', 's0'));
-
-		LDTO.States := ['s0', 's1'];
-		LDTO.Symbols := ['a'];
-		LDTO.InitialState := 's0';
-		LDTO.FinalStates := ['s1'];
-		LDTO.Transitions := LTransitions.ToArray;
-	finally
-		LTransitions.Free;
-	end;
+  LDTO.States := ['s0', 's1'];
+  LDTO.Symbols := ['a'];
+  LDTO.InitialState := 's0';
+  LDTO.FinalStates := ['s1'];
+  LDTO.Transitions := [
+    TTransition.Create('s0', 'a', 's1'),
+    TTransition.Create('s1', 'a', 's0')
+  ];
 
 	LAutomaton := TDeterministicFiniteAutomaton.Create(LDTO);
 	try
@@ -379,23 +344,17 @@ var
 	LDTO: TDTO;
 	LActual: Boolean;
 	LAutomaton: TDeterministicFiniteAutomaton;
-	LTransitions: TList<TTransition>;
 begin
-	LTransitions := TList<TTransition>.Create;
-	try
-    LTransitions.Add(TTransition.Create('s0', 'a', 's1'));
-    LTransitions.Add(TTransition.Create('s1', 'a', 's3'));
-    LTransitions.Add(TTransition.Create('s1', 'b', 's2'));
-    LTransitions.Add(TTransition.Create('s2', 'b', 's1'));
-
-		LDTO.States := ['s0', 's1', 's2', 's3'];
-		LDTO.Symbols := ['a', 'b'];
-		LDTO.InitialState := 's0';
-		LDTO.FinalStates := ['s3'];
-		LDTO.Transitions := LTransitions.ToArray;
-	finally
-		LTransitions.Free;
-	end;
+  LDTO.States := ['s0', 's1', 's2', 's3'];
+  LDTO.Symbols := ['a', 'b'];
+  LDTO.InitialState := 's0';
+  LDTO.FinalStates := ['s3'];
+  LDTO.Transitions := [
+    TTransition.Create('s0', 'a', 's1'),
+    TTransition.Create('s1', 'a', 's3'),
+    TTransition.Create('s1', 'b', 's2'),
+    TTransition.Create('s2', 'b', 's1')
+  ];
 
 	LAutomaton := TDeterministicFiniteAutomaton.Create(LDTO);
 	try
@@ -411,24 +370,18 @@ var
 	LDTO: TDTO;
 	LActual: Boolean;
 	LAutomaton: TDeterministicFiniteAutomaton;
-	LTransitions: TList<TTransition>;
 begin
-	LTransitions := TList<TTransition>.Create;
-	try
-		LTransitions.Add(TTransition.Create('s0', 'a', 's1'));
-		LTransitions.Add(TTransition.Create('s1', 'b', 's2'));
-		LTransitions.Add(TTransition.Create('s2', 'c', 's3'));
-		LTransitions.Add(TTransition.Create('s3', 'a', 's4'));
-		LTransitions.Add(TTransition.Create('s3', 'b', 's2'));
-
-		LDTO.States := ['s0', 's1', 's2', 's3', 's4'];
-		LDTO.Symbols := ['a', 'b', 'c'];
-		LDTO.InitialState := 's0';
-		LDTO.FinalStates := ['s4'];
-		LDTO.Transitions := LTransitions.ToArray;
-	finally
-		LTransitions.Free;
-	end;
+  LDTO.States := ['s0', 's1', 's2', 's3', 's4'];
+  LDTO.Symbols := ['a', 'b', 'c'];
+  LDTO.InitialState := 's0';
+  LDTO.FinalStates := ['s4'];
+  LDTO.Transitions := [
+    TTransition.Create('s0', 'a', 's1'),
+    TTransition.Create('s1', 'b', 's2'),
+    TTransition.Create('s2', 'c', 's3'),
+    TTransition.Create('s3', 'a', 's4'),
+    TTransition.Create('s3', 'b', 's2')
+  ];
 
 	LAutomaton := TDeterministicFiniteAutomaton.Create(LDTO);
 	try
@@ -444,26 +397,20 @@ var
 	LDTO: TDTO;
 	LActual: Boolean;
 	LAutomaton: TDeterministicFiniteAutomaton;
-	LTransitions: TList<TTransition>;
 begin
-	LTransitions := TList<TTransition>.Create;
-	try
-		LTransitions.Add(TTransition.Create('s0', 'a', 's1'));
-		LTransitions.Add(TTransition.Create('s1', 'a', 's1'));
-		LTransitions.Add(TTransition.Create('s1', 'b', 's2'));
-		LTransitions.Add(TTransition.Create('s1', 'c', 's3'));
-		LTransitions.Add(TTransition.Create('s2', 'b', 's2'));
-		LTransitions.Add(TTransition.Create('s2', 'c', 's3'));
-		LTransitions.Add(TTransition.Create('s3', 'c', 's3'));
-
-		LDTO.States := ['s0', 's1', 's2', 's3'];
-		LDTO.Symbols := ['a', 'b', 'c'];
-		LDTO.InitialState := 's0';
-		LDTO.FinalStates := ['s1', 's2', 's3'];
-		LDTO.Transitions := LTransitions.ToArray;
-	finally
-		LTransitions.Free;
-	end;
+  LDTO.States := ['s0', 's1', 's2', 's3'];
+  LDTO.Symbols := ['a', 'b', 'c'];
+  LDTO.InitialState := 's0';
+  LDTO.FinalStates := ['s1', 's2', 's3'];
+  LDTO.Transitions := [
+    TTransition.Create('s0', 'a', 's1'),
+    TTransition.Create('s1', 'a', 's1'),
+    TTransition.Create('s1', 'b', 's2'),
+    TTransition.Create('s1', 'c', 's3'),
+    TTransition.Create('s2', 'b', 's2'),
+    TTransition.Create('s2', 'c', 's3'),
+    TTransition.Create('s3', 'c', 's3')
+  ];
 
 	LAutomaton := TDeterministicFiniteAutomaton.Create(LDTO);
 	try
@@ -479,27 +426,21 @@ var
 	LDTO: TDTO;
 	LActual: Boolean;
 	LAutomaton: TDeterministicFiniteAutomaton;
-	LTransitions: TList<TTransition>;
 begin
-	LTransitions := TList<TTransition>.Create;
-	try
-		LTransitions.Add(TTransition.Create('s0', 'a', 's3'));
-		LTransitions.Add(TTransition.Create('s0', 'b', 's1'));
-		LTransitions.Add(TTransition.Create('s1', 'b', 's2'));
-		LTransitions.Add(TTransition.Create('s2', 'a', 's5'));
-		LTransitions.Add(TTransition.Create('s3', 'a', 's4'));
-		LTransitions.Add(TTransition.Create('s4', 'a', 's3'));
-		LTransitions.Add(TTransition.Create('s4', 'b', 's1'));
-		LTransitions.Add(TTransition.Create('s5', 'a', 's2'));
-
-		LDTO.States := ['s0', 's1', 's2', 's3', 's4', 's5'];
-		LDTO.Symbols := ['a', 'b'];
-		LDTO.InitialState := 's0';
-		LDTO.FinalStates := ['s2'];
-		LDTO.Transitions := LTransitions.ToArray;
-	finally
-		LTransitions.Free;
-	end;
+  LDTO.States := ['s0', 's1', 's2', 's3', 's4', 's5'];
+  LDTO.Symbols := ['a', 'b'];
+  LDTO.InitialState := 's0';
+  LDTO.FinalStates := ['s2'];
+  LDTO.Transitions := [
+    TTransition.Create('s0', 'a', 's3'),
+    TTransition.Create('s0', 'b', 's1'),
+    TTransition.Create('s1', 'b', 's2'),
+    TTransition.Create('s2', 'a', 's5'),
+    TTransition.Create('s3', 'a', 's4'),
+    TTransition.Create('s4', 'a', 's3'),
+    TTransition.Create('s4', 'b', 's1'),
+    TTransition.Create('s5', 'a', 's2')
+  ];
 
 	LAutomaton := TDeterministicFiniteAutomaton.Create(LDTO);
 	try
